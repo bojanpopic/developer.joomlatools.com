@@ -1,13 +1,13 @@
-
-
 # Composer
 
 ## The Problem
+
 Are you a developer and tired of re-installing the same extensions over and over again or every time you start a new Joomla project? Wouldn’t it be great if you could install and update multiple Joomla extensions in one go, without lifting a finger?
 
 What if you create websites for clients on a regular basis and you require tools that allow you to get things done quickly and automatically. That is why we have created a Composer installer for Joomla extensions. 
 
 ## Composer Can Help You
+
 [Composer](http://getcomposer.org/) is a dependency manager for PHP. You can instruct Composer to pull in all the required extensions you need in your site using a single JSON file. This will keep all your dependencies in one convenient location and Composer will take care of upgrading and managing them.
 
 Composer has become the de-facto standard for managing dependencies in the PHP community today. Because of its ease of use and community-wide support, it’s simply the best tool to manage extensions for a Joomla setup.
@@ -60,6 +60,7 @@ Congratulations, your Joomla setup has already been completed! Leaving you plent
 ```
 
 ## General Use 
+
 The above example is a very basic way to use our [Composer plugin](https://github.com/joomlatools/joomla-composer). For a more elaborate usage description, please refer to the description on our [Github repository](https://github.com/joomlatools/joomla-composer).
 
 Using the installer you can now publish your extensions to [Packagist](https://packagist.org/) so everyone can install them or host them on a private repository and use [Satis](https://github.com/composer/satis) to make them available inside your company. Doing so will reduce the amount of code you need to configure Composer to a single line!
@@ -131,7 +132,7 @@ json
 
 ### Contributing
 
-Fork the project, create a feature branch, and send us a pull request.
+[Fork the project, create a feature branch, and send us a pull request.](../preface/contributing.md)
 
 ### Authors
 
@@ -141,12 +142,13 @@ See the list of [contributors](https://github.com/joomlatools/joomla-composer/co
 
 The `joomlatools/installer` plugin is licensed under the GPL v3 license - see the LICENSE file for details.
 
-## Further Resources 
+## Further Resources
+ 
 - [Packagist](https://packagist.org/)
 - [Satis repository](http://getcomposer.org/doc/articles/handling-private-packages-with-satis.md)
 - [Composer documentation](http://getcomposer.org/doc/02-libraries.md)
 
-Happy coding !
+Happy coding!
 
 
 
