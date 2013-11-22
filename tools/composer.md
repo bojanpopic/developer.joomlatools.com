@@ -22,8 +22,7 @@ Let’s say you want to install the extension `com_xyz` and you’ve downloaded 
 
 Your `composer.json` contents should then look as follows:
 
-```
-json
+```json
 {
     "repositories": [
         {
@@ -53,11 +52,12 @@ Save this file and run from your console and within the joomla root folder:
 ``` 
 composer install
 ``` 
+
 You should get output similar to the following:
 
-```
+![Console output](http://farm6.staticflickr.com/5475/10689162794_875325a8f0_o.png)
+
 Congratulations, your Joomla setup has already been completed! Leaving you plenty of time to start cracking on your new templates and/or extensions!
-```
 
 ## General Use 
 
@@ -67,7 +67,7 @@ Using the installer you can now publish your extensions to [Packagist](https://p
 
 The installer allows you to ensure your developers and designers all work with exactly the same versions of certain extensions and keep everyone’s development environment in sync. You can distribute your extensions faster than before and never have to deal with installer uploads which are too big for PHP to handle.
 
-To make your extension available to other users or to take advantage of all of Composer's features you should consider refer to the [Custom Package](#custom) section.
+To make your extension available to other users or to take advantage of all of Composer's features you should consider referring to the [Custom Package](#custom) section.
 
 ## FAQs 
 
