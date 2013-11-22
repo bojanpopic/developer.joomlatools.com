@@ -22,7 +22,7 @@ Let’s say you want to install the extension `com_xyz` and you’ve downloaded 
 
 Your `composer.json` contents should then look as follows:
 
-```json
+```js
 {
     "repositories": [
         {
@@ -49,7 +49,7 @@ Your `composer.json` contents should then look as follows:
 ```
 Save this file and run from your console and within the joomla root folder: 
 
-``` 
+```bash
 composer install
 ``` 
 
@@ -67,7 +67,7 @@ Using the installer you can now publish your extensions to [Packagist](https://p
 
 The installer allows you to ensure your developers and designers all work with exactly the same versions of certain extensions and keep everyone’s development environment in sync. You can distribute your extensions faster than before and never have to deal with installer uploads which are too big for PHP to handle.
 
-To make your extension available to other users or to take advantage of all of Composer's features you should consider referring to the [Custom Package](#custom) section.
+To make your extension available to other users or to take advantage of all of Composer's features you should consider referring to the [Custom Package](#creating-a-custom-package) section.
 
 ## FAQs 
 
@@ -79,15 +79,13 @@ The result is identical to installing an extension through the administrator int
 
 We’ve published the plugin on Packagist, the central Composer repository, so that everyone can make use of it. To use it, just tell Composer to find the plugin and let it do all the hard work for you.
 
-<a name="custom"></a>
 ### Creating a custom package 
 
 To make use of all Composer's features, eg. upgrading to a newer version, you are better off creating a package using your extension's source code. 
 
 The package definition should contain the following basic information to make it installable into Joomla: 
 
-```
-json
+```js
 {
     "config": {
         "joomla": {
@@ -112,8 +110,7 @@ The installer injects a user called `root` into the Joomla application at runtim
 
 If for some reason, you need to change the details of this mock user, you can override them by adding a `joomla` block into the `config` section of your `composer.json`. Example:  
 
-```
-json
+```js
 {
     "config": {
         "joomla": {
@@ -140,7 +137,7 @@ See the list of [contributors](https://github.com/joomlatools/joomla-composer/co
 
 ### License
 
-The `joomlatools/installer` plugin is licensed under the GPL v3 license - see the LICENSE file for details.
+The `joomlatools/installer` plugin is licensed under the GPL v3 license - see the [LICENSE](https://github.com/joomlatools/joomla-composer/blob/master/LICENSE) file for details.
 
 ## Further Resources
  
