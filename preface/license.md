@@ -1,6 +1,6 @@
 # License
 
-The Symfony2 documentation is licensed under a Creative Commons Attribution-Share Alike 4.0 International [License](http://creativecommons.org/licenses/by-sa/4.0/).
+The Joomlatools developer documentation is licensed under a Creative Commons Attribution-Share Alike 4.0 International [License](http://creativecommons.org/licenses/by-sa/4.0/).
 
 **You are free to:**
 
