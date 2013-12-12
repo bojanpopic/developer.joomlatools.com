@@ -1,0 +1,10 @@
+default: preface/introduction.md
+
+pages:
+   Preface:
+      Introduction: preface/introduction.md
+      Contributing: preface/contributing.md
+      License: preface/license.md
+   Tools:
+      Composer: tools/composer.md
+      Vagrant: tools/vagrant.md
