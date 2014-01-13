@@ -127,6 +127,10 @@ If for some reason, you need to change the details of this mock user, you can ov
 * Composer
 * Joomla version 2.5 and up.
 
+### Changelog
+
+The [CHANGELOG](https://github.com/joomlatools/joomla-composer/blob/master/CHANGELOG.md) has all the details about the changes done in all releases.
+
 ### Contributing
 
 [Fork the project, create a feature branch, and send us a pull request.](../preface/contributing.md)
