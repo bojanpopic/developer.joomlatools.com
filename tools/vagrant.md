@@ -139,6 +139,23 @@ To create the image again run:
 vagrant up
 ```
 
+## Changelog
+
+The [CHANGELOG](https://github.com/joomlatools/joomla-vagrant/blob/master/CHANGELOG.md) has all the details about the changes done in all releases.
+
+## Contributing
+
+[Fork the project, create a feature branch, and send us a pull request.](../preface/contributing.md)
+
+## Authors
+
+See the list of [contributors](https://github.com/joomlatools/joomla-vagrant/contributors).
+
+## License
+
+This project is licensed under the Mozilla Public License, version 2.0 - see the [LICENSE](https://github.com/joomlatools/joomla-vagrant/blob/master/LICENSE) file for details.
+
+
 ## Further Resources
 
 * [Joomla Vagrant](https://github.com/joomlatools/joomla-vagrant)
