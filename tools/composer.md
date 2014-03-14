@@ -87,24 +87,10 @@ The package definition should contain the following basic information to make it
 
 ```js
 {
-    "name": "joomlatools/com_helloworld",
-    "type": "joomlatools-installer",
-    "license": "GPLv3",
-    "description": "A Hello World component!",
-    "keywords": [
-        "joomla"
-    ],
-    "homepage": "https://github.com/joomlatools/joomla-helloworld",
-    "authors": [
-        {
-            "name": "Joomlatools",
-            "email": "info@joomlatools.com",
-            "homepage": "https://www.joomlatools.com"
+        "name": "vendor/my-extension",
+        "require": {
+            "joomlatools/installer": "*"
         }
-    ],
-    "require": {
-        "joomlatools/installer": "*"
-    }
 }
 ```
 
