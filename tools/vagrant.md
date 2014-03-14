@@ -46,7 +46,7 @@ There will be two folders created in that folder called `www` and `projects`.
 Add the following line to your `/etc/hosts`
 
 ```
-33.33.33.58 webgrind phpmyadmin
+33.33.33.58 joomla.dev webgrind.joomla.dev phpmyadmin.joomla.dev
 ```
 
 ## FAQs
@@ -69,6 +69,10 @@ Add the following line to your `/etc/hosts`
 Apache serves files from the `www` folder using the IP:
 
     http://33.33.33.58/
+    
+If you have setup your hosts file correctly as shown above, you can now also access the default www/ folder at:
+
+	http://joomla.dev
 
 It is advised to use virtual hosts for development. See below for our virtual host manager.
 
@@ -84,12 +88,8 @@ The Vagrant box has our [Joomla Console](https://github.com/joomlatools/joomla-c
 To create a site with the latest Joomla version, run:
 
     joomla site:create testsite
-
-Add the following line into your /etc/hosts file on your host machine:
-
-    33.33.33.58 testsite.dev
-
-The newly installed site will be available at /var/www/testsite and testsite.dev after that.
+    
+The newly installed site will be available in the /testsite subfolder at http://joomla.dev/testsite after that. The files are located at /var/www/testsite.
 
 You can choose the Joomla version or the sample data to be installed:
 
@@ -102,6 +102,12 @@ For more information and available options, see [Joomlatools console repository]
     joomla --list
     
 Note: after installing a Joomla site using the joomla site:create command, the administrator credentials will be _admin/admin_.
+
+Additionally, the script creates a new virtual host. If you add the following line into your /etc/hosts file on your host machine:
+
+    33.33.33.58 testsite.dev
+
+you will now be able to go to http://testsite.dev to view your newly created site instead of http://joomla.dev/testsite.
 
 ### How should I test my component's code on the Vagrant box?
 Let's say you are working on your own Joomla component called _Awesome_ and want to continue working on it using the Vagrant box. You can use the _Projects_ folder in the repository root for your projects.
@@ -141,13 +147,13 @@ For more information on the symlinker, run:
 
 After you modify /etc/hosts as shown above you can use phpMyAdmin at
 
-    http://phpmyadmin
+    http://phpmyadmin.joomla.dev
     
 ### Can I use webgrind? 
 
 After you modify /etc/hosts as shown above go to
 
-    http://webgrind
+    http://webgrind.joomla.dev
     
 ### Can I sftp into my box?
 
