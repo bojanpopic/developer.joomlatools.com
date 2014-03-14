@@ -81,18 +81,29 @@ We’ve published the plugin on Packagist, the central Composer repository, so t
 
 ### Creating a custom package 
 
-To make use of all Composer's features, eg. upgrading to a newer version, you are better off creating a package using your extension's source code. 
+To make use of all Composer's features, eg. upgrading to a newer version, you are better off creating a proper package using your extension's source code, instead of simply linking to installation packages.
 
 The package definition should contain the following basic information to make it installable into Joomla: 
 
 ```js
 {
-    "config": {
-        "joomla": {
-            "username": "johndoe",
-            "name":		 "John Doe",
-            "email": 	 "john@doe.com"
+    "name": "joomlatools/com_helloworld",
+    "type": "joomlatools-installer",
+    "license": "GPLv3",
+    "description": "A Hello World component!",
+    "keywords": [
+        "joomla"
+    ],
+    "homepage": "https://github.com/joomlatools/joomla-helloworld",
+    "authors": [
+        {
+            "name": "Joomlatools",
+            "email": "info@joomlatools.com",
+            "homepage": "https://www.joomlatools.com"
         }
+    ],
+    "require": {
+        "joomlatools/installer": "*"
     }
 }
 ```
