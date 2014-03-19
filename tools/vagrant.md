@@ -16,38 +16,31 @@ There should be a better way to do this!
 
 It lets you create, setup and destroy virtual machines with a single command. It comes with a base operating system and builds called boxes and server provisioning software to make it easy to install and configure the virtual machine to your needs.
 
-```
-vagrant
-```
-
 Using Vagrant with Virtualbox, you can set up a Joomla development environment from scratch in minutes.
 
 ## How To Use
 
-* Install [VirtualBox](http://www.virtualbox.org/)
+Install [VirtualBox](http://www.virtualbox.org/)
 
-* Install [Vagrant](http://downloads.vagrantup.com/)
+Install [Vagrant](http://downloads.vagrantup.com/)
 
-Clone this repository
+Run the following commands in a folder of your choice:
 
-```
-$ git clone https://github.com/joomlatools/joomla-vagrant.git
-```
+    $ vagrant init joomlatools/box
+    $ vagrant up
+    
+This will download the Vagrant box and get it running. 
 
-Go to the repository folder and create the box
+Note that this requires a 700 MB download for the first run and Vagrant version 1.5 or later. If you want to perform an offline installation or on an older Vagrant version, [download the box here](https://vagrantcloud.com/joomlatools/box/version/1/provider/virtualbox.box) and run the following commands instead:
 
-```
-$ cd joomla-vagrant
-$ vagrant up
-```
+    $ vagrant init joomlatools/box /path/to/download/joomlatools-box-1.2.box
+    $ vagrant up
+        
+Add the following line into your ***hosts file*** (/etc/hosts on Linux and MacOS, for other operating systems see [here](http://en.wikipedia.org/wiki/Hosts_(file)#Location_in_the_file_system))
 
-There will be two folders created in that folder called `www` and `projects`.
+    33.33.33.58 joomla.dev webgrind.joomla.dev phpmyadmin.joomla.dev
 
-Add the following line to your `/etc/hosts`
-
-```
-33.33.33.58 joomla.dev webgrind.joomla.dev phpmyadmin.joomla.dev
-```
+And you are done. There will be two new folders created called www and Projects.
 
 ## FAQs
 ### What does the box contain?
