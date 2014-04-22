@@ -10,44 +10,38 @@ What about when a new developer joins your team? He will need to spend half a da
 
 There should be a better way to do this!
 
-## How Vagrant Can Help You?
+## How Can Vagrant Help You?
 
 [Vagrant](http://vagrantup.com) is a tool for managing virtual machines from providers such as VMWare and Virtualbox.
 
 It lets you create, setup and destroy virtual machines with a single command. It comes with a base operating system and builds called boxes and server provisioning software to make it easy to install and configure the virtual machine to your needs.
 
-```
-vagrant
-```
-
 Using Vagrant with Virtualbox, you can set up a Joomla development environment from scratch in minutes.
 
 ## How To Use
 
-* Install [VirtualBox](http://www.virtualbox.org/)
+Install [VirtualBox](http://www.virtualbox.org/)
 
-* Install [Vagrant](http://downloads.vagrantup.com/)
+Install [Vagrant](http://downloads.vagrantup.com/)
 
-Clone this repository
+Run the following commands in a folder of your choice:
 
-```
-$ git clone https://github.com/joomlatools/joomla-vagrant.git
-```
+    $ vagrant init joomlatools/box
+    $ vagrant up
+    
+This will download the Vagrant box and get it running. 
 
-Go to the repository folder and create the box
 
-```
-$ cd joomla-vagrant
-$ vagrant up
-```
+Note that this requires a 700 MB download for the first run and Vagrant version 1.5 or later. If you want to perform an offline installation or on an older Vagrant version, [download the box here](https://vagrantcloud.com/joomlatools/box/version/1/provider/virtualbox.box) and run the following commands instead:
 
-There will be two folders created in that folder called `www` and `projects`.
+    $ vagrant init joomlatools/box /path/to/download/joomlatools-box-1.2.box
+    $ vagrant up
 
-Add the following line to your `/etc/hosts`
+Add the following line into your **hosts file** (/etc/hosts on Linux and MacOS, for other operating systems see [here](http://en.wikipedia.org/wiki/Hosts_%28file%29#Location_in_the_file_system))
 
-```
-33.33.33.58 webgrind phpmyadmin
-```
+    33.33.33.58 joomla.dev webgrind.joomla.dev phpmyadmin.joomla.dev
+
+And you are done. There will be two new folders created called www and Projects.
 
 ## FAQs
 ### What does the box contain?
@@ -69,6 +63,10 @@ Add the following line to your `/etc/hosts`
 Apache serves files from the `www` folder using the IP:
 
     http://33.33.33.58/
+    
+If you have setup your hosts file correctly as shown above, you can now also access the default www/ folder at:
+
+	http://joomla.dev
 
 It is advised to use virtual hosts for development. See below for our virtual host manager.
 
@@ -80,34 +78,76 @@ You can reach the box by using the command:
 	
 ### Can I create a new site from the command line?
 
-This is a script developed by Joomlatools to ease the management of Joomla sites from command line.
+The Vagrant box has our [Joomla Console](https://github.com/joomlatools/joomla-console) script pre-installed.
+To create a site with the latest Joomla version, run:
 
-To create a site with it, SSH into the box and then run
+    joomla site:create testsite
+    
+The newly installed site will be available in the /testsite subfolder at http://joomla.dev/testsite after that. The files are located at /var/www/testsite.
 
-    joomla create testsite
+You can choose the Joomla version or the sample data to be installed:
 
-Add the following line into your /etc/hosts file
+    joomla site:create testsite --joomla=2.5 --sample-data=blog
+
+You can install any branch from the Git repository or any version from 2.5.0 and up using this command. See [this demo](http://quick.as/kvjjsg6g) to see how the script works.
+
+For more information and available options, see [Joomlatools console repository](https://github.com/joomlatools/joomla-console) or try running:
+
+    joomla --list
+    
+Note: after installing a Joomla site using the joomla site:create command, the administrator credentials will be _admin/admin_.
+
+Additionally, the script creates a new virtual host. If you add the following line into your /etc/hosts file on your host machine:
 
     33.33.33.58 testsite.dev
 
-Now you can reach www/testsite folder from the domain testsite.dev
+you will now be able to go to http://testsite.dev to view your newly created site instead of http://joomla.dev/testsite.
 
-For more information try running:
+### How should I test my component's code on the Vagrant box?
+Let's say you are working on your own Joomla component called _Awesome_ and want to continue working on it using the Vagrant box. You can use the _Projects_ folder in the repository root for your projects.
 
-    joomla --help
+But if you would like to use a custom folder we should start by making the source code available to the Vagrant box. Let's assume the source code is located at _/Users/myname/Projects/awesome_ :
+
+Copy the ```config.custom.yaml-dist``` file to ```config.custom.yaml``` and edit with your favorite text editor. Make it look like this:
+
+    synced_folders:
+      /home/vagrant/Projects: /Users/myname/Projects
+
+Save this file and restart the Vagrant box. (```vagrant reload```)
+
+The "Projects" folder from your host machine will now be available inside the Vagrant box through _/home/vagrant/Projects_.
+
+Next step is to create the new site you'll be working on. SSH into the box (```vagrant ssh```) and execute the following command: 
+
+    joomla site:create testsite --joomla=3.2 --symlink=awesome
+
+Or to symlink your code into an existing site:
+
+    joomla extension:symlink testsite awesome
+
+This will symlink all the folders from the _awesome_ folder into _testsite.dev_.
+Please note that your source code should resemble the Joomla folder structure for symlinking to work well. For example your administrator section should reside in /Users/myname/Projects/awesome/administrator/components/com_awesome.
+
+Now add _testsite.dev_ to your /etc/hosts as described in the previous paragraph, so you can access the new site via _http://testsite.dev_
+
+Run discover install to make your component available to Joomla and you are good to go!
+
+For more information on the symlinker, run:
+
+	  joomla extension:symlink  --help
     
     
 ### Yo dude where is my phpmyadmin?
 
 After you modify /etc/hosts as shown above you can use phpMyAdmin at
 
-    http://phpmyadmin
+    http://phpmyadmin.joomla.dev
     
 ### Can I use webgrind? 
 
 After you modify /etc/hosts as shown above go to
 
-    http://webgrind
+    http://webgrind.joomla.dev
     
 ### Can I sftp into my box?
 
@@ -138,6 +178,23 @@ To create the image again run:
 ```
 vagrant up
 ```
+
+## Changelog
+
+The [CHANGELOG](https://github.com/joomlatools/joomla-vagrant/blob/master/CHANGELOG.md) has all the details about the changes done in all releases.
+
+## Contributing
+
+[Fork the project, create a feature branch, and send us a pull request.](../preface/contributing.md)
+
+## Authors
+
+See the list of [contributors](https://github.com/joomlatools/joomla-vagrant/contributors).
+
+## License
+
+This project is licensed under the Mozilla Public License, version 2.0 - see the [LICENSE](https://github.com/joomlatools/joomla-vagrant/blob/master/LICENSE) file for details.
+
 
 ## Further Resources
 

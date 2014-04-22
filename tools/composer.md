@@ -81,19 +81,16 @@ We’ve published the plugin on Packagist, the central Composer repository, so t
 
 ### Creating a custom package 
 
-To make use of all Composer's features, eg. upgrading to a newer version, you are better off creating a package using your extension's source code. 
+To make use of all Composer's features, eg. upgrading to a newer version, you are better off creating a proper package using your extension's source code, instead of simply linking to installation packages.
 
 The package definition should contain the following basic information to make it installable into Joomla: 
 
 ```js
 {
-    "config": {
-        "joomla": {
-            "username": "johndoe",
-            "name":		 "John Doe",
-            "email": 	 "john@doe.com"
+        "name": "vendor/my-extension",
+        "require": {
+            "joomlatools/installer": "*"
         }
-    }
 }
 ```
 
@@ -126,6 +123,10 @@ If for some reason, you need to change the details of this mock user, you can ov
 
 * Composer
 * Joomla version 2.5 and up.
+
+### Changelog
+
+The [CHANGELOG](https://github.com/joomlatools/joomla-composer/blob/master/CHANGELOG.md) has all the details about the changes done in all releases.
 
 ### Contributing
 
