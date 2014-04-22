@@ -6,5 +6,6 @@ pages:
       Contributing: preface/contributing
       License: preface/license
    Tools:
+      Console: tools/console
       Composer: tools/composer
       Vagrant: tools/vagrant
