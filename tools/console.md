@@ -10,7 +10,7 @@ At Joomlatools we are testing almost daily and had to come up with a better way 
 
 [Joomla Console](https://github.com/joomlatools/joomla-console) is a command line console for common Joomla operations like creating and deleting sites, installing extensions, symlinking files etc. so that you don't have to perform these tasks over and over again.
 
-You can see [a little video here](http://www.youtube.com/watch?v=3W5ahHCd9pU) showing how to use it to setup a Joomla site with just one command.
+You can see [a little video here](https://www.youtube.com/watch?v=3W5ahHCd9pU&vq=hd720&wide=1) showing how to use it to setup a Joomla site with just one command.
 
 ## How To Install Console?
 
@@ -53,7 +53,8 @@ To create a site with the latest Joomla version, run:
 
     joomla site:create testsite
 
-The newly installed site will be available at /var/www/testsite and testsite.dev after that.
+The newly installed site will be available at /var/www/testsite and testsite.dev after that. You can login into your fresh Joomla installation using these credentials: `admin` / `admin`.
+
 By default web server root is set to _/var/www_. You can pass _--www=/my/server/path_ to commands for custom values.
 
 You can choose the Joomla version or the sample data to be installed:
