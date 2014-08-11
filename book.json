@@ -1,0 +1,5 @@
+{
+	"title": "Joomlatools Developer Zone",
+	"output": "./build/",
+	"plugins": ["toc"]
+}

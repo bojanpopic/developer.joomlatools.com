@@ -5,7 +5,6 @@
 * Tools
     * [Composer](tools/composer.md)
     * [Console](tools/console.md)
-    * Vagrant
-        * [Introduction](tools/vagrant/introduction.md) 
+    * [Vagrant](tools/vagrant/introduction.md)
         * [How to use](tools/vagrant/howto.md) 
         * [FAQ](tools/vagrant/faq.md) 
