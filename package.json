@@ -1,0 +1,12 @@
+{
+    "name": "developer.joomlatools.com",
+    "version": "0.0.1",
+    "description": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/joomlatools/developer.joomlatools.com.git"
+    },
+    "dependencies": {
+        "gitbook-plugin-toc": "*"
+    }
+}
