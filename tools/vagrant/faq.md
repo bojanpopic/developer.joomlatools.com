@@ -1,10 +1,8 @@
-
-
 # FAQs
 
 <!-- toc -->
 
-### What does the box contain?
+## What does the box contain?
 
 * Ubuntu 12.10 (Precise) 64 bit
 * Apache
@@ -18,7 +16,7 @@
 * Less compiler
 * UglifyJS
 
-### How do I access my site?
+## How do I access my site?
 
 Apache serves files from the `www` folder using the IP:
 
@@ -30,13 +28,13 @@ If you have setup your hosts file correctly as shown above, you can now also acc
 
 It is advised to use virtual hosts for development. See below for our virtual host manager.
 
-### Can I SSH into my box?
+## Can I SSH into my box?
 
 You can reach the box by using the command:
 
 	$ vagrant ssh
 	
-### Can I create a new site from the command line?
+## Can I create a new site from the command line?
 
 The Vagrant box has our [Joomla Console](https://github.com/joomlatools/joomla-console) script pre-installed.
 To create a site with the latest Joomla version, run:
@@ -54,7 +52,7 @@ For more information, please refer to the [Joomla Console](http://www.joomlatool
 
 you can access it directly at http://testsite.dev.
 
-### How should I test my component's code on the Vagrant box?
+## How should I test my component's code on the Vagrant box?
 Let's say you are working on your own Joomla component called _Awesome_ and want to continue working on it using the Vagrant box. You can use the _Projects_ folder in the repository root for your projects.
 
 But if you would like to use a custom folder we should start by making the source code available to the Vagrant box. Let's assume the source code is located at _/Users/myname/Projects/awesome_ :
@@ -82,19 +80,19 @@ For more information on the symlinker, refer to the [Joomla Console](http://www.
 
       joomla extension:symlink  --help    
     
-### Where can I find phpmyadmin?
+## Where can I find phpmyadmin?
 
 After you modify /etc/hosts as shown above you can use phpMyAdmin at
 
     http://phpmyadmin.joomla.dev
     
-### Can I use webgrind? 
+## Can I use webgrind? 
 
 After you modify /etc/hosts as shown above go to
 
     http://webgrind.joomla.dev
     
-### Can I sftp into my box?
+## Can I sftp into my box?
 
 Use following details to connect:
 
@@ -103,7 +101,7 @@ Use following details to connect:
     User: vagrant
     Password: vagrant
     
-### How do I stop the box?
+## How do I stop the box?
 
 Simply type
 
@@ -111,7 +109,7 @@ Simply type
 vagrant halt
 ```
 
-### How do I destroy a box? 
+## How do I destroy a box? 
 	
 To completely destroy the virtual image, run 
 

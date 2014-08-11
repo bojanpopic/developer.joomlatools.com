@@ -10,27 +10,10 @@ What about when a new developer joins your team? He will need to spend half a da
 
 There should be a better way to do this!
 
-## Changelog
+## Vagrant to the rescue!
 
-The [CHANGELOG](https://github.com/joomlatools/joomla-vagrant/blob/master/CHANGELOG.md) has all the details about the changes done in all releases.
+[Vagrant](http://vagrantup.com) is a tool for managing virtual machines from providers such as VMWare and Virtualbox.
 
-## Contributing
+It lets you create, setup and destroy virtual machines with a single command. It comes with a base operating system and builds called boxes and server provisioning software to make it easy to install and configure the virtual machine to your needs.
 
-[Fork the project, create a feature branch, and send us a pull request.](../preface/contributing.md)
-
-## Authors
-
-See the list of [contributors](https://github.com/joomlatools/joomla-vagrant/contributors).
-
-## License
-
-This project is licensed under the Mozilla Public License, version 2.0 - see the [LICENSE](https://github.com/joomlatools/joomla-vagrant/blob/master/LICENSE) file for details.
-
-
-## Further Resources
-
-* [Joomla Vagrant](https://github.com/joomlatools/joomla-vagrant)
-* [Vagrant](http://www.vagrantup.com/)
-* [VirtualBox](http://www.virtualbox.org/)
-
-Happy coding!
+By downoading our pre-built [Vagrant box](https://github.com/joomlatools/joomla-vagrant), you can set up a Joomla development environment from scratch in minutes.

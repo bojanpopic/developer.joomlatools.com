@@ -7,6 +7,5 @@
     * [Console](tools/console.md)
     * Vagrant
         * [Introduction](tools/vagrant/introduction.md) 
-        * [About](tools/vagrant/about) 
         * [How to use](tools/vagrant/howto.md) 
         * [FAQ](tools/vagrant/faq.md) 

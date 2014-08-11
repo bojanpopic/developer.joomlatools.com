@@ -9,7 +9,7 @@
     $ vagrant up
 ```
     
-* This will download the Vagrant box and get it running. 
+* This will download the [Vagrant box](https://github.com/joomlatools/joomla-vagrant) and get it running. 
 
 Note that this requires a 700 MB download for the first run and Vagrant version 1.5 or later. If you want to perform an offline installation or on an older Vagrant version, [download the box here](https://vagrantcloud.com/joomlatools/box/version/1/provider/virtualbox.box) and run the following commands instead:
 
