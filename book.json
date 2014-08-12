@@ -1,5 +1,6 @@
 {
 	"title": "Joomlatools Developer Zone",
 	"output": "./build/",
+    "theme": "theme",
 	"plugins": ["toc"]
 }
