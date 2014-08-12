@@ -9,4 +9,4 @@ Assuming you already have [GitBook](https://github.com/GitbookIO/gitbook) instal
     npm install
     gitbook serve
 
-The site is now available at ```http://localhost:4000``.
+The site is now available at ```http://localhost:4000```.
