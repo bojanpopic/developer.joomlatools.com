@@ -38,6 +38,7 @@
                 {% include "includes/book/header.html" %}
                 <div class="page-wrapper" tabindex="-1">
                     <div class="page-inner">
+                {% block page_inner %}
                     {% for section in content %}
                         <section class="{{ section.type }}" id="section-{{ section.id }}">
                         {% if section.type == "normal" %}
@@ -49,6 +50,7 @@
                         {% endif %}
                         </section>
                     {% endfor %}
+                {% endblock %}
                     </div>
                 </div>
             </div>
