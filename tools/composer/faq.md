@@ -27,3 +27,11 @@ If for some reason, you need to change the details of this mock user, you can ov
     }
 }
 ```
+
+## Where can I find an example component?
+
+We have published a very basic example component on [GitHub](https://github.com/joomlatools/joomla-com_helloworld). Then we've published this component on [Packagist](https://packagist.org/packages/joomlatools/com_helloworld) to make it available through Composer.
+
+The [composer.json](https://github.com/joomlatools/joomla-com_helloworld/blob/master/composer.json) is all you need to add to your own project.
+
+You can install this component in every Joomla installation by putting `joomlatools/com_helloworld` in your composer.json file.

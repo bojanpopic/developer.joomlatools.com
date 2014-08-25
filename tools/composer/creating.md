@@ -19,4 +19,6 @@ You can now publish your extension on [Packagist](https://packagist.org/) or ser
 
 Once published, you can easily install your extension/template/.. using the method we described on the previous page.
 
+We published [com_helloworld](https://github.com/joomlatools/joomla-com_helloworld) on GitHub to serve as an example. You can install this component in every Joomla installation by putting `joomlatools/com_helloworld` in your composer.json file.
+
 For more information on rolling your own package, please refer to the [Composer documentation](http://getcomposer.org/doc/02-libraries.md).
