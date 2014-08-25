@@ -16,4 +16,4 @@ There should be a better way to do this!
 
 It lets you create, setup and destroy virtual machines with a single command. It comes with a base operating system and builds called boxes and server provisioning software to make it easy to install and configure the virtual machine to your needs.
 
-By downoading our pre-built [Vagrant box](https://github.com/joomlatools/joomla-vagrant), you can set up a Joomla development environment from scratch in minutes.
+By downloading our pre-built [Vagrant box](https://github.com/joomlatools/joomla-vagrant), you can set up a Joomla development environment from scratch in minutes.
