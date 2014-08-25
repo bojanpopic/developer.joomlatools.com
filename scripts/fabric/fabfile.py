@@ -16,6 +16,3 @@ def deploy():
         run("git clean -f -d")
         print(yellow("-- Git: pull from origin"))
         run("git pull origin")
-        print(yellow("-- Build GitBook"))
-        run("gitbook build .")
-        run("[ -f ./index.html ] && rsync -az ./ ../public/ || echo 'Build failed!'")
