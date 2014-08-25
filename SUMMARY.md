@@ -2,8 +2,8 @@
 
 * Tools
     * [Composer](tools/composer/introduction.md)
-        * [Getting started](tools/composer/gettingstarted.md)
-        * [Advanced options](tools/composer/advanced.md)
+        * [Installing Packages](tools/composer/installing.md)
+        * [Distributing Packages](tools/composer/creating.md)
         * [FAQ](tools/composer/faq.md) 
     * [Console](tools/console.md)
     * [Vagrant](tools/vagrant/introduction.md)
