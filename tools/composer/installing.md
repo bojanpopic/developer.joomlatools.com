@@ -1,4 +1,4 @@
-# Getting Started
+# Installing Packages
 
 First make sure you have composer installed on your machine. On the Composer website you will find a [Getting Started](http://getcomposer.org/doc/00-intro.md) guide.
 

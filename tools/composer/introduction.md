@@ -1,4 +1,4 @@
-# Vagrant
+# Composer
 
 ## Introduction
 
