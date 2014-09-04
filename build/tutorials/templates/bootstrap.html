@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Distributing Packages | Joomlatools Developer Zone</title>
+        <title>Bootstrap | Joomlatools Developer Zone</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.2">
@@ -18,10 +18,8 @@
     
     
     
-    <link rel="next" href="../../tools/composer/faq.html" />
     
-    
-    <link rel="prev" href="../../tools/composer/installing.html" />
+    <link rel="prev" href="../../tutorials/introduction.html" />
     
 
         
@@ -48,7 +46,7 @@
             </ul>
         </div>
     </div>
-    <div class="book"  data-level="1.2" data-basepath="../.." data-revision="1409817648695">
+    <div class="book"  data-level="4.1" data-basepath="../.." data-revision="1409817648695">
         
 
 <div class="book-summary">
@@ -113,7 +111,7 @@
         </li>
     
         
-        <li class="chapter active" data-level="1.2" data-path="tools/composer/creating.html">
+        <li class="chapter " data-level="1.2" data-path="tools/composer/creating.html">
             
                 
                     <a href="../../tools/composer/creating.html">
@@ -291,7 +289,7 @@
                 
     
         
-        <li class="chapter " data-level="4.1" data-path="tutorials/templates/bootstrap.html">
+        <li class="chapter active" data-level="4.1" data-path="tutorials/templates/bootstrap.html">
             
                 
                     <a href="../../tutorials/templates/bootstrap.html">
@@ -400,23 +398,49 @@
                     <div class="page-inner">
                 
                     
-                        <section class="normal" id="section-gitbook_164">
+                        <section class="normal" id="section-gitbook_176">
                         
-                            <h2 id="distributing-packages">Distributing packages</h2>
-<p>The previous example is a very basic way to use our <a href="https://github.com/joomlatools/joomla-composer" target="_blank">Composer plugin</a>. To make use of all Composer&#39;s features, for example automatically upgrading to the latest version, you are better off creating a package using your extension&#39;s source code. </p>
-<p>Create a <code>composer.json</code> file in the root of your project. This file defines your package. The package definition should contain the following basic information to make it installable into Joomla: </p>
-<pre><code class="lang-json">{
-        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"vendor/my-extension"</span></span>,
-        "<span class="hljs-attribute">require</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">joomlatools/installer</span>": <span class="hljs-value"><span class="hljs-string">"*"</span>
-        </span>}
-</span>}
-</code></pre>
-<p>If you want to make your extension available directly from Github or any other VCS, you want to make sure that the file layout in your repo resembles your install package. </p>
-<p>You can now publish your extension on <a href="https://packagist.org/" target="_blank">Packagist</a> or serve it yourself using your own <a href="http://getcomposer.org/doc/articles/handling-private-packages-with-satis.md" target="_blank">Satis repository</a>. </p>
-<p>Once published, you can easily install your extension/template/.. using the method we described on the previous page.</p>
-<p>We published <a href="https://github.com/joomlatools/joomla-com_helloworld" target="_blank">com_helloworld</a> on GitHub to serve as an example. You can install this component in every Joomla installation by putting <code>joomlatools/com_helloworld</code> in your composer.json file.</p>
-<p>For more information on rolling your own package, please refer to the <a href="http://getcomposer.org/doc/02-libraries.md" target="_blank">Composer documentation</a>.</p>
+                            <h1 id="disable--enable-bootstrap-css">Disable / enable bootstrap CSS</h1>
+<p>How to disable or enable the bootstrap CSS file for DOCman and FILEman?</p>
+<h2 id="introduction">Introduction</h2>
+<p>Some Joomla 2.5 templates are already shipped with a Bootstrap file. There are also Joomla 3 templates that are designed to work without Bootstrap. For these templates we built a switch to either disable or enable the bootstrap file that is shipped with our extensions.</p>
+<p><strong>Note:</strong> this switch is only available since our 2.0 stable versions.</p>
+<h2 id="do-i-need-this">Do I need this?</h2>
+<p>No, you almost never do. We developed our extensions in a way that they always look as good as possible with any template. This switch is built for the edge cases. That’s also the reason why we didn’t build a user interface for this switch.</p>
+<h2 id="how-does-it-work">How does it work?</h2>
+<p>Disabling or enabling the Bootstrap file can only be done by template. A website might be using several templates. And you probably want to disable or enable Bootstrap for only one of these templates. </p>
+<p>Doing this on a template level also means that the file is being disabled/enabled for all Joomlatools extensions. It is not possible to disable the file only for DOCman but not for FILEman for example. Also the file is only being disabled/enabled on the frontend and not the administrator since the admin uses a different template.</p>
+<h2 id="disabling-bootstrapcss-on-joomla-25">Disabling bootstrap.css on Joomla 2.5</h2>
+<p>On Joomla 2.5 our bootstrap.css file is loaded by default. Therefore it’s only possible to disable the file here.</p>
+<p>Disabling is as easy as adding a file to your template root folder which is called: disable-joomlatools-bootstrap</p>
+<p>Example:    </p>
+<p>[yourwebsite]/templates/[yourtemplate]/disable-joomlatools-bootstrap</p>
+<p><strong>Notes:</strong></p>
+<ol>
+<li><p>The [yourwebsite] and [yourtemplate] in the above example are there to help you understand the structure. For example this could be a real-life example: www.mywebsite.com/templates/protostar/disable-joomlatools-bootstrap</p>
+</li>
+<li><p>The file does not have any extension like .html or .css. It’s just &quot;disable-joomlatools-bootstrap&quot;</p>
+</li>
+<li><p>This file should be empty</p>
+</li>
+</ol>
+<h2 id="enabling-bootstrapcss-on-joomla-3">Enabling bootstrap.css on Joomla 3</h2>
+<p>On Joomla 3 we never load any bootstrap.css file by default. Therefore it’s only possible to enable the file here and not possible to disable it.</p>
+<p>Enabling is as easy as adding a file to your template root folder which is called: enable-joomlatools-bootstrap</p>
+<p>Example:</p>
+<p>[yourwebsite]/templates/[yourtemplate]/enable-joomlatools-bootstrap</p>
+<p><strong>Notes:</strong></p>
+<ol>
+<li><p>The [yourwebsite] and [yourtemplate] in the above example are there to help you understand the structure. For example this could be a real-life example: www.mywebsite.com/templates/protostar/enable-joomlatools-bootstrap</p>
+</li>
+<li><p>The file does not have any extension like .html or .css. It’s just &quot;disable-joomlatools-bootstrap&quot;</p>
+</li>
+<li><p>This file should be empty.</p>
+</li>
+</ol>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>Keep in mind that this switch is only built for the edge cases. Using this switch might have a really unexpected outcome. If this is the case please revert back to the original state by removing the file you just added.</p>
+<p>Also keep in mind that updating your template might remove this file. Another thing to understand is that your template might include or exclude some bootstrap classes that were/weren’t there before after upgrading.</p>
 
                         
                         </section>
@@ -427,10 +451,8 @@
             </div>
 
             
-            <a href="../../tools/composer/installing.html" class="navigation navigation-prev " aria-label="Previous page: Installing Packages"><i class="fa fa-angle-left"></i></a>
+            <a href="../../tutorials/introduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Tutorials"><i class="fa fa-angle-left"></i></a>
             
-            
-            <a href="../../tools/composer/faq.html" class="navigation navigation-next " aria-label="Next page: FAQ"><i class="fa fa-angle-right"></i></a>
             
         </div>
     </div>
