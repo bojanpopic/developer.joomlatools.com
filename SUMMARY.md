@@ -11,4 +11,8 @@
     * [Installation](tools/console/installation.md)
     * [Usage](tools/console/usage.md) 
     * [FAQs](tools/console/faq.md)
-    	 
+* [Extensions](extensions/README.md)
+    * [LOGman](extensions/logman.md)
+        * [Plugins](extensions/logman/plugins.md)
+        * [Activities](extensions/logman/activities.md)
+        * [Translations](extensions/logman/translations.md)
