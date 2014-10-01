@@ -12,6 +12,8 @@ Once an application makes use of Joomla's event system, you can go ahead and cre
 
 The first step on integrating a component with LOGman is to create a LOGman plugin that listens to the events we would like to log.
 
+The name of the plugin should match the name of the component. This is important so that LOGman may find overrides for activities of a given package/component.
+
 There are two different types of events. Context events and Non-context events. LOGman plugins support all kind of events, but the way you write plugins differ depending on the type of events that it listens to.
 
 ####Context Events
@@ -32,9 +34,7 @@ With this in mind, let us re-develop the Newsfeeds LOGman plugin for logging new
 
 ###Plugins listening to Context Events
 
-The first step is to create a newsfeeds.php file in the plugins/logman/newsfeeds directory. The name of the file and the directoy it resides is important. The name of the plugin should match the component's name it is integrating.
-
-The file should contain the following content:
+The first step is to create a `newsfeeds.php` file in the `plugins/logman/newsfeeds` directory. The file should contain the following content inside:
 
 ```
 <?php
