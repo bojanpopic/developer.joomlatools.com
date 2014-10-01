@@ -48,7 +48,7 @@
             </ul>
         </div>
     </div>
-    <div class="book"  data-level="4.1.1.1" data-basepath="../../.." data-revision="1411744181326">
+    <div class="book"  data-level="4.1.1.1" data-basepath="../../.." data-revision="1412161152387">
         
 
 <div class="book-summary">
@@ -492,7 +492,7 @@
                     <div class="page-inner">
                 
                     
-                        <section class="normal" id="section-gitbook_632">
+                        <section class="normal" id="section-gitbook_860">
                         
                             <h1 id="joomla-components">Joomla! components</h1>
 <p>By utilizing Joomla&#39;s event system, third party components built on top of the Joomla! Framework can be easily integrated with LOGman. </p>
@@ -501,6 +501,7 @@
 <h2 id="logman-plugins">LOGman plugins</h2>
 <h3 id="events">Events</h3>
 <p>The first step on integrating a component with LOGman is to create a LOGman plugin that listens to the events we would like to log.</p>
+<p>The name of the plugin should match the name of the component. This is important so that LOGman may find overrides for activities of a given package/component.</p>
 <p>There are two different types of events. Context events and Non-context events. LOGman plugins support all kind of events, but the way you write plugins differ depending on the type of events that it listens to.</p>
 <h4 id="context-events">Context Events</h4>
 <p>Context events are generic events that get triggered with a context argument. A context argument is a string that looks something like this:</p>
@@ -511,8 +512,7 @@
 <p>Contrarily to context events, non-context events are specific. This means that the event itself already provides information about who triggered the event and in what context. An example would be the <code>onUserAfterSaveGroup</code> event. By just looking at the event name, we know that it is users related and that it got triggered after saving a group.</p>
 <p>With this in mind, let us re-develop the Newsfeeds LOGman plugin for logging newsfeeds activities. The newsfeeds core component triggers <strong>context</strong> events for notifying plugins. So let us first building a plugin that listens to those events for logging activities.</p>
 <h3 id="plugins-listening-to-context-events">Plugins listening to Context Events</h3>
-<p>The first step is to create a newsfeeds.php file in the plugins/logman/newsfeeds directory. The name of the file and the directoy it resides is important. The name of the plugin should match the component&#39;s name it is integrating.</p>
-<p>The file should contain the following content:</p>
+<p>The first step is to create a <code>newsfeeds.php</code> file in the <code>plugins/logman/newsfeeds</code> directory. The file should contain the following content inside:</p>
 <pre><code>&lt;?php
     class PlgLogmanNewsfeeds extends ComLogmanPluginJoomla
     {
