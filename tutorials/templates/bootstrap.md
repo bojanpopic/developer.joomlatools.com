@@ -22,37 +22,33 @@ Doing this on a template level also means that the file is being disabled/enable
 
 On Joomla 2.5 our bootstrap.css file is loaded by default. Therefore it’s only possible to disable the file here.
 
-Disabling is as easy as adding a file to your template root folder which is called: disable-joomlatools-bootstrap
+Disabling is as easy as adding a file to your template root folder which is called: disable-koowa-bootstrap.txt
 
 Example:	
 
-[yourwebsite]/templates/[yourtemplate]/disable-joomlatools-bootstrap
+[yourwebsite]/templates/[yourtemplate]/disable-koowa-bootstrap.txt
 
 **Notes:**
 
-1. The [yourwebsite] and [yourtemplate] in the above example are there to help you understand the structure. For example this could be a real-life example: www.mywebsite.com/templates/protostar/disable-joomlatools-bootstrap
+1. The [yourwebsite] and [yourtemplate] in the above example are there to help you understand the structure. For example this could be a real-life example: www.mywebsite.com/templates/protostar/disable-koowa-bootstrap.txt
 
-2. The file does not have any extension like .html or .css. It’s just "disable-joomlatools-bootstrap"
-
-3. This file should be empty
+2. This file should be empty
 
 ## Enabling bootstrap.css on Joomla 3
 
 On Joomla 3 we never load any bootstrap.css file by default. Therefore it’s only possible to enable the file here and not possible to disable it.
 
-Enabling is as easy as adding a file to your template root folder which is called: enable-joomlatools-bootstrap
+Enabling is as easy as adding a file to your template root folder which is called: enable-koowa-bootstrap.txt
 
 Example:
 
-[yourwebsite]/templates/[yourtemplate]/enable-joomlatools-bootstrap
+[yourwebsite]/templates/[yourtemplate]/enable-koowa-bootstrap.txt
 
 **Notes:**
 
-1. The [yourwebsite] and [yourtemplate] in the above example are there to help you understand the structure. For example this could be a real-life example: www.mywebsite.com/templates/protostar/enable-joomlatools-bootstrap
+1. The [yourwebsite] and [yourtemplate] in the above example are there to help you understand the structure. For example this could be a real-life example: www.mywebsite.com/templates/protostar/enable-koowa-bootstrap.txt
 
-2. The file does not have any extension like .html or .css. It’s just "disable-joomlatools-bootstrap"
-
-3. This file should be empty.
+2. This file should be empty.
 
 ## Disclaimer
 
