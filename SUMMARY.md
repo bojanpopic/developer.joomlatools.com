@@ -11,4 +11,6 @@
     * [Installation](tools/console/installation.md)
     * [Usage](tools/console/usage.md) 
     * [FAQs](tools/console/faq.md)
-    	 
+* [Tutorials](tutorials/introduction.md)
+	* [Bootstrap](tutorials/templates/bootstrap.md)
+	* [Custom icons](tutorials/templates/icons.md)
