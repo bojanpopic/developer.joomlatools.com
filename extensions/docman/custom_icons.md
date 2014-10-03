@@ -10,13 +10,13 @@ The first part of this tutorial shows you how to change your frontend icons. The
 
 There are three ways to get your own custom icons in DOCman:
 
-1. [by uploading a custom icon for every document you create](#1-upload-custom-icons) as described on our blog
+1. [by uploading a custom icon per document](#1-upload-custom-icons) as described on our blog
 2. [by using background images ](#2-using-background-images)
 3. [by using a custom icon font](#3-using-a-custom-icon-font)
 
 ### 1. Upload custom icons
 
-This technique is described in detail on our blog.
+This technique is described in detail [on our blog](http://blog.joomlatools.com/2014/10/how-to-get-your-own-custom-icons-to-docman.html).
 
 ### 2. Using Background Images
 
