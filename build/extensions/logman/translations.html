@@ -46,7 +46,7 @@
             </ul>
         </div>
     </div>
-    <div class="book"  data-level="4.1.2" data-basepath="../.." data-revision="1412324012183">
+    <div class="book"  data-level="4.1.2" data-basepath="../.." data-revision="1412324305649">
         
 
 <div class="book-summary">
@@ -490,14 +490,14 @@
                     <div class="page-inner">
                 
                     
-                        <section class="normal" id="section-gitbook_216">
+                        <section class="normal" id="section-gitbook_273">
                         
                             <h1 id="translations">Translations</h1>
-<p>LOGman provides a simple yet porweful system for translating activity messages, leveraged through our own translator which sits on top of Joomla&#39;s translation system.</p>
+<p>LOGman provides a simple yet powerful system for translating activity messages, leveraged through our own translator which sits on top of Joomla&#39;s translation system.</p>
 <p>The override system is designed so that the most specific keys are given higher privilege over the more generic ones.</p>
 <p>Activity messages typically follow the form:</p>
 <pre><code>John Doe deleted the article with the title Frequently Asked Questions
-</code></pre><p>Each part of the above message contains variable parts and constant parts. Lets examine which parts are likely to change between each activity message and which parts remain constant:</p>
+</code></pre><p>Each part of the above message contains variable parts and constant parts. Let us examine which parts are likely to change between each activity message and which parts remain constant:</p>
 <p><strong>Variables</strong></p>
 <ul>
 <li>John Doe</li>
@@ -544,7 +544,7 @@
 </code></pre><p>This key would work fine for resources such as article, since article is a masculine subject. But what about category, which is feminine. In that case we can do this:</p>
 <pre><code>KLS_ACTIVITY_ACTOR_ACTION_CATEGORY_TITLE_OBJECT=”{actor} {action} la {object.type} conn el título {object}“
 </code></pre><p>Using the above key, you can override the translation string used for specific resource types in order to create a grammatically correct sentence.</p>
-<p>Some message parameters such as {action} can also be translated by addint translations with the <code>KLS_</code> prefix. For example, to translate the word CREATED, we could need to define its translation using the <code>KLS_CREATED</code> key.</p>
+<p>Some message parameters such as {action} can also be translated by adding translations with the <code>KLS_</code> prefix. For example, to translate the word CREATED, we could need to define its translation using the <code>KLS_CREATED</code> key.</p>
 <pre><code>KLS_CREATED=&quot;creado&quot;
 </code></pre><p>Not all parameters on keys are translatable (providing a key for each article title wouldn’t make sense). This is internally defined by each activity object.</p>
 <p>When translating each variable our translator will first look up for <code>KLS_</code> prefixed keys. If none is found, non-prefixed keys (without the <code>KLS_</code> prefix) will be used if defined. This is useful for re-using Joomla! core translations and overriding them if needed.</p>
