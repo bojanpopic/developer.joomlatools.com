@@ -48,7 +48,7 @@
             </ul>
         </div>
     </div>
-    <div class="book"  data-level="4.1.1.1" data-basepath="../../.." data-revision="1412174030869">
+    <div class="book"  data-level="4.1.1.1" data-basepath="../../.." data-revision="1412324012183">
         
 
 <div class="book-summary">
@@ -492,10 +492,10 @@
                     <div class="page-inner">
                 
                     
-                        <section class="normal" id="section-gitbook_953">
+                        <section class="normal" id="section-gitbook_214">
                         
                             <h1 id="joomla-components">Joomla! components</h1>
-<p>By utilizing Joomla&#39;s event system, third party components built on top of the Joomla! Framework can be easily integrated with LOGman. </p>
+<p>By utilizing Joomla&#39;s event system, third party components built on top of Joomla! can be easily integrated with LOGman. </p>
 <p><em>For information on integrating a component within the Joomla! event system, please refer to the <a href="http://docs.joomla.org/Plugin" target="_blank">Plugin</a> and <a href="http://docs.joomla.org/Plugin/Events" target="_blank">Events</a> Joomla! guides.</em></p>
 <p>Once an application makes use of Joomla&#39;s event system, you can go ahead and create a plugin that listens for events and then notifies LOGman of the event.</p>
 <h2 id="logman-plugins">LOGman plugins</h2>
@@ -510,7 +510,7 @@
 <p>Context events are said to be generic since the same event may be triggered over more than one resource and/or by more than one component. As an example, the event that gets triggered after saving an article or a banner is <code>onContentAfterSave</code>. The same event gets fired after the save action for both resources. The context that get passed (<code>com_content.article</code> and <code>com_newsfeed.newsfeed</code> for articles and news feeds respectively) is what helps on making the difference between an article and a newsfeed save action.</p>
 <h4 id="non-context-events">Non-context Events</h4>
 <p>Contrarily to context events, non-context events are specific. This means that the event itself already provides information about who triggered the event and in what context. An example would be the <code>onUserAfterSaveGroup</code> event. By just looking at the event name, we know that it is users related and that it got triggered after saving a group.</p>
-<p>With this in mind, let us re-develop the Newsfeeds LOGman plugin for logging newsfeeds activities. The newsfeeds core component triggers <strong>context</strong> events for notifying plugins. So let us first building a plugin that listens to those events for logging activities.</p>
+<p>With this in mind, let us re-develop the Newsfeeds LOGman plugin for logging newsfeeds activities. The newsfeeds core component triggers <strong>context</strong> events for notifying plugins. So let us first build a plugin that listens to those events for logging activities.</p>
 <h3 id="plugins-listening-to-context-events">Plugins listening to Context Events</h3>
 <p>The first step is to create a <code>newsfeeds.php</code> file in the <code>plugins/logman/newsfeeds</code> directory. The file should contain the following content inside:</p>
 <pre><code>&lt;?php
@@ -537,9 +537,9 @@
 
         parent::_initialize($config);
     }
-</code></pre><p>We have just changed the way the plugin initializes itself. By specifying resources in the config object we are telling the plugin which resources are we interested on. In this case we have told the plugin to listen for newsfeed events.</p>
-<p>Right now, and with a few lines of code, the onContentAfterSave and onContentAfterDelete events are going to log activities every single time a newsfeed is saved or deleted.</p>
-<p>Easy right?. There is still one small catch. Let us talk about data. When an event is triggered, handlers are very often provided with a reference to the data on which the action or the event took place. In this case the handler is given a newsfeed object. For logging activities we need to tell the plugin how to use this data in order to pass this information to LOGman.</p>
+</code></pre><p>We have just changed the way the plugin initializes itself. By specifying resources in the config object we are telling the plugin which resources we are interested on. We are basically specifying the context we are interested on.</p>
+<p>When a newsfeed is saved or deleted, the <code>onContentAfterSave</code> or <code>onContentAfterDelete</code> events are triggered respectively. By specifying newsfeed as a plugin resource in the config object, the plugin will proceed to log save and delete activities when these events get triggered over newsfeed resources.</p>
+<p>Easy right?. There is still one small catch. Let us talk about data. When an event is triggered, handlers are very often provided with a reference to the data on which the action or the event took place. In this case the handler is given a newsfeed object.</p>
 <p>Out of the box, the plugin will guess two pieces of information that it needs to log activities: the resource <code>id</code> and its <code>name</code>. The plugin assumes that the resource <code>id</code> and <code>name</code> correspond to the <code>id</code> and <code>title</code> properties in the passed data object, i.e. <code>$newsfeed-&gt;id</code> and <code>`$newsfeed-&gt;title</code> respectively. If this is the case, then all will work out of the box. Otherwise a bit more work will be needed to tell the plugin how to get this information.</p>
 <p>In the case of our example, the newsfeeds name can be grabbed using the <code>name</code> property. Because of this, we need to add the following piece of code in our plugin:</p>
 <pre><code>    protected function _getNewsfeedObjectData($data, $event)
@@ -554,7 +554,7 @@
 <li>Edit</li>
 <li>Delete</li>
 </ul>
-<p>Pretty awesome uh?. Le us improve the plugin by supporting state change events.</p>
+<p>Pretty awesome uh?. Let us improve the plugin by supporting state change events.</p>
 <p>As mentioned above, the base <strong>ComLogmanPluginJoomla</strong> class also provides support for the <code>onContentChangeState</code> event. This event gets triggered when a resource state changes. The following core state changes are supported:</p>
 <ul>
 <li>Published</li>
