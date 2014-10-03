@@ -1,6 +1,6 @@
 #Translations
 
-LOGman provides a simple yet porweful system for translating activity messages, leveraged through our own translator which sits on top of Joomla's translation system.
+LOGman provides a simple yet powerful system for translating activity messages, leveraged through our own translator which sits on top of Joomla's translation system.
 
 The override system is designed so that the most specific keys are given higher privilege over the more generic ones.
 
@@ -8,7 +8,7 @@ Activity messages typically follow the form:
 
 	John Doe deleted the article with the title Frequently Asked Questions
 
-Each part of the above message contains variable parts and constant parts. Lets examine which parts are likely to change between each activity message and which parts remain constant:
+Each part of the above message contains variable parts and constant parts. Let us examine which parts are likely to change between each activity message and which parts remain constant:
 
 **Variables**
 
@@ -81,7 +81,7 @@ This key would work fine for resources such as article, since article is a mascu
 
 Using the above key, you can override the translation string used for specific resource types in order to create a grammatically correct sentence.
 
-Some message parameters such as {action} can also be translated by addint translations with the `KLS_` prefix. For example, to translate the word CREATED, we could need to define its translation using the `KLS_CREATED` key.
+Some message parameters such as {action} can also be translated by adding translations with the `KLS_` prefix. For example, to translate the word CREATED, we could need to define its translation using the `KLS_CREATED` key.
 
 	KLS_CREATED="creado"
 
