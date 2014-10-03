@@ -1,6 +1,6 @@
 #Joomla! components
 
-By utilizing Joomla's event system, third party components built on top of the Joomla! Framework can be easily integrated with LOGman. 
+By utilizing Joomla's event system, third party components built on top of Joomla! can be easily integrated with LOGman. 
 
 *For information on integrating a component within the Joomla! event system, please refer to the [Plugin](http://docs.joomla.org/Plugin) and [Events](http://docs.joomla.org/Plugin/Events) Joomla! guides.*
 
@@ -30,7 +30,7 @@ Context events are said to be generic since the same event may be triggered over
 
 Contrarily to context events, non-context events are specific. This means that the event itself already provides information about who triggered the event and in what context. An example would be the `onUserAfterSaveGroup` event. By just looking at the event name, we know that it is users related and that it got triggered after saving a group.
 
-With this in mind, let us re-develop the Newsfeeds LOGman plugin for logging newsfeeds activities. The newsfeeds core component triggers **context** events for notifying plugins. So let us first building a plugin that listens to those events for logging activities.
+With this in mind, let us re-develop the Newsfeeds LOGman plugin for logging newsfeeds activities. The newsfeeds core component triggers **context** events for notifying plugins. So let us first build a plugin that listens to those events for logging activities.
 
 ###Plugins listening to Context Events
 
@@ -69,11 +69,11 @@ Add the following code inside the class:
     }
 ``` 
 
-We have just changed the way the plugin initializes itself. By specifying resources in the config object we are telling the plugin which resources are we interested on. In this case we have told the plugin to listen for newsfeed events.
+We have just changed the way the plugin initializes itself. By specifying resources in the config object we are telling the plugin which resources we are interested on. We are basically specifying the context we are interested on.
 
-Right now, and with a few lines of code, the onContentAfterSave and onContentAfterDelete events are going to log activities every single time a newsfeed is saved or deleted.
+When a newsfeed is saved or deleted, the `onContentAfterSave` or `onContentAfterDelete` events are triggered respectively. By specifying newsfeed as a plugin resource in the config object, the plugin will proceed to log save and delete activities when these events get triggered over newsfeed resources.
 
-Easy right?. There is still one small catch. Let us talk about data. When an event is triggered, handlers are very often provided with a reference to the data on which the action or the event took place. In this case the handler is given a newsfeed object. For logging activities we need to tell the plugin how to use this data in order to pass this information to LOGman.
+Easy right?. There is still one small catch. Let us talk about data. When an event is triggered, handlers are very often provided with a reference to the data on which the action or the event took place. In this case the handler is given a newsfeed object.
 
 Out of the box, the plugin will guess two pieces of information that it needs to log activities: the resource `id` and its `name`. The plugin assumes that the resource `id` and `name` correspond to the `id` and `title` properties in the passed data object, i.e. `$newsfeed->id` and ``$newsfeed->title` respectively. If this is the case, then all will work out of the box. Otherwise a bit more work will be needed to tell the plugin how to get this information.
 
@@ -96,7 +96,7 @@ Right now we have a working plugin that is capable of logging the following news
 * Edit
 * Delete
 
-Pretty awesome uh?. Le us improve the plugin by supporting state change events.
+Pretty awesome uh?. Let us improve the plugin by supporting state change events.
 
 As mentioned above, the base **ComLogmanPluginJoomla** class also provides support for the `onContentChangeState` event. This event gets triggered when a resource state changes. The following core state changes are supported:
 
