@@ -1,8 +1,8 @@
 # SUMMARY
 
-* [Extensions](extensions/docman/icons.md)
-    * [DOCman](extensions/docman/icons.md)
-        * [Custom icons](extensions/docman/icons.md)
+* [Extensions](extensions/docman/custom_icons.md)
+    * [DOCman](extensions/docman/custom_icons.md)
+        * [Custom icons](extensions/docman/custom_icons.md)
 * [Framework](framework/bootstrap.md)
     * [Bootstrap](framework/bootstrap.md)
 * [Tools](tools/composer/introduction.md)
