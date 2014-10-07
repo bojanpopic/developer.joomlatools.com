@@ -48,7 +48,7 @@
             </ul>
         </div>
     </div>
-    <div class="book"  data-level="1.1.1" data-basepath="../.." data-revision="1412586398198">
+    <div class="book"  data-level="1.1.1" data-basepath="../.." data-revision="1412691662434">
         
 
 <div class="book-summary">
@@ -482,7 +482,7 @@
                     <div class="page-inner">
                 
                     
-                        <section class="normal" id="section-gitbook_16">
+                        <section class="normal" id="section-gitbook_2">
                         
                             <h1 id="custom-icons-in-docman">Custom icons in DOCman</h1>
 <p>When we released the stable 2.0 releases of our extensions we introduced an icon font to display all our icons. If you need to change the icons that we chose it’s possible to override them. To follow this tutorial you need a good understanding of CSS and templating/overriding in Joomla.</p>
@@ -753,16 +753,12 @@
 <p>To make things a little bit easier we’re just going to use all the file we already created. So Basically the only thing you have to do is this:</p>
 <ol>
 <li>Download the administrator template index.php file</li>
-<li>locate the line that starts with a piece of code that looks like this:</li>
-</ol>
-<pre><code class="lang-php"><span class="hljs-variable">$doc</span><span class="hljs-variable">-&gt;addStyleSheet</span>(<span class="hljs-string">'templates/'</span> . <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;template</span> ….
+<li>locate the line that starts with a piece of code that looks like this:<pre><code class="lang-php"><span class="hljs-variable">$doc</span><span class="hljs-variable">-&gt;addStyleSheet</span>(<span class="hljs-string">'templates/'</span> . <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;template</span> ….
 </code></pre>
-<ol>
-<li>Add the following line right below:</li>
-</ol>
-<pre><code class="lang-php"><span class="hljs-variable">$doc</span><span class="hljs-variable">-&gt;addStyleSheet</span>(JURI::root().<span class="hljs-string">'templates/[your template]/icons.css'</span>);
+</li>
+<li>Add the following line right below:<pre><code class="lang-php"><span class="hljs-variable">$doc</span><span class="hljs-variable">-&gt;addStyleSheet</span>(JURI::root().<span class="hljs-string">'templates/[your template]/icons.css'</span>);
 </code></pre>
-<ol>
+</li>
 <li>Upload the index.php file and you should be good to go.</li>
 </ol>
 

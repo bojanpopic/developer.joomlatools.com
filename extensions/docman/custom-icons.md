@@ -340,15 +340,11 @@ To make things a little bit easier we’re just going to use all the file we alr
 
 1. Download the administrator template index.php file
 2. locate the line that starts with a piece of code that looks like this:
-
 ```php
 $doc->addStyleSheet('templates/' . $this->template ….
 ```
-
 3. Add the following line right below:
-
 ```php
 $doc->addStyleSheet(JURI::root().'templates/[your template]/icons.css');
 ```
-
 4. Upload the index.php file and you should be good to go.
