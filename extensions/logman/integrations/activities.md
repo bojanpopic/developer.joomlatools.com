@@ -4,7 +4,7 @@ In LOGman, activity objects fully adhere to the [Activity Streams specification]
 
 In the previous sections, we have explained that components can be integrated with LOGman by using plugins. These plugins take care of the activity logging process and make them available to LOGman.
 
-Additionally, these plugins can also provide activity overrides that will get used by LOGman, and this for each resource type and for each component being integrated with LOGman.
+Additionally, these plugins can also provide activity overrides that will get used by LOGman, and this for each resource type and for each component being integrated with LOGman, e.g. we may define and activity for users, groups, user notes and user categories resources while integrating the com_users Joomla! core component with LOGman.
 
 By providing activity overrides, the developer automatically gains control on how the activity exposes its data, and thus, how this data gets rendered.
 
@@ -83,7 +83,7 @@ Translated formats provided by the **getActivityFormat** method still have their
 
 	{actor} {action} the {object.type} with the title {object}
 
-This is intentional, as it allows consumers to do do the replacement themselves using (if any) a markup language of their choice.
+This is intentional, as it allows consumers to do the replacement themselves using (if any) a markup language of their choice.
 
 Contrarily to key generation (as explained above), tokens from the translated formats are to be replaced by the `displayName` property of the corresponding activity object. This property contains the displayable and potentially translated string of the activity object.
 
@@ -170,7 +170,7 @@ For overriding this property, all that is needed is to override the **getPropert
     		$image = $images[$this->verb];    	
     	}
     	
-    	return $image
+    	return $image;
     }
 ```
 
