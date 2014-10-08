@@ -95,7 +95,7 @@ For the translated format string:
 
 ## Activity objects
 
-Activity objects are the backbone of an activity record. They represent the different parts of an activity and can be accessed with getters following the `getActivity{ObjectName}` naming convention. The returned object must implement **ComActivitiesActivityObjectInteface**.
+Activity objects are the backbone of an activity record. They represent the different parts of an activity and can be accessed with getters following the `getActivity{ObjectName}` naming convention. The returned object must implement **ComActivitiesActivityObjectInterface**.
 
 The **ComLogmanModelEntityActivity** base activity class already provide getters for the base activity objects referenced in the Activity Streams specification, i.e. actor, object, target, generator and provider.
 
