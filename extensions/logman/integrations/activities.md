@@ -109,7 +109,7 @@ The way on which any of the activity objects gets constructed can, and sometimes
 
 The base activity object getters make calls to `_{object}Config` methods (where `{object}` is the object's name, e.g. actor, action, object, etc.). These are basically configuration getters for grabbing configuration objects that get used for instantiating activity objects. By overriding these methods you can change the way activity objects get instantiated.
 
-Let us assume that in our `bar` activity override the way on which the object activity object URL is being wrongly set. Not a problem, we just need to change/override the way the URL property gets set. For this we would need to add the following code in our activity override class:
+Let us assume that in our `bar` activity override, the object's URL is being wrongly set. Not a problem, we just need to change/override the way the URL property gets set in the configuration object. For this we would need to add the following code in our activity override class:
 
 ```
 	protected function _objectConfig(KObjectConfig $config)
