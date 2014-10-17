@@ -13,7 +13,7 @@ The name of the plugin should match the name of the component. This is important
 
 For this, we need to create a LOGman plugin in the `plugins/logman/docman` directory. The `docman.php` plugin file content should be as follows:
 
-```
+```php
 <?php
 	class PlgLogmanDocman extends ComLogmanPluginKoowa
 	{
@@ -25,7 +25,7 @@ Here we are extending **ComLogmanPluginKoowa**, which is the base plugin class f
 
 Next step is to tell the plugin which DOCman controller we would like log actions from, and define the logger that will be responsible for logging activities for this controller. We can do this by adding the following code:
 
-```
+```php
  	$config->append(
  		array(
     		'controllers' => array(
@@ -45,7 +45,7 @@ Loggers sit in the middle between LOGman and your component controller. They pro
 
 LOGman's base logger class is `ComLogmanActivityLogger`. This logger may be used as is and it may work out of the box for you. The base logger is initialized as follows on **ComActivitiesActivityLogger::_initialize**:
 
-```
+```php
         $config->append(
         	array(
         		'actions' => array(
@@ -60,7 +60,7 @@ The first `actions` parameter defines the events (we call these commands in Nook
 
 The base logger will basically log add, edit and delete actions from your controllers, assuming that the activity object title is stored on either a `title` or `name` property. If this is the case, the base logger will work for you as is. You may use the base logger along with your controller by initializing the plugin as follows:
 
-```
+```php
 <?php
 	class PlgLogman{Component} extends ComLogmanPluginKoowa
 	{
@@ -81,7 +81,7 @@ More often than not, we will like to modify the behavior of the logger, i.e. log
 
 We are going to override the base logger by creating a `plugins/logman/docman/logger/document.php` file with the following content inside:
 
-```
+```php
 <?php
 	class PlgLogmanDocmanLoggerDocument extends ComLogmanActivityLogger
 	{
@@ -93,7 +93,7 @@ Right now our custom logger is just extending the base logger. Remember that the
 
 If we would like to log an additional `download` action, we would add the following code:
 
-```
+```php
 	$config->append(
 		array('actions' => array('after.download')
 	);
@@ -103,7 +103,7 @@ Our logger will now attempt to log activities after the download action is execu
 
 When logging custom actions, the first thing to take into account is the result of the action being logged. By default, loggers attempt to get this information from the activity object status (see **ComActivitiesActivityLogger::getActivityStatus**). While this work just fine for the default actions (add, edit, delete), the **getActivityStatus** method may need to be overridden when dealing with custom actions. Let us do just that:
 
-```
+```php
 	public function getActivityStatus(KModelEntityInterface $object, $action = null)
     {
     	if ($action == 'after.download') {
@@ -120,7 +120,7 @@ Easy right?. This effectively tells LOGman that the result of the `download` act
 
 What if we would like to store some metadata along with the activity data?. Let's do exactly that:
 
-```
+```php
 	public function getActivityData(KModelEntityInterface $object, KObjectIdentifierInterface $subject)
 	{
 		$data = parent::getActivityData($object, $subject);

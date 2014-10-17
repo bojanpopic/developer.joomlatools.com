@@ -7,7 +7,7 @@
         <title>Activities | Joomlatools Developer Zone</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 1.0.3">
+        <meta name="generator" content="GitBook 1.0.2">
         <meta name="HandheldFriendly" content="true"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -48,7 +48,7 @@
             </ul>
         </div>
     </div>
-    <div class="book"  data-level="4.1.1.3" data-basepath="../../.." data-revision="1413556993685">
+    <div class="book"  data-level="4.1.1.3" data-basepath="../../.." data-revision="1413558298578">
         
 
 <div class="book-summary">
@@ -622,24 +622,26 @@
 <p>Activity overrides can be provided by simply including activity classes in an <code>activity</code> folder located in your LOGman plugin root directory. The override filename must match the resource type as stored in the activities datababase, i.e. for a overriding a <code>user</code> activity, the override filename would be <code>user.php</code>.</p>
 <p>For convenience, an activity override per component can also be defined, i.e. if the resource override <code>activity/user.php</code> is not found, LOGman will look for a component wide activity override inside the <code>activity/users.php</code> file (users being the package/component holding the resource referenced by the activity). If none is found, then the default activity object will get used.</p>
 <p>Let us create our first activity override class. If we would like to create an activity override for a <code>bar</code> resource of our <code>foo</code> component we would add the following contents inside the <code>plugins/logman/foo/activity/bar.php</code> file:</p>
-<pre><code>&lt;?php
-    class PlgLogmanFooActivityBar extends ComLogmanModelEntityActivity
-    {
+<pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgLogmanFooActivityBar</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ComLogmanModelEntityActivity</span>
+    </span>{
     }
-?&gt;
-</code></pre><p>We have successfully told LOGman to use our own activity object instead of the default <strong>ComLogmanModelEntityActivity</strong> class. Each time an activity from a <code>bar</code> resource of the <code>foo</code> component gets loaded by LOGman, this is the activity class that will get used.</p>
+<span class="hljs-preprocessor">?&gt;</span>
+</code></pre>
+<p>We have successfully told LOGman to use our own activity object instead of the default <strong>ComLogmanModelEntityActivity</strong> class. Each time an activity from a <code>bar</code> resource of the <code>foo</code> component gets loaded by LOGman, this is the activity class that will get used.</p>
 <h2 id="format">Format</h2>
 <p>The activity format defines the text layout that is used for rendering activity messages.</p>
 <p>These layouts can be defined during instantiation:</p>
-<pre><code>    protected function _initialize(KObjectConfig $config)
-    {
-        $config-&gt;append(
-            array(&#39;format&#39; =&gt; &#39;{actor} {action} {object.type} title {object}&#39;
+<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_initialize</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
+    </span>{
+        <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(
+            <span class="hljs-keyword">array</span>(<span class="hljs-string">'format'</span> =&gt; <span class="hljs-string">'{actor} {action} {object.type} title {object}'</span>
         );
 
-        parent::_initialize($config);
+        <span class="hljs-keyword">parent</span>::_initialize(<span class="hljs-variable">$config</span>);
     }
-</code></pre><p>The <code>{actor} {action} {object.type} title {object}</code> string is what we call a short format. Short formats contain tokens (with {} placeholders) and constants (like the word title in our previous example).</p>
+</code></pre>
+<p>The <code>{actor} {action} {object.type} title {object}</code> string is what we call a short format. Short formats contain tokens (with {} placeholders) and constants (like the word title in our previous example).</p>
 <p>Tokens are variables referencing <a href="http://activitystrea.ms/specs/json/1.0/#object" target="_blank">activity objects</a>. These objects represent the different components of an activity. We will learn more about them in the next section.</p>
 <p>These activity objects can be accessed from an activity by using getters following the <code>getActivity{ObjectName}</code> naming convention, i.e. making a call like <code>$activity-&gt;getActivityActor()</code> for getting the activity <strong>actor</strong> object.</p>
 <p>By issuing a call to the activity <strong>getActivityFormat</strong> method, we are given with a translated version of the short format string presented above. In English this call may return something like:</p>
@@ -674,12 +676,13 @@
 <h3 id="configuration">Configuration</h3>
 <p>The base activity object getters make calls to <code>_{object}Config</code> methods (where <code>{object}</code> is the object&#39;s name, e.g. actor, action, object, etc.). These are basically configuration getters for grabbing configuration objects that get used for instantiating activity objects. By overriding these methods you can change the way activity objects get instantiated.</p>
 <p>Let us assume that in our <code>bar</code> activity override, the object&#39;s URL is being wrongly set. Not a problem, we just need to change/override the way the URL property gets set in the configuration object. For this we would need to add the following code in our activity override class:</p>
-<pre><code>    protected function _objectConfig(KObjectConfig $config)
-    {
-        $config-&gt;append(array(&#39;url&#39; =&gt; &#39;option=com_foo&amp;view=bar&amp;id=&#39; . $activity-&gt;row));
-        return parent::_objectConfig($config);
+<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_objectConfig</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
+    </span>{
+        <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(<span class="hljs-keyword">array</span>(<span class="hljs-string">'url'</span> =&gt; <span class="hljs-string">'option=com_foo&amp;view=bar&amp;id='</span> . <span class="hljs-variable">$activity</span><span class="hljs-variable">-&gt;row</span>));
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">parent</span>::_objectConfig(<span class="hljs-variable">$config</span>);
     }
-</code></pre><p>That&#39;s it, just a couple of lines and we are all set.</p>
+</code></pre>
+<p>That&#39;s it, just a couple of lines and we are all set.</p>
 <p>All of the activity objects currently implemented in the activity class are overridable this way.</p>
 <h3 id="instantiation">Instantiation</h3>
 <p>A call to <code>ComLogmanModelEntityActivity::_getObject</code> is always made when instantiating activity objects. This method takes care of a few things such as translating properties, routing URLs, finding objects, etc. It is always recommended to use this getter when creating activity objects. You will learn how to create your own objects latter on.</p>
@@ -690,27 +693,29 @@
 </ul>
 <p>The <strong>_getObject</strong> method will automatically set a <code>display</code> prefixed  property for each <code>object</code> prefixed property if this one is not already set in the configuration object. The value that gets used to set the <code>display</code> prefixed property is the <code>object</code> prefixed property value. Remember that the <code>display</code> prefixed property is the displayable property (usually translated) of the corresponding <code>object</code> prefixed property. Think of the <code>object</code> prefixed property as the property that always get used internally or by consumers for conditionally acting upon its value. This is the property that gets used while coding around it since its value is always the same regardless of the language on which activities get translated. On the other hand, the <code>display</code> prefixed property is the displayable, usually translated property, that gets used for rendering purposes, i.e. for generating activity messages.</p>
 <p>Let us suppose that we would like to add an additional dot property to the object activity object of our <code>bar</code> activity override. We do this as follows:</p>
-<pre><code>    protected function _objectConfig(KObjectConfig $config)
-    {
-        $config-&gt;append(
-            array(
-                &#39;objectBaz&#39; =&gt; &#39;Howdy&#39;
+<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_objectConfig</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
+    </span>{
+        <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(
+            <span class="hljs-keyword">array</span>(
+                <span class="hljs-string">'objectBaz'</span> =&gt; <span class="hljs-string">'Howdy'</span>
             )
         )
     }
-</code></pre><p>By only providing the <code>objectBaz</code> property, the object getter will automatically set for us a <code>displayBaz</code> property with <code>&#39;Howdy&#39;</code> as value. If a translate property isn&#39;t set at all it will also translate <code>displayBaz</code>. This is the default behavior, but we can always make it behave as we please. Let us see how:</p>
-<pre><code>    protected function _objectConfig(KObjectConfig $config)
-    {
-        $config-&gt;append(
-            array(
-                &#39;objectBaz&#39;  =&gt; &#39;Howdy&#39;,
-                &#39;displayBaz&#39; =&gt; &#39;Hello sir!&#39;,
-                &#39;translate&#39;  =&gt; array(&#39;displayName&#39;),
-                &#39;find&#39;       =&gt; &#39;something&#39;
+</code></pre>
+<p>By only providing the <code>objectBaz</code> property, the object getter will automatically set for us a <code>displayBaz</code> property with <code>&#39;Howdy&#39;</code> as value. If a translate property isn&#39;t set at all it will also translate <code>displayBaz</code>. This is the default behavior, but we can always make it behave as we please. Let us see how:</p>
+<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_objectConfig</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
+    </span>{
+        <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(
+            <span class="hljs-keyword">array</span>(
+                <span class="hljs-string">'objectBaz'</span>  =&gt; <span class="hljs-string">'Howdy'</span>,
+                <span class="hljs-string">'displayBaz'</span> =&gt; <span class="hljs-string">'Hello sir!'</span>,
+                <span class="hljs-string">'translate'</span>  =&gt; <span class="hljs-keyword">array</span>(<span class="hljs-string">'displayName'</span>),
+                <span class="hljs-string">'find'</span>       =&gt; <span class="hljs-string">'something'</span>
             )
         )
     }
-</code></pre><p>Here we have just forced our <code>displayBaz</code> value. Additionally we have specified which properties get translated. In this particular case only the <code>displayName</code> will get translated. We have also told the object getter to perform a search for <code>something</code>. This will internally trigger a call to <code>_findObjectSomething</code> (if such a method exists) and set the deleted and url properties accordingly depending on the result of this call, i.e. true if found, false otherwise.</p>
+</code></pre>
+<p>Here we have just forced our <code>displayBaz</code> value. Additionally we have specified which properties get translated. In this particular case only the <code>displayName</code> will get translated. We have also told the object getter to perform a search for <code>something</code>. This will internally trigger a call to <code>_findObjectSomething</code> (if such a method exists) and set the deleted and url properties accordingly depending on the result of this call, i.e. true if found, false otherwise.</p>
 <h3 id="finding-objects">Finding objects</h3>
 <p>As mentioned above, by passing a <code>find</code> property to the <strong>_getObject</strong> method configuration object, the object getter will attempt to find the referenced resource and act over the configuration properties accordingly.</p>
 <p>If we take a closer look at the  <strong>ComActivitiesModelEntityActivity::_findObjectActor</strong> and <strong>ComActivitiesModelEntityActivity::_findObjectObject</strong> methods, we realize that all that they are doing is to search for activity objects and return the search result. The actor finder is unlikely to need changes. On the other hand the <strong>_findObjectObject</strong> method makes use of two instance properties that get set during the activity instantiation: </p>
@@ -719,18 +724,19 @@
 <li><em>_object_column</em>: A string containing the name of the identity column of the database table containing the object resources.</li>
 </ul>
 <p>Let us suppose that in our hypothetical <code>com_foo</code> component, our <code>bar</code> resources get stored in a database table called <code>bars</code>. The identity column of this table is <code>bar_id</code>. If this is the case, then we would setup the above finder properties as follows:</p>
-<pre><code>    protected function _initialize(KObjectConfig $config)
-    {
-        $config-&gt;append(
-            array(
-                &#39;object_table&#39;  =&gt; &#39;bars&#39;,
-                &#39;object_column&#39; =&gt; &#39;bar_id&#39;,
+<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_initialize</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
+    </span>{
+        <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(
+            <span class="hljs-keyword">array</span>(
+                <span class="hljs-string">'object_table'</span>  =&gt; <span class="hljs-string">'bars'</span>,
+                <span class="hljs-string">'object_column'</span> =&gt; <span class="hljs-string">'bar_id'</span>,
             )
         );
 
-        parent::_initialize($config);
+        <span class="hljs-keyword">parent</span>::_initialize(<span class="hljs-variable">$config</span>);
     }
-</code></pre><p>The object finder will now be able to determine if a given <code>bar</code> resource referenced in an activity record still exists.</p>
+</code></pre>
+<p>The object finder will now be able to determine if a given <code>bar</code> resource referenced in an activity record still exists.</p>
 <h3 id="urls">URLs</h3>
 <p>Activity object URLs may be set in two different ways. By talking a closer look to <strong>ComActivitiesActivityObject::getUrl</strong> you may see that URL are KHttpUrl objects. As we previously mentioned, activity objects are created by using a <strong>_getObject</strong> factory method. This method accepts a configuration object which may contain a url property for setting the activity object URL. </p>
 <p>If the url property is a string, the <strong>_getObject</strong> method will assume that it contains a query string. This query string will get routed, and the creation of the KHttpUrl object is taken cared off.</p>
@@ -739,44 +745,47 @@
 <h2 id="icons">Icons</h2>
 <p>Activity messages that get rendered by LOGman, are usually assigned an icon to easily differentiate one activity from another. This icon is simply a CSS class that gets assigned to a given activity. The name of the CSS class is made available through the image property, e.g. <code>$activity-&gt;image</code>.</p>
 <p>For changing the value of this property, we just need to override the <strong>getPropertyImage</strong> method inside the activity override class:</p>
-<pre><code>    public function getPropertyImage()
-    {
-        $images = array(&#39;walk&#39; =&gt; &#39;icon-walk&#39;, &#39;run&#39; =&gt; &#39;icon-run&#39; , &#39;sit&#39; =&gt; &#39;icon-sit&#39;);
+<pre><code class="lang-php">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPropertyImage</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-variable">$images</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">'walk'</span> =&gt; <span class="hljs-string">'icon-walk'</span>, <span class="hljs-string">'run'</span> =&gt; <span class="hljs-string">'icon-run'</span> , <span class="hljs-string">'sit'</span> =&gt; <span class="hljs-string">'icon-sit'</span>);
 
-        $image = &#39;icon-default&#39;;
+        <span class="hljs-variable">$image</span> = <span class="hljs-string">'icon-default'</span>;
 
-        if (in_array($this-&gt;verb, array_keys($images))) {
-            $image = $images[$this-&gt;verb];        
+        <span class="hljs-keyword">if</span> (in_array(<span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;verb</span>, array_keys(<span class="hljs-variable">$images</span>))) {
+            <span class="hljs-variable">$image</span> = <span class="hljs-variable">$images</span>[<span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;verb</span>];        
         }
 
-        return $image;
+        <span class="hljs-keyword">return</span> <span class="hljs-variable">$image</span>;
     }
-</code></pre><p>An icon is often assigned to a given activity action, but you could perfectly assign one icon to all of the activities of a given resource and/or component. This is left to the implementer&#39;s discretion.</p>
+</code></pre>
+<p>An icon is often assigned to a given activity action, but you could perfectly assign one icon to all of the activities of a given resource and/or component. This is left to the implementer&#39;s discretion.</p>
 <h2 id="extending-the-specification">Extending the specification</h2>
 <p>The activity API is not static. While we already provide a very complete platform for logging and exposing activity streams, nothing prevents developers to bend activities to their needs and likings by extending the Activity Streams specification and/or our implementation. </p>
 <p>As an example, adding new activity objects is a breeze. Let&#39;s assume that our <code>bar</code> activity also has related <code>baz</code> resources. Let us take this into account in our activity override.</p>
 <p>We can extend the activity by just adding a <code>baz</code> activity object to it. First we provide a getter for the object:</p>
-<pre><code>    public function getActivityBaz()
-    {
-        $config = new KObjectConfig();
+<pre><code class="lang-php">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getActivityBaz</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-variable">$config</span> = <span class="hljs-keyword">new</span> KObjectConfig();
 
-        // Set the baz activity object configuration
+        <span class="hljs-comment">// Set the baz activity object configuration</span>
         ...
 
-        return $this-&gt;_getObject($config);
+        <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;_getObject</span>(<span class="hljs-variable">$config</span>);
     }
-</code></pre><p>Easy right?. Setting the object&#39;s configuration is nothing more than setting the data of the activity object we are creating. In this case, we are setting data from a <code>baz</code> related resource. This data may be grabbed from the activity row itself (possibly stored in the metadata property) or it can be queried directly from the database table holding <code>baz</code> rows. Anything works, this all depends on the implementation of the component being integrated, and whether or not the information is made available in the activities table.</p>
+</code></pre>
+<p>Easy right?. Setting the object&#39;s configuration is nothing more than setting the data of the activity object we are creating. In this case, we are setting data from a <code>baz</code> related resource. This data may be grabbed from the activity row itself (possibly stored in the metadata property) or it can be queried directly from the database table holding <code>baz</code> rows. Anything works, this all depends on the implementation of the component being integrated, and whether or not the information is made available in the activities table.</p>
 <p>After providing a getter for the client activity object, we can now make use of it by referencing it in short formats:</p>
 <pre><code>{actor} {action} {object.type} {baz} title {object}
 </code></pre><p>which may translate to:</p>
 <pre><code>{actor} {action} the {object.type} from {baz} with title {object}
 </code></pre><p>For the object to be renderable on JSON activity streams, we need the activity to be aware of this new object. We can easily do so by specifying this at instantiation time:</p>
-<pre><code>    protected function _initialize(KObjectConfig $config)
-    {
-        $config-&gt;append(array(&#39;objects&#39; =&gt; array(&#39;baz&#39;)));
-        parent::_initialize($config);
+<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_initialize</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
+    </span>{
+        <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(<span class="hljs-keyword">array</span>(<span class="hljs-string">'objects'</span> =&gt; <span class="hljs-keyword">array</span>(<span class="hljs-string">'baz'</span>)));
+        <span class="hljs-keyword">parent</span>::_initialize(<span class="hljs-variable">$config</span>);
     }
-</code></pre><p>By appending <code>baz</code> to the objects array, we are effectively telling the activity that we are adding a <code>baz</code> object. The <code>baz</code> activity object will now get displayed as part of the activity on JSON activity streams. JSON activity streams can be accessed by appending <em>&amp;format=json&amp;layout=stream</em> to the URL query.</p>
+</code></pre>
+<p>By appending <code>baz</code> to the objects array, we are effectively telling the activity that we are adding a <code>baz</code> object. The <code>baz</code> activity object will now get displayed as part of the activity on JSON activity streams. JSON activity streams can be accessed by appending <em>&amp;format=json&amp;layout=stream</em> to the URL query.</p>
 <p>When working with activity overrides, we strongly encourage developers to review the entire activity package (classes under the <code>activity</code> folder of the base activity component located at <code>libraries/koowa/components/com_activities</code>) as well as the <strong>ComActivitiesModelEntityActivity</strong> and <strong>ComLogmanModelEntityActivity</strong> implementations. Knowing the ins and outs of activity entities will be of great help while developing activity overrides for your LOGman plugins.</p>
 
                         
@@ -806,7 +815,7 @@
     
 
     
-    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
     

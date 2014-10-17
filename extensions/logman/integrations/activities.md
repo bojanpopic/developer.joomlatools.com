@@ -14,7 +14,7 @@ For convenience, an activity override per component can also be defined, i.e. if
 
 Let us create our first activity override class. If we would like to create an activity override for a `bar` resource of our `foo` component we would add the following contents inside the `plugins/logman/foo/activity/bar.php` file:
 
-```
+```php
 <?php
 	class PlgLogmanFooActivityBar extends ComLogmanModelEntityActivity
 	{
@@ -30,7 +30,7 @@ The activity format defines the text layout that is used for rendering activity 
 
 These layouts can be defined during instantiation:
 
-```
+```php
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(
@@ -111,7 +111,7 @@ The base activity object getters make calls to `_{object}Config` methods (where 
 
 Let us assume that in our `bar` activity override, the object's URL is being wrongly set. Not a problem, we just need to change/override the way the URL property gets set in the configuration object. For this we would need to add the following code in our activity override class:
 
-```
+```php
 	protected function _objectConfig(KObjectConfig $config)
 	{
 		$config->append(array('url' => 'option=com_foo&view=bar&id=' . $activity->row));
@@ -136,7 +136,7 @@ The **_getObject** method will automatically set a `display` prefixed  property 
 
 Let us suppose that we would like to add an additional dot property to the object activity object of our `bar` activity override. We do this as follows:
 
-```
+```php
 	protected function _objectConfig(KObjectConfig $config)
 	{
 		$config->append(
@@ -149,7 +149,7 @@ Let us suppose that we would like to add an additional dot property to the objec
 
 By only providing the `objectBaz` property, the object getter will automatically set for us a `displayBaz` property with `'Howdy'` as value. If a translate property isn't set at all it will also translate `displayBaz`. This is the default behavior, but we can always make it behave as we please. Let us see how:
 
-```
+```php
 	protected function _objectConfig(KObjectConfig $config)
 	{
 		$config->append(
@@ -176,7 +176,7 @@ If we take a closer look at the  **ComActivitiesModelEntityActivity::_findObject
 
 Let us suppose that in our hypothetical `com_foo` component, our `bar` resources get stored in a database table called `bars`. The identity column of this table is `bar_id`. If this is the case, then we would setup the above finder properties as follows:
 
-```
+```php
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(
@@ -208,7 +208,7 @@ Activity messages that get rendered by LOGman, are usually assigned an icon to e
 
 For changing the value of this property, we just need to override the **getPropertyImage** method inside the activity override class:
 
-```
+```php
 	public function getPropertyImage()
     {
     	$images = array('walk' => 'icon-walk', 'run' => 'icon-run' , 'sit' => 'icon-sit');
@@ -234,7 +234,7 @@ As an example, adding new activity objects is a breeze. Let's assume that our `b
 
 We can extend the activity by just adding a `baz` activity object to it. First we provide a getter for the object:
 
-```
+```php
 	public function getActivityBaz()
 	{
 		$config = new KObjectConfig();
@@ -258,7 +258,7 @@ which may translate to:
 	
 For the object to be renderable on JSON activity streams, we need the activity to be aware of this new object. We can easily do so by specifying this at instantiation time:
 
-```
+```php
 	protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array('objects' => array('baz')));

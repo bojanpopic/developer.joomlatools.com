@@ -7,7 +7,7 @@
         <title>Joomla components | Joomlatools Developer Zone</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 1.0.3">
+        <meta name="generator" content="GitBook 1.0.2">
         <meta name="HandheldFriendly" content="true"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -48,7 +48,7 @@
             </ul>
         </div>
     </div>
-    <div class="book"  data-level="4.1.1.1" data-basepath="../../.." data-revision="1413556993685">
+    <div class="book"  data-level="4.1.1.1" data-basepath="../../.." data-revision="1413558298578">
         
 
 <div class="book-summary">
@@ -633,12 +633,13 @@
 <p>With this in mind, let us re-develop the Newsfeeds LOGman plugin for logging newsfeeds activities. The newsfeeds core component triggers <strong>context</strong> events for notifying plugins. So let us first build a plugin that listens to those events for logging activities.</p>
 <h3 id="plugins-listening-to-context-events">Plugins listening to Context Events</h3>
 <p>The first step is to create a <code>newsfeeds.php</code> file in the <code>plugins/logman/newsfeeds</code> directory. The file should contain the following content inside:</p>
-<pre><code>&lt;?php
-    class PlgLogmanNewsfeeds extends ComLogmanPluginJoomla
-    {
+<pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgLogmanNewsfeeds</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ComLogmanPluginJoomla</span>
+    </span>{
     }    
-?&gt;
-</code></pre><p>Congratulations! you have just created your first LOGman plugin!.</p>
+<span class="hljs-preprocessor">?&gt;</span>
+</code></pre>
+<p>Congratulations! you have just created your first LOGman plugin!.</p>
 <p>By default plugins extending the <strong>ComLogmanPluginJoomla</strong> class will listen to the following <strong>context</strong> events:</p>
 <ul>
 <li>onContentAfterSave</li>
@@ -649,24 +650,26 @@
 </ul>
 <p>Unfortunately, at this stage, the plugin will not be logging anything. We need to provide it with more information about the things we want to log. Let&#39;s do exactly that.</p>
 <p>Add the following code inside the class:</p>
-<pre><code>    protected function _initialize(KObjectConfig $config)
-    {
-        $config-&gt;append(array(
-            &#39;resources&#39; =&gt; array(&#39;newsfeed&#39;)
+<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_initialize</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
+    </span>{
+        <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(<span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'resources'</span> =&gt; <span class="hljs-keyword">array</span>(<span class="hljs-string">'newsfeed'</span>)
         ));
 
-        parent::_initialize($config);
+        <span class="hljs-keyword">parent</span>::_initialize(<span class="hljs-variable">$config</span>);
     }
-</code></pre><p>We have just changed the way the plugin initializes itself. By specifying resources in the config object we are telling the plugin which resources we are interested on. We are basically specifying the context we are interested on.</p>
+</code></pre>
+<p>We have just changed the way the plugin initializes itself. By specifying resources in the config object we are telling the plugin which resources we are interested on. We are basically specifying the context we are interested on.</p>
 <p>When a newsfeed is saved or deleted, the <code>onContentAfterSave</code> or <code>onContentAfterDelete</code> events are triggered respectively. By specifying newsfeed as a plugin resource in the config object, the plugin will proceed to log save and delete activities when these events get triggered over newsfeed resources.</p>
 <p>Easy right?. There is still one small catch. Let us talk about data. When an event is triggered, handlers are very often provided with a reference to the data on which the action or the event took place. In this case the handler is given a newsfeed object.</p>
 <p>Out of the box, the plugin will guess two pieces of information that it needs to log activities: the resource <code>id</code> and its <code>name</code>. The plugin assumes that the resource <code>id</code> and <code>name</code> correspond to the <code>id</code> and <code>title</code> properties in the passed data object, i.e. <code>$newsfeed-&gt;id</code> and <code>`$newsfeed-&gt;title</code> respectively. If this is the case, then all will work out of the box. Otherwise a bit more work will be needed to tell the plugin how to get this information.</p>
 <p>In the case of our example, the newsfeeds name can be grabbed using the <code>name</code> property. Because of this, we need to add the following piece of code in our plugin:</p>
-<pre><code>    protected function _getNewsfeedObjectData($data, $event)
-    {
-        return array(&#39;id&#39; =&gt; $data-&gt;id, &#39;name&#39; =&gt; $data-&gt;name);
+<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getNewsfeedObjectData</span><span class="hljs-params">(<span class="hljs-variable">$data</span>, <span class="hljs-variable">$event</span>)</span>
+    </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">array</span>(<span class="hljs-string">'id'</span> =&gt; <span class="hljs-variable">$data</span><span class="hljs-variable">-&gt;id</span>, <span class="hljs-string">'name'</span> =&gt; <span class="hljs-variable">$data</span><span class="hljs-variable">-&gt;name</span>);
     }
-</code></pre><p>The <code>_getNewsfeedObjectData</code> method gets called for getting the newsfeed data that will be passed to LOGman for logging the activity. The <code>$data</code> argument is the data passed to the event handler, i.e. the newsfeed object. The <code>$event</code> argument is a string containing the name of the event. The method should return an array containing at the very least the <code>id</code> and the <code>name</code> of the resource. Additionally, a <code>metadata</code> field can be provided with additional data that may be used for rendering activities. This field must contain an associative array of metadata.</p>
+</code></pre>
+<p>The <code>_getNewsfeedObjectData</code> method gets called for getting the newsfeed data that will be passed to LOGman for logging the activity. The <code>$data</code> argument is the data passed to the event handler, i.e. the newsfeed object. The <code>$event</code> argument is a string containing the name of the event. The method should return an array containing at the very least the <code>id</code> and the <code>name</code> of the resource. Additionally, a <code>metadata</code> field can be provided with additional data that may be used for rendering activities. This field must contain an associative array of metadata.</p>
 <p>As you may have guessed, the naming convention being used is <code>_get{Resource}ObjectData</code> where <code>{Resource}</code> is the object we are listenning events for. If we would be listening events for articles, the method for providing the activity data would be <code>_getArticleObjectData</code>.</p>
 <p>Right now we have a working plugin that is capable of logging the following newsfeeds actions:</p>
 <ul>
@@ -685,42 +688,45 @@
 <p>As with our previous example, under some circumstances all will work out of the box. However, sometimes the plugin needs a bit of help for figuring it out.</p>
 <p>For logging state changes, the plugin needs to know the name of the Joomla! table class that defines the event object, a.k.a the resource. By default this is assumed to be <code>JTable{Resource}</code>. This is needed because unfortunately, the <code>onContentChangeState</code> event only provides the IDs of the resources which state is changing. Otherwise speaking, we need to load the resources ourselves in order to get the activity data to be logged.</p>
 <p>In our example, the Table class being used for newsfeeds resources is <strong>NewsfeedsTableNewsfeed</strong>. For telling the plugin which table class to use we use the following code block:</p>
-<pre><code>    protected function _getTable($config)
-    {
-        $config-&gt;append(array(
-            &#39;prefix&#39; =&gt; &#39;NewsfeedsTable&#39;
+<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getTable</span><span class="hljs-params">(<span class="hljs-variable">$config</span>)</span>
+    </span>{
+        <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(<span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'prefix'</span> =&gt; <span class="hljs-string">'NewsfeedsTable'</span>
         ));
 
-        return parent::_getTable($config);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">parent</span>::_getTable(<span class="hljs-variable">$config</span>);
     }
-</code></pre><p>The table class name is constructed with two variables that get passed to the <strong>_getTable</strong> method, <code>prefix</code> and <code>name</code>. In this case we are telling the getter method that <code>prefix</code> is <code>NewsfeedsTable</code>. By default, <code>name</code> corresponds to the resource name, i.e. <strong>Newsfeed</strong>, which is exactly what we need. Otherwise, <code>&#39;name&#39; =&gt; {name}</code> should be appended to the config object along with the prefix. By concatenating both (<code>prefix</code> + <code>name</code>), the getter is able to determine the class name, <strong>NewsfeedsTableNewsfeed</strong> for this example.</p>
+</code></pre>
+<p>The table class name is constructed with two variables that get passed to the <strong>_getTable</strong> method, <code>prefix</code> and <code>name</code>. In this case we are telling the getter method that <code>prefix</code> is <code>NewsfeedsTable</code>. By default, <code>name</code> corresponds to the resource name, i.e. <strong>Newsfeed</strong>, which is exactly what we need. Otherwise, <code>&#39;name&#39; =&gt; {name}</code> should be appended to the config object along with the prefix. By concatenating both (<code>prefix</code> + <code>name</code>), the getter is able to determine the class name, <strong>NewsfeedsTableNewsfeed</strong> for this example.</p>
 <p>By simply adding the above piece of code, our plugin can now log state changes like a champ. Awesome!.</p>
 <h3 id="plugins-listening-to-non-context-events">Plugins listening to non-Context Events</h3>
 <p>The previous section walked you through the process of creating a basic LOGman plugin that listens to context events to log activities. While context events are nice and dandy, and can be used in the great majority of cases, many components out there also trigger non-context events. Do not panic, LOGman can handle those too!.</p>
 <p>All we need to do for listening to any event is to add a handler for it, i.e. a plugin method, to our plugin:</p>
-<pre><code>    public function on{EventName}($arg1, $arg2, ...)
+<pre><code class="lang-php">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">on</span></span>{EventName}(<span class="hljs-variable">$arg1</span>, <span class="hljs-variable">$arg2</span>, ...)
     {
-        $this-&gt;log(
-            array(
-                &#39;object&#39; =&gt; array(
-                    &#39;package&#39;  =&gt; {package},
-                    &#39;type&#39;     =&gt; {type},
-                    &#39;id&#39;       =&gt; {id},
-                    &#39;name&#39;     =&gt; {name},
-                    &#39;metadata&#39; =&gt; {metadata}
+        <span class="hljs-variable">$this</span><span class="hljs-variable">-&gt;log</span>(
+            <span class="hljs-keyword">array</span>(
+                <span class="hljs-string">'object'</span> =&gt; <span class="hljs-keyword">array</span>(
+                    <span class="hljs-string">'package'</span>  =&gt; {package},
+                    <span class="hljs-string">'type'</span>     =&gt; {type},
+                    <span class="hljs-string">'id'</span>       =&gt; {id},
+                    <span class="hljs-string">'name'</span>     =&gt; {name},
+                    <span class="hljs-string">'metadata'</span> =&gt; {metadata}
                  ),
-                &#39;verb&#39;   =&gt; {verb},
-                &#39;actor&#39;  =&gt; {actor},
-                &#39;result&#39; =&gt; {result}            
+                <span class="hljs-string">'verb'</span>   =&gt; {verb},
+                <span class="hljs-string">'actor'</span>  =&gt; {actor},
+                <span class="hljs-string">'result'</span> =&gt; {result}            
             )
         );
     }
-</code></pre><p>where <code>{EventName}</code> is the name of the event we want to listen to. As an example, if we would like to listen to the <strong>onUserLogin</strong> event, our event handler must look like:</p>
-<pre><code>    public function onUserLogin($user, $options = array())
-    {
+</code></pre>
+<p>where <code>{EventName}</code> is the name of the event we want to listen to. As an example, if we would like to listen to the <strong>onUserLogin</strong> event, our event handler must look like:</p>
+<pre><code class="lang-php">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onUserLogin</span><span class="hljs-params">(<span class="hljs-variable">$user</span>, <span class="hljs-variable">$options</span> = array<span class="hljs-params">()</span>)</span>
+    </span>{
         ...
     }
-</code></pre><p>For logging an activity the handler must issue a <strong>log</strong> call with some activity data. Part of this data is mandatory, the rest is of course optional. Let us start with the mandatory fields:</p>
+</code></pre>
+<p>For logging an activity the handler must issue a <strong>log</strong> call with some activity data. Part of this data is mandatory, the rest is of course optional. Let us start with the mandatory fields:</p>
 <ul>
 <li><code>{id}</code>: The unique identifier of the resource.</li>
 <li><code>{name}</code>: The name/title of the resource.</li>
@@ -762,7 +768,7 @@
     
 
     
-    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
     

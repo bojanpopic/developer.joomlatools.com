@@ -36,7 +36,7 @@ With this in mind, let us re-develop the Newsfeeds LOGman plugin for logging new
 
 The first step is to create a `newsfeeds.php` file in the `plugins/logman/newsfeeds` directory. The file should contain the following content inside:
 
-```
+```php
 <?php
 	class PlgLogmanNewsfeeds extends ComLogmanPluginJoomla
 	{
@@ -58,7 +58,7 @@ Unfortunately, at this stage, the plugin will not be logging anything. We need t
 
 Add the following code inside the class:
 
-```
+```php
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
@@ -79,7 +79,7 @@ Out of the box, the plugin will guess two pieces of information that it needs to
 
 In the case of our example, the newsfeeds name can be grabbed using the `name` property. Because of this, we need to add the following piece of code in our plugin:
 
-```
+```php
     protected function _getNewsfeedObjectData($data, $event)
     {
         return array('id' => $data->id, 'name' => $data->name);
@@ -111,7 +111,7 @@ For logging state changes, the plugin needs to know the name of the Joomla! tabl
 
 In our example, the Table class being used for newsfeeds resources is **NewsfeedsTableNewsfeed**. For telling the plugin which table class to use we use the following code block:
 
-```
+```php
 	protected function _getTable($config)
     {
         $config->append(array(
@@ -132,7 +132,7 @@ The previous section walked you through the process of creating a basic LOGman p
 
 All we need to do for listening to any event is to add a handler for it, i.e. a plugin method, to our plugin:
 
-```
+```php
 	public function on{EventName}($arg1, $arg2, ...)
 	{
 		$this->log(
@@ -154,7 +154,7 @@ All we need to do for listening to any event is to add a handler for it, i.e. a 
 
 where `{EventName}` is the name of the event we want to listen to. As an example, if we would like to listen to the **onUserLogin** event, our event handler must look like:
 
-```
+```php
     public function onUserLogin($user, $options = array())
     {
     	...
