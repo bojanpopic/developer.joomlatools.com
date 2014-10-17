@@ -17,7 +17,7 @@
 	    * [Installation](tools/console/installation.md)
 	    * [Usage](tools/console/usage.md)
 	    * [FAQs](tools/console/faq.md)
-* [Extensions](extensions/README.md)
+* [Extensions](extensions/logman.md)
     * [LOGman](extensions/logman.md)
         * [Integrations](extensions/logman/integrations/README.md)
         	* [Joomla components](extensions/logman/integrations/joomla.md)
