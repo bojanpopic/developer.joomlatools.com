@@ -48,7 +48,7 @@
             </ul>
         </div>
     </div>
-    <div class="book"  data-level="1.2.1.2" data-basepath="../../.." data-revision="1413558516804">
+    <div class="book"  data-level="1.2.1.2" data-basepath="../../.." data-revision="1414501622757">
         
 
 <div class="book-summary">
@@ -590,7 +590,7 @@
                     <div class="page-inner">
                 
                     
-                        <section class="normal" id="section-gitbook_7">
+                        <section class="normal" id="section-gitbook_6">
                         
                             <h1 id="nooku-components">Nooku components</h1>
 <p>Joomla! components built on top of the <a href="http://www.nooku.org" target="_blank">Nooku Framework</a> can also be easily integrated with LOGman.</p>
@@ -604,7 +604,6 @@ achieved by using LOGman plugins.</p>
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgLogmanDocman</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ComLogmanPluginKoowa</span>
     </span>{
     }
-<span class="hljs-preprocessor">?&gt;</span>
 </code></pre>
 <p>Here we are extending <strong>ComLogmanPluginKoowa</strong>, which is the base plugin class for integrating Nooku components. This plugin makes sure that the component controllers become loggable, i.e. it attaches the loggable behavior to each controller that we would like to integrate. The loggable behavior is also preset with one or more loggers by the plugin.</p>
 <p>Next step is to tell the plugin which DOCman controller we would like log actions from, and define the logger that will be responsible for logging activities for this controller. We can do this by adding the following code:</p>
@@ -643,7 +642,6 @@ achieved by using LOGman plugins.</p>
              )
         );
     }
-<span class="hljs-preprocessor">?&gt;</span>
 </code></pre>
 <p>where <code>{Component}</code> and <code>{identifier}</code> are the component name and the identifier of your controller issuing the actions to be logged respectively.</p>
 <p>More often than not, we will like to modify the behavior of the logger, i.e. log other actions, avoid logging in some particular cases, store additional metadata, override the default activity object to activity data mapping, etc. With this in mind, let us get back to our DOCman plugin example.</p>
@@ -652,7 +650,6 @@ achieved by using LOGman plugins.</p>
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgLogmanDocmanLoggerDocument</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ComLogmanActivityLogger</span>
     </span>{
     }
-<span class="hljs-preprocessor">?&gt;</span>
 </code></pre>
 <p>Right now our custom logger is just extending the base logger. Remember that the the DOCman plugin was initialized so that the document controller is made loggable by using the <strong>PlgLogmanDocmanLoggerDocument</strong> logger.</p>
 <p>If we would like to log an additional <code>download</code> action, we would add the following code:</p>
