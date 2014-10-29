@@ -121,9 +121,9 @@ produce the same result as the previous example:
 In this case the system assumes that your helper classes are located somewhere in the `template/helper` fallback
 hierarchy:
 
-1) `com_example/template/helper`
-2) `libraries/koowa/components/com_koowa/template/helper`
-3) `libraries/koowa/library/template/helper`
+1. `com_example/template/helper`
+2. `libraries/koowa/components/com_koowa/template/helper`
+3. `libraries/koowa/library/template/helper`
 
 Helpers with abbreviated identifiers will have their classes located first within the component where they are called from; then com_koowa;
 then the Koowa library.
@@ -164,10 +164,10 @@ to the view template.
 
 We'll take the 'module' filter as an example as its responsible for 'Module Injection':
 
-1) It looks in the view template for the `<ktml:module />` tag
-2) removes it from the template
-3) parse its attributes which correspond to attributes inherent to Joomla! modules (i.e. position, etc)
-4) lastly, add that module to your page in the position that you specify.
+1. It looks in the view template for the `<ktml:module />` tag
+2. removes it from the template
+3. parse its attributes which correspond to attributes inherent to Joomla! modules (i.e. position, etc)
+4. lastly, add that module to your page in the position that you specify.
 
 **Powerful stuff**
 
@@ -176,9 +176,9 @@ to that of the template helpers.
 
 The fallback hierarchy is almost exactly the same:
 
-1) `com_example/template/filter`
-2) `libraries/koowa/components/com_koowa/template/filter`
-3) `libraries/koowa/library/template/filter`
+1. `com_example/template/filter`
+2. `libraries/koowa/components/com_koowa/template/filter`
+3. `libraries/koowa/library/template/filter`
 
 By inspection of these directories you can review what filters you have access to.
 
