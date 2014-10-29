@@ -11,6 +11,7 @@
         * [Translations](extensions/logman/translations.md)
 * [Framework](framework/bootstrap.md)
     * [Bootstrap](framework/bootstrap.md)
+    * [Template System](framework/template-system.md)
 * [Tools](tools/composer/introduction.md)
 	* [Composer](tools/composer/introduction.md)
 	    * [Installing Packages](tools/composer/installing.md)
