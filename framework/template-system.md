@@ -1,10 +1,10 @@
 #Template System
 
-The Nooku Framework boasts a new [Template System](http://api.nooku.org/package-Koowa.Library.Template.html) that gives you
-and your applications unparalleled flexibility and power. What follows is a high level overview of the practical end-uses
+The Nooku Framework boasts a new [Template System](http://api.nooku.org/package-Koowa.Library.Template.html) that give
+Joomlatools extensions unparalleled flexibility and power. What follows is a high level overview of the practical end-uses
 of the technology with a few examples to help you get creating awesome views for your extensions.
 
-A good understanding of Nooku's [Object Management](http://guides.nooku.org/essentials/object-management.html) and
+A good understanding of the Framework's [Object Management](http://guides.nooku.org/essentials/object-management.html) and
 [Naming Conventions](http://guides.nooku.org/essentials/naming-conventions.html) will really help you realize more of the potential
 benefits of the Template system. This is especially true if you want to create your own template helpers and filters.
 
@@ -35,25 +35,27 @@ The folder structure is as follows:
 * **view_name** - the name name of the view whose template is being overridden
 * **layout_name** - the specific layout being overridden, e.g. default.php, form.php
 
-An example of this might be: `/templates/beez/html/com_docman/documents/list.php`, which overrides the `list` layout, in
-the `documents` view, in the `com_docman` component if you are using the Beez template. This file's existence tells the
+An example override might be `/templates/beez/html/com_docman/documents/list.php`, which overrides the `list` layout, in
+the `documents` view, in the `com_docman` component for pages using the `Beez` template. This file's existence tells the
 Nooku template system that you want to use it, as opposed to the original file `components/com_docman/views/documents/tmpl/list.php`.
-This allows you to modify the output of a Nooku component without changing the core files.
+This allows you to modify the output of a Joomlatools component (or any other Nooku powered component) without changing
+the core files.
 
 ##Partials
 
-Partials are a great way of separating layouts into manageable chunks. These can be included very easily within one another.
-
-A partial is just another layout, that can be loaded on it's own, or included within another layout. The simplest way to do this is:
+Partials are a great way of separating layouts into manageable chunks.
+They are just layout files, that can be loaded on their own, or included within another layout. We do this with the `import` template
+function.
 
 ```php
-<?= import('layout_name');
+<?= import('layout_name.html');
 ```
 
 **Note:** `<?=` is short for `<?php echo` which can use with any Nooku powered template.
 
-The `'layout_name'` in this case is the name of the layout file itself. The above method will attempt include a file called "layout_name.php" from the
-same folder in which the parent files reside (note: the same rules for template overrides apply to partials).
+The `'layout_name.html'` in this case is the name of the layout file itself without the `php` file extension. The above
+method will attempt include a file called "layout_name.html.php" from the same folder in which the parent files reside
+(note: the same rules for template overrides apply to partials).
 
 When using `import()`, a second argument can be supplied to pass additional variables to the included partial. For example:
 
@@ -71,7 +73,7 @@ name of the partial file.
 
 ##Helpers
 
-Template Helpers are an incredibly useful tool for creating reusable template code. Helpers can be used for all sorts of things,
+Template Helpers are an incredibly useful tool for creating reusable template code. They can be used for all sorts of things,
 from rendering form controls, to pagination, to tabs. The Framework comes packaged with several helpers, including but not limited to:
 
 * Accordion: methods to create an accordion menu
@@ -84,48 +86,65 @@ from rendering form controls, to pagination, to tabs. The Framework comes packag
 * Select: select list, radio list, checkbox list and boolean list controls.
 * Tabs: html & javascript code for creating tab controls.
 
-Helpers are invoked using the `helper` command. This template function is first passed a string which at first glance looks like a regular Nooku object
-identifier; and then an optional array of options. That string is actually the helper's Object Identifier with a method name
-concatenated to it with a period (.). To rephrase, everything before the last period in the string is an Object Identifier and after, is a
-method that is in that helper object's interface.
+Helpers are invoked using the `helper` template function. That function is first passed a string which at first glance looks
+like a regular Nooku object identifier; and then secondly, it can get an optional array of options. That string is actually
+the helper's Object Identifier with a method name concatenated to it with a period (.). To rephrase, everything before the
+last period in the string is an Object Identifier and after, is a method that is in that helper object's interface.
 
+This line of code:
 ```php
 <?=  helper('com://site/example.template.helper.myhelper.mymethod', array('of' => 'options'));
 ```
-
+Looks for the following class, and invoke the `mymethod` method:
+<a name="myhelper"></a>
+```php
+class ComExampleTemplateHelperMyhelper extends KTemplateHelperAbstract
+{
+    function mymethod($config = array()){
+    {
+          $config = new KObjectConfig($config);
+          $config->append(array(
+                   'of' => 'methods'
+          ));
+           return '<div>'. $config->of .'</div>';
+    }
+}
+```
 A helper identifier can take on the form of a fully qualified identifier as above, or a more convenient abbreviated form where just the file name
 of the helper is used with the concatenated method. Hence, if we are working on a template in `com_example` the following command will
 produce the same result as the previous example:
+
 ```php
-<?=  helper('myhelper.mymethod', array('of' => 'options'));
+<?=  helper('myhelper.mymethod', array('of' => 'options')); // Write Less Code
 ```
-In this case the system assumes that your helper classes are located in the `template/helper` fallback
+
+In this case the system assumes that your helper classes are located somewhere in the `template/helper` fallback
 hierarchy:
 
 1) `com_example/template/helper`
 2) `libraries/koowa/components/com_koowa/template/helper`
 3) `libraries/koowa/library/template/helper`
 
-Helpers with abbreviated identifiers are located first within the component where they are called from; then com_koowa;
+Helpers with abbreviated identifiers will have their classes located first within the component where they are called from; then com_koowa;
 then the Koowa library.
 
 The helper methods included with Nooku are designed to be pretty smart in that they have a default set of parameters. This means they
 can work with a limited amount of input. However, that 'array of options' we mentioned above is a convenient vehicle to
-override those defaults and get what you need from the helper.
+override those defaults and get what you need from the helper. We did this in our [above class example](#myhelper) but another real example:
 
 ```php
 <?= helper('date.humanize', array('date' => $date)); //where $date is a datetime formatted YYY-mm-dd H:m:s
 ```
 
 The best way to get to know template helpers is to first look at some of them, and then start using them. For examples of the
-helpers that come with Koowa, see the `libraries/koowa/library/template/helper` and the `libraries/koowa/components/com_koowa/template/helper`
-the directories contained within the package.
+helpers that come with the Framework, see the `libraries/koowa/library/template/helper` and the `libraries/koowa/components/com_koowa/template/helper`
+directories contained within the package.
 
 ##Filters
 
 Filters are a powerful feature of the Nooku template system. They are yet another tool to support you in **"Writing Less Code"**.
 Each template object has a 'queue' of filters, and before a template is rendered, each of those filters is used against the content
-of the template. For example, lets look at the current ComKoowaViewPageHtml::_initialize method:
+of the template. As an illustration lets look at the current ComKoowaViewPageHtml::_initialize method:
 
 ```php
     protected function _initialize(KObjectConfig $config)
@@ -143,7 +162,7 @@ to the view template.
 
 ### So what?
 
-We'll take the `module` filter as an example as its responsible for 'Module Injection':
+We'll take the 'module' filter as an example as its responsible for 'Module Injection':
 
 1) It looks in the view template for the `<ktml:module />` tag
 2) removes it from the template
@@ -196,5 +215,5 @@ qualified identifier will also work.
 
 We've taken a high level look at the Nooku template system. With a solid understanding of these fundamental pieces you can
 start to build extension views more quickly with powerful ready to use features at your finger tips. You can also customize
-all of the Joomlatools extensions and add information that you you want to see.
-The best way to get to know the templating system is to start using it, we think you'll be happy you did.
+all of the Joomlatools extensions and add information that you want to see.
+The best way to get to know the template system is to start using it, we think you'll be happy you did.
