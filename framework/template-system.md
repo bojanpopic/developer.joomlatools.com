@@ -217,3 +217,5 @@ We've taken a high level look at the Nooku template system. With a solid underst
 start to build extension views more quickly with powerful ready to use features at your finger tips. You can also customize
 all of the Joomlatools extensions and add information that you want to see.
 The best way to get to know the template system is to start using it, we think you'll be happy you did.
+
+
