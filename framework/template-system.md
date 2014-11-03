@@ -11,7 +11,7 @@ Template overrides allow you to change how a component's output is rendered with
 component layout files. The main benefit of this is that component upgrades won't overwrite your modified files.
 
 If you're familiar with the Joomla! template override system. The template engine is similar to that of Joomla!, but turbo
-charged! All Joomlatool templates can be overridden from within the active system template, and follow the same folder
+charged! All Joomlatools templates can be overridden from within the active system template, and follow the same folder
 structure as standard Joomla! template overrides.
 
 In order to override a component view layout, you must create a few folders and a PHP file within the active system template.
