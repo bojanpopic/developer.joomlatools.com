@@ -5,7 +5,7 @@ we use so that you can better understand what's happening in each template layou
 
 <!-- toc -->
 
-##Template Overrides
+## Overrides
 
 Template overrides allow you to change how a component's output is rendered without having to modify the original
 component layout files. The main benefit of this is that component upgrades won't overwrite your modified files.
@@ -67,7 +67,7 @@ With that, you should see something similar to this when you're creating a new m
 
 ![Custom Alternative Layout Select in Joomla](/resources/images/joomla-alternative-menu-item-layout-select.png "Alternative List Menu Item Select")
 
-##Partials
+## Partials
 
 Partials are a great way of separating layouts into manageable chunks. They are just layout files, that can be loaded on
 their own, or included within another layout. We do this with the `import` template function.
@@ -96,7 +96,7 @@ name of the partial file.
 
 >Those of you who are familiar with Koowa 1.0 will recognize that "import "has replaced the "@template" template function.
 
-##Helpers
+## Helpers
 
 Template Helpers are an incredibly useful tool for creating reusable template code. Joomlatools extensions use them throughout
 their respective presentation layers. These helpers can be used for all sorts of things, from rendering form controls, to pagination, to tabs.
@@ -156,7 +156,7 @@ hierarchy:
 2. `libraries/koowa/components/com_koowa/template/helper`
 3. `libraries/koowa/library/template/helper`
 
-## Template Functions
+## Functions
 
 There are a number of 'core' template functions that our extensions make use of. We've already introduced `helper` and `import` above.
 Template functions let us shorten what can be lengthy object method calls, alias more obscure function names and generally help
