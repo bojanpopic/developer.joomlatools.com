@@ -44,11 +44,11 @@ for a special purpose. Maybe you want a differently formatted list of items, or 
  to that of the Template Override. Don't worry its very similar and is straight forward with Joomla! 2.5+ .
 
 Once you have identified the layout that you want to augment, copy it to the same folder that you would have for a template
-override *BUT* under a different name, i.e. `customlist.html.php`. This will let you load your new layout for a given item, just by adding
+override **BUT** under a different name, i.e. `customlist.html.php`. This will let you load your new layout for a given item, just by adding
 `layout=custom` to the URL of the page.
 
 If you would like to have your new layout available as a menu item, that is straight forward as well. In similar way, copy the original
-layout xml file to the same directory, and rename it to match your new layout name, but with the `.xml` instead of `.php` and no `html` part, i.e. `customlist.xml`.
+layout xml  file from the component view's layout director to the same override directory, and rename it to match your new layout name, but with the `.xml` instead of `.php` and no `html` part, i.e. `customlist.xml`.
 
 ![Custom Alternative Layout in Joomla](/resources/images/alternative-menu-item-layout-xml.png "Alternative List Menu Item")
 
