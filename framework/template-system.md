@@ -65,7 +65,7 @@ A partial can also be loaded on its own by placing `&layout=default_list` in the
 assumes loads the `default.html.php` file because the implied format is `html` when looking at the page.
 
 
-##Helpers
+## Helpers
 
 Template Helpers are an incredibly useful tool for creating reusable template code. Joomlatools extensions use them throughout
 their respective presentation layers. These helpers can be used for all sorts of things, loading a javascript library, rendering form controls,
@@ -136,7 +136,8 @@ That call looks for the `listbox` helper and tries to invoke the `category_id` m
 a `com_example/template/helper/listbox.php` the system will load `libraries/koowa/components/com_koowa/template/helper/listbox.php`
 instead and then pass along the array of configuration options to the method.
 
-## Template Functions
+
+## Functions
 
 There are a number of 'core' template functions that our extensions make use of. We've already introduced `helper` and `import` above.
 Template functions let us shorten what can be lengthy object method calls, alias more obscure function names and generally help
