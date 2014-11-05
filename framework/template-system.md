@@ -3,103 +3,73 @@
 Joomlatools extension templates expose unparalleled flexibility and power. What follows is a high level overview of the structures
 we use so that you can better understand what's happening in each template layout.
 
-<!-- toc -->
+To start lets consider the following example component view template, named `default.html.php`:
 
-##Template Overrides
+<a name="example-template"></a>
 
-Template overrides allow you to change how a component's output is rendered without having to modify the original
-component layout files. The main benefit of this is that component upgrades won't overwrite your modified files.
+```php
+<?= helper('behavior.koowa'); ?>
+<div id="example-template">
+<h1><?= translate('Example Title') ?></h1>
+<div class="control">
+    <?= helper('listbox.category_id', array(
+        'identifier'=>'com://site/example.model.examples',
+        'id' => 'category_select'
+    )) ?>
+</div>
+    <?= import('default_list.html', array(
+        'title' => translate('This is my list')
+        )) ?>
+</div>
+<ktml:script src="media://com_example/js/example.js" />
+<style>
+ .control select option:selected { color: red }
+</style>
+```
 
-If you're familiar with the Joomla! template override system. The template engine is similar to that of Joomla!, but turbo
-charged! All Joomlatools templates can be overridden from within the active system template, and follow the same folder
-structure as standard Joomla! template overrides.
+>This file gets loaded following the same rules as regular Joomla! layouts. Get some more details
+ in [Layout Considerations](layout-considerations.md)
 
-In order to override a component view layout, you must create a few folders and a PHP file within the active system template.
-
-The folder structure is as follows:
-
-	/templates
-		-> template_name
-			-> html
-				-> com_component_name
-					-> view_name
-						-> layout_name.php
-
-* **template_name** - this is the name of the active system template
-* **html** - all template overrides go in an "html" folder
-* **com_component_name** - this is the name of the component, e.g. com_docman, com_fileman, etc
-* **view_name** - the name name of the view whose template is being overridden
-* **layout_name** - the specific layout being overridden, e.g. default.php, form.php
-
-An example override might be `/templates/beez/html/com_docman/documents/list.html.php`, which overrides the `list` layout, in
-the `documents` view, in the `com_docman` component for pages using the `Beez` template. That file's existence tells the
-system that you want to use it, as opposed to the original file `components/com_docman/views/documents/tmpl/list.html.php`.
-This allows you to modify the output of a Joomlatools component without changing the core files.
-
-### Additional Layouts and Alternative Menu Items
-
-In some situations you may want to keep the current core layout available, but would like to render a very similar layout
-for a special purpose. Maybe you want a differently formatted list of items, or maybe you want some other piece of information
- from your site that's related to the current item being shown. Whatever the reason, we need to take a slightly different approach
- to that of the Template Override. Don't worry its very similar and is straight forward with Joomla! 2.5+ .
-
-Once you have identified the layout that you want to augment, copy it to the same folder that you would have for a template
-override **BUT** under a different name, i.e. `customlist.html.php`. This will let you load your new layout for a given item, just by adding
-`layout=custom` to the URL of the page.
-
-If you would like to have your new layout available as a menu item, that is straight forward as well. In similar way, copy the original
-layout xml  file from the component view's layout director to the same override directory, and rename it to match your new layout name, but with the `.xml` instead of `.php` and no `html` part, i.e. `customlist.xml`.
-
-![Custom Alternative Layout in Joomla](/resources/images/alternative-menu-item-layout-xml.png "Alternative List Menu Item")
-
-After that, just open that file and edit the `title` attribute in the `<layout>` tag and make sure its unique compared with all the other layouts for
-that view, like perhaps:
-
- ```xml
- <layout title="Custom List">
- 		<message>
- 			<![CDATA[COM_DOCMAN_VIEW_LIST_DESCRIPTION]]>
- 		</message>
- 	</layout>
- ```
-
-With that, you should see something similar to this when you're creating a new menu item:
-
-![Custom Alternative Layout Select in Joomla](/resources/images/joomla-alternative-menu-item-layout-select.png "Alternative List Menu Item Select")
+This is not a great deal of code, but there is a lot going on. In this template we are making use of [Template Functions](#template-helpers),
+[Template Helpers](#helpers), [Special Tags](#tags) and [Partials](#partials). Joomlatools components use all of
+these to keep our templates compact, segmented and thus reusable.
 
 ##Partials
 
-Partials are a great way of separating layouts into manageable chunks. They are just layout files, that can be loaded on
-their own, or included within another layout. We do this with the `import` template function.
+Partials are a great way of separating layouts into manageable chunks. They are just template files, that can be loaded on
+their own, or included within another layout. We do this with the `import` template function. You saw an example of this above
+with the line that looks like:
 
 ```php
-<?= import('layout_name.html');
+<?= import('default_list.html'); ?>
 ```
-
 **Note:** `<?=` is short for `<?php echo`, which gets replaced when the template is compiled.
 
-The `'layout_name.html'` in this case is the name of the layout file itself without the `php` file extension. The above
-method will attempt include a file called "layout_name.html.php" from the same folder in which the parent files reside
-(note: the same rules for template overrides apply to partials).
+The `default_list.html` in this case is the name of the template file itself without the `php` file extension. The above
+method will attempt include a file called "default_name.html.php" from the same folder in which the parent files reside
+
+> The template system also applies [Template Overrides](layout-considerations.md) apply to partials.
 
 When using `import()`, a second argument can be supplied to pass additional variables to the included partial. For example:
 
 ```php
-<?= import('partial', array('var_name' => 'var_value'));
+<?= import('default_list.html', array(
+        'title' => translate('This is my list')
+        )) ?>
 ```
 
-This will create a variable in the partial called `$var_name` with a value of `var_value`. In addition, any variables that exist in the
+This will create a variable in the partial called `$title` with a value of `This is my list`. In addition, any variables that exist in the
 parent layout will be automatically be passed through to the partial.
 
-A partial can also be loaded on its own by placing `&layout=partial` in the query string of url of the page, again, where `partial` is the
-name of the partial file.
+A partial can also be loaded on its own by placing `&layout=default_list` in the query string of url of the page. The system
+assumes loads the `default.html.php` file because the implied format is `html` when looking at the page.
 
->Those of you who are familiar with Koowa 1.0 will recognize that "import "has replaced the "@template" template function.
 
 ##Helpers
 
 Template Helpers are an incredibly useful tool for creating reusable template code. Joomlatools extensions use them throughout
-their respective presentation layers. These helpers can be used for all sorts of things, from rendering form controls, to pagination, to tabs.
+their respective presentation layers. These helpers can be used for all sorts of things, loading a javascript library, rendering form controls,
+rendering pagination or the needed structure for tabs.
 The Framework comes packaged with several helpers, including but not limited to:
 
 * Accordion: methods to create an accordion menu
@@ -112,11 +82,11 @@ The Framework comes packaged with several helpers, including but not limited to:
 * Select: select list, radio list, checkbox list and boolean list controls.
 * Tabs: html & javascript code for creating tab controls.
 
-Helpers are invoked using the `helper` [template function](#template-functions). That function is first passed a string which at first glance looks
-like a regular Object Identifier; and then secondly, it can get an optional array of options. That string is actually
-the helper's Object Identifier with a method name concatenated to it with a period (.):
+Helpers are invoked using the `helper` [template function](#template-functions). That function is first passed a string
+which at first glance looks like a regular Object Identifier; and then secondly, it can get an optional array of options. That
+string is actually the helper's Object Identifier with a method name concatenated to it with a period (.):
 
-    `com://site/example.template.helper.myhelper` + `.` + `mymethod`
+`com://site/example.template.helper.myhelper` + `.` + `mymethod`
 
 To rephrase, everything before the last period in the string is an Object Identifier and after, is a method that is in
 that helper object's interface.
@@ -125,7 +95,6 @@ This line of code:
 ```php
 <?=  helper('com://site/example.template.helper.myhelper.mymethod', array('of' => 'options'));
 ```
-
 Looks for the following class, and invokes the `mymethod` method:
 <a name="myhelper"></a>
 ```php
@@ -156,6 +125,17 @@ hierarchy:
 2. `libraries/koowa/components/com_koowa/template/helper`
 3. `libraries/koowa/library/template/helper`
 
+In our [example template](#example-template) in the introduction you saw us use this line of code in our example:
+```php
+<?= helper('listbox.category_id', array(
+        'identifier'=>'com://site/example.model.examples',
+        'id' => 'category_select'
+    )) ?>
+```
+That call looks for the `listbox` helper and tries to invoke the `category_id` method of its interface. If there is not
+a `com_example/template/helper/listbox.php` the system will load `libraries/koowa/components/com_koowa/template/helper/listbox.php`
+instead and then pass along the array of configuration options to the method.
+
 ## Template Functions
 
 There are a number of 'core' template functions that our extensions make use of. We've already introduced `helper` and `import` above.
@@ -164,15 +144,15 @@ keep the layouts clean.
 
 Here are some of the mappings:
 
-`object()` => `$this->getObject()`
-`translate()` => `$this->getObject('translator')->translate()'`
-`json()` => `json_encode()`
-`format()` => `sprintf()`
-`replace()` => `strtr()`
-`escape()` => `$this->escape()`
-`helper()` => `$this->invoke()`
-`import()` => `$this->_import()`
-`parameters()` => `$this->getParameters()`
+* `object()` => `$this->getObject()`
+* `translate()` => `$this->getObject('translator')->translate()'`
+* `json()` => `json_encode()`
+* `format()` => `sprintf()`
+* `replace()` => `strtr()`
+* `escape()` => `$this->escape()`
+* `helper()` => `$this->invoke()`
+* `import()` => `$this->_import()`
+* `parameters()` => `$this->getParameters()`
 
 When a Joomlatools layout gets compiled the above mappings are applied and the corresponding calls evaluated. What that means
 for example is that calling `object()` inside a template layout file is the same as calling `$this->getObject()`.
@@ -197,17 +177,20 @@ You may also see special scheme information in the URLs that templates use to lo
 a `src` attribute Joomlatools uses another filter to keep them nice and short, but dynamically and accurately specify what
  path the actual file resource is in.
 
-You may see, in DOCman for example, a tag in the form:
+Above, we used the following to get a javascript file into the head of the page.
   ```javascript
-  <ktml:script src="media://com_docman/js/document.js" />
+  <ktml:script src="media://com_example/js/example.js" />
   ```
+
 That `media://` scheme specification, gets replaced with the current URL for the media folder, i.e. `http://joomla.dev/media/`. In
 combination with the `ktml:script` tag, the final result gets added to the head in the form:
 
 ```javascript
-<script type="text/javascript" src="http://joomla.dev/media/com_docman/js/document.js"></script>
+<script type="text/javascript" src="http://joomla.dev/media/com_example/js/example.js"></script>
 ```
 There also `base://` and `root://` url schemes which load the base url and root url of your application, respectively.
+
+
 
 ## Summing Up
 
