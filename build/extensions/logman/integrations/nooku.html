@@ -7,7 +7,7 @@
         <title>Nooku components | Joomlatools Developer Zone</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 1.0.2">
+        <meta name="generator" content="GitBook 1.3.1">
         <meta name="HandheldFriendly" content="true"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,7 +15,6 @@
         <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
         <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
         
-    
     
     
     <link rel="next" href="../../../extensions/logman/integrations/activities.html" />
@@ -26,7 +25,8 @@
 
         
     </head>
-    <body>
+    <body class="no-js">
+    <script data-inline type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.body;var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg," js-enabled")}</script>
         
         
 <link rel="stylesheet" href="../../../gitbook/style.css">
@@ -48,8 +48,8 @@
             </ul>
         </div>
     </div>
-    <div class="book"  data-level="1.2.1.2" data-basepath="../../.." data-revision="1415204614451">
-        
+    <div class="book" data-level="1.2.1.2" data-basepath="../../.." data-revision="1415269291198">
+    
 
 <div class="book-summary">
     <div class="book-search">
@@ -512,9 +512,9 @@
     </ul>
 </div>
 
-        <div class="book-body">
-            <div class="body-inner">
-                <div class="book-header">
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
     <a href="#" class="btn pull-left toggle-search" aria-label="Toggle search"><i class="fa fa-search"></i></a>
@@ -586,13 +586,13 @@
     </h1>
 </div>
 
-                <div class="page-wrapper" tabindex="-1">
-                    <div class="page-inner">
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
                 
+                
+                    <section class="normal" id="section-gitbook_6">
                     
-                        <section class="normal" id="section-gitbook_6">
-                        
-                            <h1 id="nooku-components">Nooku components</h1>
+                        <h1 id="nooku-components">Nooku components</h1>
 <p>Joomla! components built on top of the <a href="http://www.nooku.org" target="_blank">Nooku Framework</a> can also be easily integrated with LOGman.</p>
 <p>For logging activities of Nooku powered components, we just need to wire activity loggers to the controllers performing the actions that we want to log. This may be 
 achieved by using LOGman plugins.</p>
@@ -607,7 +607,7 @@ achieved by using LOGman plugins.</p>
 </code></pre>
 <p>Here we are extending <strong>ComLogmanPluginKoowa</strong>, which is the base plugin class for integrating Nooku components. This plugin makes sure that the component controllers become loggable, i.e. it attaches the loggable behavior to each controller that we would like to integrate. The loggable behavior is also preset with one or more loggers by the plugin.</p>
 <p>Next step is to tell the plugin which DOCman controller we would like log actions from, and define the logger that will be responsible for logging activities for this controller. We can do this by adding the following code:</p>
-<pre><code class="lang-php">     <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(
+<pre><code class="lang-php">     <span class="hljs-variable">$config</span>-&gt;append(
          <span class="hljs-keyword">array</span>(
             <span class="hljs-string">'controllers'</span> =&gt; <span class="hljs-keyword">array</span>(
                 <span class="hljs-string">'com://site/docman.controller.document'</span> =&gt; <span class="hljs-string">'plg:logman.docman.logger.document'</span>
@@ -620,7 +620,7 @@ achieved by using LOGman plugins.</p>
 <h2 id="loggers">Loggers</h2>
 <p>Loggers sit in the middle between LOGman and your component controller. They provide an interface for grabbing activity data and for logging activities while using this data.</p>
 <p>LOGman&#39;s base logger class is <code>ComLogmanActivityLogger</code>. This logger may be used as is and it may work out of the box for you. The base logger is initialized as follows on <strong>ComActivitiesActivityLogger::_initialize</strong>:</p>
-<pre><code class="lang-php">        <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(
+<pre><code class="lang-php">        <span class="hljs-variable">$config</span>-&gt;append(
             <span class="hljs-keyword">array</span>(
                 <span class="hljs-string">'actions'</span> =&gt; <span class="hljs-keyword">array</span>(
                     <span class="hljs-string">'after.edit'</span>, <span class="hljs-string">'after.add'</span>, <span class="hljs-string">'after.delete'</span>
@@ -634,7 +634,7 @@ achieved by using LOGman plugins.</p>
 <pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgLogman</span></span>{Component} extends ComLogmanPluginKoowa
     {
-         <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(
+         <span class="hljs-variable">$config</span>-&gt;append(
              <span class="hljs-keyword">array</span>(
                  <span class="hljs-string">'controllers'</span> =&gt; <span class="hljs-keyword">array</span>(
                      <span class="hljs-string">'{identifier}'</span> =&gt; <span class="hljs-string">'com://admin/logman.activity.logger'</span>
@@ -653,7 +653,7 @@ achieved by using LOGman plugins.</p>
 </code></pre>
 <p>Right now our custom logger is just extending the base logger. Remember that the the DOCman plugin was initialized so that the document controller is made loggable by using the <strong>PlgLogmanDocmanLoggerDocument</strong> logger.</p>
 <p>If we would like to log an additional <code>download</code> action, we would add the following code:</p>
-<pre><code class="lang-php">    <span class="hljs-variable">$config</span><span class="hljs-variable">-&gt;append</span>(
+<pre><code class="lang-php">    <span class="hljs-variable">$config</span>-&gt;append(
         <span class="hljs-keyword">array</span>(<span class="hljs-string">'actions'</span> =&gt; <span class="hljs-keyword">array</span>(<span class="hljs-string">'after.download'</span>)
     );
 </code></pre>
@@ -676,7 +676,7 @@ achieved by using LOGman plugins.</p>
     </span>{
         <span class="hljs-variable">$data</span> = <span class="hljs-keyword">parent</span>::getActivityData(<span class="hljs-variable">$object</span>, <span class="hljs-variable">$subject</span>);
 
-        <span class="hljs-variable">$data</span>[<span class="hljs-string">'metadata'</span>] = <span class="hljs-keyword">array</span>(<span class="hljs-string">'ip'</span> =&gt; <span class="hljs-variable">$subject</span><span class="hljs-variable">-&gt;getRequest</span>()<span class="hljs-variable">-&gt;getAddress</span>());
+        <span class="hljs-variable">$data</span>[<span class="hljs-string">'metadata'</span>] = <span class="hljs-keyword">array</span>(<span class="hljs-string">'ip'</span> =&gt; <span class="hljs-variable">$subject</span>-&gt;getRequest()-&gt;getAddress());
 
         <span class="hljs-keyword">return</span> <span class="hljs-variable">$data</span>
     }
@@ -685,26 +685,25 @@ achieved by using LOGman plugins.</p>
 <p><strong>getActivityData</strong> can also be overridden to change mappings between the activity object and the activity data that will get passed to LOGman.</p>
 <p>Loggers implement a very flexible interface. Each method may be easily overridden in order to better fit your requirements. Make sure to review their implementations when developing integrations for your components.</p>
 
-                        
-                        </section>
                     
+                    </section>
                 
-                    </div>
+                
                 </div>
             </div>
-
-            
-            <a href="../../../extensions/logman/integrations/joomla.html" class="navigation navigation-prev " aria-label="Previous page: Joomla components"><i class="fa fa-angle-left"></i></a>
-            
-            
-            <a href="../../../extensions/logman/integrations/activities.html" class="navigation navigation-next " aria-label="Next page: Activities"><i class="fa fa-angle-right"></i></a>
-            
         </div>
-    </div>
 
         
-<script src="../../../gitbook/js/apollo.js"></script>
-<script src="../../../gitbook/js/vanilla.js.responsive.menu.js"></script>
+        <a href="../../../extensions/logman/integrations/joomla.html" class="navigation navigation-prev " aria-label="Previous page: Joomla components"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../../../extensions/logman/integrations/activities.html" class="navigation navigation-next " aria-label="Next page: Activities"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../../../gitbook/theme.js"></script>
 <script src="../../../gitbook/app.js"></script>
 
     
@@ -712,20 +711,17 @@ achieved by using LOGman plugins.</p>
     
 
     
-    <script src="https://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
     
     <script src="../../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
     
 
-<script>
-    responsivemenu.init({
-        wrapper: document.getElementsByClassName('navbar')[0],
-        before_element: document.getElementsByClassName('brand')[0],
-        absolute: 1
-    });
-</script>
+    
+    <script src="../../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    
+
 <script>
 require(["gitbook"], function(gitbook) {
     var config = {"fontSettings":{"theme":null,"family":"sans","size":2},"ga":{"token":"UA-214238-3","configuration":"auto"}};
