@@ -3,7 +3,7 @@
 The only thing we're adding right now is the menu bar, nothing else. This small tutorial shows how to quickly rebuild a theme.
 
 1. Rename current 'theme' folder to 'theme_backup'
-2. Copy/paste latest theme from gitbook github repo
+2. Copy/paste latest theme from [Gitbook repo](https://github.com/GitbookIO/gitbook/tree/master/theme)
 3. Copy the `theme.css`, `theme.js` and images from 'theme_backup' to 'theme'
 4. Add `theme.css` AFTER `style.css` to the proper page to load it (search for `style.css` in 'theme' folder)
 5. Add `theme.js` BEFORE `app.js` to the proper page to load it (search for `app.js` in 'theme' folder)
