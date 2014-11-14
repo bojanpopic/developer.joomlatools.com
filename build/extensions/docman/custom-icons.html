@@ -48,7 +48,7 @@
             </ul>
         </div>
     </div>
-    <div class="book" data-level="1.1.1" data-basepath="../.." data-revision="1415270565481">
+    <div class="book" data-level="1.1.1" data-basepath="../.." data-revision="1415959856356">
     
 
 <div class="book-summary">
@@ -590,7 +590,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_2">
+                    <section class="normal" id="section-gitbook_62">
                     
                         <h1 id="custom-icons-in-docman">Custom icons in DOCman</h1>
 <p>When we released the stable 2.0 releases of our extensions we introduced an icon font to display all our icons. If you need to change the icons that we chose it’s possible to override them. To follow this tutorial you need a good understanding of CSS and templating/overriding in Joomla.</p>
@@ -608,16 +608,16 @@
 <h3 id="2-using-background-images">2. Using Background Images</h3>
 <p>In this second technique we are going to override the default icons. This will change all icons on your website at once. It’s no longer possible to use the icons we picked since we’re using / overriding the existing markup.</p>
 <p>If you’re feeling old school or if you need to use icons with multiple colors you should use this second technique. We are basically going to use existing class names and change the output of these classes so they’re showing background images instead of an icon font.</p>
-<p>Currently we are using the following styling for our 9 base icons:</p>
-<pre><code class="lang-css"><span class="hljs-class">.koowa-icon-archive</span>
-<span class="hljs-class">.koowa-icon-audio</span>
-<span class="hljs-class">.koowa-icon-default</span>
-<span class="hljs-class">.koowa-icon-document</span>
-<span class="hljs-class">.koowa-icon-folder</span>
-<span class="hljs-class">.koowa-icon-image</span>
-<span class="hljs-class">.koowa-icon-pdf</span>
-<span class="hljs-class">.koowa-icon-spreadsheet</span>
-<span class="hljs-class">.koowa-icon-video</span>
+<p>Currently we are using the following classes for our 9 base icons:</p>
+<pre><code class="lang-css"><span class="hljs-class">.koowa-icon--archive</span>
+<span class="hljs-class">.koowa-icon--audio</span>
+<span class="hljs-class">.koowa-icon--default</span>
+<span class="hljs-class">.koowa-icon--document</span>
+<span class="hljs-class">.koowa-icon--folder</span>
+<span class="hljs-class">.koowa-icon--image</span>
+<span class="hljs-class">.koowa-icon--pdf</span>
+<span class="hljs-class">.koowa-icon--spreadsheet</span>
+<span class="hljs-class">.koowa-icon--video</span>
 </code></pre>
 <p>These are the 9 icons you can find in the image below from left to right. We are using the :before <a href="http://coding.smashingmagazine.com/2011/07/13/learning-to-use-the-before-and-after-pseudo-elements-in-css/" target="_blank">pseudo</a> element to display the icons:</p>
 <p><img src="https://farm6.staticflickr.com/5562/14949316139_13d71bb027_o.png" alt="Available icons"></p>
@@ -637,7 +637,8 @@
 <pre><code class="lang-php"><span class="hljs-variable">$this</span>-&gt;addStyleSheet( <span class="hljs-string">'templates/'</span> . <span class="hljs-variable">$this</span>-&gt;template . <span class="hljs-string">'/icons.css'</span> );
 </code></pre>
 <p>That will load your icons.css file into the template. Now add the following lines of code to your icons.css file:</p>
-<pre><code class="lang-css"><span class="hljs-tag">body</span> <span class="hljs-class">.koowa_icon</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<pre><code class="lang-css"><span class="hljs-class">.koowa</span> <span class="hljs-attr_selector">[class^="koowa_icon--"]</span><span class="hljs-pseudo">:before</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-attr_selector">[class*=" koowa_icon--"]</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">" "</span></span></span>;
 <span class="hljs-rule">}</span></span>
 </code></pre>
@@ -646,11 +647,11 @@
 <p>templates &gt; protostar &gt; images &gt; custom_docman_icons</p>
 <p>Now the only way to use images as icons is by using an image background.</p>
 <p>There’s actually only one property you have to add per class in order for this to work. Just add the correct image file path to each separate class using the background-image property like so:</p>
-<pre><code class="lang-css"><span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-archive</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<pre><code class="lang-css"><span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--archive</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_archive_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-audio</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--audio</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_audio_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 </code></pre>
@@ -663,43 +664,44 @@
 </ol>
 <p>Note: You can also use larger images like 600x600 pixels but this will drastically slow down your website. We recommend using a maximum width and height of 96 pixels.</p>
 <p><strong>An example of a finished icon overwrite using images</strong></p>
-<pre><code class="lang-css"><span class="hljs-tag">body</span> <span class="hljs-class">.koowa_icon</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<pre><code class="lang-css"><span class="hljs-class">.koowa</span> <span class="hljs-attr_selector">[class^="koowa_icon--"]</span><span class="hljs-pseudo">:before</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-attr_selector">[class*=" koowa_icon--"]</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">" "</span></span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-archive</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--archive</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_archive_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-audio</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--audio</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_audio_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-default</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--default</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_default_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-document</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--document</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_document_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-folder</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--folder</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_folder_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-image</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--image</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_image_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-pdf</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--pdf</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_pdf_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-spreadsheet</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--spreadsheet</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_spreadsheet_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-video</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--video</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">background-image</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"images/custom_docman_icons/my_video_icon.png"</span>)</span></span>;
 <span class="hljs-rule">}</span></span>
 </code></pre>
@@ -742,27 +744,27 @@
 <pre><code class="lang-css"><span class="hljs-attr_selector">[class^="icon-"]</span>, <span class="hljs-attr_selector">[class*=" icon-"]</span> <span class="hljs-rules">{</span>
 </code></pre>
 <p>This line has to be changed to the following:</p>
-<pre><code class="lang-css"><span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-default</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-image</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-video</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-archive</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-folder</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-pdf</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-audio</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-document</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-spreadsheet</span> <span class="hljs-rules">{
+<pre><code class="lang-css"><span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--default</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--image</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--video</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--archive</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--folder</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--pdf</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--audio</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--document</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--spreadsheet</span> <span class="hljs-rules">{
 <span class="hljs-rule">}</span></span>
 </code></pre>
 <p>So the revised style declaration should now look like:</p>
-<pre><code class="lang-css"><span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-default</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-image</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-video</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-archive</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-folder</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-pdf</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-audio</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-document</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-spreadsheet</span> <span class="hljs-rules">{
+<pre><code class="lang-css"><span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--default</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--image</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--video</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--archive</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--folder</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--pdf</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--audio</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--document</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--spreadsheet</span> <span class="hljs-rules">{
     <span class="hljs-rule"><span class="hljs-attribute">font-family</span>:<span class="hljs-value"> <span class="hljs-string">'icomoon'</span></span></span>;
     <span class="hljs-rule"><span class="hljs-attribute">speak</span>:<span class="hljs-value"> none</span></span>;
     <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> normal</span></span>;
@@ -781,7 +783,7 @@
 <span class="hljs-rule">}</span></span>
 </code></pre>
 <p>To actually make this work you should change it to:</p>
-<pre><code class="lang-css"><span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-image</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<pre><code class="lang-css"><span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--image</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
     <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e601"</span></span></span>;
 <span class="hljs-rule">}</span></span>
 </code></pre>
@@ -798,15 +800,15 @@
   <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> normal</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-default</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-image</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-video</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-archive</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-folder</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-pdf</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-audio</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-document</span>,
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-spreadsheet</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--default</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--image</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--video</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--archive</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--folder</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--pdf</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--audio</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--document</span>,
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--spreadsheet</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">font-family</span>:<span class="hljs-value"> <span class="hljs-string">'icomoon'</span></span></span>;
   <span class="hljs-rule"><span class="hljs-attribute">speak</span>:<span class="hljs-value"> none</span></span>;
   <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> normal</span></span>;
@@ -819,39 +821,39 @@
   <span class="hljs-rule"><span class="hljs-attribute">-moz-osx-font-smoothing</span>:<span class="hljs-value"> grayscale</span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-default</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--default</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e600"</span></span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-image</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--image</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e601"</span></span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-video</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--video</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e602"</span></span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-archive</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--archive</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e603"</span></span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-folder</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--folder</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e604"</span></span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-pdf</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--pdf</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e605"</span></span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-audio</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--audio</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e606"</span></span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-document</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--document</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e607"</span></span></span>;
 <span class="hljs-rule">}</span></span>
 
-<span class="hljs-tag">body</span> <span class="hljs-class">.koowa-icon-spreadsheet</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+<span class="hljs-class">.koowa</span> <span class="hljs-class">.koowa-icon--spreadsheet</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
   <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e608"</span></span></span>;
 <span class="hljs-rule">}</span></span>
 </code></pre>
@@ -901,6 +903,10 @@
 
     
     <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

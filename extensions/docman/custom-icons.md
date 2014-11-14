@@ -24,7 +24,7 @@ In this second technique we are going to override the default icons. This will c
 
 If you’re feeling old school or if you need to use icons with multiple colors you should use this second technique. We are basically going to use existing class names and change the output of these classes so they’re showing background images instead of an icon font.
 
-Currently we are using the following styling for our 9 base icons:
+Currently we are using the following classes for our 9 base icons:
 
 ```css
 .koowa-icon--archive
@@ -68,7 +68,8 @@ $this->addStyleSheet( 'templates/' . $this->template . '/icons.css' );
 That will load your icons.css file into the template. Now add the following lines of code to your icons.css file:
 
 ```css
-body .koowa_icon:before {
+.koowa [class^="koowa_icon--"]:before,
+.koowa [class*=" koowa_icon--"]:before {
   content: " ";
 }
 ```
@@ -84,11 +85,11 @@ Now the only way to use images as icons is by using an image background.
 There’s actually only one property you have to add per class in order for this to work. Just add the correct image file path to each separate class using the background-image property like so:
 
 ```css
-body .koowa-icon--archive:before {
+.koowa .koowa-icon--archive:before {
   background-image: url("images/custom_docman_icons/my_archive_icon.png");
 }
 
-body .koowa-icon--audio:before {
+.koowa .koowa-icon--audio:before {
   background-image: url("images/custom_docman_icons/my_audio_icon.png");
 }
 ```
@@ -105,43 +106,44 @@ Note: You can also use larger images like 600x600 pixels but this will drastical
 **An example of a finished icon overwrite using images**
 
 ```css
-body .koowa_icon:before {
+.koowa [class^="koowa_icon--"]:before,
+.koowa [class*=" koowa_icon--"]:before {
   content: " ";
 }
 
-body .koowa-icon--archive:before {
+.koowa .koowa-icon--archive:before {
   background-image: url("images/custom_docman_icons/my_archive_icon.png");
 }
 
-body .koowa-icon--audio:before {
+.koowa .koowa-icon--audio:before {
   background-image: url("images/custom_docman_icons/my_audio_icon.png");
 }
 
-body .koowa-icon--default:before {
+.koowa .koowa-icon--default:before {
   background-image: url("images/custom_docman_icons/my_default_icon.png");
 }
 
-body .koowa-icon--document:before {
+.koowa .koowa-icon--document:before {
   background-image: url("images/custom_docman_icons/my_document_icon.png");
 }
 
-body .koowa-icon--folder:before {
+.koowa .koowa-icon--folder:before {
   background-image: url("images/custom_docman_icons/my_folder_icon.png");
 }
 
-body .koowa-icon--image:before {
+.koowa .koowa-icon--image:before {
   background-image: url("images/custom_docman_icons/my_image_icon.png");
 }
 
-body .koowa-icon--pdf:before {
+.koowa .koowa-icon--pdf:before {
   background-image: url("images/custom_docman_icons/my_pdf_icon.png");
 }
 
-body .koowa-icon--spreadsheet:before {
+.koowa .koowa-icon--spreadsheet:before {
   background-image: url("images/custom_docman_icons/my_spreadsheet_icon.png");
 }
 
-body .koowa-icon--video:before {
+.koowa .koowa-icon--video:before {
   background-image: url("images/custom_docman_icons/my_video_icon.png");
 }
 ```
@@ -202,30 +204,30 @@ Now we’ve got to update the CSS style declarations to match those used by DOCm
 This line has to be changed to the following:
 
 ```css
-body .koowa-icon--default,
-body .koowa-icon--image,
-body .koowa-icon--video,
-body .koowa-icon--archive,
-body .koowa-icon--folder,
-body .koowa-icon--pdf,
-body .koowa-icon--audio,
-body .koowa-icon--document,
-body .koowa-icon--spreadsheet {
+.koowa .koowa-icon--default,
+.koowa .koowa-icon--image,
+.koowa .koowa-icon--video,
+.koowa .koowa-icon--archive,
+.koowa .koowa-icon--folder,
+.koowa .koowa-icon--pdf,
+.koowa .koowa-icon--audio,
+.koowa .koowa-icon--document,
+.koowa .koowa-icon--spreadsheet {
 }
 ```
 
 So the revised style declaration should now look like:
 
 ```css
-body .koowa-icon--default,
-body .koowa-icon--image,
-body .koowa-icon--video,
-body .koowa-icon--archive,
-body .koowa-icon--folder,
-body .koowa-icon--pdf,
-body .koowa-icon--audio,
-body .koowa-icon--document,
-body .koowa-icon--spreadsheet {
+.koowa .koowa-icon--default,
+.koowa .koowa-icon--image,
+.koowa .koowa-icon--video,
+.koowa .koowa-icon--archive,
+.koowa .koowa-icon--folder,
+.koowa .koowa-icon--pdf,
+.koowa .koowa-icon--audio,
+.koowa .koowa-icon--document,
+.koowa .koowa-icon--spreadsheet {
     font-family: 'icomoon';
     speak: none;
     font-style: normal;
@@ -251,7 +253,7 @@ We want to use the existing class names. But we need to add the new characters t
 To actually make this work you should change it to:
 
 ```css
-body .koowa-icon--image:before {
+.koowa .koowa-icon--image:before {
     content: "\e601";
 }
 ```
@@ -272,15 +274,15 @@ The important part here is that the "content" property doesn’t get changed. Yo
   font-style: normal;
 }
 
-body .koowa-icon--default,
-body .koowa-icon--image,
-body .koowa-icon--video,
-body .koowa-icon--archive,
-body .koowa-icon--folder,
-body .koowa-icon--pdf,
-body .koowa-icon--audio,
-body .koowa-icon--document,
-body .koowa-icon--spreadsheet {
+.koowa .koowa-icon--default,
+.koowa .koowa-icon--image,
+.koowa .koowa-icon--video,
+.koowa .koowa-icon--archive,
+.koowa .koowa-icon--folder,
+.koowa .koowa-icon--pdf,
+.koowa .koowa-icon--audio,
+.koowa .koowa-icon--document,
+.koowa .koowa-icon--spreadsheet {
   font-family: 'icomoon';
   speak: none;
   font-style: normal;
@@ -293,39 +295,39 @@ body .koowa-icon--spreadsheet {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body .koowa-icon--default:before {
+.koowa .koowa-icon--default:before {
   content: "\e600";
 }
 
-body .koowa-icon--image:before {
+.koowa .koowa-icon--image:before {
   content: "\e601";
 }
 
-body .koowa-icon--video:before {
+.koowa .koowa-icon--video:before {
   content: "\e602";
 }
 
-body .koowa-icon--archive:before {
+.koowa .koowa-icon--archive:before {
   content: "\e603";
 }
 
-body .koowa-icon--folder:before {
+.koowa .koowa-icon--folder:before {
   content: "\e604";
 }
 
-body .koowa-icon--pdf:before {
+.koowa .koowa-icon--pdf:before {
   content: "\e605";
 }
 
-body .koowa-icon--audio:before {
+.koowa .koowa-icon--audio:before {
   content: "\e606";
 }
 
-body .koowa-icon--document:before {
+.koowa .koowa-icon--document:before {
   content: "\e607";
 }
 
-body .koowa-icon--spreadsheet:before {
+.koowa .koowa-icon--spreadsheet:before {
   content: "\e608";
 }
 ```
