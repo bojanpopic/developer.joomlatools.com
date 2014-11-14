@@ -27,15 +27,15 @@ If you’re feeling old school or if you need to use icons with multiple colors 
 Currently we are using the following styling for our 9 base icons:
 
 ```css
-.koowa-icon-archive
-.koowa-icon-audio
-.koowa-icon-default
-.koowa-icon-document
-.koowa-icon-folder
-.koowa-icon-image
-.koowa-icon-pdf
-.koowa-icon-spreadsheet
-.koowa-icon-video
+.koowa-icon--archive
+.koowa-icon--audio
+.koowa-icon--default
+.koowa-icon--document
+.koowa-icon--folder
+.koowa-icon--image
+.koowa-icon--pdf
+.koowa-icon--spreadsheet
+.koowa-icon--video
 ```
 
 These are the 9 icons you can find in the image below from left to right. We are using the :before [pseudo](http://coding.smashingmagazine.com/2011/07/13/learning-to-use-the-before-and-after-pseudo-elements-in-css/) element to display the icons:
@@ -84,11 +84,11 @@ Now the only way to use images as icons is by using an image background.
 There’s actually only one property you have to add per class in order for this to work. Just add the correct image file path to each separate class using the background-image property like so:
 
 ```css
-body .koowa-icon-archive:before {
+body .koowa-icon--archive:before {
   background-image: url("images/custom_docman_icons/my_archive_icon.png");
 }
 
-body .koowa-icon-audio:before {
+body .koowa-icon--audio:before {
   background-image: url("images/custom_docman_icons/my_audio_icon.png");
 }
 ```
@@ -109,39 +109,39 @@ body .koowa_icon:before {
   content: " ";
 }
 
-body .koowa-icon-archive:before {
+body .koowa-icon--archive:before {
   background-image: url("images/custom_docman_icons/my_archive_icon.png");
 }
 
-body .koowa-icon-audio:before {
+body .koowa-icon--audio:before {
   background-image: url("images/custom_docman_icons/my_audio_icon.png");
 }
 
-body .koowa-icon-default:before {
+body .koowa-icon--default:before {
   background-image: url("images/custom_docman_icons/my_default_icon.png");
 }
 
-body .koowa-icon-document:before {
+body .koowa-icon--document:before {
   background-image: url("images/custom_docman_icons/my_document_icon.png");
 }
 
-body .koowa-icon-folder:before {
+body .koowa-icon--folder:before {
   background-image: url("images/custom_docman_icons/my_folder_icon.png");
 }
 
-body .koowa-icon-image:before {
+body .koowa-icon--image:before {
   background-image: url("images/custom_docman_icons/my_image_icon.png");
 }
 
-body .koowa-icon-pdf:before {
+body .koowa-icon--pdf:before {
   background-image: url("images/custom_docman_icons/my_pdf_icon.png");
 }
 
-body .koowa-icon-spreadsheet:before {
+body .koowa-icon--spreadsheet:before {
   background-image: url("images/custom_docman_icons/my_spreadsheet_icon.png");
 }
 
-body .koowa-icon-video:before {
+body .koowa-icon--video:before {
   background-image: url("images/custom_docman_icons/my_video_icon.png");
 }
 ```
@@ -202,30 +202,30 @@ Now we’ve got to update the CSS style declarations to match those used by DOCm
 This line has to be changed to the following:
 
 ```css
-body .koowa-icon-default,
-body .koowa-icon-image,
-body .koowa-icon-video,
-body .koowa-icon-archive,
-body .koowa-icon-folder,
-body .koowa-icon-pdf,
-body .koowa-icon-audio,
-body .koowa-icon-document,
-body .koowa-icon-spreadsheet {
+body .koowa-icon--default,
+body .koowa-icon--image,
+body .koowa-icon--video,
+body .koowa-icon--archive,
+body .koowa-icon--folder,
+body .koowa-icon--pdf,
+body .koowa-icon--audio,
+body .koowa-icon--document,
+body .koowa-icon--spreadsheet {
 }
 ```
 
 So the revised style declaration should now look like:
 
 ```css
-body .koowa-icon-default,
-body .koowa-icon-image,
-body .koowa-icon-video,
-body .koowa-icon-archive,
-body .koowa-icon-folder,
-body .koowa-icon-pdf,
-body .koowa-icon-audio,
-body .koowa-icon-document,
-body .koowa-icon-spreadsheet {
+body .koowa-icon--default,
+body .koowa-icon--image,
+body .koowa-icon--video,
+body .koowa-icon--archive,
+body .koowa-icon--folder,
+body .koowa-icon--pdf,
+body .koowa-icon--audio,
+body .koowa-icon--document,
+body .koowa-icon--spreadsheet {
     font-family: 'icomoon';
     speak: none;
     font-style: normal;
@@ -251,7 +251,7 @@ We want to use the existing class names. But we need to add the new characters t
 To actually make this work you should change it to:
 
 ```css
-body .koowa-icon-image:before {
+body .koowa-icon--image:before {
     content: "\e601";
 }
 ```
@@ -272,15 +272,15 @@ The important part here is that the "content" property doesn’t get changed. Yo
   font-style: normal;
 }
 
-body .koowa-icon-default,
-body .koowa-icon-image,
-body .koowa-icon-video,
-body .koowa-icon-archive,
-body .koowa-icon-folder,
-body .koowa-icon-pdf,
-body .koowa-icon-audio,
-body .koowa-icon-document,
-body .koowa-icon-spreadsheet {
+body .koowa-icon--default,
+body .koowa-icon--image,
+body .koowa-icon--video,
+body .koowa-icon--archive,
+body .koowa-icon--folder,
+body .koowa-icon--pdf,
+body .koowa-icon--audio,
+body .koowa-icon--document,
+body .koowa-icon--spreadsheet {
   font-family: 'icomoon';
   speak: none;
   font-style: normal;
@@ -293,39 +293,39 @@ body .koowa-icon-spreadsheet {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body .koowa-icon-default:before {
+body .koowa-icon--default:before {
   content: "\e600";
 }
 
-body .koowa-icon-image:before {
+body .koowa-icon--image:before {
   content: "\e601";
 }
 
-body .koowa-icon-video:before {
+body .koowa-icon--video:before {
   content: "\e602";
 }
 
-body .koowa-icon-archive:before {
+body .koowa-icon--archive:before {
   content: "\e603";
 }
 
-body .koowa-icon-folder:before {
+body .koowa-icon--folder:before {
   content: "\e604";
 }
 
-body .koowa-icon-pdf:before {
+body .koowa-icon--pdf:before {
   content: "\e605";
 }
 
-body .koowa-icon-audio:before {
+body .koowa-icon--audio:before {
   content: "\e606";
 }
 
-body .koowa-icon-document:before {
+body .koowa-icon--document:before {
   content: "\e607";
 }
 
-body .koowa-icon-spreadsheet:before {
+body .koowa-icon--spreadsheet:before {
   content: "\e608";
 }
 ```
