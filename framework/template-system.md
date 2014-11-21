@@ -1,13 +1,11 @@
-#Template System
+# Template System
 
 Joomlatools extension templates expose unparalleled flexibility and power. What follows is a high level overview of the structures
-we use so that you can better understand what's happening in each template layout.
-
+we use so that you can better understand what's happening in each layout.
+<a name="example-template"></a>
 To start lets consider the following example component view template, named `default.html.php`:
 
-<a name="example-template"></a>
-
-```php
+```html
 <?= helper('behavior.koowa'); ?>
 <div id="example-template">
 <h1><?= translate('Example Title') ?></h1>
@@ -27,14 +25,14 @@ To start lets consider the following example component view template, named `def
 </style>
 ```
 
->This file gets loaded following the same rules as regular Joomla! layouts. Get some more details
+>This file gets loaded following the same rules as regular Joomla layouts. Get some more details
  in [Layout Considerations](layout-considerations.md)
 
-This is not a great deal of code, but there is a lot going on. In this template we are making use of [Template Functions](#template-helpers),
-[Template Helpers](#helpers), [Special Tags](#tags) and [Partials](#partials). Joomlatools components use all of
+This is not a great deal of code, but there is a lot going on. In this template we are making use of [Functions](#functions),
+[Helpers](#helpers), [Special Tags](#tags) and [Partials](#partials). Joomlatools components use all of
 these to keep our templates compact, segmented and thus reusable.
 
-##Partials
+## Partials
 
 Partials are a great way of separating layouts into manageable chunks. They are just template files, that can be loaded on
 their own, or included within another layout. We do this with the `import` template function. You saw an example of this above
@@ -72,17 +70,17 @@ their respective presentation layers. These helpers can be used for all sorts of
 rendering pagination or the needed structure for tabs.
 The Framework comes packaged with several helpers, including but not limited to:
 
-* Accordion: methods to create an accordion menu
-* Behavior: a set of javascript behaviors including, tooltips, overlays, keep alive, validator, autocomplete, sortable and calendar.
-* Date: date helper functions, including formatting and humanizing dates (e.g. 1 minute ago).
-* Grid: grid table controls, including checkbox, search, enable/disable, order, and access.
-* Image: provides a select list of images in a directory and preview functions.
-* Listbox: allows you to create a select list or auto-complete from data returned from a model.
-* Pagination: pagination and limit controls.
-* Select: select list, radio list, checkbox list and boolean list controls.
-* Tabs: html & javascript code for creating tab controls.
+* **Accordion**:    methods to create an accordion menu
+* **Behavior**:     a set of javascript behaviors including, tooltips, overlays, keep alive, validator, autocomplete, sortable and calendar.
+* **Date**:         date helper functions, including formatting and humanizing dates (e.g. 1 minute ago).
+* **Grid**:         grid table controls, including checkbox, search, enable/disable, order, and access.
+* **Image**:        provides a select list of images in a directory and preview functions.
+* **Listbox**:      allows you to create a select list or auto-complete from data returned from a model.
+* **Pagination**:   pagination and limit controls.
+* **Select**:       select list, radio list, checkbox list and boolean list controls.
+* **Tabs**:         html & javascript code for creating tab controls.
 
-Helpers are invoked using the `helper` [template function](#template-functions). That function is first passed a string
+Helpers are invoked using the `helper` [template function](#functions). That function is first passed a string
 which at first glance looks like a regular Object Identifier; and then secondly, it can get an optional array of options. That
 string is actually the helper's Object Identifier with a method name concatenated to it with a period (.):
 

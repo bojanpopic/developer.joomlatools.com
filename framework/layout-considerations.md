@@ -34,7 +34,7 @@ The folder structure is as follows:
 					-> view_name
 						-> layout_name.php
 
-* **template_name** - this is the name of the active system template
+* **template_name** - this is the name of the active application template
 * **html** - all template overrides go in an "html" folder
 * **com_component_name** - this is the name of the component, e.g. com_docman, com_fileman, etc
 * **view_name** - the name name of the view whose template is being overridden

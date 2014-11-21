@@ -12,7 +12,7 @@
 * [Framework](framework/bootstrap.md)
     * [Bootstrap](framework/bootstrap.md)
     * [Template System](framework/template-system.md)
-    * [Layout Overrides and Alternatives](framework/layout-considerations.md)
+        * [Layout Overrides and Alternatives](framework/layout-considerations.md)
 * [Tools](tools/composer/introduction.md)
 	* [Composer](tools/composer/introduction.md)
 	    * [Installing Packages](tools/composer/installing.md)
