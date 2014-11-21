@@ -2,6 +2,7 @@
 
 Joomlatools extension templates expose unparalleled flexibility and power. What follows is a high level overview of the structures
 we use so that you can better understand what's happening in each layout.
+
 <a name="example-template"></a>
 To start lets consider the following example component view template, named `default.html.php`:
 
@@ -44,9 +45,9 @@ with the line that looks like:
 **Note:** `<?=` is short for `<?php echo`, which gets replaced when the template is compiled.
 
 The `default_list.html` in this case is the name of the template file itself without the `php` file extension. The above
-method will attempt include a file called "default_name.html.php" from the same folder in which the parent files reside
+method will attempt include a file called `default_name.html.php` from the same folder in which the parent files reside
 
-> The template system also applies [Template Overrides](layout-considerations.md) apply to partials.
+> The template system also applies [Template Overrides](layout-considerations.md#template-overrides) to partials.
 
 When using `import()`, a second argument can be supplied to pass additional variables to the included partial. For example:
 
@@ -56,8 +57,8 @@ When using `import()`, a second argument can be supplied to pass additional vari
         )) ?>
 ```
 
-This will create a variable in the partial called `$title` with a value of `This is my list`. In addition, any variables that exist in the
-parent layout will be automatically be passed through to the partial.
+This will create a variable in the partial called `$title` with a value of `This is my list` in the imported template. In addition,
+ any variables that exist in the parent layout will be automatically be passed through to the partial.
 
 A partial can also be loaded on its own by placing `&layout=default_list` in the query string of url of the page. The system
 assumes loads the `default.html.php` file because the implied format is `html` when looking at the page.
@@ -66,8 +67,9 @@ assumes loads the `default.html.php` file because the implied format is `html` w
 ## Helpers
 
 Template Helpers are an incredibly useful tool for creating reusable template code. Joomlatools extensions use them throughout
-their respective presentation layers. These helpers can be used for all sorts of things, loading a javascript library, rendering form controls,
+their respective presentation layers. These helpers can be used for all sorts of things: loading a javascript library, rendering form controls,
 rendering pagination or the needed structure for tabs.
+
 The Framework comes packaged with several helpers, including but not limited to:
 
 * **Accordion**:    methods to create an accordion menu
@@ -137,7 +139,7 @@ instead and then pass along the array of configuration options to the method.
 
 ## Functions
 
-There are a number of 'core' template functions that our extensions make use of. We've already introduced `helper` and `import` above.
+There are a number of 'core' template functions of which our extensions make use. We've already introduced `helper` and `import` above.
 Template functions let us shorten what can be lengthy object method calls, alias more obscure function names and generally help
 keep the layouts clean.
 
@@ -157,16 +159,16 @@ Here are some of the mappings:
 
 
 When a Joomlatools layout gets compiled the above mappings are applied and the corresponding calls evaluated. What that means
-for example is that calling `object()` inside a template layout file is the same as calling `KObject::getObject()`.
+for example is that calling `object()` inside a template file is the same as calling `KObject::getObject()`.
 
 ## Tags
 
-Tags are one more important part of the template dialect that Joomlatools uses. The system finds the `style`, `script`,
+Tags are one more important part of the template dialect that Joomlatools uses. The engine finds the `style`, `script`,
 `meta`, `links` and `title` tags in a template, filters them out, and adds them to the head document. The `style` and `script` tags
 can optionally be given the `data-inline` attribute, which lets them stay exactly where there are in the layout.
 
 Special `ktml` namespace tags (i.e.`<ktml:toolbar></ktml:toolbar>`) also get filtered and replaced with specialized dynamic
-output in a similar way that a template helper might. We use the `ktml` namespace to avoid name collisions with other tags.
+output. We use the `ktml` namespace to avoid name collisions with other tags.
 
 * `<ktml:script src=[url]>` - Render a script tag with specified source url and place that tag in the head.
 * `<ktml:style src=[url]>`  - Render the appropriate `link` tag, with `href` from the `src`, and add it to the head.
@@ -175,9 +177,9 @@ output in a similar way that a template helper might. We use the `ktml` namespac
 * `<ktml:content>` - Gets the currently rendered content from the template object. Allows the current layout to `decorate` that content,
 and replace it back into the template object.
 
-You may also see special scheme information in the URLs that templates use to load resources. For URLs in a layout that follow this form,
-Joomlatools has access to another filter that replaces them with the appropriate `http://` scheme and the relevant domain and path information
-for that resource.
+You may also see special [scheme](http://en.wikipedia.org/wiki/URI_scheme) information in the URLs that our templates use to load resources.
+For URLs in a layout that follow this form, Joomlatools relies on the use of another filter that replaces them with the appropriate
+`http://` scheme, relevant domain and path information for that resource.
 
 Above, we used the following to get a javascript file into the head of the page.
   ```javascript
@@ -190,12 +192,12 @@ combination with the `ktml:script` tag, the final result gets added to the head 
 ```javascript
 <script type="text/javascript" src="http://joomla.dev/media/com_example/js/example.js"></script>
 ```
-There also `base://` and `root://` url schemes which load the base url and root url of your application, respectively.
+There also `base://` and `root://` url schemes which load the `base` url and `root` url of your application, respectively.
 
 ## Summing Up
 
 We've taken a high level look at the Joomlatools template system. With a solid understanding of these fundamental pieces you can
-easily gain insight into what's happening in those templates.  You can also customize all of the Joomlatools extensions and
+easily gain insight into what's happening in those templates.  More importantly, you can also customize all of the Joomlatools extensions and
 add information that you want to see.
 
 
