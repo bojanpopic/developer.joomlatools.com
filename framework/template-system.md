@@ -143,15 +143,18 @@ keep the layouts clean.
 
 Here are some of the mappings:
 
-* `object()` => `$this->getObject()`
-* `translate()` => `$this->getObject('translator')->translate()'`
+
+* `object()` => [`KObject::getObject()`](http://api.nooku.org/source-class-KObject.html#_getObject)
+* `translate()` => [`KObject::getObject('translator')->translate()'`](http://api.nooku.org/source-class-KTranslatorAbstract.html#_translate)
+* `route()` => [`KViewTemplate::getRoute()`](http://api.nooku.org/source-class-KViewTemplate.html#_getRoute)
 * `json()` => `json_encode()`
 * `format()` => `sprintf()`
 * `replace()` => `strtr()`
-* `escape()` => `$this->escape()`
-* `helper()` => `$this->invoke()`
-* `import()` => `$this->_import()`
-* `parameters()` => `$this->getParameters()`
+* `escape()` => [`KTemplate::escape()`](http://api.nooku.org/source-class-KTemplate.html#_escape)
+* `helper()` => [`KTemplate::invoke()`](http://api.nooku.org/source-class-KTemplate.html#_invoke)
+* `import()` => [`KTemplateEngineKoowa::_import()`](http://api.nooku.org/source-class-KTemplateEngineKoowa.html#__import)
+* `parameters()` => [`KTemplate::getParameters()`](http://api.nooku.org/source-class-KTemplate.html#_getParameters)
+
 
 When a Joomlatools layout gets compiled the above mappings are applied and the corresponding calls evaluated. What that means
 for example is that calling `object()` inside a template layout file is the same as calling `$this->getObject()`.
