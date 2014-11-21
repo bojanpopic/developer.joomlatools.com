@@ -165,16 +165,16 @@ can optionally be given the `data-inline` attribute, which lets them stay exactl
 Special `ktml` namespace tags (i.e.`<ktml:toolbar></ktml:toolbar>`) also get filtered and replaced with specialized dynamic
 output in a similar way that a template helper might. We use the `ktml` namespace to avoid name collisions with other tags.
 
-`<ktml:script src=[url]>` - Render a script tag with specified source url and place that tag in the head.
-`<ktml:style src=[url]>`  - Render the appropriate `link` tag, with `href` from the `src`, and add it to the head.
-`<ktml:module position=[position]>` - Take the content contained inside the tag, and 'inject' it into the specified module `position`.
-`<ktml:toolbar>` - Find the controller toolbar which is currently active and render its output. Often used inside a `<ktml:module>` tag.
-`<ktml:content>` - Gets the currently rendered content from the template object. Allows the current layout to `decorate`
-that content, and replace it back into the template object.
+* `<ktml:script src=[url]>` - Render a script tag with specified source url and place that tag in the head.
+* `<ktml:style src=[url]>`  - Render the appropriate `link` tag, with `href` from the `src`, and add it to the head.
+* `<ktml:module position=[position]>` - Take the content contained inside the tag, and **inject** it into the specified module `position`.
+* `<ktml:toolbar>` - Find the controller toolbar which is currently active and render its output. Often used inside a `<ktml:module>` tag.
+* `<ktml:content>` - Gets the currently rendered content from the template object. Allows the current layout to `decorate` that content,
+and replace it back into the template object.
 
-You may also see special scheme information in the URLs that templates use to load resources. In the above tags that use
-a `src` attribute Joomlatools uses another filter to keep them nice and short, but dynamically and accurately specify what
- path the actual file resource is in.
+You may also see special scheme information in the URLs that templates use to load resources. For URLs in a layout that follow this form,
+Joomlatools has access to another filter that replaces them with the appropriate `http://` scheme and the relevant domain and path information
+for that resource.
 
 Above, we used the following to get a javascript file into the head of the page.
   ```javascript
@@ -189,12 +189,10 @@ combination with the `ktml:script` tag, the final result gets added to the head 
 ```
 There also `base://` and `root://` url schemes which load the base url and root url of your application, respectively.
 
-
-
 ## Summing Up
 
 We've taken a high level look at the Joomlatools template system. With a solid understanding of these fundamental pieces you can
-easily gain inside into what's happening in those templates.  You can also customize all of the Joomlatools extensions and
+easily gain insight into what's happening in those templates.  You can also customize all of the Joomlatools extensions and
 add information that you want to see.
 
 
