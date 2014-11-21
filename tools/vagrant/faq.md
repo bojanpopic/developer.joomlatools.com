@@ -53,6 +53,7 @@ For more information, please refer to the [Joomla Console](http://www.joomlatool
 you can access it directly at http://testsite.dev.
 
 ## How should I test my component's code on the Vagrant box?
+
 Let's say you are working on your own Joomla component called _Awesome_ and want to continue working on it using the Vagrant box. You can use the _Projects_ folder in the repository root for your projects.
 
 But if you would like to use a custom folder we should start by making the source code available to the Vagrant box. Let's assume the source code is located at _/Users/myname/Projects/awesome_ :
@@ -85,6 +86,12 @@ For more information on the symlinker, refer to the [Joomla Console](http://www.
 After you modify /etc/hosts as shown above you can use phpMyAdmin at
 
     http://phpmyadmin.joomla.dev
+    
+## I don't like the command line! Is there another way to manage the Vagrant box?
+
+There's a great tool we use to start and manage our Vagrant boxes, called [Vagrant Manager](http://vagrantmanager.com/).  It is currently available on OS X only, though!
+
+To create a new Joomla site or symlink an extension, you will still need the command line however.
     
 ## Can I use webgrind? 
 
