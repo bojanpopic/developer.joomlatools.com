@@ -157,7 +157,7 @@ Here are some of the mappings:
 
 
 When a Joomlatools layout gets compiled the above mappings are applied and the corresponding calls evaluated. What that means
-for example is that calling `object()` inside a template layout file is the same as calling `$this->getObject()`.
+for example is that calling `object()` inside a template layout file is the same as calling `KObject::getObject()`.
 
 ## Tags
 
