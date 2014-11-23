@@ -12,7 +12,7 @@ To start lets consider the following example component view template, named `def
 <h1><?= translate('Example Title') ?></h1>
 <div class="control">
     <?= helper('listbox.category_id', array(
-        'identifier'=>'com://site/example.model.examples',
+        'identifier'=>'com://site/acme.model.foos',
         'id' => 'category_select'
     )) ?>
 </div>
@@ -20,7 +20,7 @@ To start lets consider the following example component view template, named `def
         'title' => translate('This is my list')
         )) ?>
 </div>
-<ktml:script src="media://com_example/js/example.js" />
+<ktml:script src="media://com_acme/js/foo.js" />
 <style>
  .control select option:selected { color: red }
 </style>
@@ -60,10 +60,6 @@ When using `import()`, a second argument can be supplied to pass additional vari
 This will create a variable in the partial called `$title` with a value of `This is my list` in the imported template. In addition,
  any variables that exist in the parent layout will be automatically be passed through to the partial.
 
-A partial can also be loaded on its own by placing `&layout=default_list` in the query string of url of the page. The system
-assumes loads the `default.html.php` file because the implied format is `html` when looking at the page.
-
-
 ## Helpers
 
 Template Helpers are an incredibly useful tool for creating reusable template code. Joomlatools extensions use them throughout
@@ -86,21 +82,24 @@ Helpers are invoked using the `helper` [template function](#functions). That fun
 which at first glance looks like a regular Object Identifier; and then secondly, it can get an optional array of options. That
 string is actually the helper's Object Identifier with a method name concatenated to it with a period (.):
 
-`com://site/example.template.helper.myhelper` + `.` + `mymethod`
+`com://site/acme.template.helper.foo` + `.` + `bar`
 
 To rephrase, everything before the last period in the string is an Object Identifier and after, is a method that is in
 that helper object's interface.
 
 This line of code:
 ```php
-<?=  helper('com://site/example.template.helper.myhelper.mymethod', array('of' => 'options'));
+<?=  helper('com://site/acme.template.helper.foo.bar', array('of' => 'options'));
 ```
-Looks for the following class, and invokes the `mymethod` method:
+Looks for the following class, and invokes the `bar` method:
 <a name="myhelper"></a>
 ```php
-class ComExampleTemplateHelperMyhelper extends KTemplateHelperAbstract
+/**
+ * file would be located at components/com_acme/template/helper/foo.php
+ */
+class ComAcmeTemplateHelperFoo extends KTemplateHelperAbstract
 {
-    function mymethod($config = array()){
+    function bar($config = array()){
     {
           $config = new KObjectConfig($config);
           $config->append(array(
@@ -111,29 +110,29 @@ class ComExampleTemplateHelperMyhelper extends KTemplateHelperAbstract
 }
 ```
 A helper identifier can take on the form of a fully qualified identifier as above, or a more convenient abbreviated form where just the file name
-of the helper is used with the concatenated method. Hence, if we are working on a template in `com_example` the following command will
+of the helper is used with the concatenated method. Hence, if we are working on a template in `com_foo` the following command will
 produce the same result as the previous example:
 
 ```php
-<?=  helper('myhelper.mymethod', array('of' => 'options')); // Write Less Code
+<?=  helper('foo.bar', array('of' => 'options')); // Write Less Code
 ```
 
 In this case the system assumes that your helper classes are located somewhere in the `template/helper` fallback
 hierarchy:
 
-1. `com_example/template/helper`
+1. `com_acme/template/helper`
 2. `libraries/koowa/components/com_koowa/template/helper`
 3. `libraries/koowa/library/template/helper`
 
 In our [example template](#example-template) in the introduction you saw us use this line of code in our example:
 ```php
 <?= helper('listbox.category_id', array(
-        'identifier'=>'com://site/example.model.examples',
+        'identifier'=>'com://site/acme.model.foos',
         'id' => 'category_select'
     )) ?>
 ```
 That call looks for the `listbox` helper and tries to invoke the `category_id` method of its interface. If there is not
-a `com_example/template/helper/listbox.php` the system will load `libraries/koowa/components/com_koowa/template/helper/listbox.php`
+a `com_acme/template/helper/listbox.php` the system will load `libraries/koowa/components/com_koowa/template/helper/listbox.php`
 instead and then pass along the array of configuration options to the method.
 
 
@@ -151,6 +150,7 @@ Here are some of the mappings:
 * `route()` => [`KViewTemplate::getRoute()`](http://api.nooku.org/source-class-KViewTemplate.html#_getRoute)
 * `json()` => `json_encode()`
 * `format()` => `sprintf()`
+
 * `replace()` => `strtr()`
 * `escape()` => [`KTemplate::escape()`](http://api.nooku.org/source-class-KTemplate.html#_escape)
 * `helper()` => [`KTemplate::invoke()`](http://api.nooku.org/source-class-KTemplate.html#_invoke)
@@ -182,15 +182,15 @@ For URLs in a layout that follow this form, Joomlatools relies on the use of ano
 `http://` scheme, relevant domain and path information for that resource.
 
 Above, we used the following to get a javascript file into the head of the page.
-  ```javascript
-  <ktml:script src="media://com_example/js/example.js" />
+```html
+  <ktml:script src="media://com_acme/js/foo.js" />
   ```
 
 That `media://` scheme specification, gets replaced with the current URL for the media folder, i.e. `http://joomla.dev/media/`. In
 combination with the `ktml:script` tag, the final result gets added to the head in the form:
 
-```javascript
-<script type="text/javascript" src="http://joomla.dev/media/com_example/js/example.js"></script>
+```html
+<script type="text/javascript" src="http://joomla.dev/media/com_acme/js/foo.js"></script>
 ```
 There also `base://` and `root://` url schemes which load the `base` url and `root` url of your application, respectively.
 
