@@ -146,8 +146,8 @@ database table, database adapter, model and view events! Consider for example **
 
 ### Method
 
-The event handler takes a single argument which is an instance of `KCommandInterface` and holds all of the
-information about the event that was dispatched. This is very similar to how events work in Javascript; the event object
+The event handler takes a single argument which is an instance of [`KEventInterface`](http://api.nooku.org/class-KEventInterface.html)
+and holds all of the information about the event that was dispatched. This is very similar to how events work in Javascript; the event object
 that is passed to the method contains everything you need to know about who/what generated the event.
 
 ```php
@@ -315,4 +315,4 @@ naming convention that we have outlined above.
 
 Though we did not cover all the possibilities extensively here, you have this same ability for DOCman models, tables and views as well.
 
-Remember also, the handler method gets passed an `KCommandInterface $event` object with most of the information you will need.
+Remember also, the handler method gets passed an `KEventInterface $event` object with most of the information you will need.
