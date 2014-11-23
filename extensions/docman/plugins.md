@@ -2,7 +2,7 @@
 
 ## Introduction
 
-DOCman is a Nooku Framework powered extension and as such, has access to a powerful yet simple event architecture.
+DOCman is a Nooku Framework powered extension and as such, has access to a powerful, yet simple event architecture.
 Almost ANY action in DOCman can have an event listener registered against it. Not only that, but multiple listeners can be
 registered for a single event.
 
@@ -72,7 +72,7 @@ of the XML descriptor above. In our case, the name would be:
 
 `PlgKoowaDocman`
 
-The plugin **must** also extend `PlgKoowaAbstract`.
+Also, the plugin **must** also extend `PlgKoowaAbstract`.
 
 So our PHP file should look something like this:
 
@@ -90,16 +90,16 @@ Joomla provides 2 main methods for installing plugins
 
 <!-- CB: Should we add a third option for development via the console? -->
 
-Method 1 is generally used when packaging plugins and distributing them,. Method 2 is useful when you have full control
+Method 1 is generally used when packaging plugins and distributing them, while Method 2 is useful when you have full control
 over the source code and can just write the files in place, then tell Joomla to discover them so they are installed.
 
 1) For this example, let's put the files in place so that you know where they are when we come to editing them. The files
 should be located in the `/plugins/koowa/name` directory where name is the name of your plugin, in our case `/plugins/koowa/docman`
 
 2) Once the files are in place, in the Joomla backend, go to **Menu > Extensions > Extension Manager**, then select **Discover**
-from the submenu.
+from the sub-menu.
 
-3) On the discover screen, hit the **Discover** button, the plugin should then show up in the list. Now click the
+3) On the Discover screen, hit the **Discover** button, the plugin should then show up in the list. Now click the
 checkbox to the left of the plugin, and hit **Install**. The plugin should now be installed.
 
 4) Once the plugin is installed, you also need to enable it. Go to: **Menu > Extensions > Plug-in Manager** and search by
@@ -122,13 +122,13 @@ can be substituted with different values:
 * Before/After - All actions have a before/after event and unsurprisingly are run before/after the action
 * Component - The name of the component the event belongs to, in this case **Docman**
 * Name - The name of the "entity" the event belongs to (e.g. the controller/table)
-* Type - The type of the "entity", e.g. **Controller**, (*)
+* Type - The type of the "entity", e.g. **Controller** (*)
 * Action - The name of the action being run. In the case of controllers, this would be one of the BREAD actions as explained above.
 
 > Note: Each part in brackets must always start with an uppercase letter.
 
-> Note: (*) - In this turorial we are only covering controller events. The event system is also capable of subscribing to
-both database table and database adapter events!
+> Note: (*) - In this tutorial we are only covering controller events. The event system is also capable of subscribing to
+database table, database adapter, model and view events!
 
 If we wanted to run some code after the user adds a new document, the event name would look like this:
 
@@ -218,7 +218,7 @@ So let's go ahead and work out what events we need to respond to:
 Therefore the event method names we need are:
 
 ```php
-class PlgKoowaDocman extends PlgKoowaDefault
+class PlgKoowaDocman extends PlgKoowaAbstract
 {
         onAfterDocmanDocumentControllerAdd(KCommandInterface $event){}
         onAfterDocmanDocumentControllerEdit(KCommandInterface $event){}
@@ -232,7 +232,7 @@ Now consider save events, these cover both add and edit (create and update), so 
 methods run the same code is have one call the other.
 
 ```php
-class PlgKoowaDocman extends PlgKoowaDefault
+class PlgKoowaDocman extends PlgKoowaAbstract
 {
         onAfterDocmanDocumentControllerAdd(KCommandInterface $event)
         {
@@ -297,4 +297,13 @@ public function onAfterDocmanDocumentControllerEdit(KCommandInterface $event)
 
 Simple as that :)
 
-To download the entire sample plugin, visit here: [Example Plugin](https://github.com/joomlatools/developer.joomlatools.com/blob/master/Extensions/DOCman/examples/plugin)
+To download the entire sample plugin, visit here: [Example Plugin](/resources/code/docman/plugins.zip)
+
+## In Closing
+
+We have shown you how to create event handlers for any DOCman controller action. You can affect the both the input
+and the output of any one of those actions but simply building and placing a plugin in the right place, following the
+naming convention that we have outlined above. Though we did not cover all the possibilities here, you have this same ability
+for DOCman models, tables and views as well.
+
+Remember also, the handler method gets passed an `KCommandInterface $event` object with most of the information you will need.
