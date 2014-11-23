@@ -1,4 +1,10 @@
-#Plugins
+# Plugins
+
+There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
+Perhaps you want to send an email when a document is uploaded. Maybe you want add some data to the list of documents before
+it gets rendered to the screen. What ever you would like to do is possible with Plugins and our event driven architecture.
+
+<!-- toc -->
 
 ## Introduction
 
@@ -116,25 +122,26 @@ An event handler is simply a method of our new plugin, the naming of which confo
 
 on[**Before/After**][**Component**][**Name**][**Type**][**Action**]
 
+> Note: Each part in brackets must always start with an uppercase letter.
+
 This might look confusing, but it's actually quite simple. Each of the parts in brackets is a variable placeholder and
 can be substituted with different values:
 
 * Before/After - All actions have a before/after event and unsurprisingly are run before/after the action
 * Component - The name of the component the event belongs to, in this case **Docman**
-* Name - The name of the "entity" the event belongs to (e.g. the controller/table)
-* Type - The type of the "entity", e.g. **Controller** (*)
+* Name - The name of the "entity" that the event belongs to, e.g. the **Document**
+* Type - The type of the object using the entity, e.g. **Controller** (*)
 * Action - The name of the action being run. In the case of controllers, this would be one of the BREAD actions as explained above.
-
-> Note: Each part in brackets must always start with an uppercase letter.
-
-> Note: (*) - In this tutorial we are only covering controller events. The event system is also capable of subscribing to
-database table, database adapter, model and view events!
 
 If we wanted to run some code after the user adds a new document, the event name would look like this:
 
 `onAfterDocmanDocumentControllerAdd()`
 
 Using this syntax, you can register events for any combination of controllers and actions.
+
+> In this tutorial we are only covering controller events. The event system is also capable of subscribing to
+database table, database adapter, model and view events! Consider for example **onBeforeDocmanDocumentViewRender** or
+**onAfterDocmanDocumentModelFetch**. <br><br>Maybe you can think of a few more?
 
 
 ### Method
@@ -301,8 +308,11 @@ To download the entire sample plugin, visit here: [Example Plugin](/resources/co
 
 ## In Closing
 
-We have shown you how to create event handlers for any DOCman controller action. You can affect both the input
-and output of any one of those actions by simply building and placing a plugin properly and following the method
-naming convention that we have outlined above. Though we did not cover all the possibilities extensively here, you have
-this same ability for DOCman models, tables and views as well. Remember also, the handler method gets passed an
-`KCommandInterface $event` object with most of the information you will need.
+We have shown you how to create event handlers for any DOCman controller action.
+
+You can affect both the input and output of any one of those actions by simply building and placing a plugin properly and following the method
+naming convention that we have outlined above.
+
+Though we did not cover all the possibilities extensively here, you have this same ability for DOCman models, tables and views as well.
+
+Remember also, the handler method gets passed an `KCommandInterface $event` object with most of the information you will need.
