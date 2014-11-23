@@ -301,9 +301,8 @@ To download the entire sample plugin, visit here: [Example Plugin](/resources/co
 
 ## In Closing
 
-We have shown you how to create event handlers for any DOCman controller action. You can affect the both the input
-and the output of any one of those actions but simply building and placing a plugin in the right place, following the
-naming convention that we have outlined above. Though we did not cover all the possibilities here, you have this same ability
-for DOCman models, tables and views as well.
-
-Remember also, the handler method gets passed an `KCommandInterface $event` object with most of the information you will need.
+We have shown you how to create event handlers for any DOCman controller action. You can affect both the input
+and output of any one of those actions by simply building and placing a plugin properly and following the method
+naming convention that we have outlined above. Though we did not cover all the possibilities extensively here, you have
+this same ability for DOCman models, tables and views as well. Remember also, the handler method gets passed an
+`KCommandInterface $event` object with most of the information you will need.
