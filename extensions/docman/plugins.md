@@ -2,7 +2,7 @@
 
 There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
 Perhaps you want to send an email when a document is uploaded. Maybe you want add some data to the list of documents before
-it gets rendered to the screen. What ever you would like to do is possible with Plugins and our event driven architecture.
+it gets rendered to the screen. Whatever you would like to do is possible with Plugins and our Event driven architecture.
 
 <!-- toc -->
 
