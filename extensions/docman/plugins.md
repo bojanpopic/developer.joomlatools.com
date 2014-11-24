@@ -146,12 +146,12 @@ database table, database adapter, model and view events! Consider for example **
 
 ### Method
 
-The event handler takes a single argument which is an instance of `KCommandInterface` and holds all of the
+The event handler takes a single argument which is an instance of `KEventInterface` and holds all of the
 information about the event that was dispatched. This is very similar to how events work in Javascript; the event object
 that is passed to the method contains everything you need to know about who/what generated the event.
 
 ```php
-public function onAfterDocmanDocumentControllerAdd(KCommandInterface $event)
+public function onAfterDocmanDocumentControllerAdd(KEventInterface $event)
 {
     //The event object contains several useful properties
     $caller		= $event->caller;
@@ -191,7 +191,7 @@ for example removing certain values from a document for unregistered users.
 <?php
 class PlgKoowaDocman extends PlgKoowaAbstract
 {
-    public function onBeforeDocumentControllerAdd(KCommandInterface $event)
+    public function onBeforeDocumentControllerAdd(KEventInterface $event)
     {
         //Do something like sending an email to an administrator and disabling the document
         $event->data->enabled = 0;
@@ -227,9 +227,9 @@ Therefore the event method names we need are:
 ```php
 class PlgKoowaDocman extends PlgKoowaAbstract
 {
-        onAfterDocmanDocumentControllerAdd(KCommandInterface $event){}
-        onAfterDocmanDocumentControllerEdit(KCommandInterface $event){}
-        onAfterDocmanDocumentControllerDelete(KCommandInterface $event){}
+        onAfterDocmanDocumentControllerAdd(KEventInterface $event){}
+        onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
+        onAfterDocmanDocumentControllerDelete(KEventInterface $event){}
 }
 ```
 
@@ -241,12 +241,12 @@ methods run the same code is have one call the other.
 ```php
 class PlgKoowaDocman extends PlgKoowaAbstract
 {
-        onAfterDocmanDocumentControllerAdd(KCommandInterface $event)
+        onAfterDocmanDocumentControllerAdd(KEventInterface $event)
         {
             return $this->onAfterDocmanDocumentControllerEdit($event);
         }
-        onAfterDocmanDocumentControllerEdit(KCommandInterface $event){}
-        onAfterDocmanDocumentControllerDelete(KCommandInterface $event){}
+        onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
+        onAfterDocmanDocumentControllerDelete(KEventInterface $event){}
 }
 ```
 
@@ -261,7 +261,7 @@ First things first; we need to get the document that was added/edited. This is c
 Secondly we need to get the description field of the document that we're going to check for the keywords.
 
 ```php
-public function onAfterDocmanDocumentControllerEdit(KCommandInterface $event)
+public function onAfterDocmanDocumentControllerEdit(KEventInterface $event)
 {
     //The result of the controller action is stored in the "result" property
     $row = $event->result;
@@ -277,7 +277,7 @@ If you were to `var_dump($description)` or use your favorite debugger you should
 Once we have the description, we can do some simple regular expression matches on it to extract the year and the author:
 
 ```php
-public function onAfterDocmanDocumentControllerEdit(KCommandInterface $event)
+public function onAfterDocmanDocumentControllerEdit(KEventInterface $event)
 {
     //The result of the controller action is stored in the "result" property
     $row = $event->result;
@@ -315,4 +315,4 @@ naming convention that we have outlined above.
 
 Though we did not cover all the possibilities extensively here, you have this same ability for DOCman models, tables and views as well.
 
-Remember also, the handler method gets passed an `KCommandInterface $event` object with most of the information you will need.
+Remember also, the handler method gets passed an `KEventInterface $event` object with most of the information you will need.
