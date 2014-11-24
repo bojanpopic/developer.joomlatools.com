@@ -194,7 +194,7 @@ combination with the `ktml:script` tag, the final result gets added to the head 
 ```
 There also `base://` and `root://` url schemes which load the `base` url and `root` url of your application, respectively.
 
-## Summing Up
+## In Closing
 
 We've taken a high level look at the Joomlatools template system. With a solid understanding of these fundamental pieces you can
 easily gain insight into what's happening in those templates.  More importantly, you can also customize all of the Joomlatools extensions and
