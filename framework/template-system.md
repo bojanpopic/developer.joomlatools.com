@@ -27,7 +27,7 @@ To start lets consider the following example component view template, named `def
 ```
 
 >This file gets loaded following the same rules as regular Joomla layouts. Get some more details
- in [Layout Overrides](layout-overrides.md)
+ in [Overrides](overrides.md)
 
 This is not a great deal of code, but there is a lot going on. In this template we are making use of [Functions](#functions),
 [Helpers](#helpers), [Special Tags](#tags) and [Partials](#partials). Joomlatools components use all of
@@ -147,6 +147,7 @@ In our [example template](#example-template) in the introduction you saw us use 
 That call looks for the `listbox` helper and tries to invoke the `category_id` method of its interface. If there is not
 a `com_acme/template/helper/listbox.php` the system will load `libraries/koowa/components/com_koowa/template/helper/listbox.php`
 instead and then pass along the array of configuration options to the method.
+
 
 ## Functions
 
