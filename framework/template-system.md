@@ -218,8 +218,12 @@ There also `base://` and `root://` url schemes which load the `base` url and `ro
 
 [**Version**](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/template/filter/version.php)
 
-This filter runs before most. It finds all those `media://` urls we were just talking about and provides a `versioned` fingerprinting
-of the file url.
+If enabled, this filter will run at the beginning of rendering, before the Assets filter is run. It finds all those `media://` urls we were just talking about and provides a `versioned` fingerprinting
+of the file url, based on the version of the component. This ensures that the right version of the media file gets cached in the client browser.
+
+Our `<ktml:script src="media://com_acme/js/foo.js" />`<br>
+gets updated to<br>
+`<ktml:script src="media://com_acme/js/foo.js?c81e728d" />`
 
 [**Document**](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/template/filter/document.php)
 
@@ -236,6 +240,3 @@ module content.
 We've taken a high level look at the Joomlatools template system. With a solid understanding of these fundamental pieces you can
 easily gain insight into what's happening in those templates.  More importantly, you can also customize all of the Joomlatools extensions and
 add information that you want to see.
-
-
-
