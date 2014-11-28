@@ -195,7 +195,7 @@ output. We use the `ktml` namespace to avoid name collisions with other tags.
 and replace it back into the template object.
 * `<ktml:message>` - Render the response flash messages.
 
-### Other Filters
+### Other Special Filters
 
 [**Assets**](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/template/filter/asset.php)
 
