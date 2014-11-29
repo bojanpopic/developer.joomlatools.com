@@ -78,7 +78,7 @@ of the XML descriptor above. In our case, the name would be:
 
 `PlgKoowaDocman`
 
-Also, the plugin **must** also extend `PlgKoowaAbstract`.
+Also, the plugin **must** also extend [`PlgKoowaAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/abstract.php#L10)
 
 So our PHP file should look something like this:
 
@@ -146,12 +146,12 @@ database table, database adapter, model and view events! Consider for example **
 
 ### Method
 
-The event handler takes a single argument which is an instance of [`KEventInterface`](http://api.nooku.org/class-KEventInterface.html)
+The event handler takes a single argument which is an instance of [`KEventInterface`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/event/interface.php#L10)
 and holds all of the information about the event that was dispatched. This is very similar to how events work in Javascript; the event object
 that is passed to the method contains everything you need to know about who/what generated the event.
 
 ```php
-public function onAfterDocmanDocumentControllerAdd(KCommandInterface $event)
+public function onAfterDocmanDocumentControllerAdd(KEventInterface $event)
 {
     //The event object contains several useful properties
     $caller		= $event->caller;
@@ -315,4 +315,4 @@ naming convention that we have outlined above.
 
 Though we did not cover all the possibilities extensively here, you have this same ability for DOCman models, tables and views as well.
 
-Remember also, the handler method gets passed an `KEventInterface $event` object with most of the information you will need.
+Remember also, the handler method gets passed an [`KEventInterface $event`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/event/interface.php#L10) object with most of the information you will need.
