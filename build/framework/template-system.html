@@ -48,7 +48,7 @@
             </ul>
         </div>
     </div>
-    <div class="book" data-level="2.1" data-basepath=".." data-revision="1417206704737">
+    <div class="book" data-level="2.1" data-basepath=".." data-revision="1417268692131">
     
 
 <div class="book-summary">
@@ -687,7 +687,7 @@ To start lets consider the following example component view template, named <cod
 </code></pre>
 <blockquote>
 <p>This file gets loaded following the same rules as regular Joomla layouts. Get some more details
- in <a href="layout-overrides.html">Layout Overrides</a></p>
+ in <a href="overrides.html">Overrides</a></p>
 </blockquote>
 <p>This is not a great deal of code, but there is a lot going on. In this template we are making use of <a href="#functions">Functions</a>,
 <a href="#helpers">Helpers</a>, <a href="#tags">Special Tags</a> and <a href="#partials">Partials</a>. Joomlatools components use all of
@@ -774,6 +774,13 @@ produce the same result as the previous example:</p>
 <pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?</span>=  helper(<span class="hljs-string">'foo.bar'</span>, <span class="hljs-keyword">array</span>(<span class="hljs-string">'of'</span> =&gt; <span class="hljs-string">'options'</span>)); <span class="hljs-comment">// Write Less Code</span>
 </code></pre>
 <p>The template engine assumes that the helper&#39;s identifier is <code>com://site/acme.template.helper.foo</code>.</p>
+<p>In this case the system assumes that your helper classes are located somewhere in the <code>template/helper</code> fallback
+hierarchy:</p>
+<ol>
+<li><code>com_acme/template/helper</code></li>
+<li><code>libraries/koowa/components/com_koowa/template/helper</code></li>
+<li><code>libraries/koowa/library/template/helper</code></li>
+</ol>
 <p>In our <a href="#example-template">example template</a> in the introduction you saw us use this line of code in our example:</p>
 <pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?</span>= helper(<span class="hljs-string">'listbox.category_id'</span>, <span class="hljs-keyword">array</span>(
         <span class="hljs-string">'identifier'</span>=&gt;<span class="hljs-string">'com://site/acme.model.foos'</span>,
