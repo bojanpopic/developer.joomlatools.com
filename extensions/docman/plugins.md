@@ -304,7 +304,8 @@ public function onAfterDocmanDocumentControllerEdit(KCommandInterface $event)
 
 Simple as that :)
 
-To download the entire sample plugin, visit here: [Example Plugin](https://github.com/joomlatools/developer.joomlatools.com/tree/master/resources/code/docman/example-plugin/)
+To get the sample plugin, visit here: [Example Plugin](https://github.com/joomlatools/docman-example/). You can download it
+or even install it with Composer. 
 
 ## In Closing
 
