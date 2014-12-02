@@ -48,7 +48,7 @@
             </ul>
         </div>
     </div>
-    <div class="book" data-level="1.1.2" data-basepath="..\.." data-revision="1417261924064">
+    <div class="book" data-level="1.1.2" data-basepath="..\.." data-revision="1417538538794">
     
 
 <div class="book-summary">
@@ -281,18 +281,72 @@
                 
     
         
-        <li class="chapter " data-level="2.1" data-path="framework/bootstrap.html">
+        <li class="chapter " data-level="2.1" data-path="framework/template-system.html">
+            
+                
+                    <a href="..\../framework/template-system.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                         Template System
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        
+        <li class="chapter " data-level="2.1.1" data-path="framework/bootstrap.html">
             
                 
                     <a href="..\../framework/bootstrap.html">
                         <i class="fa fa-check"></i>
                         
-                            <b>2.1.</b>
+                            <b>2.1.1.</b>
                         
                          Bootstrap
                     </a>
                 
             
+            
+        </li>
+    
+        
+        <li class="chapter " data-level="2.1.2" data-path="framework/overrides.html">
+            
+                
+                    <a href="..\../framework/overrides.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.2.</b>
+                        
+                         Overrides
+                    </a>
+                
+            
+            
+        </li>
+    
+        
+        <li class="chapter " data-level="2.1.3" data-path="framework/alternative-layouts.html">
+            
+                
+                    <a href="..\../framework/alternative-layouts.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.3.</b>
+                        
+                         Alternative Layouts
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -606,7 +660,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_69">
+                    <section class="normal" id="section-gitbook_24">
                     
                         <h1 id="plugins">Plugins</h1>
 <p>There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
@@ -689,7 +743,7 @@ format in order for your plugin to work. The format is as follows:</p>
 <p><code>PlgKoowaName</code> where the <strong>Name</strong> part is the name (first letter capitalized) of your plugin as defined in the <code>&lt;filename plugin=&quot;docman&quot;&gt;</code> section
 of the XML descriptor above. In our case, the name would be:</p>
 <p><code>PlgKoowaDocman</code></p>
-<p>Also, the plugin <strong>must</strong> also extend <code>PlgKoowaAbstract</code>.</p>
+<p>Also, the plugin <strong>must</strong> also extend <a href="https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/abstract.php#L10" target="_blank"><code>PlgKoowaAbstract</code></a></p>
 <p>So our PHP file should look something like this:</p>
 <pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgKoowaDocman</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaAbstract</span></span>{}
@@ -738,10 +792,10 @@ database table, database adapter, model and view events! Consider for example <s
 <strong>onAfterDocmanDocumentModelFetch</strong>. <br><br>Maybe you can think of a few more?</p>
 </blockquote>
 <h3 id="method">Method</h3>
-<p>The event handler takes a single argument which is an instance of <a href="http://api.nooku.org/class-KEventInterface.html" target="_blank"><code>KEventInterface</code></a>
+<p>The event handler takes a single argument which is an instance of <a href="https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/event/interface.php#L10" target="_blank"><code>KEventInterface</code></a>
 and holds all of the information about the event that was dispatched. This is very similar to how events work in Javascript; the event object
 that is passed to the method contains everything you need to know about who/what generated the event.</p>
-<pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onAfterDocmanDocumentControllerAdd</span><span class="hljs-params">(KCommandInterface <span class="hljs-variable">$event</span>)</span>
+<pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onAfterDocmanDocumentControllerAdd</span><span class="hljs-params">(KEventInterface <span class="hljs-variable">$event</span>)</span>
 </span>{
     <span class="hljs-comment">//The event object contains several useful properties</span>
     <span class="hljs-variable">$caller</span>        = <span class="hljs-variable">$event</span>-&gt;caller;
@@ -866,13 +920,14 @@ for this, let&#39;s just say they&#39;ll be in the format <code>{year:X}</code> 
 }
 </code></pre>
 <p>Simple as that :)</p>
-<p>To download the entire sample plugin, visit here: <a href="https://github.com/joomlatools/developer.joomlatools.com/tree/master/resources/code/docman/example-plugin/" target="_blank">Example Plugin</a></p>
+<p>To get the sample plugin, visit here: <a href="https://github.com/joomlatools/docman-example/" target="_blank">Example Plugin</a>. You can download it
+or even install it with Composer.</p>
 <h2 id="in-closing">In Closing</h2>
 <p>We have shown you how to create event handlers for any DOCman controller action.</p>
 <p>You can affect both the input and output of any one of those actions by simply building and placing a plugin properly and following the method
 naming convention that we have outlined above.</p>
 <p>Though we did not cover all the possibilities extensively here, you have this same ability for DOCman models, tables and views as well.</p>
-<p>Remember also, the handler method gets passed an <code>KEventInterface $event</code> object with most of the information you will need.</p>
+<p>Remember also, the handler method gets passed an <a href="https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/event/interface.php#L10" target="_blank"><code>KEventInterface $event</code></a> object with most of the information you will need.</p>
 
                     
                     </section>
