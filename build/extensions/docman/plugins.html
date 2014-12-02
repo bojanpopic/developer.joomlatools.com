@@ -22,7 +22,6 @@
     
     <link rel="prev" href="..\../extensions/docman/custom-icons.html" />
     
-<link rel="stylesheet" href="http://use.typekit.net/c/96df50/1w;proxima-nova,2,b5x:N:i4,b61:N:i7,b5r:N:n1,b5t:N:n3,b5w:N:n4,bBh:N:n7;proxima-nova-alt,2,S9j:N:i4,S9d:N:i7,S9h:N:n4,S9c:N:n7/d?3bb2a6e53c9684ffdc9a98f41a5b2a62f97c6e2d19ae8171762f36a47b7ae4c15c15262578921b579b40772b17a4eeecbd196d5e41afbde63d066aca0adb6668b3041dcb1bd480ac9835af7a0262b3e6e63c8d629858af7ef7fe3d8800ea88755285b723ce632daa8d9425ed73e43cc241d0f1e654decd26a99bef6b3084bb5074fe9cbb89cd4392dd2e1eb9de20e42e0e2e9f26565e45aa62105f55a5be79697d144a19d6b9a27417ef903139e47ca0fef68be9fc7c58ca6a25b10107d6a34c73963e79a0b2702ffdc2637834bf784bd1fe0d69007cbd45f4021e4d">
 
         
     </head>
@@ -49,7 +48,7 @@
             </ul>
         </div>
     </div>
-    <div class="book" data-level="1.1.2" data-basepath="..\.." data-revision="1417271728795">
+    <div class="book" data-level="1.1.2" data-basepath="..\.." data-revision="1417538538794">
     
 
 <div class="book-summary">
@@ -661,7 +660,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_3">
+                    <section class="normal" id="section-gitbook_24">
                     
                         <h1 id="plugins">Plugins</h1>
 <p>There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
@@ -828,7 +827,7 @@ for example removing certain values from a document for unregistered users.</li>
 <pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgKoowaDocman</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaAbstract</span>
 </span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onBeforeDocumentControllerAdd</span><span class="hljs-params">(KEventInterface <span class="hljs-variable">$event</span>)</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onBeforeDocumentControllerAdd</span><span class="hljs-params">(KCommandInterface <span class="hljs-variable">$event</span>)</span>
     </span>{
         <span class="hljs-comment">//Do something like sending an email to an administrator and disabling the document</span>
         <span class="hljs-variable">$event</span>-&gt;data-&gt;enabled = <span class="hljs-number">0</span>;
@@ -859,9 +858,9 @@ custom database table so that we can do special search operations.&quot;</p>
 <p>Therefore the event method names we need are:</p>
 <pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgKoowaDocman</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaAbstract</span>
 </span>{
-        onAfterDocmanDocumentControllerAdd(KEventInterface <span class="hljs-variable">$event</span>){}
-        onAfterDocmanDocumentControllerEdit(KEventInterface <span class="hljs-variable">$event</span>){}
-        onAfterDocmanDocumentControllerDelete(KEventInterface <span class="hljs-variable">$event</span>){}
+        onAfterDocmanDocumentControllerAdd(KCommandInterface <span class="hljs-variable">$event</span>){}
+        onAfterDocmanDocumentControllerEdit(KCommandInterface <span class="hljs-variable">$event</span>){}
+        onAfterDocmanDocumentControllerDelete(KCommandInterface <span class="hljs-variable">$event</span>){}
 }
 </code></pre>
 <p>Pretty simple so far right?</p>
@@ -869,12 +868,12 @@ custom database table so that we can do special search operations.&quot;</p>
 methods run the same code is have one call the other.</p>
 <pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgKoowaDocman</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaAbstract</span>
 </span>{
-        onAfterDocmanDocumentControllerAdd(KEventInterface <span class="hljs-variable">$event</span>)
+        onAfterDocmanDocumentControllerAdd(KCommandInterface <span class="hljs-variable">$event</span>)
         {
             <span class="hljs-keyword">return</span> <span class="hljs-variable">$this</span>-&gt;onAfterDocmanDocumentControllerEdit(<span class="hljs-variable">$event</span>);
         }
-        onAfterDocmanDocumentControllerEdit(KEventInterface <span class="hljs-variable">$event</span>){}
-        onAfterDocmanDocumentControllerDelete(KEventInterface <span class="hljs-variable">$event</span>){}
+        onAfterDocmanDocumentControllerEdit(KCommandInterface <span class="hljs-variable">$event</span>){}
+        onAfterDocmanDocumentControllerDelete(KCommandInterface <span class="hljs-variable">$event</span>){}
 }
 </code></pre>
 <p>Now, let&#39;s flesh out the edit event.</p>
@@ -883,7 +882,7 @@ for this, let&#39;s just say they&#39;ll be in the format <code>{year:X}</code> 
 <p>First things first; we need to get the document that was added/edited. This is contained within the &quot;result&quot; property
  of the event object as it&#39;s the &quot;result&quot; of the action that&#39;s being performed.</p>
 <p>Secondly we need to get the description field of the document that we&#39;re going to check for the keywords.</p>
-<pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onAfterDocmanDocumentControllerEdit</span><span class="hljs-params">(KEventInterface <span class="hljs-variable">$event</span>)</span>
+<pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onAfterDocmanDocumentControllerEdit</span><span class="hljs-params">(KCommandInterface <span class="hljs-variable">$event</span>)</span>
 </span>{
     <span class="hljs-comment">//The result of the controller action is stored in the "result" property</span>
     <span class="hljs-variable">$row</span> = <span class="hljs-variable">$event</span>-&gt;result;
@@ -896,7 +895,7 @@ for this, let&#39;s just say they&#39;ll be in the format <code>{year:X}</code> 
 <p>Note: you&#39;ll need to add an <code>exit()</code> or <code>die()</code> method after the var_dump otherwise the page will redirect and you won&#39;t see anything).</p>
 </blockquote>
 <p>Once we have the description, we can do some simple regular expression matches on it to extract the year and the author:</p>
-<pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onAfterDocmanDocumentControllerEdit</span><span class="hljs-params">(KEventInterface <span class="hljs-variable">$event</span>)</span>
+<pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onAfterDocmanDocumentControllerEdit</span><span class="hljs-params">(KCommandInterface <span class="hljs-variable">$event</span>)</span>
 </span>{
     <span class="hljs-comment">//The result of the controller action is stored in the "result" property</span>
     <span class="hljs-variable">$row</span> = <span class="hljs-variable">$event</span>-&gt;result;
@@ -921,7 +920,8 @@ for this, let&#39;s just say they&#39;ll be in the format <code>{year:X}</code> 
 }
 </code></pre>
 <p>Simple as that :)</p>
-<p>To download the entire sample plugin, visit here: <a href="https://github.com/joomlatools/developer.joomlatools.com/tree/master/resources/code/docman/example-plugin/" target="_blank">Example Plugin</a></p>
+<p>To get the sample plugin, visit here: <a href="https://github.com/joomlatools/docman-example/" target="_blank">Example Plugin</a>. You can download it
+or even install it with Composer.</p>
 <h2 id="in-closing">In Closing</h2>
 <p>We have shown you how to create event handlers for any DOCman controller action.</p>
 <p>You can affect both the input and output of any one of those actions by simply building and placing a plugin properly and following the method
