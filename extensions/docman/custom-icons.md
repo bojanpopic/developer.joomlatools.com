@@ -27,15 +27,15 @@ If you’re feeling old school or if you need to use icons with multiple colors 
 Currently we are using the following classes for our 9 base icons:
 
 ```css
-.koowa-icon--archive
-.koowa-icon--audio
-.koowa-icon--default
-.koowa-icon--document
-.koowa-icon--folder
-.koowa-icon--image
-.koowa-icon--pdf
-.koowa-icon--spreadsheet
-.koowa-icon--video
+.koowa_icon--archive
+.koowa_icon--audio
+.koowa_icon--default
+.koowa_icon--document
+.koowa_icon--folder
+.koowa_icon--image
+.koowa_icon--pdf
+.koowa_icon--spreadsheet
+.koowa_icon--video
 ```
 
 These are the 9 icons you can find in the image below from left to right. We are using the :before [pseudo](http://coding.smashingmagazine.com/2011/07/13/learning-to-use-the-before-and-after-pseudo-elements-in-css/) element to display the icons:
@@ -62,7 +62,7 @@ $doc->addStyleSheet('templates/'.$this->template.'/css/template.css');
 And right below add this line:
 
 ```php
-$this->addStyleSheet( 'templates/' . $this->template . '/icons.css' );
+$doc->addStyleSheet( 'templates/' . $this->template . '/icons.css' );
 ```
 
 That will load your icons.css file into the template. Now add the following lines of code to your icons.css file:
@@ -78,18 +78,18 @@ By adding these lines we are telling the template to clear the content property 
 
 Now you need to tell the template which images to load. First make sure that the images you want to use are located in the template folders. For example if you’re using the "Protostar" template then you could place the images in:
 
-templates > protostar > images > custom_docman_icons
+[joomla] > templates > protostar > images > custom_docman_icons
 
 Now the only way to use images as icons is by using an image background.
 
 There’s actually only one property you have to add per class in order for this to work. Just add the correct image file path to each separate class using the background-image property like so:
 
 ```css
-.koowa .koowa-icon--archive:before {
+.koowa .koowa_icon--archive:before {
   background-image: url("images/custom_docman_icons/my_archive_icon.png");
 }
 
-.koowa .koowa-icon--audio:before {
+.koowa .koowa_icon--audio:before {
   background-image: url("images/custom_docman_icons/my_audio_icon.png");
 }
 ```
@@ -111,39 +111,39 @@ Note: You can also use larger images like 600x600 pixels but this will drastical
   content: " ";
 }
 
-.koowa .koowa-icon--archive:before {
+.koowa .koowa_icon--archive:before {
   background-image: url("images/custom_docman_icons/my_archive_icon.png");
 }
 
-.koowa .koowa-icon--audio:before {
+.koowa .koowa_icon--audio:before {
   background-image: url("images/custom_docman_icons/my_audio_icon.png");
 }
 
-.koowa .koowa-icon--default:before {
+.koowa .koowa_icon--default:before {
   background-image: url("images/custom_docman_icons/my_default_icon.png");
 }
 
-.koowa .koowa-icon--document:before {
+.koowa .koowa_icon--document:before {
   background-image: url("images/custom_docman_icons/my_document_icon.png");
 }
 
-.koowa .koowa-icon--folder:before {
+.koowa .koowa_icon--folder:before {
   background-image: url("images/custom_docman_icons/my_folder_icon.png");
 }
 
-.koowa .koowa-icon--image:before {
+.koowa .koowa_icon--image:before {
   background-image: url("images/custom_docman_icons/my_image_icon.png");
 }
 
-.koowa .koowa-icon--pdf:before {
+.koowa .koowa_icon--pdf:before {
   background-image: url("images/custom_docman_icons/my_pdf_icon.png");
 }
 
-.koowa .koowa-icon--spreadsheet:before {
+.koowa .koowa_icon--spreadsheet:before {
   background-image: url("images/custom_docman_icons/my_spreadsheet_icon.png");
 }
 
-.koowa .koowa-icon--video:before {
+.koowa .koowa_icon--video:before {
   background-image: url("images/custom_docman_icons/my_video_icon.png");
 }
 ```
@@ -191,9 +191,25 @@ To start with clean classes you need to add some CSS to your website. If you’r
 
 We recommend creating a new icons.css stylesheet because every time you update your template there’s a chance you will remove your style declarations contained within the master template css file. This way all you will need to do is repeat steps 3 & 4 to re-instate your new icons.
 
+**Protostar Template Example**
+
+If you use Protostar you could search for the following line in the index.php file
+
+```php
+$doc->addStyleSheet('templates/'.$this->template.'/css/template.css');
+```
+
+And right below add this line:
+
+```php
+$doc->addStyleSheet( 'templates/' . $this->template . '/icons.css' );
+```
+
+That will load your icons.css file into the template.
+
 Next open the style.css file (contained within the root of the icon font zip you downloaded) and copy the contents and paste them in your icons.css file:
 
-templates > protostar > icons.css
+[joomla] > templates > protostar > icons.css
 
 Now we’ve got to update the CSS style declarations to match those used by DOCman. Look for the area that starts with "[class^=".
 
@@ -204,30 +220,29 @@ Now we’ve got to update the CSS style declarations to match those used by DOCm
 This line has to be changed to the following:
 
 ```css
-.koowa .koowa-icon--default,
-.koowa .koowa-icon--image,
-.koowa .koowa-icon--video,
-.koowa .koowa-icon--archive,
-.koowa .koowa-icon--folder,
-.koowa .koowa-icon--pdf,
-.koowa .koowa-icon--audio,
-.koowa .koowa-icon--document,
-.koowa .koowa-icon--spreadsheet {
-}
+body .koowa .koowa_icon--default:before,
+body .koowa .koowa_icon--image:before,
+body .koowa .koowa_icon--video:before,
+body .koowa .koowa_icon--archive:before,
+body .koowa .koowa_icon--folder:before,
+body .koowa .koowa_icon--pdf:before,
+body .koowa .koowa_icon--audio:before,
+body .koowa .koowa_icon--document:before,
+body .koowa .koowa_icon--spreadsheet:before {
 ```
 
-So the revised style declaration should now look like:
+So the revised style declaration should now look something like this:
 
 ```css
-.koowa .koowa-icon--default,
-.koowa .koowa-icon--image,
-.koowa .koowa-icon--video,
-.koowa .koowa-icon--archive,
-.koowa .koowa-icon--folder,
-.koowa .koowa-icon--pdf,
-.koowa .koowa-icon--audio,
-.koowa .koowa-icon--document,
-.koowa .koowa-icon--spreadsheet {
+body .koowa .koowa_icon--default:before,
+body .koowa .koowa_icon--image:before,
+body .koowa .koowa_icon--video:before,
+body .koowa .koowa_icon--archive:before,
+body .koowa .koowa_icon--folder:before,
+body .koowa .koowa_icon--pdf:before,
+body .koowa .koowa_icon--audio:before,
+body .koowa .koowa_icon--document:before,
+body .koowa .koowa_icon--spreadsheet:before {
     font-family: 'icomoon';
     speak: none;
     font-style: normal;
@@ -253,7 +268,7 @@ We want to use the existing class names. But we need to add the new characters t
 To actually make this work you should change it to:
 
 ```css
-.koowa .koowa-icon--image:before {
+.koowa .koowa_icon--image:before {
     content: "\e601";
 }
 ```
@@ -274,15 +289,15 @@ The important part here is that the "content" property doesn’t get changed. Yo
   font-style: normal;
 }
 
-.koowa .koowa-icon--default,
-.koowa .koowa-icon--image,
-.koowa .koowa-icon--video,
-.koowa .koowa-icon--archive,
-.koowa .koowa-icon--folder,
-.koowa .koowa-icon--pdf,
-.koowa .koowa-icon--audio,
-.koowa .koowa-icon--document,
-.koowa .koowa-icon--spreadsheet {
+body .koowa .koowa_icon--default:before,
+body .koowa .koowa_icon--image:before,
+body .koowa .koowa_icon--video:before,
+body .koowa .koowa_icon--archive:before,
+body .koowa .koowa_icon--folder:before,
+body .koowa .koowa_icon--pdf:before,
+body .koowa .koowa_icon--audio:before,
+body .koowa .koowa_icon--document:before,
+body .koowa .koowa_icon--spreadsheet:before {
   font-family: 'icomoon';
   speak: none;
   font-style: normal;
@@ -295,39 +310,39 @@ The important part here is that the "content" property doesn’t get changed. Yo
   -moz-osx-font-smoothing: grayscale;
 }
 
-.koowa .koowa-icon--default:before {
+.koowa .koowa_icon--default:before {
   content: "\e600";
 }
 
-.koowa .koowa-icon--image:before {
+.koowa .koowa_icon--image:before {
   content: "\e601";
 }
 
-.koowa .koowa-icon--video:before {
+.koowa .koowa_icon--video:before {
   content: "\e602";
 }
 
-.koowa .koowa-icon--archive:before {
+.koowa .koowa_icon--archive:before {
   content: "\e603";
 }
 
-.koowa .koowa-icon--folder:before {
+.koowa .koowa_icon--folder:before {
   content: "\e604";
 }
 
-.koowa .koowa-icon--pdf:before {
+.koowa .koowa_icon--pdf:before {
   content: "\e605";
 }
 
-.koowa .koowa-icon--audio:before {
+.koowa .koowa_icon--audio:before {
   content: "\e606";
 }
 
-.koowa .koowa-icon--document:before {
+.koowa .koowa_icon--document:before {
   content: "\e607";
 }
 
-.koowa .koowa-icon--spreadsheet:before {
+.koowa .koowa_icon--spreadsheet:before {
   content: "\e608";
 }
 ```
@@ -336,16 +351,18 @@ The important part here is that the "content" property doesn’t get changed. Yo
 
 Right now we’ve only covered how to add the images to the frontend, but wouldn’t it be useful to have the same icons display on the administrator side?
 
-This is basically the same as adding the new icons to the frontend template. First locate the administrator template you are using. We are using the "Isis" template in the following example.
+This is basically the same as adding the new icons to the frontend template. First locate the administrator template you are using. We are using the "Isis" template in the following example which can be found here:
 
-To make things a little bit easier we’re just going to use all the file we already created. So Basically the only thing you have to do is this:
+[joomla] > administrator > templates > isis
+
+To make things a little bit easier we’re just going to use the same file we already created. So Basically the only thing you have to do is this:
 
 1. Download the administrator template index.php file
 2. locate the line that starts with a piece of code that looks like this:
 ```php
 $doc->addStyleSheet('templates/' . $this->template ….
 ```
-3. Add the following line right below:
+3. Add the following line right below (replacing [your template] with protostar for example):
 ```php
 $doc->addStyleSheet(JURI::root().'templates/[your template]/icons.css');
 ```

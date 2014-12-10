@@ -3,6 +3,7 @@
 * [Extensions](extensions/docman/custom-icons.md)
     * [DOCman](extensions/docman/custom-icons.md)
         * [Custom icons](extensions/docman/custom-icons.md)
+        * [Custom icon sizes](extensions/docman/custom-icon-sizes.md)
         * [Plugins](extensions/docman/plugins.md)
     * [LOGman](extensions/logman.md)
         * [Integrations](extensions/logman/integrations/README.md)
