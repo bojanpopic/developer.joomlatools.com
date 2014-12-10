@@ -40,8 +40,7 @@ The first step is to create a `newsfeeds.php` file in the `plugins/logman/newsfe
 <?php
 	class PlgLogmanNewsfeeds extends ComLogmanPluginJoomla
 	{
-	}	
-?>
+	}
 ```
 
 Congratulations! you have just created your first LOGman plugin!.

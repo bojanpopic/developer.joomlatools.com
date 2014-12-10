@@ -18,7 +18,6 @@ For this, we need to create a LOGman plugin in the `plugins/logman/docman` direc
 	class PlgLogmanDocman extends ComLogmanPluginKoowa
 	{
 	}
-?>
 ``` 
 
 Here we are extending **ComLogmanPluginKoowa**, which is the base plugin class for integrating Nooku components. This plugin makes sure that the component controllers become loggable, i.e. it attaches the loggable behavior to each controller that we would like to integrate. The loggable behavior is also preset with one or more loggers by the plugin.
@@ -72,7 +71,6 @@ The base logger will basically log add, edit and delete actions from your contro
  			)
 		);
 	}
-?>
 ```
 
 where `{Component}` and `{identifier}` are the component name and the identifier of your controller issuing the actions to be logged respectively.
@@ -86,7 +84,6 @@ We are going to override the base logger by creating a `plugins/logman/docman/lo
 	class PlgLogmanDocmanLoggerDocument extends ComLogmanActivityLogger
 	{
 	}
-?>
 ```
 
 Right now our custom logger is just extending the base logger. Remember that the the DOCman plugin was initialized so that the document controller is made loggable by using the **PlgLogmanDocmanLoggerDocument** logger.

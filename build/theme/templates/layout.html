@@ -17,7 +17,8 @@
         {% block head %}{% endblock %}
         {{ htmlSnippet("head:end")|default("") }}
     </head>
-    <body>
+    <body class="no-js">
+    <script data-inline type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.body;var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg," js-enabled")}</script>
         {{ htmlSnippet("body:start")|default("") }}
         {% block style %}{% endblock %}
         {% block content %}{% endblock %}

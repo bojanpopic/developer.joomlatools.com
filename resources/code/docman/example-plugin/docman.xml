@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="koowa">
+	<name>Docman Example Plugin</name>
+	<author>Timble</author>
+	<creationDate>June 2013</creationDate>
+	<copyright></copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail></authorEmail>
+	<authorUrl></authorUrl>
+	<version>1.0.0</version>
+	<description>Example docman plugin</description>
+
+	<files>
+		<filename plugin="docman">docman.php</filename>
+	</files>
+	<languages>
+	</languages>
+	<config>
+		<fields name="params">
+		</fields>
+	</config>
+</extension>

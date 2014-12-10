@@ -19,7 +19,6 @@ Let us create our first activity override class. If we would like to create an a
 	class PlgLogmanFooActivityBar extends ComLogmanModelEntityActivity
 	{
 	}
-?>
 ```
 
 We have successfully told LOGman to use our own activity object instead of the default **ComLogmanModelEntityActivity** class. Each time an activity from a `bar` resource of the `foo` component gets loaded by LOGman, this is the activity class that will get used.
