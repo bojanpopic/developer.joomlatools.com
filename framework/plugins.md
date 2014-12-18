@@ -27,14 +27,18 @@ that allows for a very fine grained targeting.
 
 ## What is possible?
 
-A better question would be "What's not possible?". <!--There are many opportunities in the handling of a request through the Framework for the
-supplementing of an extension's functionality.-->To get a feel for the potential, here is an example signature of a plugin
-that takes advantage of all the opportunities exposed in an extension called `Acme` for one entity called `Bar`.
+A better question would be "What's not possible?".
+<!--There are many opportunities in the handling of a request through the Framework for the
+supplementing of an extension's functionality.-->
+To get a feel for the potential, here is an example signature of a plugin
+that takes advantage of all the opportunities exposed in just the MVC layer in an extension called `Acme` for one entity called `Bar`.
 ```php
 <?php
 class PlgKoowaAcme extends PlgKoowaAbstract
 {
-    // 10 controller event handlers
+    // 12 controller event handlers
+    function onBeforeAcmeBarControllerRender(KEventInterface $event);
+    function onBeforeAcmeBarControllerRender(KEventInterface $event);
     function onBeforeAcmeBarControllerBrowse(KEventInterface $event);
     function onAfterAcmeBarControllerBrowse(KEventInterface $event);
     function onBeforeAcmeBarControllerRead(KEventInterface $event);
@@ -46,9 +50,15 @@ class PlgKoowaAcme extends PlgKoowaAbstract
     function onBeforeAcmeBarControllerDelete(KEventInterface $event);
     function onAfterAcmeBarControllerDelete(KEventInterface $event);
 
-    // 2 model event handlers
+    // 8 model event handlers
     function onBeforeAcmeBarModelFetch(KEventInterface $event);
     function onAfterAcmeBarModelFetch(KEventInterface $event);
+    function onBeforeAcmeBarModelCreate(KEventInterface $event);
+    function onAfterAcmeBarModelCreate(KEventInterface $event);
+    function onBeforeAcmeBarModelCount(KEventInterface $event);
+    function onAfterAcmeBarModelCount(KEventInterface $event);
+    function onBeforeAcmeBarModelReset(KEventInterface $event);
+    function onAfterAcmeBarModelReset(KEventInterface $event);
 
     // 2 view event handlers
     function onBeforeAcmeBarViewRender(KEventInterface $event);
@@ -56,14 +66,17 @@ class PlgKoowaAcme extends PlgKoowaAbstract
 }
 ```
 
-That's 14 opportunities for a developer to augment the extension treatment of the `Bar` entity  in exactly the way they choose; **and that's for just one entity type**.
-If the extension were to have another entity called `Foo`, then there are 14 more.
+That's 22 distinct opportunities for a developer to augment the extension treatment of the `Bar` entity in exactly the way they choose; **and that's for just one entity type**.
+If the extension were to have another entity called `Foo`, then there are 22 more.
 
-> **Tip:** There are two more exposed for the component's [Dispatcher](#dispatcher), and could be more for [Modules](#modules).
+> **Tip:** There are four more actions mixed into a controller's interface by default via the [Editable behavior](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/controller/behavior/editable.php#L16),
+and thus 8 more opportunities.
+
+> **Next Tip:** There are even more exposed for the component's [Dispatcher](#dispatcher)
 
 ## How does it work?
 
-All objects in the Framework that provide this access through the Plugin API have the same architectural characteristic. Their main
+All objects in the Framework that provide this access through the Events API have the same architectural characteristic. Their main
 action methods get funnelled through a singular 'executing' method and thus centralizes the execution strategy of their respective class.
 
 That method is rarely used directly from outside of an object, but is exposed via the magic `__call()` method. It also
@@ -97,9 +110,9 @@ Have a look at the others
 * [`KControllerAbstract::execute()`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/abstract.php#L125)
 * [`KModelAbstract::fetch()`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/model/abstract.php#L125)
 
-### Where does the Plugin API part come in?
+### Where does the Plugin part come in?
 
-It is those `before` and `after` steps that are the starting points for the Plugin API. They tell the object to run a series of commands, or a command chain.
+It is those `before` and `after` steps that are the starting points for the Event API. They tell the object to run a series of commands, or a command chain.
 
 To expose this 'heart' of changeability as a _core Joomla 'like' plugin_ the object in question must have the a `KCommandHandlerEvent` class based object
 in its command chain.
@@ -107,22 +120,31 @@ in its command chain.
 >Most objects in the Framework have an `_initialize` method where a number of defaults and base configuration variables
 are set. Each class that we expose as Plugin API will have a `command_handlers` array with `'lib:command.handler.event'`.
 
-Its that 'handler' which
+When this handler gets is turn in the chain, its own `execute` method
 
-1. builds the **event**
-2. notifies a publisher
-3. loads the plugin, _with `JPluginHelper::importPlugin`_
-4. and calls the actual individual `event handling` plugins.
+1. builds the **event** name
+2. tells the event publisher to publish the event
+3. which loads the plugin(s), _with `JPluginHelper::importPlugin`_
+4. When the plugin(s) load (and they extend from `PlgKoowaSubscriber`) the methods that start with 'on' are `subscribed` to the
+event publisher, and the ones that match the event name are fired at that point.
 
 <!-- DIAGRAM HERE -->
 
+
 ### The Event Mixin
 
-At the core of the Framework is the ability to `mixin` functionality. To give our exposed objects the right Event interface
-we make use of the KEventMixin class based object.
+At the core of the Framework is the ability to `mixin` functionality. When we have an object that we want to expose through the Event API
+we make sure to mixin the `KEventMixin` interface. This provides that object, and those that use it, with access to the objects that make up the API.
+Namely the event publisher, subscribers, listeners and access to a `publishEvent` method.
+
+This is important architecturally. It means that if you are writing an with extension Nooku Framework you can add your own custom events, with any
+naming convention you like from any class with the `KEventMixin` interface.
+
+>Tip: The Event Mixin is not directly used by the event command handler `KCommandHandlerEvent` but is very relevant to the overall Event API
 
 ### The Event Variable
 
+When the
 That **event** part is important. Its provides a nice interface for you to work with in your plugin. Attached to it are
 some of the same objects our context variable from above gets.
 
@@ -155,9 +177,7 @@ shows the building of the event handler name clearly
 $event_specific = 'on'.ucfirst($when).ucfirst($package).ucfirst($subject).ucfirst($type).$name;
 ```
 
-## Extras
-
-### Modules
+<!-- ### Modules
 
 A module's `html.php` file is the rendering strategy for that module, and will it extend `ModKoowaHtml`
 which descends from the above mentioned `KViewAbstract` and so, has the Plugin API automatically.
@@ -176,20 +196,22 @@ class PlgKoowaAcme extends PlgKoowaAbstract
     function  onAfterAcme_bar_bannerHtmlRender(KEventInterface $event){}  // no Subject
  }
 ```
+-->
 
 ### Dispatcher
 
-A component dispatcher descends from `KControllerAbstract` and as such, it too gets exposed through the Plugin API. In this
- instance there is no specific entity, but there is a specific protocol based strategy, in many cases http.
+A component dispatcher descends from `KControllerAbstract` so it too gets exposed through the Events API. In this
+ instance there is no specific entity, i.e. no `Bar`, but there is a specific protocol based strategy, in many cases `Http`.
 
-`ComAcmeDispatcherHttp` would be exposed in our Acme plugin with
+As of the 2.0 Release the abstract dispatcher has 4 action methods:
 
-```php
-class PlgKoowaAcme extends PlgKoowaAbstract
-{
-    function  onBeforeAcmeDispatcherHttpDispatch(KEventInterface $event){}  // no Subject
-    function  onAfterAcmeDispatcherHttpDispatch(KEventInterface $event){}  // no Subject
- }
-```
+`_actionDispatch, _actionForward, _actionFail,` and `_actionSend`
+
+Normally, we use the http dispatcher which adds more action methods, the majority of which correspond to HTTP methods:
+
+`_actionHead, _actionOptions, _actionGet, _actionPost, _actionPut, _actionDelete` and `_actionRedirect`
+
+That means our `Acme` component dispatcher, i.e. `com://site/acme.dispatcher.http` would be exposed to
+our `Acme` plugin with another 2 * (4 + 7) = 22 opportunities to handle events
 
 
