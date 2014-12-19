@@ -14,7 +14,7 @@
     * [Template System](framework/template-system.md)
         * [Bootstrap](framework/bootstrap.md)
         * [Overrides](framework/overrides.md)
-        * [Alternative Layouts](framework/alternative-layouts.md)
+        * [Layouts](framework/layouts.md)
 * [Tools](tools/composer/introduction.md)
 	* [Composer](tools/composer/introduction.md)
 	    * [Installing Packages](tools/composer/installing.md)
