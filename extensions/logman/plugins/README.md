@@ -1,4 +1,4 @@
-#Integrations
+# Plugins
 
 By integrating LOGman with another component, activities from the latest will get logged and made available in a variety of forms: HTML/JSON Activity Streams, CSV exports, etc.
 
