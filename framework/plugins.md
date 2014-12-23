@@ -1,22 +1,74 @@
 # Plugins
 
-The Framework provides a nice Event API to Joomla! extensions that use it. It is the principle mechanism by which we can subscribe a Joomla plugin to events in other parts of the Framework. Here we provide a high level overview of the classes and objects involved, and dive into some specific examples.
-
-In the majority of cases, you will want to register an event listener against a controller action. A controller action is
-a method within DOCman that is run when a particular user request happens. There are five (5) standard actions that are available in
-the controller which are characterized with the BREAD acronym:
-
-* **B**rowse - Viewing a list of documents
-* **R**ead - Viewing a single document
-* **E**dit - Editing/updating a single existing document on save
-* **A**dd - Adding a new document on save
-* **D**elete - Deleting a document
-
-Each of these actions can have an event listener registered to be run **before** or **after** the action itself is executed.
+The Framework provides a nice Event API to Joomla! extensions that use it. It is the principle mechanism by which we can subscribe a Joomla plugin to events in other parts of the Framework. All of the main actions that take place in the MVC layer expose both before and after command chains that are exposed to the Joomla! Plugin layer for plugin's that extend `PlgKoowaSubscriber`. Here we provide a high level overview of the classes and objects involved, and dive into some specific examples.
 
 <!-- toc -->
 
-<!-- THIS SEEMS LIKE MORE OF A BLOG POST TO ME-->
+## Setup
+
+Your first step is to create a plugin and register/install it within Joomla. If you have ever created a Joomla plugin, the process is exactly the same. A plugin consists of at least 2 files, a PHP class and an XML descriptor. Let's quickly cover how to set these up:
+
+### XML Descriptor
+
+The XML file contains a description of the plugin so that Joomla knows what it is installing.
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="koowa">
+    <name>Acme Plugin</name>
+    <author>John Foobar</author>
+    <creationDate>Dec 2014</creationDate>
+    <version>1.0.0</version>
+    <description>PLUGIN DESCRIPTION</description>
+    <files>
+        <filename plugin="acme">acme.php</filename>
+    </files>
+</extension>
+```
+
+This is the minimum required contents of the descriptor. Adjust the values accordingly. There are plenty more options you can configure for the XML file, but you need to specify at least these. For more information consult the Joomla 2.5+ documentation.
+
+The XML file should have the same name as your plugin (see the `<filename plugin="acme">` line). Your XML file would in this example
+be named `acme.xml`.
+
+## PHP Class
+
+The PHP class contains the code you want to execute before/after certain events. The class name must conform to a specific format in order for your plugin to work. The format is as follows:
+
+`PlgKoowaName` where the **Name** part is the name (first letter capitalized) of your plugin as defined in the `<filename plugin="docman">` section
+of the XML descriptor above. In our case, the name would be:
+
+`PlgKoowaAcme`
+
+Also, the plugin **must** also extend [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php#L10)
+
+So our PHP file should start out looking something like this:
+
+```php
+<?php
+class PlgKoowaAcme extends PlgKoowaSubscriber{}
+```
+
+## Installing the plugin
+
+Joomla provides 2 main methods for installing plugins
+
+1. Install via a ZIP file
+2. Place the files in the correct location and "discover" them
+
+<!-- CB: Should we add a third option for development via the console? -->
+
+Method 1 is generally used when packaging plugins and distributing them, while Method 2 is useful when you have full control over the source code and can just write the files in place, then tell Joomla to discover them so they are installed.
+
+1. For this example, let's put the files in place so that you know where they are when we come to editing them. The files should be located in the `/plugins/koowa/name` directory where name is the name of your plugin, in our case `/plugins/koowa/docman`.
+
+2. Once the files are in place, in the Joomla backend, go to **Menu > Extensions > Extension Manager**, then select **Discover** from the sub-menu.
+
+3. On the Discover screen, hit the **Discover** button, the plugin should then show up in the list. Now click the checkbox to the left of the plugin, and hit **Install**. The plugin should now be installed.
+
+4. Once the plugin is installed, you also need to enable it. Go to: **Menu > Extensions > Plug-in Manager** and search by name or filter by type and set to **koowa**. When you the newly created plugin, you should see a red cross in the status column to indicate the plugin is disabled; click that red cross to enable the plugin.
+
+## Event handlers
 
 ### Naming
 
@@ -26,7 +78,7 @@ Without preamble, the event naming pattern is as follows
 
 > In our ["What is possible? example"](#what-is-possible), the pattern that a plugin method takes can to be readily seen.
 
-Each of the parts in brackets holds a piece of information that helps the command handler build an event name, and then see if any event handlers are registered, or available for this event.
+Each of the parts in brackets holds a piece of information that helps the event command handler build an event name, and broadcast or publish that event.
 
 * **When** - "Before" or "After" - All actions have a before/after event and unsurprisingly are run before/after the action
 * **Package**  - The name of the component the event belongs to, in this case **Acme**
@@ -40,13 +92,14 @@ The [KCommandHandlerEvent::execute()](https://github.com/nooku/nooku-framework/b
 $event_specific = 'on'.ucfirst($when).ucfirst($package).ucfirst($subject).ucfirst($type).$name;
 ```
 
+
 ### PlgKoowaSubscriber: The Actual Subscriber 
 
 Nooku provides the Event API, but to make use of it in a Joomla plugin, that plugin needs to subscribe to it.  To make that happen these extensions simply need to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). This is the one of last pieces in the puzzle, and a pretty important one at that.    
 
-As soon as they are instantiated a PlgKoowaSubscriber loads up the instance of the `KEventPublisher` and adds itself and its callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. For example, the listeners registered for event named **"onBeforeAcmeBarControllerBrowse"** are in this case plugin's  `onBeforeAcmeBarControllerBrowse` method.
+> **Technical Tip**: As soon as they are instantiated a PlgKoowaSubscriber loads up the instance of the `KEventPublisher` and adds itself and its callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. For example, the listeners registered for event named **"onBeforeAcmeBarControllerBrowse"** are in this case plugin's  `onBeforeAcmeBarControllerBrowse` method.
  
->**Tip:** `PlgKoowaSubscriber` plugins will not fire for native Joomla! plugin events because they aren't connected to `JEventDispatcher`.
+>**Another Tip:** `PlgKoowaSubscriber` plugins will not fire for native Joomla! plugin events because they aren't connected to `JEventDispatcher`. 
 
 ### PlgKoowaAbstract
 
@@ -54,9 +107,17 @@ Plugins written to take advantage of the native Joomla! and other extension plug
 
 Another benefit to using `PlgKoowaAbstract` over JPlugin is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html) to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
 
+### Before/After - When to use
+
+It can sometimes be confusing to know when to use before or after events. However, following these simple rules should help:
+
+* **BEFORE** - If you wish to modify the incoming data, such as in add/edit actions.
+* **AFTER** - If you need to be sure the action was successful or need to manipulate the response before it is displayed,
+for example removing certain values from a document for unregistered users.
+
 ### The Event Variable
 
-When subscribers to the Event API are notified that a given event is taking place, they get a nice `KEventInterface` object with all the information they need: 
+When subscribers to the Event API, our Plugins in this case are notified that a given event is taking place, they get a nice `KEventInterface` object with all the information they need: 
 
 ```php
     $caller		= $event->caller;
@@ -65,6 +126,14 @@ When subscribers to the Event API are notified that a given event is taking plac
     $result 	= $event->result;
 ```
 It provides access to some of the same objects that our `$context` variable from above gets, but also gives us methods to control the event like, `stopPropagation`,  `canPropogate` , and attribute getters and setters. We can assess and alter the `$context->data` property before it makes it to the subject class's execute method or alter the `$context->result` before it returns to the original calling scope.  
+
+* Caller - This is the object that triggered the event, in the case above it would be the **document** controller.
+* Action - The original action that triggered the event, in this case **add**.
+* Data - Any data that is passed to the controller action is stored in a KConfig object. Typically this is used for
+any action that takes in data, such as **Add**, **Edit**, **Post** and **Put**. You could modify the data here if you wished.
+* Result - This is populated with the result of the action, only applicable to **After** events.
+
+
 
 ## What is possible?
 
