@@ -15,7 +15,7 @@
         * [Bootstrap](framework/bootstrap.md)
         * [Overrides](framework/overrides.md)
         * [Alternative Layouts](framework/alternative-layouts.md)
-    * [Plugins](framework/plugins.md)
+    * [Event API](framework/plugins.md)
 * [Tools](tools/composer/introduction.md)
 	* [Composer](tools/composer/introduction.md)
 	    * [Installing Packages](tools/composer/installing.md)
