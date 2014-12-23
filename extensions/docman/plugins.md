@@ -78,13 +78,13 @@ of the XML descriptor above. In our case, the name would be:
 
 `PlgKoowaDocman`
 
-Also, the plugin **must** also extend [`PlgKoowaAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/abstract.php#L10)
+Also, the plugin **must** also extend [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php#L10)
 
 So our PHP file should look something like this:
 
 ```php
 <?php
-class PlgKoowaDocman extends PlgKoowaAbstract{}
+class PlgKoowaDocman extends PlgKoowaSubscriber{}
 ```
 
 ## Installing the plugin
@@ -189,7 +189,7 @@ for example removing certain values from a document for unregistered users.
 
 ```php
 <?php
-class PlgKoowaDocman extends PlgKoowaAbstract
+class PlgKoowaDocman extends PlgKoowaSubscriber
 {
     public function onBeforeDocumentControllerAdd(KEventInterface $event)
     {
@@ -225,7 +225,7 @@ So let's go ahead and work out what events we need to respond to:
 Therefore the event method names we need are:
 
 ```php
-class PlgKoowaDocman extends PlgKoowaAbstract
+class PlgKoowaDocman extends PlgKoowaSubscriber
 {
         onAfterDocmanDocumentControllerAdd(KEventInterface $event){}
         onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
@@ -239,7 +239,7 @@ Now consider save events, these cover both add and edit (create and update), so 
 methods run the same code is have one call the other.
 
 ```php
-class PlgKoowaDocman extends PlgKoowaAbstract
+class PlgKoowaDocman extends PlgKoowaSubscriber
 {
         onAfterDocmanDocumentControllerAdd(KEventInterface $event)
         {
