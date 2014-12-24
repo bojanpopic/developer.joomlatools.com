@@ -20,8 +20,10 @@ The benefit of adding your own separate file (e.g. custom.css) is that you have 
 
 Most often, this strategy involves editing the template’s index.php file. Simply add a <link> tag pointing to your new custom.css file just before the closing </head> tag in that file.
 
-```<link rel=”stylesheet” href=”/templates/your_template/css/custom.css” />
-</head>```
+```html
+<link rel=”stylesheet” href=”/templates/your_template/css/custom.css” />
+</head>
+```
 
 Making it the last style reference in the head will help ensure that your customizations take precedent. You may also want to make that same change in other page level template files e.g in the component.php file so that your changes carry through to component only pages.
 
