@@ -1,85 +1,52 @@
 # Plugins
 
-The Framework provides a nice Event API to Joomla! extensions that use it. It is the principle mechanism by which we can subscribe a Joomla plugin to events in other parts of the Framework. All of the main actions that take place in the MVC layer expose both before and after command chains that are exposed to the Joomla! Plugin layer for plugin's that extend `PlgKoowaSubscriber`. Here we provide a high level overview of the classes and objects involved, and dive into some specific examples.
+The Framework provides a nice Event API to Joomla! extensions that use it. It is the principle mechanism by which we can subscribe a Joomla plugin to events in other parts of the Framework. All of the main actions that take place in the MVC layer expose both before and after command chains that broadcast events to the Joomla! Plugin layer for plugin's that extend `PlgKoowaSubscriber`. This gives huge advantages to component extensions that use the Framework in terms of granularity of the events they can expose to their user base and therefore nearly complete control of the component, i.e. _they can customize the behavior exactly as needed_
+
+Here we provide a high level overview of the concepts, classes and objects involved in the make up of such a plugin. 
+
+> **Specific Plugin Example:** Build a working plugin with the [DOCman Plugin Tutorial](extensions/docman/plugins.md).
 
 <!-- toc -->
 
-## Setup
 
-Your first step is to create a plugin and register/install it within Joomla. If you have ever created a Joomla plugin, the process is exactly the same. A plugin consists of at least 2 files, a PHP class and an XML descriptor. Let's quickly cover how to set these up:
+## Plugin Classes
 
-### XML Descriptor
-
-The XML file contains a description of the plugin so that Joomla knows what it is installing.
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<extension version="2.5" type="plugin" group="koowa">
-    <name>Acme Plugin</name>
-    <author>John Foobar</author>
-    <creationDate>Dec 2014</creationDate>
-    <version>1.0.0</version>
-    <description>PLUGIN DESCRIPTION</description>
-    <files>
-        <filename plugin="acme">acme.php</filename>
-    </files>
-</extension>
-```
-
-This is the minimum required contents of the descriptor. Adjust the values accordingly. There are plenty more options you can configure for the XML file, but you need to specify at least these. For more information consult the Joomla 2.5+ documentation.
-
-The XML file should have the same name as your plugin (see the `<filename plugin="acme">` line). Your XML file would in this example be named `acme.xml`.
-
-## PHP Class
-
-The PHP class contains the code you want to execute before/after certain events. The class name must conform to a specific format in order for your plugin to work. The format is as follows:
-
-`PlgKoowaName` where the **Name** part is the name (first letter capitalized) of your plugin as defined in the `<filename plugin="acme">` section of the XML descriptor above. In our case, the name would be:
-
-`PlgKoowaAcme`
-
-Also, the plugin **must** also extend [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php#L10)
-
-So our PHP file should start out looking something like this:
-
+Here is a very simple example of a Nooku plugin for us to refer back to
 ```php
-<?php
-class PlgKoowaAcme extends PlgKoowaSubscriber{}
+class PlgKoowaAcme extends PlgKoowaSubscriber
+{
+    function onBeforeAcmeBarControllerBrowse(KEventInterface $event)
+    {
+	    if(!$event->data->foo) {
+		    JFactory::getApplication()->redirect('/', 'You have no Foo');  
+		}      
+	}
+}
 ```
-We talk a little more about `PlgKoowaSubscriber` a little later. 
 
-## Installing the plugin
+### PlgKoowaAbstract
 
-Joomla provides 2 main methods for installing plugins
+If you want your plugin to simply take advantage of the native Joomla! (and other extension plugin events), it need only extend `PlgKoowaAbstract`. This class extends directly from `JPlugin` and will work like any other plugin; but, you have the added bonus of direct access to the Frameworks object manager, not to mention allowing the plugin to have its own [object identifier](http://guides.nooku.org/essentials/object-management.html). 
 
-1. Install via a ZIP file
-2. Place the files in the correct location and "discover" them
+Another benefit to using `PlgKoowaAbstract` over `JPlugin` is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html) for example to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
 
-<!-- CB: Should we add a third option for development via the console? -->
+### PlgKoowaSubscriber: The Actual Subscriber 
 
-Method 1 is generally used when packaging plugins and distributing them, while Method 2 is useful when you have full control over the source code and can just write the files in place, then tell Joomla to discover them so they are installed.
+Nooku provides the Event API, but for a Joomla plugin to make use of it needs to become a 'subscriber'.  To make that happen these extensions simply need to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). 
 
-1. For this example, let's put the files in place so that you know where they are when we come to editing them. The files should be located in the `/plugins/koowa/name` directory where name is the name of your plugin, in our case `/plugins/koowa/docman`.
+> **Technical Tip**: As soon as they are instantiated a PlgKoowaSubscriber loads up the instance of the `KEventPublisher` and adds itself and its callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. For example, the listeners registered for event named **"onBeforeAcmeBarControllerBrowse"** are in this case plugin's  `onBeforeAcmeBarControllerBrowse` method.
+ 
+>**Another Tip:** `PlgKoowaSubscriber` plugins will not fire for native Joomla! plugin events because they aren't connected to `JEventDispatcher`. 
 
-2. Once the files are in place, in the Joomla backend, go to **Menu > Extensions > Extension Manager**, then select **Discover** from the sub-menu.
-
-3. On the Discover screen, hit the **Discover** button, the plugin should then show up in the list. Now click the checkbox to the left of the plugin, and hit **Install**. The plugin should now be installed.
-
-4. Once the plugin is installed, you also need to enable it. Go to: **Menu > Extensions > Plug-in Manager** and search by name or filter by type and set to **koowa**. When you the newly created plugin, you should see a red cross in the status column to indicate the plugin is disabled; click that red cross to enable the plugin.
-
-## Event Handlers
+## Plugin Methods 
 
 The event handlers are the methods of the plugin and must follow a specific naming pattern to be notified that an event is taking place. 
 
 ### Naming
 
-Without preamble, the event naming pattern is as follows
+Above we saw the event handler method `onBeforeAcmeBarControllerBrowse` . Its parts can be broken down as follows
 
 `on` + [**When**] + [**Package**] + [**Subject**] + [**Type**] + [**Action**]
-
-> In our ["What is possible? example"](#what-is-possible), the pattern that a plugin method takes can to be readily seen.
-
-Each of the parts in brackets holds a piece of information that the event command handler needs to build an event name, and broadcast or publish that event.
 
 * **When** - "Before" or "After" - All actions have a before/after event and unsurprisingly are run before/after the action
 * **Package**  - The name of the component the event belongs to, in this case **Acme**
@@ -90,33 +57,20 @@ Each of the parts in brackets holds a piece of information that the event comman
 > Technical Tip: The [KCommandHandlerEvent::execute()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/command/handler/event.php#L12) method shows the building of the event handler name clearly
 `$event_specific = on'.ucfirst($when).ucfirst($package).ucfirst($subject).ucfirst($type).$name;`
 
-
-### PlgKoowaSubscriber: The Actual Subscriber 
-
-Nooku provides the Event API, but to make use of it in a Joomla plugin, that plugin needs to subscribe to it.  To make that happen these extensions simply need to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). This is the one of last pieces in the puzzle, and a pretty important one at that.    
-
-> **Technical Tip**: As soon as they are instantiated a PlgKoowaSubscriber loads up the instance of the `KEventPublisher` and adds itself and its callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. For example, the listeners registered for event named **"onBeforeAcmeBarControllerBrowse"** are in this case plugin's  `onBeforeAcmeBarControllerBrowse` method.
- 
->**Another Tip:** `PlgKoowaSubscriber` plugins will not fire for native Joomla! plugin events because they aren't connected to `JEventDispatcher`. 
-
-### PlgKoowaAbstract
-
-If you want your plugin to take advantage of the native Joomla! and other extension plugin events, it need only extend `PlgKoowaAbstract` and not `PlgKoowaSubscriber`. This class extends from `JPlugin` and will work like any other plugin, but you have the added bonus of direct access to the Frameworks object manager, not to mention allowing the plugin to have its own object identifier. 
-
-Another benefit to using `PlgKoowaAbstract` over JPlugin is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html) to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
-
 ### The Event Variable
 
-When subscribers to the Event API, our Plugins in this case, are notified that a given event is taking place they get a nice `KEventInterface` object with all the information they need for a given situation. 
+When subscribers to the Event API (our plugin methods in this case) are notified of a given event they get a nice `KEventInterface` object with all the information they need for a given situation. 
 
-For example, controller focused event have properties like
+For example, our Acme package bar controller focused event (`onBeforeAcmeBarControllerBrowse`) will have properties like
+
 ```php
     $event->subject;
     $event->action;
     $event->data;
     $event->result;
 ```
-In addition, the variable gives us methods to control the event like, `stopPropagation`,  `canPropogate` , and attribute getters and setters. We could assess and alter the `$context->data` property before it makes it to the subject class's execute method or alter the `$context->result` before it returns to the original calling scope.  
+
+In addition, the variable exposes methods to control the event like, `stopPropagation`,  `canPropogate` , and attribute getters and setters. We could assess and alter the `$context->data` property before it makes it to the subject class's execute method or alter the `$context->result` before it returns to the original calling scope.  
 
 It is useful to emphasize that event variables get different properties based on which part of the MVC layer they are focused on. 
 
