@@ -101,13 +101,14 @@ By inspecting the page elements you can see that we are adding a `<div class="ko
 
 As you can see; you can target exactly what you want. A few useful examples would be:
 
-All components: `.com_docman` 
 
-All table layouts: `.docman_table_layout` 
++ The whole extension: `.com_docman`
 
-Filtered table view: `.docman_table_layout--filtered_table` 
++ All table layouts: `.docman_table_layout`
 
-Only headers in Lists: `.docman_list_layout--default .koowa_header`
++ Filtered table view: `.docman_table_layout--filtered_table`
+
++ Only headers in Lists: `.docman_list_layout--default .koowa_header`
 
 The rest of the CSS will always be the same. Only the new rules you make will affect any change.
 
