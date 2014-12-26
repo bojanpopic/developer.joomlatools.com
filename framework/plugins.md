@@ -28,15 +28,13 @@ The XML file contains a description of the plugin so that Joomla knows what it i
 
 This is the minimum required contents of the descriptor. Adjust the values accordingly. There are plenty more options you can configure for the XML file, but you need to specify at least these. For more information consult the Joomla 2.5+ documentation.
 
-The XML file should have the same name as your plugin (see the `<filename plugin="acme">` line). Your XML file would in this example
-be named `acme.xml`.
+The XML file should have the same name as your plugin (see the `<filename plugin="acme">` line). Your XML file would in this example be named `acme.xml`.
 
 ## PHP Class
 
 The PHP class contains the code you want to execute before/after certain events. The class name must conform to a specific format in order for your plugin to work. The format is as follows:
 
-`PlgKoowaName` where the **Name** part is the name (first letter capitalized) of your plugin as defined in the `<filename plugin="docman">` section
-of the XML descriptor above. In our case, the name would be:
+`PlgKoowaName` where the **Name** part is the name (first letter capitalized) of your plugin as defined in the `<filename plugin="acme">` section of the XML descriptor above. In our case, the name would be:
 
 `PlgKoowaAcme`
 
@@ -48,6 +46,7 @@ So our PHP file should start out looking something like this:
 <?php
 class PlgKoowaAcme extends PlgKoowaSubscriber{}
 ```
+We talk a little more about `PlgKoowaSubscriber` a little later. 
 
 ## Installing the plugin
 
@@ -68,7 +67,9 @@ Method 1 is generally used when packaging plugins and distributing them, while M
 
 4. Once the plugin is installed, you also need to enable it. Go to: **Menu > Extensions > Plug-in Manager** and search by name or filter by type and set to **koowa**. When you the newly created plugin, you should see a red cross in the status column to indicate the plugin is disabled; click that red cross to enable the plugin.
 
-## Event handlers
+## Event Handlers
+
+The event handlers are the methods of the plugin and must follow a specific naming pattern to be notified that an event is taking place. 
 
 ### Naming
 
@@ -78,7 +79,7 @@ Without preamble, the event naming pattern is as follows
 
 > In our ["What is possible? example"](#what-is-possible), the pattern that a plugin method takes can to be readily seen.
 
-Each of the parts in brackets holds a piece of information that helps the event command handler build an event name, and broadcast or publish that event.
+Each of the parts in brackets holds a piece of information that the event command handler needs to build an event name, and broadcast or publish that event.
 
 * **When** - "Before" or "After" - All actions have a before/after event and unsurprisingly are run before/after the action
 * **Package**  - The name of the component the event belongs to, in this case **Acme**
@@ -86,11 +87,8 @@ Each of the parts in brackets holds a piece of information that helps the event 
 * **Type** - The type of the object using the entity, e.g. **Controller, View or Model**
 * **Action** - The name of the action being run. Controller BREAD actions, Render for a view and Fetch for a model.
 
-The [KCommandHandlerEvent::execute()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/command/handler/event.php#L12) method shows the building of the event handler name clearly
-
-```php
-$event_specific = 'on'.ucfirst($when).ucfirst($package).ucfirst($subject).ucfirst($type).$name;
-```
+> Technical Tip: The [KCommandHandlerEvent::execute()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/command/handler/event.php#L12) method shows the building of the event handler name clearly
+`$event_specific = on'.ucfirst($when).ucfirst($package).ucfirst($subject).ucfirst($type).$name;`
 
 
 ### PlgKoowaSubscriber: The Actual Subscriber 
@@ -103,41 +101,61 @@ Nooku provides the Event API, but to make use of it in a Joomla plugin, that plu
 
 ### PlgKoowaAbstract
 
-Plugins written to take advantage of the native Joomla! and other extension plugin events, need only extend `PlgKoowaAbstract`. This class extends from `JPlugin` and will work like any other plugin, but you have the added bonus of direct access to the Frameworks object manager, not to mention allowing the plugin to have its own object identifier. 
+If you want your plugin to take advantage of the native Joomla! and other extension plugin events, it need only extend `PlgKoowaAbstract` and not `PlgKoowaSubscriber`. This class extends from `JPlugin` and will work like any other plugin, but you have the added bonus of direct access to the Frameworks object manager, not to mention allowing the plugin to have its own object identifier. 
 
 Another benefit to using `PlgKoowaAbstract` over JPlugin is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html) to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
 
-### Before/After - When to use
+### The Event Variable
+
+When subscribers to the Event API, our Plugins in this case, are notified that a given event is taking place they get a nice `KEventInterface` object with all the information they need for a given situation. 
+
+For example, controller focused event have properties like
+```php
+    $event->subject;
+    $event->action;
+    $event->data;
+    $event->result;
+```
+In addition, the variable gives us methods to control the event like, `stopPropagation`,  `canPropogate` , and attribute getters and setters. We could assess and alter the `$context->data` property before it makes it to the subject class's execute method or alter the `$context->result` before it returns to the original calling scope.  
+
+It is useful to emphasize that event variables get different properties based on which part of the MVC layer they are focused on. 
+
+#### Available to all event handlers focused on the MVC layer
+
+* subject - All event variables are populated with a subject. This is the object that triggered the event, in our case above it would be the **bar** controller.
+
+#### The Controller event variable
+
+* action - The original action that triggered the event, in this case **add**.
+* data - Any data that is passed to the controller action is stored in a KObjectConfig object. Typically this is used for any action that takes in data, such as **Add**, **Edit**, **Post** and **Put**. You could modify the data here if you wished.
+* result - This is populated with the result of the action, only applicable to **After** events.
+
+#### The View event variable
+
+* action - The original action that triggered the event, in this case **render**.
+* parameters - These are normally tied to the state of model entity(ies), layout and view variables that characterize the request and are available to **After** events. 
+
+#### The Model event variable
+
+* method: `fetch()`
+	* entity - This property is similar to the controller focused event variable's result property and is meant for **After** events. 
+* method: `count()`
+	* count - the count result as determined by the query. Meant for an **After** event handler. 
+* method: `reset()`
+	*  modified - Is an array of the modified properties of an entity. This is available as both a **Before** and **After** event property. 
+* method: `create()`
+	* properties - An array of the properties that a new entity is about to get. Meant to be used in a **Before** event handler. 
+	  
+#### Before/After - When to use
 
 It can sometimes be confusing to know when to use before or after events. However, following these simple rules should help:
 
-* **BEFORE** - If you wish to modify the incoming data, such as in add/edit actions.
-* **AFTER** - If you need to be sure the action was successful or need to manipulate the response before it is displayed,
-for example removing certain values from a document for unregistered users.
-
-### The Event Variable
-
-When subscribers to the Event API, our Plugins in this case are notified that a given event is taking place, they get a nice `KEventInterface` object with all the information they need: 
-
-```php
-    $caller		= $event->caller;
-    $action 	= $event->action;
-    $data 		= $event->data;
-    $result 	= $event->result;
-```
-It provides access to some of the same objects that our `$context` variable from above gets, but also gives us methods to control the event like, `stopPropagation`,  `canPropogate` , and attribute getters and setters. We can assess and alter the `$context->data` property before it makes it to the subject class's execute method or alter the `$context->result` before it returns to the original calling scope.  
-
-* Caller - This is the object that triggered the event, in the case above it would be the **document** controller.
-* Action - The original action that triggered the event, in this case **add**.
-* Data - Any data that is passed to the controller action is stored in a KConfig object. Typically this is used for
-any action that takes in data, such as **Add**, **Edit**, **Post** and **Put**. You could modify the data here if you wished.
-* Result - This is populated with the result of the action, only applicable to **After** events.
-
-
+* **BEFORE** - If you wish to modify the incoming data, such as in add/edit actions. Use the `$event->data` variable. 
+* **AFTER** - If you need to be sure the action was successful or need to manipulate the response before it is displayed, for example removing certain values from a document for unregistered users. You use the `$event->result` variable is this case. 
 
 ## What is possible?
 
-A better question would be **"What's not possible?"**.<!--There are many opportunities in the handling of a request through the Framework for thesupplementing of an extension's functionality.--> To get a feel for the potential, here is an example signature of a PlgKoowaSubscriber plugin that takes advantage of all the opportunities exposed in just the MVC layer in an extension called `Acme` for one entity called `Bar`.
+A better question would be **"What's not possible?"**.<!--There are many opportunities in the handling of a request through the Framework for thesupplementing of an extension's functionality.--> To get a feel for the potential, here is an example signature of a `PlgKoowaSubscriber` plugin that takes advantage of all the opportunities exposed in just the MVC layer in an extension called `Acme` for one entity called `Bar`.
 <a name="first_acme"></a>
 ```php
 <?php
@@ -181,9 +199,8 @@ and thus 8 more opportunities.
 
 > **Next Tip:** There are even more exposed for the component's [Dispatcher](#dispatcher)
 
-## Extra Topic
 
-### Dispatcher
+## Advanced Topic: Dispatcher
 
 A component dispatcher descends from `KControllerAbstract` so it too gets exposed through the Events API. In this instance there is no specific entity, i.e. no `Bar`, but there is a specific protocol based strategy, in many cases `Http`.
 
@@ -195,6 +212,6 @@ The Http dispatcher, which extends from that abstract, adds 7 more actions, the 
 
 `_actionHead, _actionOptions, _actionGet, _actionPost, _actionPut, _actionDelete` and `_actionRedirect`
 
-That means our `Acme` component dispatcher, i.e. `com://site/acme.dispatcher.http` would be have  2 * (4 + 7) = 22 events published and thus give our `Acme` plugin 22 opportunities to handle events.
+That means our `Acme` component dispatcher, i.e. `com://site/acme.dispatcher.http` would be have  2 * (4 + 7) = 22 events published and thus give our `Acme` plugin 22 more opportunities to handle events.
 
 
