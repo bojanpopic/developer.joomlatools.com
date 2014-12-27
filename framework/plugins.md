@@ -69,15 +69,15 @@ This class extends directly from `JPlugin` and will work like any other plugin; 
 
 Another benefit to using `PlgKoowaAbstract` over `JPlugin` is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html) for example to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
 
-### Plugin groups
+## Plugin groups
 
 Our _Easy example_ relies on the fact that when the Framework gets loaded in Joomla it tells the system to import the **koowa** group of plugins. That means any plugins placed in the /plugins/koowa/ directory (and enabled through the admin) will get loaded right away.
 
-This is not a requirement though. We are free to break plugins up into groups based on the component package that they subscribe too. As such, we are free to specialize those plugins even further, keeping them well organized and separate. The Framework will load them when it publishes the event if they haven't been already.
+This inclusion in the **koowa** group is not a requirement though. We are free to break plugins up into groups based on the component package that they subscribe too. This means that we can specialize those plugins even further, keeping them well organized and separate. The Framework will load them when it publishes the event if they haven't been already.
 
 For example we could reorganize our `Acme` plugin into two separate plugins of the **acme** group: one to focus on the presentation side of things and one to focus on the data. 
 
-If we created a /plugins/acme/views/views.php file we would create a class named `PlgAcmeViews` in which we could place our `onBeforeAcmeBarViewRender()` method. In /plugins/acme/bars/bars.php we would put `PlgAcmeBars` and be free to add our `onAfterAcmeBarModelCount()`  and `onBeforeAcmeBarControllerBrowse` methods here. 
+If we created a **/plugins/acme/views/views.php** file we would create a class named `PlgAcmeViews` in which we could place our `onBeforeAcmeBarViewRender()` method. In **/plugins/acme/bars/bars.php** we would put `PlgAcmeBars` and be free to add our `onAfterAcmeBarModelCount()`  and `onBeforeAcmeBarControllerBrowse` methods here. 
 
 Development teams can come up with the plugin structure that is right for their project. 
 
