@@ -97,7 +97,7 @@ An event handler can technically be any callable structure, but it our case it w
 * **Action** - The name of the action being run ([any one of these](what-actions-can-be-affected)). 
 
 Our example `onBeforeAcmeBarControllerBrowse` method shows this pattern clearly. Its like saying 
-<blockquote>	 "**Before** the **Acme** package **Bar** entity **Controller** performs a **Browse** action, do this". </blockqoute>
+>"**Before** the **Acme** package **Bar** entity **Controller** performs a **Browse** action, do this". 
 
  ### The Event Variable
 
