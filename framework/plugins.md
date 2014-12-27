@@ -1,6 +1,8 @@
 # Plugins
 
-The Framework provides a nice Event API to Joomla! extensions that use it. It is the principle mechanism by which we can subscribe a Joomla plugin to events in other parts of the Framework. All of the main actions that take place in the MVC layer expose both before and after command chains that broadcast events to the Joomla! Plugin layer for plugin's that extend `PlgKoowaSubscriber`. This gives huge advantages to component extensions that use the Framework in terms of granularity of the events they can expose to their user base and therefore nearly complete control of the component, i.e. _they can customize the behavior exactly as needed_
+The Framework provides a nice Event API to Joomla! extensions that use it. All of the main actions that take place in the Nooku MVC layer are exposed via before and after command chains that broadcast events; we can subscribe a Joomla plugin methods to those events with `PlgKoowaSubscriber`. This gives huge advantages to component extensions that use the Framework in terms of granularity of the functionality they can expose to their user base for customization, therefore nearly complete control of the component, i.e. 
+
+**_they can customize the behavior exactly as needed_**
 
 Here we provide a high level overview of the concepts, classes and objects involved in the make up of such a plugin. 
 
@@ -8,10 +10,9 @@ Here we provide a high level overview of the concepts, classes and objects invol
 
 <!-- toc -->
 
+## Our Example
 
-## Plugin Classes
-
-Here is a very simple example of a Nooku plugin that has three event handlers: one for each of the model, view and controller of a component extension called `Acme` focusing on an entity named `Bar`.
+To get us started, here is a very simple example of a plugin that has three event handlers: one for each of the model, view and controller of a component extension called `Acme` focusing on an entity named `Bar`.
 
 ```php
 class PlgKoowaAcme extends PlgKoowaSubscriber
@@ -30,34 +31,48 @@ class PlgKoowaAcme extends PlgKoowaSubscriber
 	}
 	function onBeforeAcmeBarViewRender(KEventInterface $event)
 	{
-		 if($event->paramters->layout == 'special') {
-		       $event->paramters->layout = 'newspecial';
+		 if($event->parameters->layout == 'special') {
+		       $event->parameters->layout = 'newspecial';
 		}      
 	}
 }
 ```
 
-### PlgKoowaAbstract
+It shows off some important concepts that we'll refer to throughout. 
 
-If you want your plugin to simply take advantage of the native Joomla! (and other extension plugin events), it need only extend `PlgKoowaAbstract`. This class extends directly from `JPlugin` and will work like any other plugin; but, you have the added bonus of direct access to the Frameworks object manager, not to mention allowing the plugin to have its own [object identifier](http://guides.nooku.org/essentials/object-management.html). 
+## The MVC Layer
 
-Another benefit to using `PlgKoowaAbstract` over `JPlugin` is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html) for example to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
+We're focusing on the Model View Controller layer and the events that it broadcasts through the Event API. In any component there are actions that take place that it would be nice to be able to effect either the input or output of those actions. Maybe for a specific view we would like to affect the data that it holds or force a layout change for a given situation (as above) **before** it gets rendered. For a model, we may wish to add more details about the contents of the entities we get **after** we fetch them. In a controller, maybe we want to send an email to someone **after**  we add an entity to the database. All of these examples are possible because the MVC layer publishes **before** and **after** events through the API for each of its major actions. 
+
+#### What actions can be affected?
+
+As we've discuss, a given entity type, e.g. `Bar` will have its own Model, View and Controller triad. For the Model, there are four actions that we can tie into, **Fetch, Create, Count**, and **Reset**. The View exposes only the **Render** action. And lastly, the Controller exposes a total of six actions. They are the five BREAD paradigm actions of **Browse, Read, Edit, Add** and **Delete**; and then a **Render** action.  
+
+
+## Plugin classes
+
+There are two plugin classes that are important for you to know about to start building your own plugins. The first is `PlgKoowaAbstract` and the second is `PlgKoowaSubscriber`. They reside in the [library's plugin folder](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/plugins/koowa) but we describe them a little here.
 
 ### PlgKoowaSubscriber: The Actual Subscriber 
 
 Nooku provides the Event API, but for a Joomla plugin to make use of it needs to become a 'subscriber'.  To make that happen these extensions simply need to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). 
 
-> **Technical Tip**: As soon as they are instantiated a `PlgKoowaSubscriber` loads up the instance of the `KEventPublisher` and adds itself and its callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. For example, the listeners registered for event named **"onBeforeAcmeBarControllerBrowse"** are in this case plugin's  `onBeforeAcmeBarControllerBrowse` method.
+ As soon as they are instantiated a `PlgKoowaSubscriber` loads up the instance of the `KEventPublisher` and adds itself and its callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. For example, the listeners registered for event named **"onBeforeAcmeBarControllerBrowse"** are in this case plugin's  `onBeforeAcmeBarControllerBrowse` method.
  
->**Another Tip:** `PlgKoowaSubscriber` plugins will not fire for native Joomla! plugin events because they aren't connected to `JEventDispatcher`. 
+>**Technical Tip:** `PlgKoowaSubscriber` plugins will not fire for native Joomla! plugin events because they aren't connected to `JEventDispatcher`. 
+ 
+### PlgKoowaAbstract
 
-## Plugin Methods 
+If you want your plugin to simply take advantage of the native Joomla! (and other extension plugin)  events, it need only extend `PlgKoowaAbstract`. It won't pick up the MVC events that we are focused on here. We highlight it because `PlgKoowaSubscriber` is a child class and is an important part of its functionality. 
 
-The event handlers are the methods of the plugin and must follow a specific naming pattern to be notified that an event is taking place. 
+This class extends directly from `JPlugin` and will work like any other plugin; but, you have the added bonus of direct access to the Frameworks object manager, not to mention allowing the plugin to have its own [object identifier](http://guides.nooku.org/essentials/object-management.html). 
 
-### Naming
+Another benefit to using `PlgKoowaAbstract` over `JPlugin` is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html) for example to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
 
-Above we saw the event handler method `onBeforeAcmeBarControllerBrowse` . Its parts can be broken down as follows
+
+## Event Handlers 
+
+An event handler can technically be any callable structure, but it our case it will simply be a method of a plugin. They must follow a specific naming pattern to be notified that an event is taking place. Its a fairly simple pattern:  
 
 `on` + [**When**] + [**Package**] + [**Subject**] + [**Type**] + [**Action**]
 
@@ -66,14 +81,18 @@ Above we saw the event handler method `onBeforeAcmeBarControllerBrowse` . Its pa
 * **Package**  - The name of the component the event belongs to, in this case **Acme**
 * **Subject** - The name of the "entity" that the event belongs to, e.g. the **Bar**
 * **Type** - The type of the object using the entity, e.g. **Controller, View or Model**
-* **Action** - The name of the action being run. Controller BREAD actions, Render for a view and Fetch for a model.
+* **Action** - The name of the action being run ([any one of these](what-actions-can-be-affected)). 
+
+Our example `onBeforeAcmeBarControllerBrowse` method shows this pattern clearly. Its like saying 
+<blockquote>	 "**Before** the **Acme** package **Bar** entity **Controller** performs a **Browse** action, do this". </blockqoute>
+
 
 > Technical Tip: The [KCommandHandlerEvent::execute()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/command/handler/event.php#L12) method shows the building of the event handler name clearly
 `$event_specific = on'.ucfirst($when).ucfirst($package).ucfirst($subject).ucfirst($type).$name;`
 
 ### The Event Variable
 
-When subscribers to the Event API (our plugin methods in this case) are notified of a given event they get a nice `KEventInterface` object with all the information they need for a given situation. 
+When subscribers to the Event API, i.e. our plugin methods, are notified of a given event they get a nicely packaged `KEventInterface` object with all the information they need for a given situation. 
 
 For example, our Acme plugin's controller focused event (`onBeforeAcmeBarControllerBrowse`) will get an event variable with these properties 
 
@@ -92,7 +111,7 @@ It is important to emphasize that event variables get different properties based
 
 * subject - All event variables are populated with a subject. This is the object that triggered the event, in our case above it would be the **bar** controller.
 
-#### The Model event variable
+#### The Model `$event` variable
 
 * Action: `Fetch`
 	* entity - This property is similar to the controller focused event variable's result property and is meant for **After** events. 
@@ -103,25 +122,25 @@ It is important to emphasize that event variables get different properties based
 * Action: `Create`
 	* properties - An array of the properties that a new entity is about to get. Meant to be used in a **Before** event handler. 
 
-#### The View event variable
+#### The View `$event` variable
 
 * Action: `Render`
 	* action - The original action that triggered the event, in this case **render**.
 	* parameters - These are normally tied to the state of model entity(ies), layout and view variables that characterize the request and are available to **After** events. 
 
-#### The Controller event variable
+#### The Controller `$event` variable
 
-* Action: `Browse, Read, Edit, Add, Delete`
+* Action: `Browse, Read, Edit, Add, Delete` and `Render`
 	* action - The original action that triggered the event.
-	* data - Any data that is passed to the controller action is stored in a KObjectConfig object. Typically this is used for any action that takes in data, such as **Add**, **Edit**, **Post** and **Put**. You could modify the data here if you wished.
+	* data - Any data that is passed to the controller action. Typically this is used in the **Before** tense for any action that takes in data, such as **Add**, **Edit**, **Post** and **Put**. You could modify that data here if you wished.
 	* result - This is populated with the result of the action, only applicable to **After** events.
 	  
 #### Before/After - When to use
 
 It can sometimes be confusing to know when to use before or after events. However, following these simple rules should help:
 
-* **BEFORE** - If you wish to modify the incoming data, such as in add/edit actions. Use the `$event->data` variable. 
-* **AFTER** - If you need to be sure the action was successful or need to manipulate the response before it is displayed, for example removing certain values from a document for unregistered users. You use the `$event->result` variable is this case. 
+* **BEFORE** - If you wish to modify the incoming data, such as in add/edit actions. Use the `$event->data` variable or its analogue. Ideally you want to affect the input before results get produced so you aren't rebuilding result sets. 
+* **AFTER** - If you need to be sure the action was successful; need to manipulate the response before it is displayed, for example removing certain values from a document for unregistered users,  you do this kind of operation after. 
 
 ## What is possible?
 
@@ -186,3 +205,6 @@ The Http dispatcher, which extends from that abstract, adds 7 more actions, the 
 That means our `Acme` component dispatcher, i.e. `com://site/acme.dispatcher.http` would be have  2 * (4 + 7) = 22 events published and thus give our `Acme` plugin 22 more opportunities to handle events.
 
 
+## In closing
+
+Developing components with the Nooku Framework exposes all its MVC actions to the Event API, both before and after they fire. This gives automatic and granular opportunities for sites that use the component to alter its functionality at run time with normal Joomla plugins. We've taken a look at the major areas to help you understand what is available in Joomlatools component extensions, and what you could have in your own Nooku Framework powered components. 
