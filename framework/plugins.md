@@ -1,6 +1,6 @@
 # Plugins
 
-The Framework provides a nice Event API to Joomla! extensions that use it. All of the main actions that take place in the Nooku MVC layer are exposed via before and after command chains that broadcast events; we can subscribe a Joomla plugin methods to those events with `PlgKoowaSubscriber`. This gives a huge advantage to component extensions that use the Framework in terms of granularity of the functionality they can expose to their user base for customization, therefore nearly complete control of the component, i.e. 
+The Framework provides a nice Event API to Joomla! extensions that use it. All of the main actions that take place in the Nooku MVC layer are exposed via 'before' and 'after' command chains that broadcast events specific to that action; we can subscribe a Joomla plugin methods to those events with `PlgKoowaSubscriber`. This gives a huge advantage to component extensions that use the Framework in terms of granularity of the functionality they can expose to their user base for customization, therefore nearly complete control of the component, i.e. 
 
 **_they can customize the behavior exactly as needed_**
 
@@ -8,7 +8,7 @@ Here we provide an overview of the concepts, classes and objects involved in the
 
 <!-- toc -->
 
-## Easy Example
+## Easy example
 
 To get us started, here is a very simple example of a plugin that has three event handlers: one for each of the model, view and controller of a component extension called `Acme` focusing on an entity named `Bar`.
 
@@ -41,7 +41,7 @@ It shows off some important concepts that we'll refer to throughout.
 >For a really good specific  example of building a working plugin checkout the [DOCman Plugin Tutorial](extensions/docman/plugins.md).
 
 
-## The MVC Layer
+## The MVC layer
 
 We're focusing on the Model View Controller layer and the events that it broadcasts through the Event API. In each part of this triad,  there are a number of major actions that take place, and it would be nice to be able to effect either their input or output. Maybe for a specific view we would like to affect the data that it holds or force a layout change (as above) **before** it gets rendered. For a model, we may wish to add more details about the contents of the entities  **after** we fetch them. In a controller, maybe we want to send an email to someone **after**  we add an entity to the database. All of these examples are possible because the MVC layer publishes **before** and **after** events through the API for each of its major actions. 
 
@@ -53,7 +53,7 @@ As we've discuss, a given entity type, e.g. `Bar` will have its own Model, View 
 
 There are two plugin classes that are important for you to know about to start building your own plugins. The first is `PlgKoowaAbstract` and the second is `PlgKoowaSubscriber`. They reside in the [library's plugin folder](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/plugins/koowa) but we describe them a little here.
 
-### PlgKoowaSubscriber: The Actual Subscriber 
+### PlgKoowaSubscriber: The actual subscriber 
 
 Nooku provides the Event API, but for a Joomla plugin to make use of it needs to become a 'subscriber'.  To make that happen these extensions simply need to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). 
 
@@ -81,7 +81,7 @@ If we created a **/plugins/acme/views/views.php** file we would create a class n
 
 Development teams can come up with the plugin structure that is right for their project. 
 
-## Event Handlers 
+## Event handlers 
 
 ### Naming
 
@@ -99,11 +99,11 @@ An event handler can technically be any callable structure, but it our case it w
 Our example `onBeforeAcmeBarControllerBrowse` method shows this pattern clearly. Its like saying 
 >"**Before** the **Acme** package **Bar** entity **Controller** performs a **Browse** action, do this". 
 
- ### The Event Variable
+ ### The `$event` variable
 
 When subscribers to the Event API, are notified of a given event they get a nicely packaged `KEventInterface` object with all the information they need for a given situation. 
 
-For example, our Acme plugin's controller focused event handler (`onBeforeAcmeBarControllerBrowse`) will get an event variable with these properties 
+For example, our `Acme` plugin's controller focused event handler (`onBeforeAcmeBarControllerBrowse`) will get an event variable with these properties 
 
 ```php
     $event->subject;
@@ -112,11 +112,11 @@ For example, our Acme plugin's controller focused event handler (`onBeforeAcmeBa
     $event->result;
 ```
 
-In addition, the variable object exposes methods to control the event like, `stopPropagation`,  `canPropogate` , and attribute getters and setters. We could assess and alter the `$context->data` property before it makes it to the subject class's execute method or alter the `$context->result` before it returns to the original calling scope.  
+In addition, the `$event` object exposes methods to interrogate and control the event, like `stopPropagation`,  `canPropogate` , and attribute getters and setters. We could assess and alter the `$context->data` property before it makes it to the subject class's execute method or alter the `$context->result` before it returns to the original calling scope.  
 
 It is important to emphasize that event variables get different properties based on which action in the MVC layer they are focused on. Lets summarize them here
 
-#### Properties Available to all event handlers 
+#### Properties available to all event handlers 
 
 * subject - All event variables are populated with a subject. This is the object that triggered the event, in our case above it would be the **bar** controller.
 
