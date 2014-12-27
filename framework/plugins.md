@@ -6,8 +6,6 @@ The Framework provides a nice Event API to Joomla! extensions that use it. All o
 
 Here we provide a high level overview of the concepts, classes and objects involved in the make up of such a plugin. 
 
-> **Specific Plugin Example:** Build a working plugin with the [DOCman Plugin Tutorial](extensions/docman/plugins.md).
-
 <!-- toc -->
 
 ## Our Example
@@ -38,16 +36,16 @@ class PlgKoowaAcme extends PlgKoowaSubscriber
 }
 ```
 
-It shows off some important concepts that we'll refer to throughout. 
+It shows off some important concepts that we'll refer to throughout. For a really good specific  example of building a working plugin checkout the [DOCman Plugin Tutorial](extensions/docman/plugins.md).
+
 
 ## The MVC Layer
 
-We're focusing on the Model View Controller layer and the events that it broadcasts through the Event API. In any component there are actions that take place that it would be nice to be able to effect either the input or output of those actions. Maybe for a specific view we would like to affect the data that it holds or force a layout change for a given situation (as above) **before** it gets rendered. For a model, we may wish to add more details about the contents of the entities we get **after** we fetch them. In a controller, maybe we want to send an email to someone **after**  we add an entity to the database. All of these examples are possible because the MVC layer publishes **before** and **after** events through the API for each of its major actions. 
+We're focusing on the Model View Controller layer and the events that it broadcasts through the Event API. In each of this triad,  there are a number of major actions that take place, and it would be nice to be able to effect either their input or output. Maybe for a specific view we would like to affect the data that it holds or force a layout change (as above) **before** it gets rendered. For a model, we may wish to add more details about the contents of the entities we get **after** we fetch them. In a controller, maybe we want to send an email to someone **after**  we add an entity to the database. All of these examples are possible because the MVC layer publishes **before** and **after** events through the API for each of its major actions. 
 
 #### What actions can be affected?
 
-As we've discuss, a given entity type, e.g. `Bar` will have its own Model, View and Controller triad. For the Model, there are four actions that we can tie into, **Fetch, Create, Count**, and **Reset**. The View exposes only the **Render** action. And lastly, the Controller exposes a total of six actions. They are the five BREAD paradigm actions of **Browse, Read, Edit, Add** and **Delete**; and then a **Render** action.  
-
+As we've discuss, a given entity type, e.g. `Bar` will have its own Model, View and Controller triad. For the Model, there are four actions that we can tie into, **Fetch, Create, Count**, and **Reset**. The View exposes only the **Render** action. And lastly, the Controller exposes a total of six actions. They are the five BREAD paradigm actions: **Browse, Read, Edit, Add** and **Delete**; and then a **Render** action.  
 
 ## Plugin classes
 
@@ -86,11 +84,7 @@ An event handler can technically be any callable structure, but it our case it w
 Our example `onBeforeAcmeBarControllerBrowse` method shows this pattern clearly. Its like saying 
 <blockquote>	 "**Before** the **Acme** package **Bar** entity **Controller** performs a **Browse** action, do this". </blockqoute>
 
-
-> Technical Tip: The [KCommandHandlerEvent::execute()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/command/handler/event.php#L12) method shows the building of the event handler name clearly
-`$event_specific = on'.ucfirst($when).ucfirst($package).ucfirst($subject).ucfirst($type).$name;`
-
-### The Event Variable
+ ### The Event Variable
 
 When subscribers to the Event API, i.e. our plugin methods, are notified of a given event they get a nicely packaged `KEventInterface` object with all the information they need for a given situation. 
 
