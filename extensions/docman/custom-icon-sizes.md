@@ -7,7 +7,7 @@ We expect you to have a good understanding of the following for this article:
 * CSS knowledge
 * Browser / web inspector knowledge
 
-## Change All Icons at Once
+## Change all icons at once
 
 The easiest way to change the sizes for all the "joomlatools icons" on the whole site at once is by using a CSS override. The most proper way of changing the icon sizes is by adding the following snippet of CSS to [your custom CSS file](/framework/custom-css.html).
 
@@ -28,7 +28,7 @@ body .koowa.koowa [class*=" koowa_icon--"]:before {
 
 This will change all the icon sizes on the whole website for both the DOCman components and modules and the FILEman components from whatever size they are to 32x32 pixels.
 
-## On a Component / Module Level
+## On a component / module Level
 
 You might not want to change all the icons though. To exercise a bit more control you could change the above CSS in something like the following:
 
@@ -66,7 +66,7 @@ body .koowa.koowa .mod_docman [class*=" koowa_icon--"]:before {
 
 That style rule will make all the icons in all DOCman modules 24x24 pixels.
 
-## Drilling Down
+## Drilling down
 
 For the sake of illustration lets say you wanted to "drill down" to change only the size within the DOCman filtered table view. You could do that like this: 
 
@@ -85,7 +85,7 @@ body .koowa.koowa .docman_table_layout--filtered_table [class*=" koowa_icon--"]:
 }
 ```
 
-## Find Your Class Name
+## Find your class name
 
 So how can you find out what CSS class you need? In the above examples you can see we only changed the middle part. Respectively, we added `".com_docman"`, `".mod_docman"` and finally `".docman_table_layout--filtered_table"`. You can find these class names by using a browser inspector.
 

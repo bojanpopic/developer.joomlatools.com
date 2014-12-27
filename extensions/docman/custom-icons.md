@@ -1,4 +1,4 @@
-# Custom icons in DOCman
+# Custom Icons in DOCman
 
 When we released the stable 2.0 releases of our extensions we introduced an icon font to display all our icons. If you need to change the icons that we chose it’s possible to override them. To follow this tutorial you need a good understanding of CSS and templating/overriding in Joomla.
 
@@ -18,7 +18,7 @@ There are three ways to get your own custom icons in DOCman:
 
 This technique is described in detail [on our blog](http://blog.joomlatools.com/2014/10/how-to-get-your-own-custom-icons-to-docman.html).
 
-### 2. Using Background Images
+### 2. Using background images
 
 In this second technique we are going to override the default icons. This will change all icons on your website at once. It’s no longer possible to use the icons we picked since we’re using / overriding the existing markup.
 
