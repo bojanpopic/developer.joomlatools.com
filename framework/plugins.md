@@ -1,6 +1,6 @@
 # Plugins
 
-The Framework provides a nice Event API to Joomla! extensions that use it. All of the main actions that take place in the Nooku MVC layer are exposed via before and after command chains that broadcast events; we can subscribe a Joomla plugin methods to those events with `PlgKoowaSubscriber`. This gives a huge advantage to component extensions that use the Framework in terms of granularity of the functionality they can expose to their user base for customization, therefore nearly complete control of the component, i.e. 
+The Framework provides a nice Event API to Joomla! extensions that use it. All of the main actions that take place in the Nooku MVC layer are exposed via 'before' and 'after' command chains that broadcast events specific to that action; we can subscribe a Joomla plugin methods to those events with `PlgKoowaSubscriber`. This gives a huge advantage to component extensions that use the Framework in terms of granularity of the functionality they can expose to their user base for customization, therefore nearly complete control of the component, i.e. 
 
 **_they can customize the behavior exactly as needed_**
 
@@ -116,7 +116,7 @@ In addition, the variable object exposes methods to control the event like, `sto
 
 It is important to emphasize that event variables get different properties based on which action in the MVC layer they are focused on. Lets summarize them here
 
-#### Properties Available to all event handlers 
+#### Properties available to all event handlers 
 
 * subject - All event variables are populated with a subject. This is the object that triggered the event, in our case above it would be the **bar** controller.
 
