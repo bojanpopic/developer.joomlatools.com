@@ -9,7 +9,7 @@ We expect you to have a good understanding of the following for this article:
 
 ## Change All Icons at Once
 
-The easiest way to change the sizes for all the "joomlatools icons" on the whole site at once is by using a CSS override. The most proper way of changing the icon sizes is by adding the following snippet of CSS to your custom CSS file.
+The easiest way to change the sizes for all the "joomlatools icons" on the whole site at once is by using a CSS override. The most proper way of changing the icon sizes is by adding the following snippet of CSS to [your custom CSS file](/framework/custom-css.html).
 
 ```css
 body .koowa.koowa .koowa_header__image,
