@@ -249,3 +249,5 @@
     display: block !important;
   }
 }
+.book .book-body .page-wrapper .page-inner section.panel { display: block }
+.book .book-body .page-wrapper .page-inner section.panel dl.dl-horizontal dt { margin-right: 15px;}
