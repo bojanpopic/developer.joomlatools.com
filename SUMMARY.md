@@ -5,6 +5,7 @@
         * [Custom Icons](extensions/docman/custom-icons.md)
             * [Sizes](extensions/docman/custom-icon-sizes.md)
         * [Plugins](extensions/docman/plugins.md)
+        * [Custom Parameters](extensions/docman/parameterizable.md)
     * [LOGman](extensions/logman.md)
         * [Plugins](extensions/logman/plugins/README.md)
         	* [Joomla components](extensions/logman/plugins/joomla.md)
