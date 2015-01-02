@@ -1,6 +1,8 @@
 # Plugins
 
-The Framework provides a nice Event API to Joomla! extensions that use it. All of the main actions that take place in the Nooku MVC layer are exposed via 'before' and 'after' command chains that broadcast events specific to that action; we can subscribe a Joomla plugin methods to those events with `PlgKoowaSubscriber`. This gives a huge advantage to component extensions that use the Framework in terms of granularity of the functionality they can expose to their user base for customization, therefore nearly complete control of the component, i.e. 
+The Framework provides a nice Event API to Joomla! extensions that use it. All of the main actions that take place in the Nooku MVC layer are exposed via 'before' and 'after' command chains that broadcast events specific to that action; we can subscribe a Joomla plugin methods to those events with `PlgKoowaSubscriber`. 
+
+This gives a huge advantage to component plugins that use the Framework in terms of granularity of the functionality, allowing nearly complete control of the data and executing flow component, i.e. 
 
 **_they can customize the behavior exactly as needed_**
 
@@ -43,7 +45,9 @@ It shows off some important concepts that we'll refer to throughout.
 
 ## The MVC layer
 
-We're focusing on the Model View Controller layer and the events that it broadcasts through the Event API. In each part of this triad,  there are a number of major actions that take place, and it would be nice to be able to effect either their input or output. Maybe for a specific view we would like to affect the data that it holds or force a layout change (as above) **before** it gets rendered. For a model, we may wish to add more details about the contents of the entities  **after** we fetch them. In a controller, maybe we want to send an email to someone **after**  we add an entity to the database. All of these examples are possible because the MVC layer publishes **before** and **after** events through the API for each of its major actions. 
+We're focusing on the Model View Controller layer and the events that it broadcasts through the Event API. In each part of this triad,  there are a number of major actions that take place, and it would be nice to be able to effect either their input or output. 
+
+Maybe for a specific view we would like to affect the data that it holds or force a layout change (as above) **before** it gets rendered. For a model, we may wish to add more details about the contents of the entities  **after** we fetch them. In a controller, maybe we want to send an email to someone **after**  we add an entity to the database. All of these examples are possible because the MVC layer publishes **before** and **after** events through the API for each of its major actions. 
 
 #### What actions can be affected?
 
