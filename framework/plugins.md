@@ -1,8 +1,6 @@
 # Plugins
 
-The Framework provides a nice Event API to Joomla! extensions that use it. All of the main actions that take place in the Nooku MVC layer are exposed via 'before' and 'after' command chains that broadcast events specific to that action; we can subscribe a Joomla plugin methods to those events with `PlgKoowaSubscriber`. 
-
-This gives a huge advantage to component plugins that use the Framework in terms of granularity of the functionality, allowing nearly complete control of the data and executing flow component, i.e. 
+The Framework provides a nice Event API to Joomla! extensions that use it. All of the main actions that take place in the Nooku MVC layer are exposed via 'before' and 'after' command chains that broadcast events specific to that action; we can subscribe a Joomla plugin methods to those events with `PlgKoowaSubscriber`. This gives a huge advantage to component extensions that use the Framework in terms of granularity of the functionality they can expose to their user base for customization, therefore nearly complete control of the component, i.e. 
 
 **_they can customize the behavior exactly as needed_**
 
@@ -45,9 +43,7 @@ It shows off some important concepts that we'll refer to throughout.
 
 ## The MVC layer
 
-We're focusing on the Model View Controller layer and the events that it broadcasts through the Event API. In each part of this triad,  there are a number of major actions that take place, and it would be nice to be able to effect either their input or output. 
-
-Maybe for a specific view we would like to affect the data that it holds or force a layout change (as above) **before** it gets rendered. For a model, we may wish to add more details about the contents of the entities  **after** we fetch them. In a controller, maybe we want to send an email to someone **after**  we add an entity to the database. All of these examples are possible because the MVC layer publishes **before** and **after** events through the API for each of its major actions. 
+We're focusing on the Model View Controller layer and the events that it broadcasts through the Event API. In each part of this triad,  there are a number of major actions that take place, and it would be nice to be able to effect either their input or output. Maybe for a specific view we would like to affect the data that it holds or force a layout change (as above) **before** it gets rendered. For a model, we may wish to add more details about the contents of the entities  **after** we fetch them. In a controller, maybe we want to send an email to someone **after**  we add an entity to the database. All of these examples are possible because the MVC layer publishes **before** and **after** events through the API for each of its major actions. 
 
 #### What actions can be affected?
 
@@ -89,7 +85,7 @@ Development teams can come up with the plugin structure that is right for their 
 
 ### Naming
 
-An event handler can technically be any callable structure, but it our case it will simply be a method of a plugin. They must follow a specific naming pattern to be notified that an event is taking place. Its a fairly simple pattern:  
+An event handler can technically be any [callable](http://php.net/manual/en/language.types.callable.php), but it our case it will simply be a method of a plugin. They must follow a specific naming pattern to be notified that an event is taking place. Its a fairly simple pattern:
 
 `on` + [**When**] + [**Package**] + [**Subject**] + [**Type**] + [**Action**]
 
@@ -116,38 +112,124 @@ For example, our `Acme` plugin's controller focused event handler (`onBeforeAcme
     $event->result;
 ```
 
-In addition, the `$event` object exposes methods to interrogate and control the event, like `stopPropagation`,  `canPropogate` , and attribute getters and setters. We could assess and alter the `$context->data` property before it makes it to the subject class's execute method or alter the `$context->result` before it returns to the original calling scope.  
+In addition, the `$event` object exposes methods to interrogate and control the event, like `stopPropagation`,  `canPropogate`, attribute getters and setters and the ever relevant, `getTarget`. We could assess and alter the `$context->data` property before it makes it to the subject class's execute method or alter the `$context->result` before it returns to the original calling scope.  
 
-It is important to emphasize that event variables get different properties based on which action in the MVC layer they are focused on. Lets summarize them here
+It is important to emphasize that event variables get different properties based on which action in the MVC layer they are focused on. 
+
+### MVC Actions and Events
+
+Its time to focus on the specific actions that we can write our plugins against. The Model, View and Controller actions each have slightly different event variables because they do different things. 
+
+#### The Model
+
+The model really is the workhorse of the triad. Not only does it handle the getting and updating of database table in question, it also indirectly interprets the request to decide whether or not you want to interact with a list or a unique item. It exposes four actions before and after they are fired, each with different `$event` variable  properties. 
+
+##### Fetch
+
+`_actionFetch()`
+
+Much like it sounds `fetch`, gets the results from the database based on the model's state, and place's that result in the model's entity object. Controller actions all the model's fetch method often.
+
+`$event->entity;`
+ 
+This property is similar (and may be exactly the same) to the controller's `$event->result` property and is meant for **After** events.
+
+##### Count
+
+`_actionCount()`
+
+The `count` action performs a query similar to fetch, based on the models state, but instead of columns of data it will `SELECT` the count. 
+
+`$event->count;` 
+
+The count result as determined by the query. Meant for an **After** event handler. 
+
+##### Reset
+
+`_actionReset()`
+
+Resetting a model empties both the entity and count cache properties of the model. 
+
+`$event->modified` 
+
+Is an array of the modified state properties. This is available as both a **Before** and **After** event property. 
+
+##### Create
+
+`_actionCreate()`
+
+The `create` action takes an array and creates an model entity, which can be anyone of a number of [model entity types](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/libraries/model/entity).  
+
+`$event->properties` 
+
+An array of the properties that a new entity is about to get. Meant to be used in a **Before** event handler. 
+
+
+#### The View 
+
+`_actionRender`
+
+The view takes the model's entity data and passes it to its template where its is formatted for display. That all happens as a result of the `render()` action. 
+	
+`$event->action`
+
+The original action that triggered the event, in this case **render**.
+	
+`$event->parameters` 
+
+These are normally tied to the state of model entity, layout and view variables that characterize the request and are available to **After** events. 
+
+#### The Controller 
+
+The controller has six (6) actions in total, and all are responsible for handling a particular request. All of the controller actions get the same event properties set is each case, though the values may be different. This is in part to do with the fact that each of these actions gets invoked via the controller execute method. 
+
+**The Controller `$event` Variable**
+ 
+`$event->action` 
+
+The original action that triggered the event. Can be render, browse, read, edit, add or delete.
+
+`$event->data` 
+
+Any data that is passed to the controller action gets set as the $event->data. Typically this is used in the **Before** tense for any action that takes you would pass in data, such as **Add**, **Edit**, **Delete** or **Post**. You could modify that data here if you wished.
+
+`$event->result`
+
+This is populated with the result of the action, only applicable to **After** events.
+
+**The Controller Actions**
+
+_actionBrowse()
+
+When you want a list of items the `browse` action will respond to the GET request. The model is loaded and its `fetch` method called. 
+
+_actionRead()
+
+A GET request for a single item is handled by the `read` action. It loads the model and either gets an existing entity or creates a new one. 
+
+_actionEdit()
+
+When you make a POST request where one or more existing entity ids with updated properties are passed in, the `edit` action handles loading the model, setting the new properties and saving those changes. 
+
+_actionAdd()
+
+A POST request with no `id` property set will result in an `add` action. It will load the model, create an entity and then attempt to save the entity.
+
+_actionDelete()
+
+A DELETE request will load all the results for a given model state and erase them from the database. 
+
+_actionRender()
+
+The last action we'll touch on is the render action. For GET requests it actually serves as a pass-through for `_actionBrowse` and `_actionRead`. When it gets the result from either of these two, it will pass it to the view for actual rendering. 
+
+
 
 #### Properties available to all event handlers 
 
-* subject - All event variables are populated with a subject. This is the object that triggered the event, in our case above it would be the **bar** controller.
+$event->target   
+All event variables are populated with a target. This is the object that triggered the event, in our case above it would be the **bar** controller.	  
 
-#### The Model `$event` variable
-
-* Action: `Fetch`
-	* entity - This property is similar to the controller focused event variable's result property and is meant for **After** events. 
-* Action: `Count`
-	* count - the count result as determined by the query. Meant for an **After** event handler. 
-* Action: `Reset`
-	*  modified - Is an array of the modified properties of an entity. This is available as both a **Before** and **After** event property. 
-* Action: `Create`
-	* properties - An array of the properties that a new entity is about to get. Meant to be used in a **Before** event handler. 
-
-#### The View `$event` variable
-
-* Action: `Render`
-	* action - The original action that triggered the event, in this case **render**.
-	* parameters - These are normally tied to the state of model entity(ies), layout and view variables that characterize the request and are available to **After** events. 
-
-#### The Controller `$event` variable
-
-* Action: `Browse, Read, Edit, Add, Delete` and `Render`
-	* action - The original action that triggered the event.
-	* data - Any data that is passed to the controller action. Typically this is used in the **Before** tense for any action that takes in data, such as **Add**, **Edit**, **Post** and **Put**. You could modify that data here if you wished.
-	* result - This is populated with the result of the action, only applicable to **After** events.
-	  
 ## What is possible?
 
 A better question would be **"What's not possible?"**. To get a feel for the potential, lets extend our example signature of our `PlgKoowaAcme` plugin so that it that takes advantage of all the opportunities exposed in just the MVC layer, again only for an entity `Bar`.
