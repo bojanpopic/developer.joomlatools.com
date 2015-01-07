@@ -249,3 +249,10 @@
     display: block !important;
   }
 }
+
+
+
+
+#mvc_action_events th{
+    min-width: 200px;
+}
