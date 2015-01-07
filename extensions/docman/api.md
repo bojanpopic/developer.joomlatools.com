@@ -12,9 +12,10 @@ The responses used below are taken directly from http://demo.joomlatools.com/joo
 
 DOCman requests must be associated with a valid Joomla! menu item **(Itemid)**, and the following API documentation assumes you will add it with each request.**
 
-**PHP Examples**
+**PHP Examples and Plugin Events**
 
-Included in each request type is the PHP API analogue. It shows you how you would do the same operation from inside the code.
+Included in each request type is the PHP API analogue. It shows you how you would do the same operation from inside the code. Also, a list of
+relevant plugin events that you can make use of to alter the input or output of a particular request.
 
 # Group Documents
 
@@ -28,6 +29,17 @@ Included in each request type is the PHP API analogue. It shows you how you woul
                         ->sort('title')
                         ->browse();
 ```
+
+** Relevant Plugin Events **
+
+
+|**Before** | **After**|
+|-----------|----------|
+|onBeforeDocmanControllerDocumentRender | onAfterDocmanControllerDocumentRender|
+|onBeforeDocmanControllerDocumentBrowse | onAfterDocmanControllerDocumentBrowse|
+|onBeforeDocmanModelDocumentFetch | onAfterDocmanModelDocumentFetch|
+|onBeforeDocmanModelDocumentCount | onAfterDocmanModelDocumentCount|
+
 
 See:
 [KControllerModel::_actionBrowse(KControllerContextInterface $context)](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L195)
@@ -268,6 +280,17 @@ See:
                         ->id(74)
                         ->read();
 ```
+
+** Relevant Plugin Events **
+
+|**Before** | **After**|
+|-----------|----------|
+|onBeforeDocmanControllerDocumentRender|onAfterDocmanControllerDocumentRender|
+|onBeforeDocmanControllerDocumentRead|onAfterDocmanControllerDocumentRead|
+|onBeforeDocmanModelDocumentFetch|onAfterDocmanModelDocumentFetch|
+
+
+
 See:
 [KControllerModel::_actionRead](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L208)
 
@@ -292,6 +315,14 @@ See:
     // edit an existing document
     $updatedDocument = $controller->id(74)->edit($data);
 ```
+** Relevant Plugin Events **
+
+|**Before** | **After**|
+|-----------|----------|
+|onBeforeDocmanControllerDocumentEdit|onAfterDocmanControllerDocumentEdit|
+|onBeforeDocmanControllerDocumentAdd|onAfterDocmanControllerDocumentAdd|
+|onBeforeDocmanModelDocumentCreate|onAfterDocmanModelDocumentCreate|
+
 See:
 [KDispatcherHttp::_actionPost](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php#L225), [KControllerModel::_actionAdd](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L267),
 [KControllerModel::_actionEdit](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L235)
@@ -329,6 +360,16 @@ See:
                         ->id(74)
                         ->delete();
 ```
+
+** Relevant Plugin Events **
+
+|**Before** | **After**|
+|-----------|----------|
+|onBeforeDocmanControllerDocumentDelete|onAfterDocmanControllerDocumentDelete|
+
+See: [KControllerModel::_actionDelete](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L313), [KDatabaseRowAbstract::delete()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/row/abstract.php#L163)
+[KDatabaseRowsetAbstract::delete()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/rowset/abstract.php#L163)
+
 + Parameters
     + id (required, number, `74`) ... Numeric `id` of the Document to delete.
 
