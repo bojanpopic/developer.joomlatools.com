@@ -108,20 +108,20 @@ As with our previous example, under some circumstances all will work out of the 
 
 For logging state changes, the plugin needs to know the name of the Joomla! table class that defines the event object, a.k.a the resource. By default this is assumed to be `JTable{Resource}`. This is needed because unfortunately, the `onContentChangeState` event only provides the IDs of the resources which state is changing. Otherwise speaking, we need to load the resources ourselves in order to get the activity data to be logged.
 
-In our example, the Table class being used for newsfeeds resources is **NewsfeedsTableNewsfeed**. For telling the plugin which table class to use we use the following code block:
+In our example, the Table class being used for newsfeeds resources is **NewsfeedsTableNewsfeed**. For telling the plugin which table class to use we must override the **_getItems** method using the following code block:
 
 ```php
-	protected function _getTable($config)
+	protected function _getItems($ids, $config)
     {
         $config->append(array(
             'prefix' => 'NewsfeedsTable'
         ));
 
-        return parent::_getTable($config);
+        return parent::_getItems($ids, $config);
     }
 ```
 
-The table class name is constructed with two variables that get passed to the **_getTable** method, `prefix` and `name`. In this case we are telling the getter method that `prefix` is `NewsfeedsTable`. By default, `name` corresponds to the resource name, i.e. **Newsfeed**, which is exactly what we need. Otherwise, `'name' => {name}` should be appended to the config object along with the prefix. By concatenating both (`prefix` + `name`), the getter is able to determine the class name, **NewsfeedsTableNewsfeed** for this example.
+The table class name is constructed with two variables that get passed to the **_getItems** method, `prefix` and `name`. In this case we are telling the getter method that `prefix` is `NewsfeedsTable`. By default, `name` corresponds to the resource name, i.e. **Newsfeed**, which is exactly what we need. Otherwise, `'name' => {name}` should be appended to the config object along with the prefix. By concatenating both (`prefix` + `name`), the getter is able to determine the class name, **NewsfeedsTableNewsfeed** for this example.
 
 By simply adding the above piece of code, our plugin can now log state changes like a champ. Awesome!.
 
