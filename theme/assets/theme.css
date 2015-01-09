@@ -249,10 +249,7 @@
     display: block !important;
   }
 }
-
-
-
-
-#mvc_action_events th{
-    min-width: 200px;
+/**Specifically For framework/plugins.md**/
+th{
+    min-width: 180px;
 }
