@@ -1,10 +1,10 @@
 # Plugins
 
-All of the methods that have the `_action` prefix in the Nooku MVC layer can be affected via the Joomla plugin system. They are each exposed via **before** and **after** command chains that broadcast events specific to that action through the Nooku Event API. The end result being that you can create Joomla plugins subscribe to those actions both before and after they occur.
+In Nooku Framework any controller, view and/or model method that has an `_action` prefix can be intercepted via the Nooku Event API and thus also through the Joomla plugin system. On the contrary to Joomla, events in Nooku are not hardcoded, but are generated on the fly in a consistent and standardised fashion. Each MVC layer action is exposed through an **before** and **after** command which is translated by a special event command handler and broadcasted to any object that subscribes to it. 
 
-This gives an advantage to component extensions that use the Framework in terms of the granularity of the functionality they can expose to developers for customization. You can  provide nearly complete control of your component to other developers that use it.
+This inversion of control mechanism allows to intercept actions both before and after they occur. Extensions that use the Nooku Framework can take advantage of this to improve the granularity of their functionality. A component can invert nearly complete control of it's data flow to other developers this way.
 
-Here we provide an overview of the concepts, classes and objects involved in the make up and use of such a plugin. 
+In this tutorial we provide an overview of the concepts, classes and objects involved in creating a Joomla plugin that can intercept action events. 
 
 <!-- toc -->
 
@@ -53,7 +53,11 @@ All of these examples are possible because the MVC layer publishes **before** an
 
 #### What actions can be affected?
 
-As we've discuss, a given entity type, e.g. `Bar` will have its own Model, View and Controller triad. For the Model, there are four actions that we can tie into, **Fetch, Create, Count**, and **Reset**. The View exposes only the **Render** action. And lastly, the Controller exposes a total of six actions. They are the five BREAD paradigm actions: **Browse, Read, Edit, Add** and **Delete**; and then a **Render** action.  
+As we've discuss, a given entity type, e.g. `Bar` will have its own Model, View and Controller triad. 
+
+- Controller : **Browse, Read, Edit, Add** and **Delete**; and **Render** 
+- Model      : **Fetch, Create, Count**, and **Reset**
+- View       : **Render** 
 
 ## Plugin classes
 
@@ -61,7 +65,7 @@ There are two plugin classes that are important for you to know about to start b
 
 ### PlgKoowaSubscriber: The actual subscriber 
 
-Nooku provides the Event API, but for a Joomla plugin to make use of it needs to become a 'subscriber'.  To make that happen these extensions simply need to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). 
+Nooku provides the Event API, but for a Joomla plugin to make use of it needs to become a 'subscriber'.  To make that happen the plugin simply need to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). 
 
  As soon as they are instantiated a `PlgKoowaSubscriber` loads up the instance of the `KEventPublisher` and adds itself and its callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. 
 
