@@ -1,21 +1,21 @@
 # Plugins
 
-In Nooku Framework any controller, view and/or model method that has an `_action` prefix can be intercepted via the Nooku Event API and thus also through the Joomla plugin system. On the contrary to Joomla, events in Nooku are not hardcoded, but are generated on the fly in a consistent and standardised fashion. 
+In Nooku Framework any controller, view or model method that has an `_action` prefix can be intercepted via the Nooku Event API and thus also through the Joomla plugin system. In contrast to Joomla, events in Nooku are not hardcoded, but are generated on the fly in a consistent and standardized fashion. 
 
-Each controller, view and/ore model action is exposed through an **before** and **after** command which is translated by a special event command handler and broadcasted to any object that subscribes to it. 
+Each controller, view and model action is exposed through an **before** and **after** command which is translated by a special event command handler and broadcasted to any object that subscribes to it. 
 
-This inversion of control mechanism allows to intercept actions both before and after they occur. Extensions that use the Nooku Framework can take advantage of this to improve the granularity of their functionality. A component inverts nearly complete control of it's data flow out of the box.
+This [inversion of control](http://en.wikipedia.org/wiki/Inversion_of_control) mechanism allows for the intercepting of actions both before and after they occur. Extensions that use the Nooku Framework can take advantage of this to improve the granularity of their functionality. A component inverts nearly complete control of its data flow out of the box.
 
-In this tutorial we provide an overview of the concepts, classes and objects involved in creating a Joomla plugin that can intercept action events. 
+Here we provide an overview of the concepts, classes and objects involved in creating a Joomla plugin that can intercept action events. 
 
 <!-- toc -->
 
 ## Easy example
 
-To get us started, here is a very simple example of a plugin that has three event handlers: one for each of the model, view and controller. Our component is called `Acme` and we are focusing on an model entity named `Bar`.
+To get us started, here is a very simple example of a plugin that has three event handlers: one for each of the model, view and controller. Our component is called `Example`, in the `Acme` plugin group, and we are focusing on a model entity named `Bar`.
 
 ```php
-class PlgKoowaAcme extends PlgKoowaSubscriber
+class PlgAcmeExample extends PlgKoowaSubscriber
 {
     function onBeforeAcmeBarControllerBrowse(KEventInterface $event)
     {
@@ -38,7 +38,7 @@ class PlgKoowaAcme extends PlgKoowaSubscriber
 }
 ```
 
-The above code shows some important concepts that we'll refer to throughout in this tutorial, but it is non-exhaustive. You will show you how all the pieces fit together to build events dynamically in the sections to come. 
+The above code shows some important concepts that we'll refer to throughout in this guide, but it is non-exhaustive. We will show you how all the pieces fit together to build events dynamically in the sections to come. 
 
 >For a really good specific  example of building a working plugin checkout the [DOCman Plugin Tutorial](extensions/docman/plugins.md).
 
@@ -55,13 +55,13 @@ All of these examples are possible because the MVC layer publishes **before** an
 
 #### What actions can be affected?
 
-As we've discuss, a given resource, e.g. `Bar` will have its own Model, View and Controller triad. 
+As we've discuss, a given resource, e.g. `Bar`, will have its own Model, View and Controller triad. 
 
 - Controller : **Browse, Read, Edit, Add** and **Delete**; and **Render** 
 - Model      : **Fetch, Create, Count**, and **Reset**
 - View       : **Render** 
 
-We will discuss each in more detail below. Lets first look into the classes that make up a Joomla Plugin.
+We discuss each in more detail below in [MVC Actions and Events](#mvc-actions-and-events). Lets first look into the classes that make up a Joomla Plugin.
 
 ## Plugin classes
 
@@ -73,7 +73,7 @@ Nooku provides the Event API, but for a Joomla plugin to make use of it needs to
 
  As soon as they are instantiated a `PlgKoowaSubscriber` loads up the instance of the `KEventPublisher` and adds itself and its callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. 
 
-For example, the event handler that is registered for the event named **"onBeforeAcmeBarControllerBrowse"** is our `PlgKoowaAcme::onBeforeAcmeBarControllerBrowse()` method.
+For example, the event handler that is registered for the event named **"onBeforeAcmeBarControllerBrowse"** is our `PlgAcmeExample::onBeforeAcmeBarControllerBrowse()` method.
  
 >**Technical Tip:** `PlgKoowaSubscriber` plugins will not fire for native Joomla! plugin events because they aren't connected to `JEventDispatcher`. 
  
@@ -84,15 +84,6 @@ If you want your plugin to simply take advantage of the native Joomla! (and othe
 This class extends directly from `JPlugin` and will work like any other plugin; but, you have the added bonus of direct access to the Framework object manager, not to mention allowing the plugin to have its own [object identifier](http://guides.nooku.org/essentials/object-management.html). 
 
 Another benefit to using `PlgKoowaAbstract` over `JPlugin` is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html) for example to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
-
-
-## Plugin groups
-
-Our _Easy example_ is part of the **koowa** plugin group. You can see that from the class prefix `PlgKoowa`. This group is much like the **system** group in Joomla, in that it all of its resident plugins get loaded when Nooku Framework is initialized. 
-
-Putting plugins in the **koowa** group is not a requirement though. We are free to break plugins up into groups based on the component they subscribe too. This is the adviced approach as it reduces overhead by loading only the plugin group that is needed at the time of event publishing. 
-
-We could therefore rename our example to `PlgAcmeCustom` and place it in a **/plugins/acme** folder. When the same `onAfterAcmeBarControllerBrowse` event is broadcast, the Event API will ensure that the plugins that folder are loaded at that time. 
 
 ## Event handlers 
 
@@ -116,7 +107,7 @@ Our example `onBeforeAcmeBarControllerBrowse` method shows this pattern clearly.
 
 When subscribers to the Event API, are notified of a given event they get a nicely packaged [`KEvent`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/event/event.php) object with all the information they need for a given situation. 
 
-For example, our `Acme` plugin's controller focused event handler (`onBeforeAcmeBarControllerBrowse`) will get an event variable with these properties 
+For example, our `PlgAcmeExample` plugin's controller focused event handler (`onBeforeAcmeBarControllerBrowse`) will get an event variable with these properties 
 
 ```php
     $event->subject;
@@ -137,11 +128,11 @@ It is important to emphasize that event variables get different properties based
 ### MVC Actions and Events
 
 
-Its time to focus on the specific actions that we can write our plugins against. The Model, View and Controller actions each have slightly different event variables because they do different things.
+Its time to focus on the specific actions that we can write our plugins against. The model, view and controller actions each have slightly different event variables because they do different things.
 
 #### The Model
 
-The model really is the workhorse of the triad. Not only does it create the model entities based on the data it retrieves from the datastore, it also indirectly interprets the request to decide whether or not you want to interact with a list or a unique item. 
+The model really is the workhorse of the triad. Not only does it create the model entities based on the data it retrieves from the datastore. It also indirectly interprets the request to decide whether or not you want to interact with a list or a unique item. 
 
 It exposes four (4) actions before and after they are fired, each with different `$event` variable properties. We list them below and describe the relevant properties the `$event` variable has.
 
@@ -204,7 +195,7 @@ As you might expect the View handles everything to do with rendering the output 
 
 #### The Controller 
 
-The Controller has six (6) actions in total, and all are responsible for handling a particular type of request. All of the controller actions get the same event properties is each case, though the values of those properties may be different. This is in part to do with the fact that each of these actions gets invoked via the [KControllerAbstract::execute](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/abstract.php) method. 
+The Controller has six (6) actions in total, and all are responsible for handling a particular type of request. All of the controller actions get the same event properties in each case, though the values of those properties may be different. This is in part to do with the fact that each of these actions gets invoked via the [KControllerAbstract::execute](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/abstract.php) method. 
 
 **The Controller `$event` Variable**
 
@@ -236,12 +227,12 @@ The Controller has six (6) actions in total, and all are responsible for handlin
 
 ## What is possible?
 
-A better question would be **"What's not possible?"**. To get a feel for the potential, lets extend the signature of our example `PlgKoowaAcme` plugin so that it that takes advantage of all the opportunities exposed in just the MVC layer, again only for one entity `Bar`.
+A better question would be **"What's not possible?"**. To get a feel for the potential, lets extend the signature of our example `PlgAcmeExample` plugin so that it that takes advantage of all the opportunities exposed in just the MVC layer, again only for one entity `Bar`.
 
 <a name="first_acme"></a>
 ```php
 <?php
-class PlgKoowaAcme extends PlgKoowaSubscriber
+class PlgAcmeExample extends PlgKoowaSubscriber
 {
     // 12 controller event handlers
     function onBeforeAcmeBarControllerRender(KEventInterface $event);
@@ -278,22 +269,9 @@ If the extension were to have another entity called `Foo`, then there are twenty
 
 > **Tip:** There are four more actions mixed into a controller's interface by default via the [Editable behavior](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/controller/behavior/editable.php#L16), and thus eight more opportunities for each entity. 
 
+<!--
 > **Next Tip:** There are even more exposed for the component's [Dispatcher](#dispatcher)
-
-
-## Advanced Topic: Dispatcher
-
-We have focused entirely on the MVC layer of a component. Each component however has a component dispatcher that asks as a bridge between the MVC and the Joomla dispatching process. `KDispatcherAbstract` descends from `KControllerAbstract` so it too gets exposed through the Events API. In this instance there is no specific entity, i.e. no `Bar`, but there is a specific protocol based strategy, in many cases `Http`.
-
-As of the 2.0 Release the abstract dispatcher has four action methods:
-
-`_actionDispatch, _actionForward, _actionFail,` and `_actionSend`
-
-The Http dispatcher (`KDispatcherHttp`), which extends from that abstract, adds seven more actions, the majority of which correspond to HTTP methods:
-
-`_actionHead, _actionOptions, _actionGet, _actionPost, _actionPut, _actionDelete` and `_actionRedirect`
-
-That means our `Acme` component dispatcher, i.e. `com://site/acme.dispatcher.http` would be have  before and after events published for each of these eleven actions. Therefore, our  `Acme` component automatically broadcasts another twenty two events.
+-->
 
 
 ## In closing
