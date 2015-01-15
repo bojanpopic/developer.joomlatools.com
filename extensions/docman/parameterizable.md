@@ -46,27 +46,13 @@ In you new `document.html.php` file place this code where ever you would like to
 <? endif; ?>
 ```
 
-## Background
-
-The **Parameterizable** is a Nooku database behavior. The class handles the saving and retrieving of non-normalized data (more than one piece of information in a field) for a given format. Parameters can actually be stored in any column. The class takes a `column` configuration option so we can use it for any column we like. We could for example use another column name like `config` or `settings` and the behavior will deal with it the same way.
-
-For a column to be used in this way it needs to have a valid format associated with it, via the column's filter. In the case of our example the parameter column is in JSON format.These formats are available in [/library/object/config/](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/libraries/object/config). 
-> **Technical Tip:** Column formats are set in a table object's _initialize method as filters. DOCman's documents table class ( administrator/components/com\_docman/database/table/documents.php)  has the following setting:  
-```'filters' => array('parameters'   => array('json'))``
-
-The format specified in the column's filter lets `getParameters()` know what strategy to use to pack and unpack your data. 
-
-When looking to interact with a document's parameters we want to make sure that the "parameterizable" table behavior is present. So we ask first: 
-
-```php
-if($document->isParameterizable()) {
-     $params =   $document->getParameters();
-}
-```
-This is good practice. It makes sure that the table behavior is present, and if so, makes sure that its ready for us to use with `getParameters();`
-
-
 ## Relevant Resources
+
+### Background
+
+[Parameterizable](framework/database-behavior-parameterizable.md)
+
+Major concepts and classes in the functioning of the Parameterizable database behavior.
 
 ### Classes and Methods
 
