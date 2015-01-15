@@ -12,7 +12,7 @@ Here we provide an overview of the concepts, classes and objects involved in cre
 
 ## Easy example
 
-To get us started, here is a very simple example of a plugin that has three event handlers: one for each of the model, view and controller. Our component is called `Example`, in the `Acme` plugin group, and we are focusing on a model entity named `Bar`.
+To get us started, here is a very simple example of a plugin that has three event handlers: one for each of the model, view and controller. Our plugin is called `Example`, in the `Acme` component plugin group, and we are focusing on a model entity named `Bar`.
 
 ```php
 class PlgAcmeExample extends PlgKoowaSubscriber
@@ -103,11 +103,11 @@ An event handler can technically be any [callable](http://php.net/manual/en/lang
 Our example `onBeforeAcmeBarControllerBrowse` method shows this pattern clearly. Its like saying 
 >"**Before** the **Acme** package **Bar** entity **Controller** performs a **Browse** action, do this". 
 
- ### The `$event` variable
+### The `$event` variable
 
 When subscribers to the Event API, are notified of a given event they get a nicely packaged [`KEvent`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/event/event.php) object with all the information they need for a given situation. 
 
-For example, our `PlgAcmeExample` plugin's controller focused event handler (`onBeforeAcmeBarControllerBrowse`) will get an event variable with these properties 
+For example, our `PlgAcmeExample` plugin `onBeforeAcmeBarControllerBrowse` event handler will get an event variable containing the following properties :
 
 ```php
     $event->subject;
@@ -276,4 +276,6 @@ If the extension were to have another entity called `Foo`, then there are twenty
 
 ## In closing
 
-Component extensions developed with the Nooku Framework exposes all of its MVC actions to the Event API, both before and after they fire. This gives automatic and granular opportunities for sites that use the component to alter its functionality at run time with normal Joomla plugins. We've taken a look at the major areas to help you understand what is available in Joomlatools component extensions, and what you could have in your own Nooku Framework powered components. 
+Component extensions developed with the Nooku Framework exposes all of its MVC actions to the Event API, both before and after they fire. This gives automatic and granular opportunities for sites that use the component to alter its functionality at run time with normal Joomla plugins. 
+
+We've taken a look at the major areas to help you understand what is available in Joomlatools component extensions, and what you could have in your own Nooku Framework powered components. 
