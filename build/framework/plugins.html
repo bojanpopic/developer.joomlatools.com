@@ -49,7 +49,7 @@
             </ul>
         </div>
     </div>
-    <div class="book" data-level="2.2" data-basepath=".." data-revision="1421385908132">
+    <div class="book" data-level="2.2" data-basepath=".." data-revision="1421415261823">
     
 
 <div class="book-summary">
@@ -776,7 +776,7 @@
 </code></pre>
 <p>The above code shows some important concepts that we&#39;ll refer to throughout in this guide, but it is non-exhaustive. We will show you how all the pieces fit together to build events dynamically in the sections to come. </p>
 <blockquote>
-<p>For a really good specific  example of building a working plugin checkout the <a href="extensions/docman/plugins.html">DOCman Plugin Tutorial</a>.</p>
+<p>For a really good specific  example of building a working plugin checkout the <a href="/extensions/docman/plugins.html">DOCman Plugin Tutorial</a>.</p>
 </blockquote>
 <h2 id="the-mvc-layer">The MVC layer</h2>
 <p>We&#39;re focusing on the Model View Controller layer and the events that it broadcasts through the Event API. In each part of this triad,  there are a number of major actions that take place, and it would be nice to be able to effect either their input or output. </p>
@@ -816,7 +816,7 @@
 <li><strong>Package</strong>  - The name of the component the event belongs to, in this case <strong>Acme</strong></li>
 <li><strong>Subject</strong> - The name of the &quot;entity&quot; that the event belongs to, e.g. the <strong>Bar</strong>. This is singular.</li>
 <li><strong>Type</strong> - The type of the object using the entity, e.g. <strong>Controller, View or Model</strong>. Also singular.</li>
-<li><strong>Action</strong> - The name of the action being run (<a href="what-actions-can-be-affected">any one of these</a>). </li>
+<li><strong>Action</strong> - The name of the action being run (<a href="what-actions-can-be-affected.html">any one of these</a>). </li>
 </ul>
 <p>Our example <code>onBeforeAcmeBarControllerBrowse</code> method shows this pattern clearly. Its like saying </p>
 <blockquote>
@@ -1116,7 +1116,7 @@ If the extension were to have another entity called <code>Foo</code>, then there
 > **Next Tip:** There are even more exposed for the component's [Dispatcher](#dispatcher)
 -->
 <h2 id="in-closing">In closing</h2>
-<p>Component extensions developed with the Nooku Framework exposes all of its MVC actions to the Event API, both before and after they fire. This gives automatic and granular opportunities for sites that use the component to alter its functionality at run time with normal Joomla plugins. We&#39;ve taken a look at the major areas to help you understand what is available in Joomlatools component extensions, and what you could have in your own Nooku Framework powered components.</p>
+<p>Component extensions developed with the Nooku Framework exposes all of its MVC actions to the Event API, both before and after they fire. This gives automatic and granular opportunities for sites that use the component to alter its functionality at run time with normal Joomla plugins. We&#39;ve taken a look at the major areas to help you understand what is available in Joomlatools component extensions, and what you could have in your own Nooku Framework powered components. </p>
 
                     
                     </section>
@@ -1149,10 +1149,6 @@ If the extension were to have another entity called <code>Foo</code>, then there
 
     
     <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>
