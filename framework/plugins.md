@@ -1,10 +1,10 @@
 # Plugins
 
-In Nooku Framework any controller, view or model method that has an `_action` prefix can be intercepted via the Nooku Event API and thus also through the Joomla plugin system. In contrast to Joomla, events in Nooku are not hardcoded, but are generated on the fly in a consistent and standardized fashion. 
+In Nooku Framework any controller, view or model method that has an `_action` prefix can be intercepted via the Nooku Event API which is can be subscribed to by the Joomla plugin system. In contrast to Joomla, events in Nooku are not hardcoded, but are generated on the fly in a consistent and standardized fashion. 
 
-Each controller, view and model action is exposed through an **before** and **after** command which is translated by a special event command handler and broadcasted to any object that subscribes to it. 
+Each controller, view and model action is exposed through a **before** and **after** command which is translated by a special event command handler and then is broadcast to any object that subscribes to it. 
 
-This [inversion of control](http://en.wikipedia.org/wiki/Inversion_of_control) mechanism allows for the intercepting of actions both before and after they occur. Extensions that use the Nooku Framework can take advantage of this to improve the granularity of their functionality. A component inverts nearly complete control of its data flow out of the box.
+This [inversion of control](http://en.wikipedia.org/wiki/Inversion_of_control) mechanism allows for the intercepting of actions both before and after they occur. Extensions that use the Nooku Framework can take advantage of this fact to improve the granularity of the functionality that they can offer up for customization. A component inverts nearly complete control of its data flow out of the box.
 
 Here we provide an overview of the concepts, classes and objects involved in creating a Joomla plugin that can intercept action events. 
 
@@ -12,7 +12,7 @@ Here we provide an overview of the concepts, classes and objects involved in cre
 
 ## Easy example
 
-To get us started, here is a very simple example of a plugin that has three event handlers: one for each of the model, view and controller. Our component is called `Example`, in the `Acme` plugin group, and we are focusing on a model entity named `Bar`.
+To get us started, here is a very simple example of a plugin that has three event handlers: one for each of the model, view and controller. Our component is called `Acme`; and our plugin is called `Example`, in the `Acme` plugin group, and we are focusing on a model entity named `Bar`.
 
 ```php
 class PlgAcmeExample extends PlgKoowaSubscriber
@@ -55,7 +55,7 @@ All of these examples are possible because the MVC layer publishes **before** an
 
 #### What actions can be affected?
 
-As we've discuss, a given resource, e.g. `Bar`, will have its own Model, View and Controller triad. 
+As we've discuss, a given resource, e.g. `Bar`, will have its own model, view and controller triad. 
 
 - Controller : **Browse, Read, Edit, Add** and **Delete**; and **Render** 
 - Model      : **Fetch, Create, Count**, and **Reset**
@@ -69,9 +69,9 @@ There are two plugin classes that are important for you to know about to start b
 
 ### PlgKoowaSubscriber: The actual subscriber 
 
-Nooku provides the Event API, but for a Joomla plugin to make use of it needs to become a 'subscriber'.  To make that happen the plugin simply need to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). 
+Nooku provides the Event API, but for a Joomla plugin to make use of it needs to become a 'subscriber'.  To make that happen the plugin simply needs to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). 
 
- As soon as they are instantiated a `PlgKoowaSubscriber` loads up the instance of the `KEventPublisher` and adds itself and its callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. 
+ As soon as a `PlgKoowaSubscriber` plugin is instantiated it loads up the singleton instance of the `KEventPublisher`, and adds its own callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. 
 
 For example, the event handler that is registered for the event named **"onBeforeAcmeBarControllerBrowse"** is our `PlgAcmeExample::onBeforeAcmeBarControllerBrowse()` method.
  
@@ -79,11 +79,11 @@ For example, the event handler that is registered for the event named **"onBefor
  
 ### PlgKoowaAbstract
 
-If you want your plugin to simply take advantage of the native Joomla! (and other extension events), it need only extend `PlgKoowaAbstract`. It won't pick up the MVC events that we are focused on here. We highlight it because `PlgKoowaSubscriber` is a child class and is an important part of its functionality. 
+If you want your plugin to simply take advantage of the native Joomla! (and other extension events), it need only extend `PlgKoowaAbstract`. It won't pick up the MVC events that we are focused on here. We highlight it because `PlgKoowaSubscriber` is a child class, and is an important piece of the plugin functionality. 
 
 This class extends directly from `JPlugin` and will work like any other plugin; but, you have the added bonus of direct access to the Framework object manager, not to mention allowing the plugin to have its own [object identifier](http://guides.nooku.org/essentials/object-management.html). 
 
-Another benefit to using `PlgKoowaAbstract` over `JPlugin` is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html) for example to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
+Another benefit to using `PlgKoowaAbstract` over `JPlugin` is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html), for example, to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
 
 ## Event handlers 
 
@@ -118,11 +118,11 @@ For example, our `PlgAcmeExample` plugin's controller focused event handler (`on
 
 In addition, the `$event` object exposes methods to interrogate and control the event, like `stopPropagation`,  `canPropogate`, attribute getters and setters and the ever relevant, `getTarget` and `setTarget`. 
 
+>The `target` is the analogue of the `subject` and should be used in the event handlers.  
+
 We could assess and alter the `$context->data` property before it makes it to the subject class's execute method or alter the `$context->result` before it returns to the original calling scope.  
 
 It is important to emphasize that event variables get different properties based on which action in the MVC layer they are focused on. 
-
-
 
 
 ### MVC Actions and Events
@@ -136,12 +136,13 @@ The model really is the workhorse of the triad. Not only does it create the mode
 
 It exposes four (4) actions before and after they are fired, each with different `$event` variable properties. We list them below and describe the relevant properties the `$event` variable has.
 
-##### Fetch
+##### Fetch  
+[KModelAbstract::fetch()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/model/abstract.php#L93)
 
 
 |method|description|
 |:---------|:---------------|
-|`_actionFetch()`|Much like it sounds, `fetch`, gets the results from the database based on the model's state, and place's that result in the model's entity object. Controller actions use the model's fetch method often.|
+|[`_actionFetch()`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/model/database.php#L108)|Much like it sounds, `fetch`, gets the results from the database based on the model's state, and place's that result in the model's entity object. Controller actions use the model's fetch method often.|
 
 | $event properties         | description |
 |:-----------------|:--------------|
@@ -149,9 +150,11 @@ It exposes four (4) actions before and after they are fired, each with different
 
 ##### Count
 
+[KModelAbstract::count()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/model/abstract.php#L139)
+
 |method|description|
 |:---------|:---------------|
-|`_actionCount()`|The `count` action performs a query similar to fetch, based on the models state, but instead of retrieving the actual data it will return the number of entities. |
+|[`_actionCount()`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/model/database.php#L143)|The `count` action performs a query similar to `fetch`, based on the models state, but instead of retrieving the actual data it will return the number of rows in the set. |
 
 | $event properties         | description |
 |:-----------------|:--------------|
@@ -159,9 +162,11 @@ It exposes four (4) actions before and after they are fired, each with different
 
 ##### Reset
 
+[KModelAbstract::reset()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/model/abstract.php#L164)
+
 |method|description|
 |:---------|:---------------|
-|`_actionReset()`|Resetting a model empties both the entity and count cache properties of the model.|
+|[`_actionReset()`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/model/abstract.php#L308)|Resetting a model empties both the entity and count cache properties of the model.|
 
 | $event properties         | description |
 |:-----------------|:--------------|
@@ -169,10 +174,11 @@ It exposes four (4) actions before and after they are fired, each with different
 
 
 ##### Create
+[KModelAbstract::create()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/model/abstract.php#L118)
 
 |method|description|
 |:---------|:---------------|
-|`_actionCreate()`|The `create` action takes an array and creates an model entity, which can be anyone of a number of [model entity types](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/libraries/model/entity).|
+|[`_actionCreate()`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/model/database.php#L82)|The `create` action takes an array and creates an model entity, which can be anyone of a number of [model entity types](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/libraries/model/entity).|
 
 | $event properties         | description |
 |:-----------------|:--------------|
@@ -182,9 +188,12 @@ It exposes four (4) actions before and after they are fired, each with different
 
 As you might expect the View handles everything to do with rendering the output of your component extension. There is one action exposed. 
 
+##### Render
+[KViewAbstract::render()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/view/abstract.php#L113)
+
 |method|description|
 |:---------|:---------------|
-|`_actionRender()`|The view takes the model's entity data and passes it to its template where its is formatted for display. That all happens as a result of the `render()` action.|
+|[`_actionRender()`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/view/template.php#L90)|The view takes the model's entity data and passes it to its template where its is formatted for display. That all happens as a result of the `render` action.|
 
 
 | $event properties         | description |
@@ -195,7 +204,7 @@ As you might expect the View handles everything to do with rendering the output 
 
 #### The Controller 
 
-The Controller has six (6) actions in total, and all are responsible for handling a particular type of request. All of the controller actions get the same event properties in each case, though the values of those properties may be different. This is in part to do with the fact that each of these actions gets invoked via the [KControllerAbstract::execute](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/abstract.php) method. 
+The default controller implementation is an instance of [KControllerModel](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php) and provides six (6) actions in total.  All of these are responsible for handling a particular type of request. The controller actions get the same `$event` variable properties set in each case, though the values of those properties may be different. This is in part to do with the fact that each of these actions gets invoked via the [KControllerAbstract::execute](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/abstract.php) method. 
 
 **The Controller `$event` Variable**
 
@@ -209,12 +218,12 @@ The Controller has six (6) actions in total, and all are responsible for handlin
 
 |method|description|
 |:---------|:---------------|
-|_actionBrowse()|When you want a list of items the `browse` action will respond to the GET request where the view parameter is plural (e.g. `option=com_acme&view=bars`). The model is loaded and its `fetch` method called. 
-|_actionRead()|A GET request for a single item is handled by the `read` action (e.g. `option=com_acme&view=bar&id=1`). It loads the model and either gets an existing entity or creates a new one if no `id` is set. 
-|_actionEdit()|When you make a POST request where one or more existing entity `id`s with updated properties are passed in, the `edit` action handles loading the model entity, setting the new properties and saving those changes. 
-|_actionAdd()|A POST request with no `id` property set will result in an `add` action. It will load the model, create an entity and then attempt to save the new entity.|
-|_actionDelete()|A DELETE request will load all the results for a given model state and erase them from the database. **Be careful with this one**.|
-|_actionRender()|For GET requests it actually serves as a pass-through for `_actionBrowse` and `_actionRead`. When it gets the result from either of these two, it will pass it to the view for actual rendering.|
+|[_actionBrowse()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L195)|When you want a list of items the `browse` action will respond to the GET request where the view parameter is plural (e.g. `option=com_acme&view=bars`). The model is loaded and its `fetch` method called. 
+|[_actionRead()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L208)|A GET request for a single item is handled by the `read` action (e.g. `option=com_acme&view=bar&id=1`). It loads the model and either gets an existing entity or creates a new one if no `id` is set. 
+|[_actionEdit()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L236)|When you make a POST request where one or more existing entity `id`s with updated properties are passed in, the `edit` action handles loading the model entity, setting the new properties and saving those changes. 
+|[_actionAdd()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L267)|A POST request with no `id` property set will result in an `add` action. It will load the model, create an entity and then attempt to save the new entity.|
+|[_actionDelete()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L313)|A DELETE request will load all the results for a given model state and erase them from the database. **Be careful with this one**.|
+|[_actionRender()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L174)|For GET requests it actually serves as a pass-through for `_actionBrowse` and `_actionRead`. When it gets the result from either of these two, it will pass it to the view for actual rendering.|
 
 
 ### Properties available to all event handlers
