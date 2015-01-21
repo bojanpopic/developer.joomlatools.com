@@ -17,6 +17,7 @@ DOCman requests must be associated with a valid Joomla! menu item **(Itemid)**, 
 Included in each request type is the PHP API analogue. It shows you how you would do the same operation from inside the code. Also, a list of
 relevant plugin events that you can make use of to alter the input or output of a particular request.
 
+
 # Group Documents
 
 ## Documents Collection [/?option=com_docman&{&view,slug,created_by,category,limit,offset,sort,direction}]
