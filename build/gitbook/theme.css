@@ -250,4 +250,7 @@
   }
 }
 .book .book-body .page-wrapper .page-inner section.panel { display: block }
-.book .book-body .page-wrapper .page-inner section.panel dl.dl-horizontal dt { margin-right: 15px;}
+.book .book-body .page-wrapper .page-inner section.panel dl.dl-horizontal dt { margin-right: 15px; min-width: 90px; text-align: left}
+
+/* fixes an aglio / gitbook collapse issue */
+.list-group-item.panel-collapse.collapse { display: none }
