@@ -1,4 +1,4 @@
-# Alternative Layouts
+# Layouts
 
 ## Additional Layouts
 
