@@ -254,3 +254,4 @@
 
 /* fixes an aglio / gitbook collapse issue */
 .list-group-item.panel-collapse.collapse { display: none }
+.list-group-item.panel-collapse.collapse.in { display: block }
