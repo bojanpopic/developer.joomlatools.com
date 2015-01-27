@@ -3,8 +3,7 @@ HOST: http://demo.joomlatools.com/joomla3/
 
 # DOCman API
 
-The DOCman JSON API is built on top of the [Nooku Framework](http://nooku.org). The default JSON response documents in Nooku are inspired by the [JSON API specification](http://jsonapi.org).
-For a deeper look at how the core JSON format actually gets built have a look our write up about JSON at http://guides.nooku.org/JSON.html .
+The DOCman Web API is a Restful JSON API. The default JSON response documents are inspired by the JSON API specification. For a deeper look at how the core JSON format actually gets built have a look our write up about JSON at http://guides.nooku.org/JSON.html.
 
 The responses used below are taken directly from http://demo.joomlatools.com/joomla3/ and can be duplicated there.
 
@@ -12,15 +11,19 @@ The responses used below are taken directly from http://demo.joomlatools.com/joo
 
 DOCman requests must be associated with a valid Joomla! menu item **(Itemid)**, and the following API documentation assumes you will add it with each request.**
 
-**PHP Examples and Plugin Events**
+**PHP and Events API**
 
 Included in each request type is the PHP API analogue. It shows you how you would do the same operation from inside the code. Also, a list of
-relevant plugin events that you can make use of to alter the input or output of a particular request.
+relevant events published through the Event API is provided. We cover these in some detail in the [DOCman plugins](/extensions/docman/plugins.html) and [Framework Plugins](/framework/plugins.html) sections.
 
 
 # Group Documents
 
 ## Documents Collection [/?option=com_docman&{&view,slug,created_by,category,limit,offset,sort,direction}]
+
+### List a subset of Documents [GET]
+
+##### PHP API
 
 ```php
     // Get a list of documents through the controller for a given set of parameters.
@@ -31,7 +34,7 @@ relevant plugin events that you can make use of to alter the input or output of 
                         ->browse();
 ```
 
-** Relevant Plugin Events **
+##### Event API
 
 
 |**Before** | **After**|
@@ -45,7 +48,6 @@ relevant plugin events that you can make use of to alter the input or output of 
 See:
 [KControllerModel::_actionBrowse(KControllerContextInterface $context)](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L195)
 
-### List a subset of Documents [GET]
 
 + Parameters
     + view (required, string, `documents`) ... The view choices are **filteredlist, userlist, list** or **documents**.
@@ -274,6 +276,8 @@ See:
 
 ### Retrieve a Document [GET]
 
+##### PHP API
+
 ```php
     // Get a document with a given id
     $documents = KObjectManager::getInstance()
@@ -282,7 +286,7 @@ See:
                         ->read();
 ```
 
-** Relevant Plugin Events **
+##### Event API
 
 |**Before** | **After**|
 |-----------|----------|
@@ -303,6 +307,8 @@ See:
 
 ### Create or Edit a Document [POST]
 
+##### PHP API
+
 ```php
     // Create a new document
     $data = array("title" => "Cake",
@@ -316,7 +322,8 @@ See:
     // edit an existing document
     $updatedDocument = $controller->id(74)->edit($data);
 ```
-** Relevant Plugin Events **
+
+##### Event API
 
 |**Before** | **After**|
 |-----------|----------|
@@ -354,6 +361,8 @@ See:
 
 ### Remove a Document [DELETE]
 
+##### PHP API
+
 ```php
     // Loads the document row and then deletes that row object.
     $documents = KObjectManager::getInstance()
@@ -362,7 +371,7 @@ See:
                         ->delete();
 ```
 
-** Relevant Plugin Events **
+##### Event API
 
 |**Before** | **After**|
 |-----------|----------|
