@@ -46,7 +46,7 @@ relevant events published through the Event API is provided. We cover these in s
 
 
 See:
-[KControllerModel::_actionBrowse(KControllerContextInterface $context)](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L195)
+[KControllerModel::_actionBrowse](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L195)
 
 
 + Parameters
@@ -377,8 +377,8 @@ See:
 |-----------|----------|
 |onBeforeDocmanControllerDocumentDelete|onAfterDocmanControllerDocumentDelete|
 
-See: [KControllerModel::_actionDelete](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L313), [KDatabaseRowAbstract::delete()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/row/abstract.php#L163)
-[KDatabaseRowsetAbstract::delete()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/rowset/abstract.php#L163)
+See: [KControllerModel::_actionDelete](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L313), [KDatabaseRowAbstract::delete](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/row/abstract.php#L163)
+[KDatabaseRowsetAbstract::delete](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/rowset/abstract.php#L163)
 
 + Parameters
     + id (required, number, `74`) ... Numeric `id` of the Document to delete.
