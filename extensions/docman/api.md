@@ -19,7 +19,7 @@ relevant events published through the Event API is provided. We cover these in s
 
 # Group Documents
 
-## Documents Collection [/?option=com_docman&{&view,slug,created_by,category,limit,offset,sort,direction}]
+## Document Collection [/?option=com_docman&{&view=documents,created_by,category,limit,offset,sort,direction}]
 
 ### List a subset of Documents [GET]
 
@@ -50,13 +50,29 @@ See:
 
 
 + Parameters
-    + view (required, string, `documents`) ... The view choices are **filteredlist, userlist, list** or **documents**.
-    + slug (optional, string, `baking`) ... The slug is used to specify the category that the documents should belongs to.
+    + view (required, string, `documents`) ... Must be `documents` in the url request.
     + category (optional, int, `24`) ... Is used to specify the category that the list of documents should belong to.
+    + category_children (optional, bool, 1) ... If `category` is set, this setting will toggle the inclusion of documents of child categories is the result.
     + sort (optional, string, `title`) ... Column used to sort the results in the response.
     + direction (optional, string, `asc`) ... The direction of the resulting sort. The default is 'asc'.
     + offset (optional, int, `6`) ... Defines the beginning of the subset of entities.
     + limit (optional, int, `2`) ... Defines the number entities that should be returned in the response.
+    + created_by (optional, int, `690`) ... Joomla userid of the document creator.
+    + search_date (optional, date, `2013-09-27`) ... Date that the document was created on.
+    + day_range (optional, int, `30`) ... The number of days before or after the `search_date` . Note: `search_date` defaults to the current time if not set.
+    + status (optional, string, `published`) ... Status of the document
+
+        + Values
+            + `published`
+            + `pending`
+            + `expired`
+    + search (optional, string, `cake`) ... A keyword to search for the documents for. Used in combination with `search_by`
+    + search_by = `exact` (optional, string, `exact`) ... Used to define the type of `search` strategy used.
+
+        + Values
+            + `exact`
+            + `any`
+            + `all`
 
 + Request /?option=com_docman&view=documents&limit=2&offset=6&Itemid=126 (application/json)
 
@@ -197,7 +213,7 @@ See:
 
 
 
-## Document [/?option=com_docman&view=document{&id}]
+## Individual Document [/?option=com_docman&view=document{&id,slug,uuid}]
 
 + Model (application/json)
 
@@ -271,10 +287,16 @@ See:
     }
 
 + Parameters
-    + id (required, number, `74`) ... Numeric `id` of the Document to retrieve.
+
+    + id (optional, number, `74`) ... Numeric `id` of the document to work with.
+    + uuid (optional, string, `fe67c09d-abb3-4e85-b66c-96f10f563582`) ... Universally unique identifier.
+    + slug (optional, string, `cake`) ... Unique alias of the document record.
+
 
 
 ### Retrieve a Document [GET]
+
+Note: either an `id`, `uuid` or `slug` must be present to interact with a specific document.
 
 ##### PHP API
 
@@ -299,13 +321,16 @@ See:
 See:
 [KControllerModel::_actionRead](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L208)
 
+**Note:** either an `id`, `uuid` or `slug` must be present to interact with a specific document.
+
 + Request /?option=com_docman&view=document&id=74&Itemid=126 (application/json)
 
 + Response 200
 
-    [Document][]
+    [Individual Document][]
 
 ### Create or Edit a Document [POST]
+
 
 ##### PHP API
 
@@ -335,8 +360,7 @@ See:
 [KDispatcherHttp::_actionPost](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php#L225), [KControllerModel::_actionAdd](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L267),
 [KControllerModel::_actionEdit](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L235)
 
-+ Parameters
-    + id (optional, number, `0`) ... Must be '0' or empty. Setting this to an existing document id will try edit the corresponding document.
+**Note:** either an `id`, `uuid` or `slug` must be present to interact with a specific document.
 
 + Request
 
@@ -356,7 +380,7 @@ See:
 
 + Response 201
 
-    [Document][]
+    [Individual Document][]
 
 
 ### Remove a Document [DELETE]
@@ -380,7 +404,6 @@ See:
 See: [KControllerModel::_actionDelete](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/model.php#L313), [KDatabaseRowAbstract::delete](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/row/abstract.php#L163)
 [KDatabaseRowsetAbstract::delete](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/rowset/abstract.php#L163)
 
-+ Parameters
-    + id (required, number, `74`) ... Numeric `id` of the Document to delete.
+**Note:** either an `id`, `uuid` or `slug` must be present to interact with a specific document.
 
 + Response 204
