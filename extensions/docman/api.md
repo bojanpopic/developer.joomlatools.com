@@ -19,7 +19,7 @@ relevant events published through the Event API is provided. We cover these in s
 
 # Group Documents
 
-## Document Collection [/?option=com_docman&{&view=documents,created_by,category,limit,offset,sort,direction}]
+## Document Collection [/?option=com_docman&view=documents{&created_by,category,limit,offset,sort,direction}]
 
 ### List a subset of Documents [GET]
 
@@ -50,7 +50,6 @@ See:
 
 
 + Parameters
-    + view (required, string, `documents`) ... Must be `documents` in the url request.
     + category (optional, int, `24`) ... Is used to specify the category that the list of documents should belong to.
     + category_children (optional, bool, 1) ... If `category` is set, this setting will toggle the inclusion of documents of child categories is the result.
     + sort (optional, string, `title`) ... Column used to sort the results in the response.
