@@ -85,7 +85,7 @@ This class extends directly from `JPlugin` and will work like any other plugin; 
 
 Another benefit to using `PlgKoowaAbstract` over `JPlugin` is the ability to tell the plugin not to connect or subscribe to any events at all. We use this ability in [LOGman](http://developer.joomlatools.com/extensions/logman.html), for example, to make sure that all the appropriate files are loaded for all the other LOGman plugin integrations. It helps to keep from cluttering up the dispatcher. 
 
-## Event handlers
+## Methods
 
 The event handler takes a single argument which is an instance of [`KEventInterface`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/event/interface.php#L10)
 and holds all of the information about the event that was dispatched. We refer to it through out this guide as the `$event` variable. The use of which is very similar to how events work in Javascript; the event object
