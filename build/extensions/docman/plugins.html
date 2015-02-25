@@ -7,7 +7,7 @@
         <title>Plugins | Joomlatools Developer Zone</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 1.3.1">
+        <meta name="generator" content="GitBook 1.5.0">
         <meta name="HandheldFriendly" content="true"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -49,7 +49,7 @@
             </ul>
         </div>
     </div>
-    <div class="book" data-level="1.1.2" data-basepath="../.." data-revision="1422306111825">
+    <div class="book" data-level="1.1.2" data-basepath="../.." data-revision="1424815217582">
     
 
 <div class="book-summary">
@@ -715,12 +715,13 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_4">
+                    <section class="normal" id="section-gitbook_3">
                     
                         <h1 id="plugins">Plugins</h1>
+<p><strong>Read the <a href="framework/plugins.html">Framework Plugins</a> guide to get the absolute most out of this tutorial</strong>. We build on concepts that are covered in that guide.  </p>
 <p>There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
 Perhaps you want to send an email when a document is uploaded. Maybe you want add some data to the list of documents before
-it gets rendered to the screen. Whatever you would like to do is possible with Plugins and our Event driven architecture.</p>
+it gets rendered to the screen. Whatever you would like to do is possible with Plugins and our Event driven architecture. </p>
 <!-- toc -->
 <ul>
 <li><a href="#introduction">Introduction</a></li>
@@ -728,159 +729,71 @@ it gets rendered to the screen. Whatever you would like to do is possible with P
 <li><a href="#xml-descriptor">XML Descriptor</a></li>
 </ul>
 </li>
-<li><a href="#php-class">PHP Class</a></li>
-<li><a href="#installing-the-plugin">Installing the plugin</a></li>
-<li><a href="#event-handlers">Event handlers</a><ul>
-<li><a href="#naming">Naming</a></li>
-<li><a href="#method">Method</a></li>
-<li><a href="#stopping-events">Stopping Events</a></li>
-<li><a href="#beforeafter-when-to-use">Before/After - When to use</a></li>
+<li><a href="#php-class">PHP Class</a><ul>
+<li><a href="#basic-example-method">Basic Example Method</a></li>
 </ul>
 </li>
-<li><a href="#put-it-all-together">Put it all together</a></li>
-<li><a href="#example-plugin">Example Plugin</a></li>
-<li><a href="#in-closing">In Closing</a></li>
+<li><a href="#real-life-example-plugin">Real Life Example Plugin</a></li>
+<li><a href="#in-closing">In closing</a></li>
 </ul>
 <!-- toc stop -->
 <h2 id="introduction">Introduction</h2>
-<p>DOCman is a Nooku Framework powered extension and as such, has access to a powerful, yet simple event architecture.
-Almost ANY action in DOCman can have an event listener registered against it. Not only that, but multiple listeners can be
-registered for a single event.</p>
-<p>In the majority of cases, you will want to register an event listener against a controller action. A controller action is
-a method within DOCman that is run when a particular user request happens. There are five (5) standard actions that are available in
-the controller which are characterized with the BREAD acronym:</p>
-<ul>
-<li><strong>B</strong>rowse - Viewing a list of documents</li>
-<li><strong>R</strong>ead - Viewing a single document</li>
-<li><strong>E</strong>dit - Editing/updating a single existing document on save</li>
-<li><strong>A</strong>dd - Adding a new document on save</li>
-<li><strong>D</strong>elete - Deleting a document</li>
-</ul>
-<p>Each of these actions can have an event listener registered to be run <strong>before</strong> or <strong>after</strong> the action itself is executed.</p>
-<p>There are a number controllers for whose actions you may wish to register an event handler against:</p>
-<p><strong>Admin Controllers</strong></p>
-<ul>
-<li>Document</li>
-<li>Category</li>
-<li>File</li>
-</ul>
-<p><strong>Site Controllers</strong></p>
-<ul>
-<li>Document</li>
-<li>Download</li>
-<li>List</li>
-</ul>
+<p>DOCman is a Nooku Framework powered extension and as such, has access to a powerful, yet simple event architecture. Almost ANY action in DOCman can have an event listener registered against it. Not only that, but multiple listeners can be registered for a single event.</p>
+<p>In the majority of cases, you will want to register an event listener against a controller action. This is not a requirement though, you can also register listeners against all model, view and controller actions. </p>
+<p>There are a number of entities in DOCman for whose MVC actions you may wish to register an event handler against:</p>
+<table>
+<thead>
+<tr>
+<th>In the Site component</th>
+<th>In the Administrator component</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>Document</td>
+</tr>
+<tr>
+<td>Download</td>
+<td>Category</td>
+</tr>
+<tr>
+<td>List</td>
+<td>File</td>
+</tr>
+</tbody>
+</table>
+<p>To get a sense of the granularity of the events that a plugin can subscribe to have a look at <a href="framework/plugins.html#what-is-possible">&quot;What is Possible?&quot;</a> in the Framework Plugins guide. </p>
 <h2 id="setup">Setup</h2>
-<p>Your first step is to create a plugin and register/install it within Joomla. If you have ever created a Joomla plugin, the
-process is exactly the same. A plugin consists of at least 2 files, a PHP class and an XML descriptor. Let&#39;s quickly cover how to
-set these up:</p>
+<p>A plugin consists of at least 2 files, a PHP class and an XML descriptor. </p>
+<blockquote>
+<p>We cover the major details of each in <a href="framework/plugins.html#creation-and-installation">Creation and Installation</a> section of the Framework Plugin guide.</p>
+</blockquote>
 <h3 id="xml-descriptor">XML Descriptor</h3>
-<p>The XML file contains a description of the plugin so that Joomla knows what it is installing.</p>
+<p>This is what our <em>bare bones</em> plugin manifest file should look like. </p>
 <pre><code class="lang-xml"><span class="hljs-pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">extension</span> <span class="hljs-attribute">version</span>=<span class="hljs-value">"2.5"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"plugin"</span> <span class="hljs-attribute">group</span>=<span class="hljs-value">"koowa"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">name</span>&gt;</span>DOCman Plugin<span class="hljs-tag">&lt;/<span class="hljs-title">name</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">extension</span> <span class="hljs-attribute">version</span>=<span class="hljs-value">"2.5"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"plugin"</span> <span class="hljs-attribute">group</span>=<span class="hljs-value">"docman"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">name</span>&gt;</span>DOCman Document Plugin<span class="hljs-tag">&lt;/<span class="hljs-title">name</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">author</span>&gt;</span>YOUR NAME<span class="hljs-tag">&lt;/<span class="hljs-title">author</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">creationDate</span>&gt;</span>June 2013<span class="hljs-tag">&lt;/<span class="hljs-title">creationDate</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span>1.0.0<span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">description</span>&gt;</span>PLUGIN DESCRIPTION<span class="hljs-tag">&lt;/<span class="hljs-title">description</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">files</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">filename</span> <span class="hljs-attribute">plugin</span>=<span class="hljs-value">"docman"</span>&gt;</span>docman.php<span class="hljs-tag">&lt;/<span class="hljs-title">filename</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">filename</span> <span class="hljs-attribute">plugin</span>=<span class="hljs-value">"document"</span>&gt;</span>document.php<span class="hljs-tag">&lt;/<span class="hljs-title">filename</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">files</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">extension</span>&gt;</span>
 </code></pre>
-<p>This is the minimum required contents of the descriptor. Adjust the values accordingly. There are plenty more options you
-can configure for the XML file, but you need to specify at least these. For more information consult the Joomla 2.5+ documentation.</p>
-<p>The XML file should have the same name as your plugin (see the <code>&lt;filename plugin=&quot;docman&quot;&gt;</code> line). Your XML file would in this example
-be named <code>docman.xml</code>.</p>
+<p>We&#39;ve made our <code>group</code> attribute &quot;docman&quot; because we are altering the data from DOCman. The system will make sure that this group of plugins is loaded whenever a DOCman event is broadcast. Also for the sake of illustration, we have named our plugin <code>document</code> in </p>
+<p><code>&lt;filename plugin=&quot;document&quot;&gt;document.php&lt;/filename&gt;</code> </p>
+<p>However, you are free to name your plugin anything you like.</p>
 <h2 id="php-class">PHP Class</h2>
-<p>The PHP class contains the code you want to execute before/after certain events. The class name must conform to a specific
-format in order for your plugin to work. The format is as follows:</p>
-<p><code>PlgKoowaName</code> where the <strong>Name</strong> part is the name (first letter capitalized) of your plugin as defined in the <code>&lt;filename plugin=&quot;docman&quot;&gt;</code> section
-of the XML descriptor above. In our case, the name would be:</p>
-<p><code>PlgKoowaDocman</code></p>
-<p>Also, the plugin <strong>must</strong> also extend <a href="https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php#L10" target="_blank"><code>PlgKoowaSubscriber</code></a></p>
-<p>So our PHP file should look something like this:</p>
+<p>The class that matches our new manifest starts out looking something like</p>
 <pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgKoowaDocman</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaSubscriber</span></span>{}
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgDocmanDocument</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaSubscriber</span></span>{}
 </code></pre>
-<h2 id="installing-the-plugin">Installing the plugin</h2>
-<p>Joomla provides 2 main methods for installing plugins</p>
-<ol>
-<li>Install via a ZIP file</li>
-<li>Place the files in the correct location and &quot;discover&quot; them</li>
-</ol>
-<!-- CB: Should we add a third option for development via the console? -->
-<p>Method 1 is generally used when packaging plugins and distributing them, while Method 2 is useful when you have full control
-over the source code and can just write the files in place, then tell Joomla to discover them so they are installed.</p>
-<p>1) For this example, let&#39;s put the files in place so that you know where they are when we come to editing them. The files
-should be located in the <code>/plugins/koowa/name</code> directory where name is the name of your plugin, in our case <code>/plugins/koowa/docman</code></p>
-<p>2) Once the files are in place, in the Joomla backend, go to <strong>Menu &gt; Extensions &gt; Extension Manager</strong>, then select <strong>Discover</strong>
-from the sub-menu.</p>
-<p>3) On the Discover screen, hit the <strong>Discover</strong> button, the plugin should then show up in the list. Now click the
-checkbox to the left of the plugin, and hit <strong>Install</strong>. The plugin should now be installed.</p>
-<p>4) Once the plugin is installed, you also need to enable it. Go to: <strong>Menu &gt; Extensions &gt; Plug-in Manager</strong> and search by
-name or filter by type and set to <strong>koowa</strong>. When you the newly created plugin, you should see a red cross in the status
-column to indicate the plugin is disabled; click that red cross to enable the plugin.</p>
-<h2 id="event-handlers">Event handlers</h2>
-<h3 id="naming">Naming</h3>
-<p>Congratulations on getting this far! Let&#39;s go ahead and create some actual event handlers to our class.</p>
-<p>An event handler is simply a method of our new plugin, the naming of which conforms to a standard convention as follows:</p>
-<p>on[<strong>Before/After</strong>][<strong>Component</strong>][<strong>Name</strong>][<strong>Type</strong>][<strong>Action</strong>]</p>
-<blockquote>
-<p>Note: Each part in brackets must always start with an uppercase letter.</p>
-</blockquote>
-<p>This might look confusing, but it&#39;s actually quite simple. Each of the parts in brackets is a variable placeholder and
-can be substituted with different values:</p>
-<ul>
-<li>Before/After - All actions have a before/after event and unsurprisingly are run before/after the action</li>
-<li>Component - The name of the component the event belongs to, in this case <strong>Docman</strong></li>
-<li>Name - The name of the &quot;entity&quot; that the event belongs to, e.g. the <strong>Document</strong></li>
-<li>Type - The type of the object using the entity, e.g. <strong>Controller</strong> (*)</li>
-<li>Action - The name of the action being run. In the case of controllers, this would be one of the BREAD actions as explained above.</li>
-</ul>
-<p>If we wanted to run some code after the user adds a new document, the event name would look like this:</p>
-<p><code>onAfterDocmanDocumentControllerAdd()</code></p>
-<p>Using this syntax, you can register events for any combination of controllers and actions.</p>
-<blockquote>
-<p>In this tutorial we are only covering controller events. The event system is also capable of subscribing to
-database table, database adapter, model and view events! Consider for example <strong>onBeforeDocmanDocumentViewRender</strong> or
-<strong>onAfterDocmanDocumentModelFetch</strong>. <br><br>Maybe you can think of a few more?</p>
-</blockquote>
-<h3 id="method">Method</h3>
-<p>The event handler takes a single argument which is an instance of <a href="https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/event/interface.php#L10" target="_blank"><code>KEventInterface</code></a>
-and holds all of the information about the event that was dispatched. This is very similar to how events work in Javascript; the event object
-that is passed to the method contains everything you need to know about who/what generated the event.</p>
-<pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onAfterDocmanDocumentControllerAdd</span><span class="hljs-params">(KEventInterface <span class="hljs-variable">$event</span>)</span>
-</span>{
-    <span class="hljs-comment">//The event object contains several useful properties</span>
-    <span class="hljs-variable">$caller</span>        = <span class="hljs-variable">$event</span>-&gt;caller;
-    <span class="hljs-variable">$action</span>     = <span class="hljs-variable">$event</span>-&gt;action;
-    <span class="hljs-variable">$data</span>         = <span class="hljs-variable">$event</span>-&gt;data;
-    <span class="hljs-variable">$result</span>     = <span class="hljs-variable">$event</span>-&gt;result;
-}
-</code></pre>
-<ul>
-<li>Caller - This is the object that triggered the event, in the case above it would be the <strong>document</strong> controller.</li>
-<li>Action - The original action that triggered the event, in this case <strong>add</strong>.</li>
-<li>Data - Any data that is passed to the controller action is stored in a KConfig object. Typically this is used for
-any action that takes in data, such as <strong>Add</strong>, <strong>Edit</strong>, <strong>Post</strong> and <strong>Put</strong>. You could modify the data here if you wished.</li>
-<li>Result - This is populated with the result of the action, only applicable to <strong>After</strong> events.</li>
-</ul>
-<h3 id="stopping-events">Stopping Events</h3>
-<p>Just as in Javascript, it is possible to stop any further events from being run. You can do this by calling</p>
-<pre><code class="lang-php"><span class="hljs-variable">$event</span>-&gt;stopPropagation();
-</code></pre>
-<p>This will stop any other event handlers registered for the given action from being run.</p>
-<h3 id="beforeafter---when-to-use">Before/After - When to use</h3>
-<p>It can sometimes be confusing to know when to use before or after events. However, following these simple rules should help:</p>
-<ul>
-<li><strong>BEFORE</strong> - If you wish to modify the incoming data, such as in add/edit actions.</li>
-<li><strong>AFTER</strong> - If you need to be sure the action was successful or need to manipulate the response before it is displayed,
-for example removing certain values from a document for unregistered users.</li>
-</ul>
-<h2 id="put-it-all-together">Put it all together</h2>
+<h3 id="basic-example-method">Basic Example Method</h3>
 <pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgKoowaDocman</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaSubscriber</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgDocmanDocument</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaSubscriber</span>
 </span>{
     <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onBeforeDocumentControllerAdd</span><span class="hljs-params">(KEventInterface <span class="hljs-variable">$event</span>)</span>
     </span>{
@@ -893,15 +806,27 @@ for example removing certain values from a document for unregistered users.</li>
     }
 }
 </code></pre>
-<p>The above is an example of how you might send an email when an event happens and modify the incoming data according to
-your business rules.</p>
-<h2 id="example-plugin">Example Plugin</h2>
-<p>Let&#39;s work through a real world example that was requested in the Joomlatools forum:</p>
+<p>Here is an event handler that we might use to help moderate document submissions. 
+We are doing two things here: </p>
+<ol>
+<li>want to make sure that the document is not published right away </li>
+<li>and that we get notified of the submission. </li>
+</ol>
+<p>Our <code>onBeforeDocumentControllerAdd</code> method follows a <a href="framework/plugins.html#naming">specific naming convention</a>.</p>
 <blockquote>
-<p>&quot;We want to use DOCman for special document processing. The document description will contain keywords for special tagging
- (year of publishing, author etc).
-If the document is saved, modified or deleted we would listen to these events and store this information in a
-custom database table so that we can do special search operations.&quot;</p>
+<p>Event names are built by Nooku&#39;s Event command handler, <a href="https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/command/handler/event.php#L120" target="_blank">KCommandHandlerEvent</a>. </p>
+</blockquote>
+<p>That method reads as follows</p>
+<blockquote>
+<p><strong>Before</strong> a <strong>Document</strong>  entity <strong>Controller</strong> executes the <strong>Add</strong> method , do this</p>
+</blockquote>
+<p>For controller focused events the <code>$event</code> variable gets the <code>data</code> property. This is made up of the input data of the request coming into the action. We intercept it with a <strong>Before</strong> event handler because we want to disable the document before we add it to the database.</p>
+<p>Refer to <a href="#mvc-actions-and-events">MVC Actions and Events</a> for detailed information about specific <code>$event</code> variable properties and the actions they are geared towards. </p>
+<h2 id="real-life-example-plugin">Real Life Example Plugin</h2>
+<p>Let&#39;s work through a real world example that was actually requested in the Joomlatools forum. It will help solidify the concepts we have covered so far. </p>
+<blockquote>
+<p>&quot;We want to use DOCman for special document processing. The document description will contain keywords for special tagging (year of publishing, author etc).
+If the document is saved, modified or deleted we would listen to these events and store this information in a custom database table so that we can do special search operations.&quot;</p>
 </blockquote>
 <p>So let&#39;s go ahead and work out what events we need to respond to:</p>
 <ul>
@@ -911,7 +836,7 @@ custom database table so that we can do special search operations.&quot;</p>
 <li>Action: <strong>add</strong>,<strong>edit</strong>,<strong>delete</strong> - Save/modify/delete events</li>
 </ul>
 <p>Therefore the event method names we need are:</p>
-<pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgKoowaDocman</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaSubscriber</span>
+<pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgDocmanDocument</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaSubscriber</span>
 </span>{
         onAfterDocmanDocumentControllerAdd(KEventInterface <span class="hljs-variable">$event</span>){}
         onAfterDocmanDocumentControllerEdit(KEventInterface <span class="hljs-variable">$event</span>){}
@@ -919,8 +844,7 @@ custom database table so that we can do special search operations.&quot;</p>
 }
 </code></pre>
 <p>Pretty simple so far right?</p>
-<p>Now consider save events, these cover both add and edit (create and update), so the simplest way to have both of these
-methods run the same code is have one call the other.</p>
+<p>Now consider save events, these cover both add and edit (create and update), so the simplest way to have both of these methods run the same code is have one call the other.</p>
 <pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlgKoowaDocman</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlgKoowaSubscriber</span>
 </span>{
         onAfterDocmanDocumentControllerAdd(KEventInterface <span class="hljs-variable">$event</span>)
@@ -932,11 +856,9 @@ methods run the same code is have one call the other.</p>
 }
 </code></pre>
 <p>Now, let&#39;s flesh out the edit event.</p>
-<p>In the brief the customer gave, they want to react to certain keywords for special tagging. As we don&#39;t know the format
-for this, let&#39;s just say they&#39;ll be in the format <code>{year:X}</code> and <code>{author:Y}</code>  where <strong>X</strong> is the year number and <strong>Y</strong> is the author name.</p>
-<p>First things first; we need to get the document that was added/edited. This is contained within the &quot;result&quot; property
- of the event object as it&#39;s the &quot;result&quot; of the action that&#39;s being performed.</p>
-<p>Secondly we need to get the description field of the document that we&#39;re going to check for the keywords.</p>
+<p>In the brief the customer gave, they want to react to certain keywords for special tagging. As we don&#39;t know the format for this, let&#39;s just say they&#39;ll be in the format <code>{year:X}</code> and <code>{author:Y}</code>  where <strong>X</strong> is the year number and <strong>Y</strong> is the author name.</p>
+<p>First things first; we need to get the document that was added/edited. This is contained within the <code>result</code> property of the <code>$event</code> object as it&#39;s the &quot;result&quot; of the action that&#39;s being performed.</p>
+<p>Secondly we need to get the <code>description</code> field of the document entity that we&#39;re going to check for the keywords.</p>
 <pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onAfterDocmanDocumentControllerEdit</span><span class="hljs-params">(KEventInterface <span class="hljs-variable">$event</span>)</span>
 </span>{
     <span class="hljs-comment">//The result of the controller action is stored in the "result" property</span>
@@ -945,7 +867,7 @@ for this, let&#39;s just say they&#39;ll be in the format <code>{year:X}</code> 
     <span class="hljs-variable">$description</span> = <span class="hljs-variable">$row</span>-&gt;description;
 }
 </code></pre>
-<p>If you were to <code>var_dump($description)</code> or use your favorite debugger you should find that it contains the value of the description field.</p>
+<p>If you were to <code>var_dump($description)</code> or use your favorite debugger you should find that it contains the value of the <code>description</code> field.</p>
 <blockquote>
 <p>Note: you&#39;ll need to add an <code>exit()</code> or <code>die()</code> method after the var_dump otherwise the page will redirect and you won&#39;t see anything).</p>
 </blockquote>
@@ -977,11 +899,9 @@ for this, let&#39;s just say they&#39;ll be in the format <code>{year:X}</code> 
 <p>Simple as that :)</p>
 <p>To get the sample plugin, visit here: <a href="https://github.com/joomlatools/docman-example/" target="_blank">Example Plugin</a>. You can download it
 or even install it with Composer.</p>
-<h2 id="in-closing">In Closing</h2>
+<h2 id="in-closing">In closing</h2>
 <p>We have shown you how to create event handlers for any DOCman controller action.</p>
-<p>You can affect both the input and output of any one of those actions by simply building and placing a plugin properly and following the method
-naming convention that we have outlined above.</p>
-<p>Though we did not cover all the possibilities extensively here, you have this same ability for DOCman models, tables and views as well.</p>
+<p>You can affect both the input and output of any one of those, or model and view actions by simply building and placing a plugin properly and following the method naming convention that we have outlined above. </p>
 <p>Remember also, the handler method gets passed an <a href="https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/event/interface.php#L10" target="_blank"><code>KEventInterface $event</code></a> object with most of the information you will need.</p>
 
                     
@@ -1015,10 +935,6 @@ naming convention that we have outlined above.</p>
 
     
     <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
-    
-
-    
-    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>
