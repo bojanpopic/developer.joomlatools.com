@@ -49,7 +49,7 @@
             </ul>
         </div>
     </div>
-    <div class="book" data-level="1.2.2" data-basepath="../.." data-revision="1424815217582">
+    <div class="book" data-level="1.2.2" data-basepath="../.." data-revision="1424862377141">
     
 
 <div class="book-summary">
@@ -738,7 +738,7 @@
 <li>title</li>
 </ul>
 <p>LOGman&#39;s activity message translations are not that different from regular Joomla! translations. They also have a key and a value. For example, the translation for the above message is:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT=&quot;{actor} {action} the {object.type} with the title {object}&quot;
+<pre><code>KLS_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT=&quot;{actor} {action} the {object.type} with the title {object}&quot;
 </code></pre><p>The above string is used to generate the text in the first example. The first part (before the equals sign) is the key, these are pre-defined keys that LOGman uses to lookup the value (the part after the equals sign). The value is used to construct the activity message, it contains placeholders that are replaced by variables when outputting the message.</p>
 <p>Using the above example, the variables would be mapped accordingly:</p>
 <ul>
@@ -750,24 +750,24 @@
 <h2 id="how-does-it-work">How does it work?</h2>
 <p>LOGman has specially constructed translation strings that can be customized for different languages, actions and resources.</p>
 <p>Not all languages construct sentences in the same way, such as putting verbs, subjects and objects in different orders. For example, english constructs sentences using subject verb object, e.g. <code>Steve sat on the sofa</code>, whereas turkish uses subject object verb, e.g. <code>Steve koltukta oturdu</code>.</p>
-<p>All LOGman translations start with the <code>KLS_ACTIVITY_</code> prefix.</p>
+<p>All LOGman translations start with the <code>KLS_</code> prefix.</p>
 <p>Sometimes it is necessary to customize specific sentences, so that they sound more grammatically accurate.</p>
 <p>For example, whilst :</p>
 <pre><code>John Doe created the article with the title Frequently Asked Questions
 </code></pre><p>makes sense, a more accurate sentence would be:</p>
 <pre><code>John Doe created a new article with the title Frequently Asked Question
-</code></pre><p>The original key <code>KLS_ACTIVITY_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT</code> can be overridden to provide a more specific version only for the <code>created</code> action:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_CREATED_OBJECTTYPE_TITLE_OBJECT=”{actor} {action} a new {object.type} with title {object}”
+</code></pre><p>The original key <code>KLS_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT</code> can be overridden to provide a more specific version only for the <code>created</code> action:</p>
+<pre><code>KLS_ACTOR_CREATED_OBJECTTYPE_TITLE_OBJECT=”{actor} {action} a new {object.type} with title {object}”
 </code></pre><p>As you can see, the above key has been made specific for the <code>created</code> action (<code>ACTION</code> has been replaced with <code>CREATED</code>). This key will be used for activities where action is created in favor of the generic one.</p>
 <p>LOGman will always try to use the most specific version of the translation that it can find.</p>
 <p>If we would like to use the previous example for article resources only, then we would use the following translation:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_CREATED_ARTICLE_TITLE_OBJECT=”{actor} {action} a new {object.type} with title {object}”
+<pre><code>KLS_ACTOR_CREATED_ARTICLE_TITLE_OBJECT=”{actor} {action} a new {object.type} with title {object}”
 </code></pre><p>By specifying the action and the object type in the key, the translation has been made more specific. This means that it will only get used for activities where articles get created.</p>
 <h2 id="other-languages">Other languages</h2>
 <p>The same technique may be employed while translating activity messages to other languages, as this allows for changing the static components (words) of the translation key values for a given translation. Let’s switch to Spanish:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT=”{actor} {action} el {object.type} con el título {object}“
+<pre><code>KLS_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT=”{actor} {action} el {object.type} con el título {object}“
 </code></pre><p>This key would work fine for resources such as article, since article is a masculine subject. But what about category, which is feminine. In that case we can do this:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_ACTION_CATEGORY_TITLE_OBJECT=”{actor} {action} la {object.type} conn el título {object}“
+<pre><code>KLS_ACTOR_ACTION_CATEGORY_TITLE_OBJECT=”{actor} {action} la {object.type} conn el título {object}“
 </code></pre><p>Using the above key, you can override the translation string used for specific resource types in order to create a grammatically correct sentence.</p>
 <p>Some message parameters such as {action} can also be translated by adding translations with the <code>KLS_</code> prefix. For example, to translate the word CREATED, we could need to define its translation using the <code>KLS_CREATED</code> key.</p>
 <pre><code>KLS_CREATED=&quot;creado&quot;
@@ -775,7 +775,7 @@
 <p>When translating each variable our translator will first look up for <code>KLS_</code> prefixed keys. If none is found, non-prefixed keys (without the <code>KLS_</code> prefix) will be used if defined. This is useful for re-using Joomla! core translations and overriding them if needed.</p>
 <h2 id="context-translations">Context translations</h2>
 <p>Sometimes the translation of a given word will depend upon the context of a message. Take the following translation as example:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_ACTION_USER_GROUP_TITLE_OBJECT=”{actor} {action} el {object.type} de {object.subtype} con el título {object}”
+<pre><code>KLS_ACTOR_ACTION_USER_GROUP_TITLE_OBJECT=”{actor} {action} el {object.type} de {object.subtype} con el título {object}”
 </code></pre><p>This translation will produce activity messages as follows:</p>
 <pre><code>Carlos borró el grupo de usuario con el título Clientes
 </code></pre><p>The problem with the phrase above is that it is slightly grammatically incorrect. The correct message should be:</p>
@@ -783,10 +783,10 @@
 </code></pre><p>The translation of the word <code>user</code> in Spanish is <code>usuario</code>. This value is provided by the <code>USER</code> translation key defined in Joomla! core translations. The <code>{object.subtype}</code> placeholder gets replaced with this value. However, instead of <code>usuario</code> (singular) we should have <code>usuarios</code> (plural).</p>
 <p>This is where context translations become useful. They provide a way to force translations in a given context.</p>
 <p>So how do they work?. Check the following translation:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_ACTION_USER_GROUP_TITLE_OBJECT=”{actor} {action} el {object.type} de {object.subtype:usuarios} con el título {object}”
+<pre><code>KLS_ACTOR_ACTION_USER_GROUP_TITLE_OBJECT=”{actor} {action} el {object.type} de {object.subtype:usuarios} con el título {object}”
 </code></pre><p>Check out the <code>{object.subtype:usuarios}</code>. Easy right?. LOGman’s translator will automatically use <code>usuarios</code> instead of the default <code>usuario</code> translation for this specific context. It is a way of saying to the trasnlator to not translate the word and use the one you are providing.</p>
 <p>We might have directly done:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_ACTION_USER_GROUP_TITLE_OBJECT=”{actor} {action} el {object.type} de usuarios con el título {object}”
+<pre><code>KLS_ACTOR_ACTION_USER_GROUP_TITLE_OBJECT=”{actor} {action} el {object.type} de usuarios con el título {object}”
 </code></pre><p>In this last example, we have completely omitted the variable placeholder and forced the usuarios word in the translation value. That is all right and it will work.</p>
 <p>However, if the <code>object.type</code> variable was linkable or contained special formatting of some kind, this information is completely lost, as we have effectively replaced a variable with a constant.</p>
 <p>As a rule of thumb, always favor context translations over hardcoded variable translations in cases like this.</p>
@@ -825,6 +825,10 @@
 
     
     <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>
