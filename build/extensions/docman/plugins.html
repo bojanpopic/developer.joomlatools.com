@@ -49,7 +49,7 @@
             </ul>
         </div>
     </div>
-    <div class="book" data-level="1.1.2" data-basepath="../.." data-revision="1424862377141">
+    <div class="book" data-level="1.1.2" data-basepath="../.." data-revision="1425082044319">
     
 
 <div class="book-summary">
@@ -715,10 +715,10 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_2">
+                    <section class="normal" id="section-gitbook_140">
                     
                         <h1 id="plugins">Plugins</h1>
-<p><strong>Read the <a href="framework/plugins.html">Framework Plugins</a> guide to get the absolute most out of this tutorial</strong>. We build on concepts that are covered in that guide.  </p>
+<p><strong>Read the <a href="/framework/plugins.html">Framework Plugins</a> guide to get the absolute most out of this tutorial</strong>. We build on concepts that are covered in that guide.  </p>
 <p>There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
 Perhaps you want to send an email when a document is uploaded. Maybe you want add some data to the list of documents before
 it gets rendered to the screen. Whatever you would like to do is possible with Plugins and our Event driven architecture. </p>
@@ -763,11 +763,11 @@ it gets rendered to the screen. Whatever you would like to do is possible with P
 </tr>
 </tbody>
 </table>
-<p>To get a sense of the granularity of the events that a plugin can subscribe to have a look at <a href="framework/plugins.html#what-is-possible">&quot;What is Possible?&quot;</a> in the Framework Plugins guide. </p>
+<p>To get a sense of the granularity of the events that a plugin can subscribe to have a look at <a href="/framework/plugins.html#what-is-possible">&quot;What is Possible?&quot;</a> in the Framework Plugins guide. </p>
 <h2 id="setup">Setup</h2>
 <p>A plugin consists of at least 2 files, a PHP class and an XML descriptor. </p>
 <blockquote>
-<p>We cover the major details of each in <a href="framework/plugins.html#creation-and-installation">Creation and Installation</a> section of the Framework Plugin guide.</p>
+<p>We cover the major details of each in <a href="/framework/plugins.html#creation-and-installation">Creation and Installation</a> section of the Framework Plugin guide.</p>
 </blockquote>
 <h3 id="xml-descriptor">XML Descriptor</h3>
 <p>This is what our <em>bare bones</em> plugin manifest file should look like. </p>
@@ -812,7 +812,7 @@ We are doing two things here: </p>
 <li>want to make sure that the document is not published right away </li>
 <li>and that we get notified of the submission. </li>
 </ol>
-<p>Our <code>onBeforeDocumentControllerAdd</code> method follows a <a href="framework/plugins.html#naming">specific naming convention</a>.</p>
+<p>Our <code>onBeforeDocumentControllerAdd</code> method follows a <a href="/framework/plugins.html#naming">specific naming convention</a>.</p>
 <blockquote>
 <p>Event names are built by Nooku&#39;s Event command handler, <a href="https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/command/handler/event.php#L120" target="_blank">KCommandHandlerEvent</a>. </p>
 </blockquote>
@@ -821,7 +821,7 @@ We are doing two things here: </p>
 <p><strong>Before</strong> a <strong>Document</strong>  entity <strong>Controller</strong> executes the <strong>Add</strong> method , do this</p>
 </blockquote>
 <p>For controller focused events the <code>$event</code> variable gets the <code>data</code> property. This is made up of the input data of the request coming into the action. We intercept it with a <strong>Before</strong> event handler because we want to disable the document before we add it to the database.</p>
-<p>Refer to <a href="#mvc-actions-and-events">MVC Actions and Events</a> for detailed information about specific <code>$event</code> variable properties and the actions they are geared towards. </p>
+<p>Refer to <a href="/framework/plugins.html#mvc-actions-and-events">MVC Actions and Events</a> for detailed information about specific <code>$event</code> variable properties and the actions they are geared towards. </p>
 <h2 id="real-life-example-plugin">Real Life Example Plugin</h2>
 <p>Let&#39;s work through a real world example that was actually requested in the Joomlatools forum. It will help solidify the concepts we have covered so far. </p>
 <blockquote>

@@ -102,7 +102,7 @@ An event handler can technically be any [callable](http://php.net/manual/en/lang
 * **Package**  - The name of the component the event belongs to, in this case **Acme**
 * **Subject** - The name of the "entity" that the event belongs to, e.g. the **Bar**. This is singular.
 * **Type** - The type of the object using the entity, e.g. **Controller, View or Model**. Also singular.
-* **Action** - The name of the action being run ([any one of these](what-actions-can-be-affected)). 
+* **Action** - The name of the action being run ([any one of these](#what-actions-can-be-affected)). 
 
 Our example `onBeforeAcmeBarControllerBrowse` method shows this pattern clearly. Its like saying 
 >"**Before** the **Acme** package **Bar** entity **Controller** performs a **Browse** action, do this". 

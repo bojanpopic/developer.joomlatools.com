@@ -1,6 +1,6 @@
 # Plugins
 
-**Read the [Framework Plugins](framework/plugins.md) guide to get the absolute most out of this tutorial**. We build on concepts that are covered in that guide.  
+**Read the [Framework Plugins](/framework/plugins.html) guide to get the absolute most out of this tutorial**. We build on concepts that are covered in that guide.  
 
 There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
 Perhaps you want to send an email when a document is uploaded. Maybe you want add some data to the list of documents before
@@ -23,13 +23,13 @@ There are a number of entities in DOCman for whose MVC actions you may wish to r
 |Download|Category|
 |List|File|
 
-To get a sense of the granularity of the events that a plugin can subscribe to have a look at ["What is Possible?"](framework/plugins.md#what-is-possible) in the Framework Plugins guide. 
+To get a sense of the granularity of the events that a plugin can subscribe to have a look at ["What is Possible?"](/framework/plugins.html#what-is-possible) in the Framework Plugins guide. 
 
 ## Setup
 
 A plugin consists of at least 2 files, a PHP class and an XML descriptor. 
 
->We cover the major details of each in [Creation and Installation](framework/plugins.md#creation-and-installation) section of the Framework Plugin guide.
+>We cover the major details of each in [Creation and Installation](/framework/plugins.html#creation-and-installation) section of the Framework Plugin guide.
 
 ### XML Descriptor
 
@@ -86,7 +86,7 @@ We are doing two things here:
 1. want to make sure that the document is not published right away 
 2. and that we get notified of the submission. 
 
-Our `onBeforeDocumentControllerAdd` method follows a [specific naming convention](framework/plugins.md#naming).
+Our `onBeforeDocumentControllerAdd` method follows a [specific naming convention](/framework/plugins.html#naming).
 
 >Event names are built by Nooku's Event command handler, [KCommandHandlerEvent](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/command/handler/event.php#L120). 
 
@@ -96,7 +96,7 @@ That method reads as follows
 
 For controller focused events the `$event` variable gets the `data` property. This is made up of the input data of the request coming into the action. We intercept it with a **Before** event handler because we want to disable the document before we add it to the database.
 
-Refer to [MVC Actions and Events](#mvc-actions-and-events) for detailed information about specific `$event` variable properties and the actions they are geared towards. 
+Refer to [MVC Actions and Events](/framework/plugins.html#mvc-actions-and-events) for detailed information about specific `$event` variable properties and the actions they are geared towards. 
  
 ## Real Life Example Plugin
 
