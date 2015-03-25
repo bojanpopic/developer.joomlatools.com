@@ -1,8 +1,11 @@
 {
-	"title": "Joomlatools Developer Zone",
-	"output": "./build/",
+    "title": "Joomlatools Developer Zone",
+    "output": "./build/",
     "theme": "theme",
-	"plugins": ["toc", "ga"],
+    "plugins": [
+        "toc",
+        "ga"
+    ],
     "pluginsConfig": {
         "ga": {
             "token": "UA-214238-3"
