@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>LOGman | Joomlatools Developer Zone</title>
+        <title>Parameterizable | Joomlatools Developer Zone</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -17,10 +17,8 @@
         
     
     
-    <link rel="next" href="../extensions/logman/plugins/README.html" />
+    <link rel="next" href="../tools/composer/introduction.html" />
     
-    
-    <link rel="prev" href="../extensions/docman/parameterizable.html" />
     
 <link rel="stylesheet" href="http://use.typekit.net/c/96df50/1w;proxima-nova,2,b5x:N:i4,b61:N:i7,b5r:N:n1,b5t:N:n3,b5w:N:n4,bBh:N:n7;proxima-nova-alt,2,S9j:N:i4,S9d:N:i7,S9h:N:n4,S9c:N:n7/d?3bb2a6e53c9684ffdc9a98f41a5b2a62f97c6e2d19ae8171762f36a47b7ae4c15c15262578921b579b40772b17a4eeecbd196d5e41afbde63d066aca0adb6668b3041dcb1bd480ac9835af7a0262b3e6e63c8d629858af7ef7fe3d8800ea88755285b723ce632daa8d9425ed73e43cc241d0f1e654decd26a99bef6b3084bb5074fe9cbb89cd4392dd2e1eb9de20e42e0e2e9f26565e45aa62105f55a5be79697d144a19d6b9a27417ef903139e47ca0fef68be9fc7c58ca6a25b10107d6a34c73963e79a0b2702ffdc2637834bf784bd1fe0d69007cbd45f4021e4d">
 
@@ -49,7 +47,7 @@
             </ul>
         </div>
     </div>
-    <div class="book" data-level="1.2" data-basepath=".." data-revision="1426693477034">
+    <div class="book" data-level="2.2.1" data-basepath=".." data-revision="1426693477034">
     
 
 <div class="book-summary">
@@ -190,7 +188,7 @@
         </li>
     
         
-        <li class="chapter active" data-level="1.2" data-path="extensions/logman.html">
+        <li class="chapter " data-level="1.2" data-path="extensions/logman.html">
             
                 
                     <a href="../extensions/logman.html">
@@ -415,7 +413,7 @@
                 
     
         
-        <li class="chapter " data-level="2.2.1" data-path="framework/database-behavior-parameterizable.html">
+        <li class="chapter active" data-level="2.2.1" data-path="framework/database-behavior-parameterizable.html">
             
                 
                     <a href="../framework/database-behavior-parameterizable.html">
@@ -745,13 +743,105 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_7">
+                    <section class="normal" id="section-gitbook_13">
                     
-                        <h1 id="logman">LOGman</h1>
-<p>LOGman is our activity logging extension for Joomla!. It is built on top of a reusable activities component that exposes an API for developing powerful activity aware applications.</p>
-<p>The API was greatly inspired and fully adheres to the <a href="http://activitystrea.ms/" target="_blank">Activitiy Streams specification</a>. It currently supports and extends the <a href="http://activitystrea.ms/specs/json/1.0/" target="_blank">first version</a> of the specification. This is an excellent source of information for any developer looking forward to develop applications that deal with activity streams.  </p>
-<p>LOGman allows 3rd party developers to integrate their extensions into the activity logging system with ease. For this end, a complete and comprehensive guide is made available under the <a href="logman/integrations/README.html">Integrations</a> section. Additionally, any developer looking forward to develop LOGman integrations is encouraged to take a look at the activity streams specification.</p>
-<p>All LOGman activity messages may be translated to other languages. Internationalization of activity messages is made possible thanks to our activities translator. A guide for for translating activities messages is provided in the <a href="logman/translations.html">Translations</a> section.</p>
+                        <h1 id="parameterizable">Parameterizable</h1>
+<p>There is sometimes a need to store more than one value in a table column as a serialized string of some kind. Maybe each record in the table has different configuration settings, or maybe you simply require flexibility in data storage without the need, or in many cases, the ability to add columns to your table to hold individual pieces of data. With storage, you also want retrieval; you&#39;ll need to decode that data to use it in your application.</p>
+<p>The Framework provides for both storing and retrieval of item level configuration or customized inputs (custom fields) in a component&#39;s tables with a database behavior called <strong>Parameterizable</strong>, i.e. <a href="https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/behavior/parameterizable.php#L16" target="_blank"><code>KDatabaseBehaviorParameterizable</code></a></p>
+<!-- The Framework solves the problem of allowing custom fields in its components by providing a database behavior called Parameterizable: -->
+<p>By making use of the <a href="https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/libraries/filter" target="_blank"><code>KFilter</code></a> classes and <code>KConfigFormat</code> this behavior handles the saving and retrieving of non-normalized data in a given format.</p>
+<p>We take a walk through some of the related objects and classes to give you some insight on how this behavior works.</p>
+<!-- toc -->
+<ul>
+<li><a href="#formats">Formats</a></li>
+<li><a href="#kconfigobject">KConfigObject</a></li>
+<li><a href="#using-a-custom-column">Using a Custom Column</a><ul>
+<li><a href="#kfilter-and-formats">KFilter and Formats</a></li>
+<li><a href="#facts">Facts</a></li>
+</ul>
+</li>
+<li><a href="#isparameterizable">isParameterizable()?</a></li>
+</ul>
+<!-- toc stop -->
+<h2 id="formats">Formats</h2>
+<p>Data stored in this way needs a <strong>format</strong>. There are a number of formats available for storing information in a column, and anywhere else for that matter, e.g perhaps a file. Currently the following formats are supported by the Framework:</p>
+<ul>
+<li>php  (parameters are stored as php arrays)</li>
+<li>yaml</li>
+<li>xml</li>
+<li>ini</li>
+<li>json</li>
+</ul>
+<p>These formats are mostly used to store, retrieve and encapsulate <strong>configuration</strong> objects, and as such, they are all available for inspection at <a href="https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/libraries/object/config" target="_blank">libraries/koowa/libraries/object/config/</a>.  All of these classes extend from KConfigObject.</p>
+<h2 id="kconfigobject">KConfigObject</h2>
+<p>When we ask a row object for its <code>parameters</code> the behavior returns an object that extends from <a href="https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/object/config/config.php#L19" target="_blank">KConfigObject</a>.</p>
+<blockquote>
+<p>KObjectConfig class plays a key role in all the major objects in the Framework. Each of them uses this object to provide for its configuration.</p>
+</blockquote>
+<p>In fact, we build this object based primarily on the format that the <code>parameters</code> table column is <strong>filtered</strong> with, and if no filter exists then the <code>type</code> attribute of the table schema. The data from that column is then injected into the object.</p>
+<p>Extending KObjectConfig provides a nice uniform interface for working with the data contained in the object no matter what format its in, with some very useful methods for doing so.</p>
+<blockquote>
+<p><strong>Technical Tip:</strong> Each <code>KObjectConfig[Format]</code> implements the <code>serialziable</code> interface and extends <code>KObjectConfigFormat</code>, and so provides the option of storing and retrieving parameters to a file.</p>
+</blockquote>
+<h2 id="using-a-custom-column">Using a Custom Column</h2>
+<p>The column that gets used to store this data is specified in the objects configuration, and the default is &#39;parameters&#39;.</p>
+<pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComAcmeDatabaseBehaviorParameterizable</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">KDatabaseParameterizable</span>
+</span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_initialize</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
+    </span>{
+        <span class="hljs-variable">$config</span>-&gt;append(<span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'column'</span> =&gt; <span class="hljs-string">'settings'</span> <span class="hljs-comment">// or whatever column you want!</span>
+        ));
+        <span class="hljs-keyword">parent</span>::_initialize(<span class="hljs-variable">$config</span>);
+    }
+}
+</code></pre>
+<p>Parameters can actually be stored in any column of appropriate type (i.e. not <code>int</code> or <code>date</code>, but can be <code>text</code>, <code>blob</code> or <code>varchar</code>, etc). The class takes a <code>column</code> configuration option so we can tie this behavior to a column other than <code>parameters</code>.</p>
+<p>For example, a column name like <code>config</code> or <code>settings</code> will be dealt with in the same way as <code>parameters</code>. Simply specify the column in the <code>_initialize</code> config object of a new class that extends this <code>KDatabaseBehaviorParameterizable</code> as we have done above.</p>
+<blockquote>
+<p><strong>Did you know? </strong>
+You can also the Nooku Framework bootstrapper to configure this object and not even have to create the class. By creating a resources/config/bootstrapper.php file in your component and adding the following:</p>
+</blockquote>
+<pre><code class="lang-php"> <span class="hljs-keyword">return</span> <span class="hljs-keyword">array</span>(
+         <span class="hljs-string">'identifiers'</span> =&gt; <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'com://site/acme.database.behavior.parameterizable =&gt;
+                array('</span>column<span class="hljs-string">' =&gt; '</span>settings<span class="hljs-string">')
+        )
+);</span>
+</code></pre>
+<h3 id="kfilter-and-formats">KFilter and Formats</h3>
+<p>A column format is defined either by the presence of a filter assigned to that column; or, if none is assigned, by the <code>type</code> actually defined in the  database schema for the column itself.</p>
+<pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComAcmeDatabaseTableBars</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">KDatabaseTableAbstract</span>
+</span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_initialize</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
+    </span>{
+        <span class="hljs-variable">$config</span>-&gt;append(<span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'filters'</span> =&gt; <span class="hljs-keyword">array</span>(<span class="hljs-string">'parameters'</span>   =&gt; <span class="hljs-keyword">array</span>(<span class="hljs-string">'json'</span>)
+        ));
+
+        <span class="hljs-keyword">parent</span>::_initialize(<span class="hljs-variable">$config</span>);
+    }
+}
+</code></pre>
+<p>For the Parameterizable behavior to do its work, the column to be used in  <strong>must</strong> have a valid format from above associated with it. The filter gets used by the behavior to make sure that the information gets written to the column in the right format. And since we filtered it using this format to store it, we must use the same format to unserialize the data and push it into the KObjectConfig object.</p>
+<p>In the <code>Acme</code> extension <code>Bars</code> table we defined above, the <code>parameter</code> column has <code>KFilterJson</code> filter attached to it.  Hence if we set the <code>parameter</code> column of a row object to an array, that filter will take care of turning the array into a json string for database storage. When we try to retrieve the column with <code>getParameters()</code>, the method sees KFilterJson and builds and returns a KObjectConfigJson object with the data.</p>
+<h3 id="facts">Facts</h3>
+<ul>
+<li><p>Parameterizable asks the table object for the filter which is applied to that column, because the filter defines the format.</p>
+</li>
+<li><p>Therefore to assign a desired format, we just need to tell the table object which one we want for that column.</p>
+</li>
+<li><p>The format specified in the column&#39;s filter lets <code>getParameters()</code> know what strategy to use to pack and unpack your data.</p>
+</li>
+</ul>
+<h2 id="isparameterizable">isParameterizable()?</h2>
+<p>When looking to interact with a row object&#39;s parameters we want to make sure that the &quot;parameterizable&quot; database behavior is present in that row&#39;s table. So we ask first:</p>
+<pre><code class="lang-php"><span class="hljs-keyword">if</span>(<span class="hljs-variable">$bar</span>-&gt;isParameterizable()) {
+     <span class="hljs-variable">$params</span> =   <span class="hljs-variable">$bar</span>-&gt;getParameters();
+}
+</code></pre>
+<p>This is good practice. If the behavior exists its <strong>mixable</strong> methods get added to the <code>$bar</code> row object&#39;s interface, which is why we can call <code>getParameters</code> . There is a risk of getting a fatal error if the behavior is not present in some context.</p>
+<p>In some of the examples above we have alluded to using a custom column name in the behavior, like <code>settings</code> or <code>config</code>, instead of the default <code>parameters</code>. If you do use a custom column, a method which is similar to <code>getParameters</code> be exposed for that column as well via PHP magic __call method. The column name <code>settings</code> yields callable <code>getSettings</code> in the row object&#39;s interface, and if <code>config</code> were used, <code>getConfig</code> would be callable too.</p>
 
                     
                     </section>
@@ -762,10 +852,8 @@
         </div>
 
         
-        <a href="../extensions/docman/parameterizable.html" class="navigation navigation-prev " aria-label="Previous page: Custom Parameters"><i class="fa fa-angle-left"></i></a>
         
-        
-        <a href="../extensions/logman/plugins/README.html" class="navigation navigation-next " aria-label="Next page: Plugins"><i class="fa fa-angle-right"></i></a>
+        <a href="../tools/composer/introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Tools"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
