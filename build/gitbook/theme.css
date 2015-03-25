@@ -249,3 +249,7 @@
     display: block !important;
   }
 }
+/**Specifically For framework/plugins.md**/
+th{
+    min-width: 180px;
+}

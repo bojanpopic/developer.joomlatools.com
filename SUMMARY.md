@@ -25,6 +25,7 @@
        * [Model](framework/model-behaviors.md)
        * [View](framework/view-behaviors.md)
        * [Controller](framework/controller-behaviors.md)
+    * [Plugins](framework/plugins.md)
 * [Tools](tools/composer/introduction.md)
    * [Composer](tools/composer/introduction.md)
        * [Installing Packages](tools/composer/installing.md)

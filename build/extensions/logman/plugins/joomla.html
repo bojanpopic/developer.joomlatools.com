@@ -49,7 +49,11 @@
             </ul>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="book" data-level="1.2.1.1" data-basepath="../../.." data-revision="1426693477034">
+=======
+    <div class="book" data-level="1.2.1.1" data-basepath="../../.." data-revision="1425082044319">
+>>>>>>> master
     
 
 <div class="book-summary">
@@ -406,6 +410,7 @@
         </li>
     
         
+<<<<<<< HEAD
         <li class="chapter " data-level="2.2" >
             
             <span><b>2.2.</b> [Database Behaviors]</span>
@@ -424,17 +429,31 @@
                             <b>2.2.1.</b>
                         
                          Parameterizable
+=======
+        <li class="chapter " data-level="2.2" data-path="framework/plugins.html">
+            
+                
+                    <a href="../../../framework/plugins.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                         Plugins
+>>>>>>> master
                     </a>
                 
             
             
         </li>
     
+<<<<<<< HEAD
 
             </ul>
             
         </li>
     
+=======
+>>>>>>> master
 
             </ul>
             
@@ -745,7 +764,11 @@
                 <div class="page-inner">
                 
                 
+<<<<<<< HEAD
                     <section class="normal" id="section-gitbook_6">
+=======
+                    <section class="normal" id="section-gitbook_147">
+>>>>>>> master
                     
                         <h1 id="joomla-components">Joomla! components</h1>
 <p>By utilizing Joomla&#39;s event system, third party components built on top of Joomla! can be easily integrated with LOGman. </p>
@@ -819,17 +842,17 @@
 </ul>
 <p>As with our previous example, under some circumstances all will work out of the box. However, sometimes the plugin needs a bit of help for figuring it out.</p>
 <p>For logging state changes, the plugin needs to know the name of the Joomla! table class that defines the event object, a.k.a the resource. By default this is assumed to be <code>JTable{Resource}</code>. This is needed because unfortunately, the <code>onContentChangeState</code> event only provides the IDs of the resources which state is changing. Otherwise speaking, we need to load the resources ourselves in order to get the activity data to be logged.</p>
-<p>In our example, the Table class being used for newsfeeds resources is <strong>NewsfeedsTableNewsfeed</strong>. For telling the plugin which table class to use we use the following code block:</p>
-<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getTable</span><span class="hljs-params">(<span class="hljs-variable">$config</span>)</span>
+<p>In our example, the Table class being used for newsfeeds resources is <strong>NewsfeedsTableNewsfeed</strong>. For telling the plugin which table class to use we must override the <strong>_getItems</strong> method using the following code block:</p>
+<pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getItems</span><span class="hljs-params">(<span class="hljs-variable">$ids</span>, <span class="hljs-variable">$config</span>)</span>
     </span>{
         <span class="hljs-variable">$config</span>-&gt;append(<span class="hljs-keyword">array</span>(
             <span class="hljs-string">'prefix'</span> =&gt; <span class="hljs-string">'NewsfeedsTable'</span>
         ));
 
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">parent</span>::_getTable(<span class="hljs-variable">$config</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">parent</span>::_getItems(<span class="hljs-variable">$ids</span>, <span class="hljs-variable">$config</span>);
     }
 </code></pre>
-<p>The table class name is constructed with two variables that get passed to the <strong>_getTable</strong> method, <code>prefix</code> and <code>name</code>. In this case we are telling the getter method that <code>prefix</code> is <code>NewsfeedsTable</code>. By default, <code>name</code> corresponds to the resource name, i.e. <strong>Newsfeed</strong>, which is exactly what we need. Otherwise, <code>&#39;name&#39; =&gt; {name}</code> should be appended to the config object along with the prefix. By concatenating both (<code>prefix</code> + <code>name</code>), the getter is able to determine the class name, <strong>NewsfeedsTableNewsfeed</strong> for this example.</p>
+<p>The table class name is constructed with two variables that get passed to the <strong>_getItems</strong> method, <code>prefix</code> and <code>name</code>. In this case we are telling the getter method that <code>prefix</code> is <code>NewsfeedsTable</code>. By default, <code>name</code> corresponds to the resource name, i.e. <strong>Newsfeed</strong>, which is exactly what we need. Otherwise, <code>&#39;name&#39; =&gt; {name}</code> should be appended to the config object along with the prefix. By concatenating both (<code>prefix</code> + <code>name</code>), the getter is able to determine the class name, <strong>NewsfeedsTableNewsfeed</strong> for this example.</p>
 <p>By simply adding the above piece of code, our plugin can now log state changes like a champ. Awesome!.</p>
 <h3 id="plugins-listening-to-non-context-events">Plugins listening to non-Context Events</h3>
 <p>The previous section walked you through the process of creating a basic LOGman plugin that listens to context events to log activities. While context events are nice and dandy, and can be used in the great majority of cases, many components out there also trigger non-context events. Do not panic, LOGman can handle those too!.</p>

@@ -49,7 +49,11 @@
             </ul>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="book" data-level="1.2.1.3" data-basepath="../../.." data-revision="1426693477034">
+=======
+    <div class="book" data-level="1.2.1.3" data-basepath="../../.." data-revision="1425082044319">
+>>>>>>> master
     
 
 <div class="book-summary">
@@ -406,6 +410,7 @@
         </li>
     
         
+<<<<<<< HEAD
         <li class="chapter " data-level="2.2" >
             
             <span><b>2.2.</b> [Database Behaviors]</span>
@@ -424,17 +429,31 @@
                             <b>2.2.1.</b>
                         
                          Parameterizable
+=======
+        <li class="chapter " data-level="2.2" data-path="framework/plugins.html">
+            
+                
+                    <a href="../../../framework/plugins.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                         Plugins
+>>>>>>> master
                     </a>
                 
             
             
         </li>
     
+<<<<<<< HEAD
 
             </ul>
             
         </li>
     
+=======
+>>>>>>> master
 
             </ul>
             
@@ -745,7 +764,11 @@
                 <div class="page-inner">
                 
                 
+<<<<<<< HEAD
                     <section class="normal" id="section-gitbook_17">
+=======
+                    <section class="normal" id="section-gitbook_144">
+>>>>>>> master
                     
                         <h1 id="activities">Activities</h1>
 <p>In LOGman, activity objects fully adhere to the <a href="http://activitystrea.ms/" target="_blank">Activity Streams specification</a> by implementing the <strong>ComActivitiesActivityInterface</strong>. Through this interface, activities effectively expose data to the outer world.</p>
@@ -779,26 +802,26 @@
 <p>By issuing a call to the activity <strong>getActivityFormat</strong> method, we are given with a translated version of the short format string presented above. In English this call may return something like:</p>
 <pre><code>{actor} {action} the {object.type} with the title {object}
 </code></pre><p>The short format <code>{actor} {action} {object.type} title {object}</code> string gets translated by going through a key search process to find a suitable translation string in the translation files. The base translation key for the previous short format is:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT
+<pre><code>KLS_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT
 </code></pre><p>which translates itself to:</p>
 <pre><code>    {actor} {action} the {object.type} with the title {object}
 </code></pre><p>in the en-GB.com_activities.ini translations file.</p>
-<p>When translating a short format string, tokens are first replaced with their corresponding activity object <code>objectName</code> property. As an example the <code>{actor}</code>, <code>{action}</code> and <code>{object}</code> tokens are replaced with <code>$activity-&gt;getActivityActor()-&gt;objectName</code>, <code>$activity-&gt;getActivityAction()-&gt;objectName</code> and <code>$activity-&gt;getActivityObject()-&gt;objectName</code> values respectively. <code>{object.type}</code> is a particular case. Its token replacement value is accessed with the <code>$activity-&gt;getActivityObject()-&gt;objectType</code> call. For others dot format tokens, take <code>{foo.bar}</code> as an example, its replacement text can be accessed with the <code>$activity-&gt;getActivityFoo()-&gt;objectBar</code> call.</p>
+<p>When translating a short format string, tokens are first replaced with their corresponding activity object <code>objectName</code> property. As an example the <code>{actor}</code>, <code>{action}</code> and <code>{object}</code> tokens are replaced with the result of the <code>$activity-&gt;getActivityActor()-&gt;getObjectName()</code>, <code>$activity-&gt;getActivityAction()-&gt;getObjectName()</code> and <code>$activity-&gt;getActivityObject()-&gt;getObjectName()</code> calls respectively. <code>{object.type}</code> is a particular case. Its token replacement value is accessed with the <code>$activity-&gt;getActivityObject()-&gt;type-&gt;getObjectName()</code> call. For others dot format tokens, take <code>{foo.bar}</code> as an example, its replacement text can be accessed with the <code>$activity-&gt;getActivityFoo()-&gt;bar-&gt;getObjectName()</code> call.</p>
 <p>Let us assume that, after this replacement, the short format string looks as follows:</p>
 <pre><code>John deleted article title Tasks
 </code></pre><p>This string gets used for constructing the following translation key:</p>
-<pre><code>KLS_ACTIVITY_JOHN_DELETED_ARTICLE_TITLE_TASKS
+<pre><code>KLS_JOHN_DELETED_ARTICLE_TITLE_TASKS
 </code></pre><p>If the key is found in the translations file, then it gets used. The activity translator will always look for the most specific key first, i.e. the one with all of its placeholders replaced. Then it will relax the search by ignoring some replacements until it finds a suitable key. For example, the next key to look for might well be:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_DELETED_ARTICLE_TITLE_TASKS
+<pre><code>KLS_ACTOR_DELETED_ARTICLE_TITLE_TASKS
 </code></pre><p>where the <code>{actor}</code> token value has been excluded (&quot;relaxed&quot;) while generating the key. This how the translator manages to provide translation overrides. Eventually, if a specialized key is not found, the most generic version of the key (with no token replacements at all) gets used:</p>
-<pre><code>KLS_ACTIVITY_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT
+<pre><code>KLS_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT
 </code></pre><p>Translated formats provided by the <strong>getActivityFormat</strong> method still have their tokens un-replaced:</p>
 <pre><code>{actor} {action} the {object.type} with the title {object}
 </code></pre><p>This is intentional, as it allows consumers to do the replacement themselves by using (if any) a markup language of their choice.</p>
 <p>Contrarily to short formats, tokens from the translated formats are to be replaced by the <code>displayName</code> property of the corresponding activity object. This property contains the displayable and potentially translated string of the activity object.</p>
 <p>For the translated format string:</p>
 <pre><code>{actor} {action} the {object.type} with the title {object}
-</code></pre><p><code>{actor}</code>, <code>{action}</code> and <code>{object}</code> are replaced with <code>$activity-&gt;getActivityActor()-&gt;displayName</code>, <code>$activity-&gt;getActivityAction()-&gt;displayName</code> and <code>$activity-&gt;getActivityObject()-&gt;displayName</code> respectively. Again, <code>{object.type}</code> is a special case. Its replacement value is accessed by making the <code>$activity-&gt;getActivityObject()-&gt;displayType</code> call. For others dot format tokens, take <code>{foo.bar}</code> as an example, its replacement text can be accessed with the <code>$activity-&gt;getActivityFoo()-&gt;displayBar</code> call.</p>
+</code></pre><p><code>{actor}</code>, <code>{action}</code> and <code>{object}</code> are replaced with the result of <code>$activity-&gt;getActivityActor()-&gt;getDisplayName()</code>, <code>$activity-&gt;getActivityAction()-&gt;getDisplayName()</code> and <code>$activity-&gt;getActivityObject()-&gt;getDisplayName()</code> calls respectively. Again, <code>{object.type}</code> is a special case. Its replacement value is accessed by making the <code>$activity-&gt;getActivityObject()-&gt;type-&gt;getDisplayName()</code> call. For others dot format tokens, take <code>{foo.bar}</code> as an example, its replacement text can be accessed with the <code>$activity-&gt;getActivityFoo()-&gt;bar-&gt;getDisplayName()</code> call.</p>
 <p>By replacing tokens on translated formats, we get ourselves a rendered activity message:</p>
 <pre><code>John deleted the article with the title FAQs
 </code></pre><h2 id="activity-objects">Activity objects</h2>
@@ -806,48 +829,57 @@
 <p>The base <strong>ComActivitiesModelEntityActivity</strong> activity class already provide getters for activity objects referenced in the Activity Streams specification, i.e. actor, object, target, generator and provider.</p>
 <p>The way on which any of the activity objects gets constructed can, and sometimes must, be modified. Let us see how.</p>
 <h3 id="configuration">Configuration</h3>
-<p>The base activity object getters make calls to <code>_{object}Config</code> methods (where <code>{object}</code> is the object&#39;s name, e.g. actor, action, object, etc.). These are basically configuration getters for grabbing configuration objects that get used for instantiating activity objects. By overriding these methods you can change the way activity objects get instantiated.</p>
-<p>Let us assume that in our <code>bar</code> activity override, the object&#39;s URL is being wrongly set. Not a problem, we just need to change/override the way the URL property gets set in the configuration object. For this we would need to add the following code in our activity override class:</p>
+<p>The base activity object getters make calls to <code>_{object}Config</code> methods (where <code>{object}</code> is the object&#39;s name, e.g. actor, action, object, etc.). These are basically configuration setters for setting configuration objects that get used for instantiating activity objects. By overriding these methods you can change the way activity objects get instantiated.</p>
+<p>Let us assume that in our <code>bar</code> activity override, the main activity object URL is being wrongly set. Not a problem, we just need to change/override the way the URL property gets set in the configuration object. For this we would need to add the following code in our activity override class:</p>
 <pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_objectConfig</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
     </span>{
         <span class="hljs-variable">$config</span>-&gt;append(<span class="hljs-keyword">array</span>(<span class="hljs-string">'url'</span> =&gt; <span class="hljs-string">'option=com_foo&amp;view=bar&amp;id='</span> . <span class="hljs-variable">$activity</span>-&gt;row));
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">parent</span>::_objectConfig(<span class="hljs-variable">$config</span>);
+        <span class="hljs-keyword">parent</span>::_objectConfig(<span class="hljs-variable">$config</span>);
     }
 </code></pre>
 <p>That&#39;s it, just a couple of lines and we are all set.</p>
 <p>All of the activity objects currently implemented in the activity class are overridable this way.</p>
 <h3 id="instantiation">Instantiation</h3>
 <p>A call to <code>ComLogmanModelEntityActivity::_getObject</code> is always made when instantiating activity objects. This method takes care of a few things such as translating properties, routing URLs, finding objects, etc. It is always recommended to use this getter when creating activity objects. You will learn how to create your own objects latter on.</p>
-<p>The configuration object that gets passed to <code>ComLogmanModelEntityActivity::_getObject</code> may contain any of the properties that are settable in the <strong>ComActivitiesActivityObject</strong> class, i.e. objectName, displayName, attachments, author, content, downstreamDuplicates, etc. Make sure to take a look at the class implementation to see all the available properties. By simply passing these properties within the configuration object, they will get set in the resulting activity object. Additionally the following properties may also be included:</p>
+<p>The configuration object that gets passed to <code>ComLogmanModelEntityActivity::_getObject</code> may contain any of the properties that may be set in the <strong>ComActivitiesActivityObject</strong> class, i.e. objectName, displayName, attachments, author, content, downstreamDuplicates, etc. Make sure to take a look at the class implementation to see all the available properties. By simply passing these properties within the configuration object, they will get set in the resulting activity object. Additionally the following properties may also be included:</p>
 <ul>
 <li><em>find</em>: A string pointing to a related resource to look for. When this property is set, a call to a <code>_findObject{Object}</code> finder method will get issued for determining if an object&#39;s resource exists. If it does not exists, the URL property of the object will be set to null, effectively making it non-linkable. Additionally, its deleted property will get set to true as well. As an example, if we set the configuration object as follows: <code>$config-&gt;find = &#39;object&#39;</code>, the URL and delete properties of the resulting activity object will be set accordingly, provided the result of the <strong>_findObjectObject</strong> finder method.</li>
-<li><em>translate</em>: An array containing property names to translate. By default, and if translate is not defined or not equal to false, all of the <code>display{Property}</code> properties are set as translatable automatically. If an array of properties is provided, only those properties will get translated. If false is provided, no property gets translated at all.</li>
+<li><em>translate</em>: An array containing property names to translate. By default, and if translate is not defined or not equal to false, only the <code>displayName</code> property will get translated. If an array of properties is provided, only those properties will get translated. If false is provided, no property gets translated at all.</li>
 </ul>
-<p>The <strong>_getObject</strong> method will automatically set a <code>display</code> prefixed  property for each <code>object</code> prefixed property if this one is not already set in the configuration object. The value that gets used to set the <code>display</code> prefixed property is the <code>object</code> prefixed property value. Remember that the <code>display</code> prefixed property is the displayable property (usually translated) of the corresponding <code>object</code> prefixed property. Think of the <code>object</code> prefixed property as the property that always get used internally or by consumers for conditionally acting upon its value. This is the property that gets used while coding around it since its value is always the same regardless of the language on which activities get translated. On the other hand, the <code>display</code> prefixed property is the displayable, usually translated property, that gets used for rendering purposes, i.e. for generating activity messages.</p>
+<p>If the the <code>objectName</code> property is set, the <strong>_getObject</strong> method will automatically set a <code>displayName</code> property if this one is not already set. The value of this property is the <code>objectName</code> property value.</p>
 <p>Let us suppose that we would like to add an additional dot property to the object activity object of our <code>bar</code> activity override. We do this as follows:</p>
 <pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_objectConfig</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
     </span>{
         <span class="hljs-variable">$config</span>-&gt;append(
             <span class="hljs-keyword">array</span>(
-                <span class="hljs-string">'objectBaz'</span> =&gt; <span class="hljs-string">'Howdy'</span>
+                <span class="hljs-string">'bar'</span> =&gt; <span class="hljs-keyword">array</span>(
+                    <span class="hljs-string">'object'</span>     =&gt; <span class="hljs-keyword">true</span>,
+                    <span class="hljs-string">'objectName'</span> =&gt; <span class="hljs-string">'Howdy'</span>
+                )
             )
         )
     }
 </code></pre>
-<p>By only providing the <code>objectBaz</code> property, the object getter will automatically set for us a <code>displayBaz</code> property with <code>&#39;Howdy&#39;</code> as value. If a translate property isn&#39;t set at all it will also translate <code>displayBaz</code>. This is the default behavior, but we can always make it behave as we please. Let us see how:</p>
+<p>By only providing a <code>bar</code> property which contains an array with its <code>object</code> key set to true, the object getter will automatically know that <code>bar</code> is supposed to be an activity object. The object getter will take care of instantiating it as such, just like it would with any other object. This means that all of the exposed above also applies to nested objects. Even better, there is no limit on how many objects can be nested:</p>
 <pre><code class="lang-php">    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_objectConfig</span><span class="hljs-params">(KObjectConfig <span class="hljs-variable">$config</span>)</span>
     </span>{
         <span class="hljs-variable">$config</span>-&gt;append(
             <span class="hljs-keyword">array</span>(
-                <span class="hljs-string">'objectBaz'</span>  =&gt; <span class="hljs-string">'Howdy'</span>,
-                <span class="hljs-string">'displayBaz'</span> =&gt; <span class="hljs-string">'Hello sir!'</span>,
-                <span class="hljs-string">'translate'</span>  =&gt; <span class="hljs-keyword">array</span>(<span class="hljs-string">'displayName'</span>),
-                <span class="hljs-string">'find'</span>       =&gt; <span class="hljs-string">'something'</span>
+                <span class="hljs-string">'foo'</span> =&gt; <span class="hljs-keyword">array</span>(
+                    <span class="hljs-string">'object'</span>     =&gt; <span class="hljs-keyword">true</span>,
+                    <span class="hljs-string">'objectName'</span> =&gt; <span class="hljs-string">'This is Foo'</span>,
+                    <span class="hljs-string">'bar'</span> =&gt; <span class="hljs-keyword">array</span>(
+                        <span class="hljs-string">'object'</span> =&gt; <span class="hljs-keyword">true</span>,
+                        <span class="hljs-string">'objectName'</span> =&gt; <span class="hljs-string">'This is Bar inside Foo'</span>
+                        <span class="hljs-string">'url'</span> =&gt; <span class="hljs-string">'option=bar&amp;view=bars'</span>,
+                        <span class="hljs-string">'find'</span> =&gt; <span class="hljs-string">'bar'</span>
+                    )
+                )
             )
         )
     }
 </code></pre>
-<p>Here we have just forced our <code>displayBaz</code> value. Additionally we have specified which properties get translated. In this particular case only the <code>displayName</code> will get translated. We have also told the object getter to perform a search for <code>something</code>. This will internally trigger a call to <code>_findObjectSomething</code> (if such a method exists) and set the deleted and url properties accordingly depending on the result of this call, i.e. true if found, false otherwise.</p>
+<p>If we make a call like <code>$this-&gt;getActivityObject()-&gt;foo-&gt;bar</code> we get ourselves an activity object. Nice uh?. As mentioned above, a <code>displayName</code> will get set for both <code>foo</code> and <code>bar</code> objects using their corresponding <code>objectName</code> properties. You are of course free to change that by providing your own <code>displayName</code> properties. Their <code>displayName</code> properties will also get translated by default unless a <code>translate</code> property is provided for each of them with either a list of properties or their values set to false. We have also told the object getter to perform a search for <code>bar</code> on the the <code>bar</code> object configuration. This will internally trigger a call to <code>_findObjectBar</code> (if such a method exists) and set the deleted and url properties of the <code>bar</code> object accordingly.</p>
 <h3 id="finding-objects">Finding objects</h3>
 <p>As mentioned above, by passing a <code>find</code> property to the <strong>_getObject</strong> method configuration object, the object getter will attempt to find the referenced resource and act over the configuration properties accordingly.</p>
 <p>If we take a closer look at the  <strong>ComActivitiesModelEntityActivity::_findObjectActor</strong> and <strong>ComActivitiesModelEntityActivity::_findObjectObject</strong> methods, we realize that all that they are doing is to search for activity objects and return the search result. The actor finder is unlikely to need changes. On the other hand the <strong>_findObjectObject</strong> method makes use of two instance properties that get set during the activity instantiation: </p>
