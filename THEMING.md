@@ -12,4 +12,4 @@ The only thing we're adding right now is the menu bar, nothing else. This small 
 8. Add following right below `<body class="no-js">`:
 ```<script data-inline type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.body;var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg," js-enabled")}</script>```
 9. Run `gitbook serve` and test if menu is working (mobile first)
-10. On success remove theme_backup
+10. On successsudo npm update gitbook remove theme_backup

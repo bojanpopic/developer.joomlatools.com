@@ -7,13 +7,14 @@
         <title>FAQs | Joomlatools Developer Zone</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 1.5.0">
+        <meta name="generator" content="GitBook 1.3.1">
         <meta name="HandheldFriendly" content="true"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
         <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         
     
     
@@ -33,21 +34,97 @@
 
 
         
-    <div class="navbar">
-        <div class="navbar-inner">
-            <a class="brand" href="http://www.joomlatools.com">
-                <img src="/theme/assets/images/slogan.png?1408441510" alt="Joomlatools logo" border="0">
-            </a>
-            <ul class="menu nav">
-                <li><a href="http://www.joomlatools.com/extensions"><span>Extensions</span></a></li>
-                <li><a href="http://www.joomlatools.com/pricing"><span>Pricing</span></a></li>
-                <li><a href="http://blog.joomlatools.com"><span>Blog</span></a></li>
-                <li><a href="http://demo.joomlatools.com/"><span>Demo</span></a></li>
-                <li><a href="http://www.joomlatools.com/support"><span>Support</span></a></li>
-            </ul>
+    <div class="jt_header">
+        <div class="jt_navigation_container">
+            <div class="jt_navigation__inner">
+                <a class="jt_brand" href="http://www.joomlatools.com/">
+                    <span class="joomlatools_logo">Joomlatools</span>
+                </a>
+                <ul class="rm-closed">
+                    <li class="jt_menu__item" role="menuitem">
+                        <a href="http://www.joomlatools.com/extensions">Extensions</a>
+                    </li>
+                    <li class="jt_menu__item" role="menuitem">
+                        <a href="http://www.joomlatools.com/pricing">Pricing</a>
+                    </li>
+                    <li class="jt_menu__item" role="menuitem">
+                        <a href="http://blog.joomlatools.com">Blog</a>
+                    </li>
+                    <li class="jt_menu__item" role="menuitem">
+                        <a href="http://demo.joomlatools.com">Demo</a>
+                    </li>
+                    <li class="jt_menu__item" role="menuitem">
+                        <a href="http://support.joomaltools.com">Support</a>
+                    </li>
+                    <li class="jt_menu__item user user--logged-in" id="user-logged-in" role="menuitem">
+                        <a href="http://support.joomlatools.com/dashboard">
+                            <span class="gravatar"><img src="" /></span>
+                            Account
+                        </a>
+                    </li>
+                    <li class="jt_menu__item user user--logged-out" id="btn-login" role="menuitem">
+                        <a href="http://support.joomlatools.com/login">Log in</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="book" data-level="3.3.3" data-basepath="../.." data-revision="1426240078812">
+
+    <script>
+        if (document.querySelectorAll) {
+            function isUserLoggedIn (data) {
+                if (data.item.name) {
+                    document.querySelectorAll('li.user--logged-in img')[0].src = data.item.gravatar;
+                    localStorage.setItem('gravatar', data.item.gravatar);
+                }
+                else {
+                    var reg = new RegExp('(\\s|^)user-logged-in(\\s|$)');
+                    document.body.className = document.body.className.replace(reg,' ');
+
+                    localStorage.removeItem('gravatar');
+                }
+            }
+
+            function readCookie(name) {
+                var nameEQ = name + '=';
+                var ca = document.cookie.split(';');
+                for(var i=0;i < ca.length;i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) === ' ') {
+                        c = c.substring(1,c.length);
+                    }
+                    if (c.indexOf(nameEQ) === 0) {
+                        return decodeURIComponent(c.substring(nameEQ.length,c.length));
+                    }
+                }
+                return null;
+            }
+
+            /* See if we have both the session and avatar set */
+            var session  = readCookie('jt-session');
+            var gravatar = localStorage.getItem('gravatar');
+
+            /* If both are set, show the Member Center button */
+            if (session) {
+                document.body.className += ' user-logged-in';
+
+                if (gravatar && gravatar.substring(0, 15) == 'data:image/png;') {
+                    document.querySelectorAll('li.user--logged-in img')[0].src = gravatar;
+                }
+
+                /* Always validate the user session in the background. If it expired or user
+                 has logged out, we need to update accordingly. */
+                var scr = document.createElement('script');
+                scr.src = 'http://support./data/user?hash='+encodeURIComponent(session);
+                document.body.appendChild(scr);
+            }
+            else {
+                localStorage.removeItem('gravatar');
+            }
+        }
+    </script>
+
+    <div class="book" data-level="3.3.3" data-basepath="../.." data-revision="1427885557016">
     
 
 <div class="book-summary">
@@ -757,6 +834,10 @@
 
     
     <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>
