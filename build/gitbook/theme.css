@@ -212,6 +212,12 @@ body.js-enabled .jt_header {
         width: 142px;
         padding-top: 24px; } }
 
+.oldie .jt_brand {
+    padding: 12px 0; }
+.oldie .jt_brand .joomlatools_logo {
+    width: 142px;
+    padding-top: 24px; }
+
 .jt_navigation_container ul {
     clear: both;
     margin: 0 -15px;
