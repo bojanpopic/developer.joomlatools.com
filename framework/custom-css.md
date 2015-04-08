@@ -18,7 +18,7 @@ In case the template developer didn't provide a mechanism for you to easily add 
 
 The benefit of adding your own separate file (e.g. custom.css) is that you have all your custom CSS together and you follow the Joomla convention. You can add CSS for multiple other extensions in this file as well.
 
-Most often, this strategy involves editing the template’s index.php file. Simply add a <link> tag pointing to your new custom.css file just before the closing </head> tag in that file.
+Most often, this strategy involves editing the template’s index.php file. Simply add a <link> tag pointing to your new custom.css file just before the closing `</head>` tag in that file.
 
 ```html
 <link rel=”stylesheet” href=”/templates/your_template/css/custom.css” />
