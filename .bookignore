@@ -1,6 +1,6 @@
 /.idea
 /scripts
-/build
+/_book
 /bower_components
 .snag
 npm-debug.log
