@@ -23,7 +23,7 @@ do
         then
             echo "Moving built site to $ROOT/public .."
             rm -rf "$ROOT/public/*"
-            mv ./build/* "$ROOT/public/"
+            mv ./_build/* "$ROOT/public/"
         else
 	        echo "Build failed!"
         fi
