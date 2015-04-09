@@ -1,0 +1,31 @@
+#!/bin/bash
+BRANCH="feature/39-shared"
+
+ROOT="/var/www/developer.joomlatools.xxx"
+TMP_CLONE="/tmp/developer.joomlatools.xxx"
+
+while read oldrev newrev REF
+do
+    CURRENT_BRANCH=$(git rev-parse --symbolic --abbrev-ref $REF)
+    if [[ "$CURRENT_BRANCH" == "$BRANCH" ]]; then
+        git clone -b $BRANCH "$ROOT/git" $TMP_CLONE
+
+        cd $TMP_CLONE
+
+        echo "Installing Gitbook plugins .."
+        gitbook install ./
+
+        echo "Building Gitbook site into $ROOT/public .."
+        gitbook build --output "$ROOT/public"
+
+        echo "Cleaning up .."
+        cd /tmp
+        rm -Rf $TMP_CLONE
+
+        echo "Done"
+    else
+        echo "You pushed $CURRENT_BRANCH instead of $BRANCH, skipping deployment"
+    fi
+
+    exit
+done
