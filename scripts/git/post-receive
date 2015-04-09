@@ -1,5 +1,5 @@
 #!/bin/bash
-BRANCH="feature/39-shared"
+BRANCH="staging"
 
 ROOT="/var/www/developer.joomlatools.xxx"
 TMP_CLONE="/tmp/developer.joomlatools.xxx"
