@@ -96,7 +96,7 @@
                 /* Always validate the user session in the background. If it expired or user
                  has logged out, we need to update accordingly. */
                 var scr = document.createElement('script');
-                scr.src = 'http://support.{{ site.domain }}/data/user?hash='+encodeURIComponent(session);
+                scr.src = 'http://support.joomlatools.com/data/user?hash='+encodeURIComponent(session);
                 document.body.appendChild(scr);
             }
             else {
