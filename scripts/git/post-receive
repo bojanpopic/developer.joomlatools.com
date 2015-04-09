@@ -15,8 +15,18 @@ do
         echo "Installing Gitbook plugins .."
         gitbook install ./
 
-        echo "Building Gitbook site into $ROOT/public .."
-        gitbook build --output "$ROOT/public"
+        echo "Building Gitbook site .."
+        gitbook build
+        status=$?
+        echo "Status is $STATUS"
+        if test status -eq 0
+        then
+            echo "Moving built site to $ROOT/public .."
+            rm -rf "$ROOT/public/"
+            mv build "$ROOT/public"
+        else
+	        echo "Build failed!"
+        fi
 
         echo "Cleaning up .."
         cd /tmp
