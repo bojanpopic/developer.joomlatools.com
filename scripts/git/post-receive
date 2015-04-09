@@ -17,13 +17,13 @@ do
 
         echo "Building Gitbook site .."
         gitbook build
-        status=$?
-        echo "Status is $STATUS"
-        if test status -eq 0
+        STATUS=$?
+
+        if test $STATUS -eq 0
         then
             echo "Moving built site to $ROOT/public .."
-            rm -rf "$ROOT/public/"
-            mv build "$ROOT/public"
+            rm -rf "$ROOT/public/*"
+            mv ./build/* "$ROOT/public/"
         else
 	        echo "Build failed!"
         fi
