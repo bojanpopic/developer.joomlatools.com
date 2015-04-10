@@ -1,6 +1,6 @@
 {
+    "gitbook": "1.5.x",
     "title": "Joomlatools Developer Zone",
-    "output": "./build/",
     "theme": "theme",
     "plugins": [
         "toc",
