@@ -22,7 +22,7 @@ do
         if test $STATUS -eq 0
         then
             echo "Moving built site to $ROOT/public .."
-            rm -rf "$ROOT/public/*"
+            rm -rf "$ROOT"/public/*
             mv ./_book/* "$ROOT/public/"
         else
 	        echo "Build failed!"
