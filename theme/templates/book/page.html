@@ -62,6 +62,7 @@
                     var reg = new RegExp('(\\s|^)user-logged-in(\\s|$)');
                     document.body.className = document.body.className.replace(reg,' ');
 
+                    deleteCookie('jt-session');
                     localStorage.removeItem('gravatar');
                 }
             }
@@ -79,6 +80,10 @@
                     }
                 }
                 return null;
+            }
+
+            function deleteCookie(name) {
+                document.cookie = name + '=; domain=.joomlatools.com; path=/; expires=Thu, 01-Jan-70 00:00:01 GMT;';
             }
 
             /* See if we have both the session and avatar set */
