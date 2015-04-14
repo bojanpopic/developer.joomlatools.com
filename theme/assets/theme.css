@@ -1,268 +1,571 @@
-/* Restyling the book class for our top menu */
-.book {
-  position: absolute;
-  top: 48px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: auto;
-}
+/**
+ * Reset properties of an element
+ *
+ * @param {string} $margin (true) - Set to false if you want to exclude
+ * @param {string} $padding (true) - Set to false if you want to exclude
+ * @param {string} $list-style (true) - Set to false if you want to exclude
+ * @param {string} $border (true) - Set to false if you want to exclude
+ * @param {string} $background (true) - Set to false if you want to exclude
+ *
+ * @example scss
+ * reset($padding: false);
+ * // Will not set padding to 0
+ *
+ * @example scss
+ * reset($padding: false, $background: false);
+ * // Will not set padding to '0'
+ * // Will not set background to 'none'
+ *
+ * @group Reset
+ */
+.js-enabled:not(.rm-no-responsive-menu) .rm-closed {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0; }
 
-/* Edited navbar styles from joomlatools site */
-.navbar-inner:before,
-.navbar .navbar-inner:after {
-  display: table;
-  content: " ";
-}
+.rm-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0; }
 
-.navbar .navbar-inner:after {
-  clear: both;
-}
+.rm-bodyoverflowhidden {
+    position: relative;
+    overflow: hidden; }
 
-.navbar {
-  position: absolute;
-  font-family: "proxima-nova", "proxima-nova-alt", Arial, helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-  max-height: 47px;
-  overflow: visible;
-  right: 0;
-  left: 0;
-  top: 0;
-  z-index: 9;
-  margin-bottom: 0;
-}
+.rm-menuoverflowauto {
+    max-height: 100%;
+    width: 100%;
+    overflow: auto; }
 
-.navbar,
-.navbar * {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
+.rm-absolutemenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 9; }
 
-.navbar .navbar-inner {
-  padding: 0;
-  min-height: 47px;
-  background: #00a6e8;
-  border-bottom: 1px solid #0175b4;
-}
+/* Extend the accessible hide class to the closed class */
+/* Only when JS is enabled since we add the closed class in the markup */
+/* And we want the menu to be open when JS is disabled/broken */
+/* hide the buttons when closed so they wont show up in tabindex */
+button.rm-closed {
+    display: none; }
 
-.navbar .brand {
-  float: left;
-  display: block;
-  font-weight: 200;
-  text-shadow: 0 1px 0 #00aeef;
-  padding: 15px 15px 10px;
-  color: #ffffff;
-  margin: 0 auto;
-}
-
-.navbar .brand img {
-  height: 17px;
-}
-
-@media screen and (min-width: 768px) {
-  .navbar .brand {
-    padding: 10px 30px 0 15px;
-  }
-
-  .navbar .brand img {
-    height: auto;
-  }
-}
-
-.navbar .nav {
-  position: relative;
-  left: 0;
-  margin: 0;
-  display: block;
-  list-style: none;
-  padding: 0;
-  float: none;
-}
-
-@media screen and (min-width: 600px) {
-  .navbar .nav {
-    float: right;
-  }
-}
-
-.navbar .nav > li {
-  float: none;
-  display: block;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-@media screen and (min-width: 600px) {
-  .navbar .nav > li {
-    float: left;
-  }
-}
-
-.navbar .nav > li a {
-  float: none;
-  display: block;
-  color: #ffffff;
-  text-decoration: none;
-  background-color: transparent;
-  text-shadow: none !important;
-  letter-spacing: 0.1em;
-  padding: 13px 20px 14px;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-
-.navbar .nav > li a:focus,
-.navbar .nav > li a:hover,
-.navbar .nav > li a:active {
-  color: #003f56;
-}
-
-@media screen and (min-width: 600px) {
-  .navbar .nav > li a {
-    padding: 13px 20px 14px;
-    border: none;
-    height: 47px;
-  }
-}
-
-.navbar .nav > li.active > a,
-.navbar .nav > li.active > a:hover,
-.navbar .nav > li.active > a:focus {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: #0089bc;
-  -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-  -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-}
-
-.navbar .nav > li.active > a:hover,
-.navbar .nav > li.active > a:hover:hover,
-.navbar .nav > li.active > a:focus:hover {
-  color: #fff;
-  cursor: default;
-}
-
-.togglebutton{
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: 1px solid #0074a2;
-  border-radius: 5px;
-  background: #fff;
-  outline: none;
-  padding: 5px 10px;
-  color: #333;
-}
-
-.navbar ul {
-  background: #00A6E8;
-}
-
-/* responsive menu plugin styles (edited for this site) */
-.accessible-hide {
-  position: absolute !important;
-  overflow: hidden !important;
-  clip: rect(0 0 0 0) !important;
-  height: 1px !important;
-  width: 1px !important;
-  margin: -1px !important;
-  padding: 0 !important;
-  border: 0 !important;
-}
-
-.bodyoverflowhidden {
-  position: relative;
-  overflow: hidden;
-}
-
-.menuoverflowauto {
-  max-height: 100%;
-  width: 100%;
-  overflow: auto;
-}
-
-.absolutemenu ul {
-  position: absolute !important;
-  top: 100% !important;
-  left: 0 !important;
-  right: 0 !important;
-  z-index: 99;
-}
-
-.closed ul {
-  display: none !important;
-}
-
-.navbar .subtoggle {
-  display: none;
-}
-
-.navbar li {
-  position: relative;
-}
-
-.navbar li.parent:after {
-  content: " U+25BC";
-}
-
-.navbar li ul {
-  display: none;
-}
-
-.navbar li.active > ul {
-  display: block;
-}
-
-.navbar.initiated li ul {
-  display: block;
-}
-
-@media screen and (min-width: 600px) {
-  .navbar.initiated li ul,
-  .navbar li ul,
-  .navbar li.active ul {
-    display: none;
+/* The menu itself */
+.navigation_container li {
+    position: relative;
+    /* initially hide all li>ul so we get a small list when JS is disabled */
+    /* And show them on active/current items */ }
+.navigation_container li ul {
+    display: none; }
+.navigation_container li.active > ul, .navigation_container li.current > ul {
+    display: block; }
+.navigation_container.rm-initiated ul {
+    display: block; }
+.navigation_container.rm-initiated ul .rm-focused {
+    overflow: visible; }
+.navigation_container .rm-closed, .navigation_container .rm-fullmenu {
+    /* Hide li ul when JS is enabled and screen is big */
+    /* And show on hover */ }
+.navigation_container .rm-closed li, .navigation_container .rm-fullmenu li {
+    overflow: hidden; }
+.navigation_container .rm-closed ul, .navigation_container .rm-fullmenu ul {
     position: absolute;
     left: 0;
     top: 100%;
     z-index: 9;
-  }
-
-  .navbar.initiated li ul.parent:after,
-  .navbar li ul.parent:after,
-  .navbar li.active ul.parent:after {
-    content: " U+25BA";
-  }
-
-  .navbar.initiated li ul ul,
-  .navbar li ul ul,
-  .navbar li.active ul ul {
-    top: 0;
+    /* Position li>li>ul */ }
+.navigation_container .rm-closed ul ul, .navigation_container .rm-fullmenu ul ul {
     left: 100%;
-  }
+    top: 0; }
+.navigation_container .rm-closed li:hover, .navigation_container .rm-closed li:focus, .navigation_container .rm-fullmenu li:hover, .navigation_container .rm-fullmenu li:focus {
+    overflow: visible; }
 
-  .navbar li:hover > ul {
-    display: block !important;
-  }
+/* Visually hide stuff but keep it accessible */
+/* Don't use display: none to hide elements to keep thing accessible */
+.accessible-hide {
+    position: absolute !important;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0; }
+
+/* Negative tabindex make sure you can jump to other areas without visually visible */
+/* We are using this to jump to #content area when using the skiplink */
+[tabindex="-1"]:focus {
+    outline: none !important; }
+
+.jt_brand .joomlatools_logo, .jts-icon--twitter, .jts-icon--facebook, .jts-icon--googleplus, .jts-icon--youtube, .jts-icon--newsletter {
+    background-image: url('images/jts-sprite.png');
+    background-repeat: no-repeat; }
+@media screen and (min-width: 0) {
+    .jt_brand .joomlatools_logo, .jts-icon--twitter, .jts-icon--facebook, .jts-icon--googleplus, .jts-icon--youtube, .jts-icon--newsletter {
+        background-image: url('images/jts-sprite--large.png');
+        background-size: 142px 54px; } }
+
+@media screen and (min-width: 0) {
+    .jt_brand .joomlatools_logo {
+        background-size: 110px 42px; } }
+@media screen and (min-width: 768px) {
+    .jt_brand .joomlatools_logo {
+        background-size: 142px 54px; } }
+
+.jt_header, .footer_container {
+    font-family: "Open Sans", Open Sans, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5em;
+    font-weight: 400;
+    -webkit-font-smoothing: subpixel-antialiased; }
+
+.jt_header {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: none;
+    overflow: visible;
+    right: 0;
+    left: 0;
+    top: 0;
+    background: #1889d0;
+    border-bottom: 1px solid #005e9a;
+    position: relative;
+    line-height: 20px;
+    z-index: 99; }
+.jt_header, .jt_header *, .jt_header *:before, .jt_header *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+
+body.js-enabled .jt_header {
+    min-height: 48px;
+    height: 48px;
+    max-height: 48px; }
+
+.jt_navigation_container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    clear: both; }
+.jt_navigation_container::after {
+    clear: both;
+    content: "";
+    display: table; }
+@media screen and (min-width: 600px) {
+    .jt_navigation_container {
+        clear: none; } }
+
+.jt_navigation__inner::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.rm-togglebutton {
+    font-family: "Open Sans", Open Sans, Helvetica, Arial, sans-serif;
+    margin: 0;
+    width: auto;
+    height: auto;
+    min-height: 0px;
+    line-height: 1.25em;
+    position: absolute;
+    top: 7px;
+    right: 15px;
+    border: 1px solid #1889d0;
+    border-radius: 5px;
+    background: #fff;
+    outline: none;
+    padding: 5px 10px;
+    color: #333;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-appearance: button;
+    cursor: pointer; }
+
+.jt_brand {
+    list-style: none;
+    border: none;
+    background: transparent;
+    float: left;
+    display: block;
+    margin: 0;
+    padding: 15px 0 14px;
+    background-position: 0 0; }
+.jt_brand .joomlatools_logo {
+    display: block;
+    overflow: hidden;
+    width: 110px;
+    height: 0;
+    padding-top: 19px; }
+@media screen and (min-width: 768px) {
+    .jt_brand {
+        padding: 12px 0; }
+    .jt_brand .joomlatools_logo {
+        width: 142px;
+        padding-top: 24px; } }
+
+.oldie .jt_brand {
+    padding: 12px 0; }
+.oldie .jt_brand .joomlatools_logo {
+    width: 142px;
+    padding-top: 24px; }
+
+.jt_navigation_container ul {
+    clear: both;
+    margin: 0 -15px;
+    padding: 0;
+    background: #1889d0;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    list-style: none; }
+.jt_navigation_container ul::after {
+    clear: both;
+    content: "";
+    display: table; }
+.jt_navigation_container ul.rm-fullmenu {
+    clear: none;
+    float: right;
+    margin: 0;
+    box-shadow: none; }
+.jt_navigation_container ul.rm-fullmenu li {
+    float: left; }
+@media screen and (min-width: 600px) {
+    .jt_navigation_container ul {
+        clear: none;
+        float: right;
+        margin: 0;
+        box-shadow: none; }
+    .jt_navigation_container ul li {
+        float: left; } }
+.jt_navigation_container ul li {
+    display: block; }
+.jt_navigation_container ul li a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    padding: 13px 15px 14px;
+    position: relative; }
+.jt_navigation_container ul li a:link {
+    color: #fff; }
+@media screen and (min-width: 600px) {
+    .jt_navigation_container ul li a {
+        padding: 13px 9px 14px;
+        height: 47px;
+        font-size: 0.875em; }
+    .jt_navigation_container ul li a:after {
+        display: block;
+        visibility: hidden;
+        content: " ";
+        position: absolute;
+        bottom: 10px;
+        left: 9px;
+        right: 9px;
+        height: 2px;
+        background: #fff; }
+    .jt_navigation_container ul li a:focus:after, .jt_navigation_container ul li a:hover:after, .jt_navigation_container ul li a:active:after {
+        visibility: visible; } }
+@media screen and (min-width: 43.75em) {
+    .jt_navigation_container ul li a {
+        padding-left: 13px;
+        padding-right: 13px;
+        font-size: 0.9375em; }
+    .jt_navigation_container ul li a:after {
+        left: 13px;
+        right: 13px; } }
+@media screen and (min-width: 768px) {
+    .jt_navigation_container ul li a {
+        padding-left: 16px;
+        padding-right: 16px;
+        font-size: 1em; }
+    .jt_navigation_container ul li a:after {
+        left: 16px;
+        right: 16px; } }
+@media screen and (min-width: 1024px) {
+    .jt_navigation_container ul li a {
+        padding-left: 20px;
+        padding-right: 20px; }
+    .jt_navigation_container ul li a:after {
+        left: 20px;
+        right: 20px; } }
+.jt_navigation_container ul li.user {
+    position: relative; }
+.jt_navigation_container ul li.user a:after {
+    display: none; }
+@media screen and (min-width: 600px) {
+    .jt_navigation_container ul li.user {
+        margin-left: 10px; }
+    .jt_navigation_container ul li.user a {
+        background: #fff;
+        border-radius: 40px;
+        color: #006eb3;
+        padding: 4px 12px;
+        margin: 8px 0;
+        height: 31px;
+        border: 1px solid #006eb3; }
+    .jt_navigation_container ul li.user a:before {
+        margin-left: 2px; }
+    .jt_navigation_container ul li.user a:hover {
+        color: #111111;
+        text-decoration: underline; } }
+.jt_navigation_container ul li.user.user--logged-in a {
+    padding-left: 36px; }
+.jt_navigation_container ul li.user .gravatar {
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+    overflow: hidden;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    background: #ddd; }
+.jt_navigation_container ul li.user img {
+    max-width: none;
+    display: block;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%; }
+.jt_navigation_container ul li.active a:after {
+    visibility: visible; }
+
+.jt_header--static .jt_navigation_container ul {
+    clear: none;
+    float: right;
+    margin: 0;
+    box-shadow: none; }
+.jt_header--static .jt_navigation_container ul li {
+    float: left; }
+.jt_header--static .jt_navigation_container ul > li a {
+    padding: 13px 9px 14px;
+    height: 47px;
+    font-size: 0.875em;
+    padding-left: 13px;
+    padding-right: 13px;
+    font-size: 0.9375em;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 1em;
+    padding-left: 20px;
+    padding-right: 20px; }
+.jt_header--static .jt_navigation_container ul > li a:after {
+    display: block;
+    visibility: hidden;
+    content: " ";
+    position: absolute;
+    bottom: 10px;
+    left: 9px;
+    right: 9px;
+    height: 2px;
+    background: #fff; }
+.jt_header--static .jt_navigation_container ul > li a:focus:after, .jt_header--static .jt_navigation_container ul > li a:hover:after, .jt_header--static .jt_navigation_container ul > li a:active:after {
+    visibility: visible; }
+.jt_header--static .jt_navigation_container ul > li a:after {
+    left: 13px;
+    right: 13px; }
+.jt_header--static .jt_navigation_container ul > li a:after {
+    left: 16px;
+    right: 16px; }
+.jt_header--static .jt_navigation_container ul > li a:after {
+    left: 20px;
+    right: 20px; }
+.jt_header--static .jt_navigation_container ul > li.user {
+    margin-left: 10px; }
+.jt_header--static .jt_navigation_container ul > li.user a {
+    background: #fff;
+    border-radius: 40px;
+    color: #006eb3;
+    padding: 4px 12px;
+    margin: 8px 0;
+    height: 31px;
+    border: 1px solid #006eb3; }
+.jt_header--static .jt_navigation_container ul > li.user a:before {
+    margin-left: 2px; }
+.jt_header--static .jt_navigation_container ul > li.user a:hover {
+    color: #111111;
+    text-decoration: underline; }
+
+body .jt_navigation_container ul .user--logged-in {
+    display: none; }
+body.user-logged-in .jt_navigation_container ul .user--logged-out {
+    display: none; }
+body.user-logged-in .jt_navigation_container ul .user--logged-in {
+    display: block; }
+
+html.oldie .jt_navigation_container ul {
+    clear: none;
+    float: right;
+    margin: 0;
+    box-shadow: none; }
+html.oldie .jt_navigation_container ul li {
+    float: left; }
+html.oldie .jt_navigation_container ul li a {
+    color: #fff; }
+
+.footer_container {
+    background: #1889d0;
+    color: #fff;
+    border-top: 1px solid #006eb3;
+    box-shadow: inset rgba(0, 0, 0, 0.2) 0px 3px 3px; }
+.footer_container::after {
+    clear: both;
+    content: "";
+    display: table; }
+.footer_container, .footer_container *, .footer_container *:before, .footer_container *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+.footer_container .footer__content {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 30px 15px; }
+.footer_container .footer__content__top::after, .footer_container .footer__content__bottom::after {
+    clear: both;
+    content: "";
+    display: table; }
+.footer_container h2 {
+    padding: 0;
+    display: inline-block;
+    color: #fff;
+    font-size: 1.0625rem;
+    line-height: 36px;
+    border-bottom: 1px solid #006eb3;
+    margin: 0 0 12px;
+    font-weight: 400; }
+.footer_container a {
+    text-decoration: underline; }
+.footer_container a, .footer_container a:hover, .footer_container a:focus, .footer_container a:active {
+    color: #fff; }
+.footer_container a:hover, .footer_container a:focus {
+    text-decoration: none; }
+.footer_container p {
+    margin: 0 0 15px; }
+.footer_container .newsfeed {
+    margin-bottom: 24px; }
+.footer_container .newsfeed .newsfeed__item {
+    line-height: 1.5em;
+    padding: 5px 10px 5px 0; }
+.footer_container hr {
+    clear: both;
+    float: none;
+    width: 100%;
+    height: 1px;
+    border: none;
+    margin: 0 auto 24px;
+    background: #006eb3; }
+.footer_container .footer__copyright {
+    text-align: left;
+    margin-bottom: 24px; }
+@media screen and (min-width: 768px) {
+    .footer_container .footer__copyright {
+        margin-bottom: 0; } }
+.footer_container .footer__menu {
+    text-align: left; }
+.footer_container .footer__menu ul {
+    margin: 0 0 1.5em;
+    padding: 0;
+    list-style: none;
+    background: none; }
+.footer_container .footer__menu ul::after {
+    clear: both;
+    content: "";
+    display: table; }
+.footer_container .footer__menu ul li {
+    display: block;
+    float: left;
+    margin-left: 6px;
+    margin-right: 6px;
+    line-height: 1.5em; }
+.footer_container .footer__menu ul li:first-child {
+    margin-left: 0; }
+@media screen and (min-width: 768px) {
+    .footer_container .footer__menu ul li {
+        margin-right: 0;
+        margin-left: 12px; } }
+
+.social_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: none;
+    background: transparent;
+    margin-bottom: 24px; }
+.social_list::after {
+    clear: both;
+    content: "";
+    display: table; }
+.social_list li {
+    display: inline-block;
+    padding-right: 24px;
+    margin-bottom: 12px;
+    line-height: 22px; }
+.social_list li a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none; }
+.social_list li a span:before {
+    display: inline-block;
+    font-size: 24px;
+    width: 24px;
+    margin-right: 10px;
+    vertical-align: middle;
+    text-align: center; }
+
+.jts-icon--twitter, .jts-icon--facebook, .jts-icon--googleplus, .jts-icon--youtube, .jts-icon--newsletter {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin: -2px 10px 0 0; }
+
+.jts-icon--twitter {
+    background-position: 0 -30px; }
+
+.jts-icon--facebook {
+    background-position: -29px -30px; }
+
+.jts-icon--googleplus {
+    background-position: -58px -30px; }
+
+.jts-icon--youtube {
+    background-position: -87px -30px; }
+
+.jts-icon--newsletter {
+    background-position: -116px -30px; }
+
+@media screen and (min-width: 768px) {
+    .footer__item--blog {
+        float: left;
+        display: block;
+        margin-right: 3.5786636068%;
+        width: 48.2106681966%; }
+    .footer__item--blog:last-child {
+        margin-right: 0; }
+
+    .footer__item--social-touch {
+        float: left;
+        display: block;
+        margin-right: 3.5786636068%;
+        width: 48.2106681966%; }
+    .footer__item--social-touch:last-child {
+        margin-right: 0; }
 }
+
+.jt_header * {
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
 /**Specifically For framework/plugins.md**/
 th{
     min-width: 180px;
 }
-
-
-
-
-
-
-
-
-
-
 
 /* Setting a proper readable font-size */
 .book.font-size-0 .book-body .page-inner section {

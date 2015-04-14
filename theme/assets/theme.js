@@ -1,403 +1,156 @@
-(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define(factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory;
-    } else {
-        root.apollo = factory();
-    }
-})(this, function () {
-
-    'use strict';
-
-    var apollo = {};
-
-    var hasClass, addClass, removeClass, toggleClass;
-
-    var forEach = function (items, fn) {
-        if (Object.prototype.toString.call(items) !== '[object Array]') {
-            items = items.split(' ');
-        }
-        for (var i = 0; i < items.length; i++) {
-            fn(items[i], i);
-        }
+!function (a, b) {
+    "function" == typeof define && define.amd ? define(b) : "object" == typeof exports ? module.exports = b : a.apollo = b()
+}(this, function () {
+    "use strict";
+    var a, b, c, d, e = {}, f = function (a, b) {
+        "[object Array]" !== Object.prototype.toString.call(a) && (a = a.split(" "));
+        for (var c = 0; c < a.length; c++)b(a[c], c)
     };
+    return "classList"in document.documentElement ? (a = function (a, b) {
+        return a.classList.contains(b)
+    }, b = function (a, b) {
+        a.classList.add(b)
+    }, c = function (a, b) {
+        a.classList.remove(b)
+    }, d = function (a, b) {
+        a.classList.toggle(b)
+    }) : (a = function (a, b) {
+        return new RegExp("(^|\\s)" + b + "(\\s|$)").test(a.className)
+    }, b = function (b, c) {
+        a(b, c) || (b.className += (b.className ? " " : "") + c)
+    }, c = function (b, c) {
+        a(b, c) && (b.className = b.className.replace(new RegExp("(^|\\s)*" + c + "(\\s|$)*", "g"), ""))
+    }, d = function (d, e) {
+        (a(d, e) ? c : b)(d, e)
+    }), e.hasClass = function (b, c) {
+        return a(b, c)
+    }, e.addClass = function (a, c) {
+        f(c, function (c) {
+            b(a, c)
+        })
+    }, e.removeClass = function (a, b) {
+        f(b, function (b) {
+            c(a, b)
+        })
+    }, e.toggleClass = function (a, b) {
+        f(b, function (b) {
+            d(a, b)
+        })
+    }, e
+}), function (a, b) {
+    "function" == typeof define && define.amd ? define("responsivemenu", b(a)) : "object" == typeof exports ? module.responsivemenu = b(a) : a.responsivemenu = b(a)
+}(this, function (a) {
+    "use strict";
+    function b(a, b, c) {
+        for (var d = []; a.parentNode && a.parentNode != c;)a = a.parentNode, a.tagName == b && d.push(a);
+        return d
+    }
 
-    if ('classList' in document.documentElement) {
-        hasClass = function (elem, className) {
-            return elem.classList.contains(className);
-        };
-        addClass = function (elem, className) {
-            elem.classList.add(className);
-        };
-        removeClass = function (elem, className) {
-            elem.classList.remove(className);
-        };
-        toggleClass = function (elem, className) {
-            elem.classList.toggle(className);
-        };
-    } else {
-        hasClass = function (elem, className) {
-            return new RegExp('(^|\\s)' + className + '(\\s|$)').test(elem.className);
-        };
-        addClass = function (elem, className) {
-            if (!hasClass(elem, className)) {
-                elem.className += (elem.className ? ' ' : '') + className;
+    function c(a) {
+        function c() {
+            var b = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            if (b < a.width && !apollo.hasClass(e, a.openclass)) {
+                apollo.removeClass(g, a.hideclass);
+                var c = document.getElementsByClassName(a.subtoggleclass);
+                i(c, function (b, d) {
+                    apollo.addClass(c[d].parentNode.getElementsByTagName("ul")[0], a.hideclass), apollo.removeClass(c[d], a.hideclass)
+                }), apollo.removeClass(e, [a.openclass, a.fullmenuclass]), apollo.addClass(e, a.hideclass), 1 == a.absolute && apollo.addClass(e, a.absolutemenuclass)
+            } else if (b >= a.width) {
+                apollo.addClass(g, a.hideclass);
+                var c = document.getElementsByClassName(a.subtoggleclass);
+                i(c, function (b, d) {
+                    apollo.removeClass(c[d].parentNode.getElementsByTagName("ul")[0], a.hideclass), apollo.addClass(c[d], a.hideclass)
+                }), apollo.removeClass(e, [a.openclass, a.hideclass]), apollo.addClass(e, a.fullmenuclass), 1 == a.absolute && apollo.hasClass(e, a.absolutemenuclass) && apollo.removeClass(e, a.absolutemenuclass)
             }
-        };
-        removeClass = function (elem, className) {
-            if (hasClass(elem, className)) {
-                elem.className = elem.className.replace(new RegExp('(^|\\s)*' + className + '(\\s|$)*', 'g'), '');
+        }
+
+        function d() {
+            if (1 == a.sticky) {
+                var b = a.wrapper.offsetHeight, c = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+                if (b >= c && !apollo.hasClass(document.body, a.bodyoverflowhiddenclass))apollo.addClass(document.body, a.bodyoverflowhiddenclass), apollo.addClass(a.wrapper, a.menuoverflowautoclass); else if (c > b && (apollo.hasClass(document.body, a.bodyoverflowhiddenclass) && (apollo.removeClass(document.body, a.bodyoverflowhiddenclass), apollo.removeClass(a.wrapper, a.menuoverflowautoclass)), apollo.hasClass(a.wrapper, a.stickyclass) || apollo.addClass(a.wrapper, a.stickyclass), !apollo.hasClass(e, a.openclass) && !apollo.hasClass(document.body, a.stickyinitiatedclass))) {
+                    var d = b.toString() + "px";
+                    document.body.setAttribute("style", "padding-top:" + d), apollo.addClass(document.body, a.stickyinitiatedclass)
+                }
             }
+        }
+
+        e = "" == a.menu ? a.wrapper.getElementsByTagName("ul")[0] : a.menu, apollo.addClass(a.wrapper, a.initiated_class);
+        var f = document.createElement(a.toggletype);
+        apollo.addClass(f, [a.toggleclass]), "" == a.before_element && (a.before_element = a.wrapper.firstChild), a.before_element.parentNode.insertBefore(f, a.before_element);
+        var g = document.getElementsByClassName(a.toggleclass)[0];
+        g.innerHTML = a.togglecontent, g.setAttribute("aria-hidden", "true"), g.setAttribute("aria-pressed", "false");
+        var h = e.getElementsByTagName("li");
+        i(h, function (b, c) {
+            var d = h[c].getElementsByTagName("ul")[0];
+            if (void 0 != d) {
+                var e = document.createElement(a.subtoggletype);
+                apollo.addClass(e, [a.subtoggleclass, a.hideclass]);
+                var f = d.parentNode;
+                f.insertBefore(e, f.firstChild), e.innerHTML = a.subtogglecontent, e.setAttribute("aria-hidden", "true"), e.setAttribute("aria-pressed", "false")
+            }
+        });
+        for (var h = e.getElementsByTagName("li"), j = 0; j < h.length; j++) {
+            var k = h[j].getElementsByTagName("ul")[0];
+            k && apollo.addClass(k.parentNode, a.parentclass)
+        }
+        c(), d(), window.addEventListener("resize", function () {
+            c(), d()
+        }, !0);
+        for (var l = e.getElementsByTagName("a"), j = 0; j < l.length; j++)l[j].onfocus = function () {
+            var c = this.parentNode.parentNode.querySelectorAll("li");
+            if (c)for (var d = 0; d < c.length; d++)apollo.removeClass(c[d], a.focusedclass);
+            var f = b(this, "LI", e);
+            if (f)for (var d = 0; d < f.length; d++)apollo.addClass(f[d], a.focusedclass)
         };
-        toggleClass = function (elem, className) {
-            (hasClass(elem, className) ? removeClass : addClass)(elem, className);
+        g.onclick = function () {
+            return apollo.hasClass(e, a.hideclass) ? (apollo.removeClass(e, a.hideclass), apollo.addClass(e, a.openclass), apollo.addClass(g, a.toggleclosedclass)) : apollo.hasClass(e, a.openclass) && (apollo.removeClass(e, a.openclass), apollo.addClass(e, a.hideclass), apollo.removeClass(g, a.toggleclosedclass)), d(), !1
         };
+        var m = document.getElementsByClassName(a.subtoggleclass);
+        i(m, function (b, c) {
+            var e = m[c], f = e.parentNode.getElementsByTagName("ul")[0];
+            e.onclick = function () {
+                apollo.hasClass(f, a.hideclass) ? (apollo.removeClass(f, a.hideclass), apollo.addClass(e, a.toggleclosedclass)) : apollo.hasClass(f, a.hideclass) || (apollo.addClass(f, a.hideclass), apollo.removeClass(e, a.toggleclosedclass)), d()
+            }
+        })
     }
 
-    apollo.hasClass = function (elem, className) {
-        return hasClass(elem, className);
-    };
-
-    apollo.addClass = function (elem, classes) {
-        forEach(classes, function (className) {
-            addClass(elem, className);
-        });
-    };
-
-    apollo.removeClass = function (elem, classes) {
-        forEach(classes, function (className) {
-            removeClass(elem, className);
-        });
-    };
-
-    apollo.toggleClass = function (elem, classes) {
-        forEach(classes, function (className) {
-            toggleClass(elem, className);
-        });
-    };
-
-    return apollo;
-
-});
-
-/**
- *
- * Responsive menu v1.0.0
- * A vanilla JS responsive menu plugin, by Robin Poort - Timble
- * http://robinpoort.com - http://www.timble.net
- *
- * Browser support: IE9+ (IE8 doesn't need a responsive menu since it's not responsive)
- *
- * Dependency: apollo JS | https://github.com/toddmotto/apollo
- * Plugin boilerplate by | http://gomakethings.com/mit/
- *
- * Free to use under the MIT License.
- *
- */
-
-(function (root, factory) {
-    if ( typeof define === 'function' && define.amd ) {
-        define('responsivemenu', factory(root));
-    } else if ( typeof exports === 'object' ) {
-        module.responsivemenu = factory(root);
-    } else {
-        root.responsivemenu = factory(root);
-    }
-})(this, function (root) {
-
-    'use strict';
-
-    // Variables
-    var exports = {}; // Object for public APIs
-    var supports = !!document.querySelector && !!root.addEventListener; // Feature test
-    var settings; // Plugin settings
-
-    // Default settings
-    var defaults = {
-        wrapper: document.getElementsByTagName('nav')[0],
-        initiated_class: 'initiated',
-        before_element: '',
-        toggletype: 'button',
-        toggleclass: 'togglebutton',
-        togglecontent: 'menu',
-        subtoggletype: 'button',
-        subtoggleclass: 'subtoggle',
-        subtogglecontent: '+',
+    var d, e, f = {}, g = !!document.querySelector && !!a.addEventListener, h = {
+        wrapper: document.getElementsByTagName("nav")[0],
+        menu: "",
+        initiated_class: "rm-initiated",
+        before_element: "",
+        toggletype: "button",
+        toggleclass: "rm-togglebutton",
+        toggleclosedclass: "rm-togglebutton--closed",
+        togglecontent: "menu",
+        subtoggletype: "button",
+        subtoggleclass: "rm-subtoggle",
+        subtogglecontent: "+",
         sticky: 0,
         absolute: 0,
-        hideclass: 'accessible-hide',
-        width: 600
+        hideclass: "rm-closed",
+        openclass: "rm-opened",
+        focusedclass: "rm-focused",
+        width: 600,
+        parentclass: "rm-parent",
+        fullmenuclass: "rm-fullmenu",
+        absolutemenuclass: "rm-absolutemenu",
+        bodyoverflowhiddenclass: "rm-bodyoverflowhidden",
+        menuoverflowautoclass: "rm-menuoverflowauto",
+        stickyclass: "rm-sticky",
+        stickyinitiatedclass: "rm-sticky-initiated",
+        noresponsivemenuclass: "rm-no-responsive-menu"
+    }, i = function (a, b, c) {
+        if ("[object Object]" === Object.prototype.toString.call(a))for (var d in a)Object.prototype.hasOwnProperty.call(a, d) && b.call(c, a[d], d, a); else for (var e = 0, f = a.length; f > e; e++)b.call(c, a[e], e, a)
+    }, j = function (a, b) {
+        var c = {};
+        return i(a, function (b, d) {
+            c[d] = a[d]
+        }), i(b, function (a, d) {
+            c[d] = b[d]
+        }), c
     };
-
-    // Methods
-    /**
-     * A simple forEach() implementation for Arrays, Objects and NodeLists
-     * @private
-     * @param {Array|Object|NodeList} collection Collection of items to iterate
-     * @param {Function} callback Callback function for each iteration
-     * @param {Array|Object|NodeList} scope Object/NodeList/Array that forEach is iterating over (aka `this`)
-     */
-    var forEach = function (collection, callback, scope) {
-        if (Object.prototype.toString.call(collection) === '[object Object]') {
-            for (var prop in collection) {
-                if (Object.prototype.hasOwnProperty.call(collection, prop)) {
-                    callback.call(scope, collection[prop], prop, collection);
-                }
-            }
-        } else {
-            for (var i = 0, len = collection.length; i < len; i++) {
-                callback.call(scope, collection[i], i, collection);
-            }
-        }
-    };
-
-    /**
-     * Merge defaults with user options
-     * @private
-     * @param {Object} defaults Default settings
-     * @param {Object} options User options
-     * @returns {Object} Merged values of defaults and options
-     */
-    var extend = function ( defaults, options ) {
-        var extended = {};
-        forEach(defaults, function (value, prop) {
-            extended[prop] = defaults[prop];
-        });
-        forEach(options, function (value, prop) {
-            extended[prop] = options[prop];
-        });
-        return extended;
-    };
-
-    /**
-     * Remove whitespace from a string
-     * @private
-     * @param {String} string
-     * @returns {String}
-     */
-    var trim = function ( string ) {
-        return string.replace(/^\s+|\s+$/g, '');
-    };
-
-    /**
-     * Convert data-options attribute into an object of key/value pairs
-     * @private
-     * @param {String} options Link-specific options as a data attribute string
-     * @returns {Object}
-     */
-    var getDataOptions = function ( options ) {
-        var settings = {};
-        // Create a key/value pair for each setting
-        if ( options ) {
-            options = options.split(';');
-            options.forEach( function(option) {
-                option = trim(option);
-                if ( option !== '' ) {
-                    option = option.split(':');
-                    settings[option[0]] = trim(option[1]);
-                }
-            });
-        }
-        return settings;
-    };
-
-    // Initialize
-    function initialize(settings) {
-
-        // Add a class when JS is initiated
-        apollo.addClass(settings.wrapper, settings.initiated_class);
-
-        // Creating the main toggle button
-        var toggle_element = document.createElement(settings.toggletype);
-        apollo.addClass(toggle_element, [settings.toggleclass]);
-        if ( settings.before_element == '' ) { settings.before_element = settings.wrapper.firstChild }
-        settings.before_element.parentNode.insertBefore(toggle_element, settings.before_element);
-        var togglebutton = document.getElementsByClassName(settings.toggleclass)[0];
-        togglebutton.innerHTML = settings.togglecontent;
-        togglebutton.setAttribute('aria-hidden', 'true');
-        togglebutton.setAttribute('aria-pressed', 'false');
-        togglebutton.style.display = "none";
-
-        // Creating subtoggles
-        var parents = settings.wrapper.getElementsByTagName('li');
-        forEach(parents, function(value, prop) {
-            var child = parents[prop].getElementsByTagName('ul')[0];
-            if ( child != undefined ) {
-                apollo.addClass(child, settings.hideclass);
-                var subtoggle_element = document.createElement(settings.subtoggletype);
-                apollo.addClass(subtoggle_element, [settings.subtoggleclass, settings.hideclass]);
-                var parent = child.parentNode;
-                parent.insertBefore(subtoggle_element, parent.firstChild);
-                subtoggle_element.style.display = 'block';
-                subtoggle_element.innerHTML = settings.subtogglecontent;
-                subtoggle_element.setAttribute('aria-hidden', 'true');
-                subtoggle_element.setAttribute('aria-pressed', 'false');
-            }
-        });
-
-        // Adding classes
-        function classes() {
-
-            // Check current viewport width
-            var viewportwidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-
-            // If screen is small and if the menu is not already opened
-            if ( viewportwidth <= settings.width && !apollo.hasClass(settings.wrapper, 'opened') && !apollo.hasClass(settings.wrapper, 'closed') ) {
-
-                // Show the toggle button(s)
-                apollo.removeClass(togglebutton, 'close');
-                togglebutton.style.display = "block";
-                var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
-                forEach(subtoggles, function(value, prop) {
-                    apollo.addClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
-                    apollo.removeClass(subtoggles[prop], [settings.hideclass, 'close']);
-                });
-
-                // Hide the menu
-                apollo.removeClass(settings.wrapper, 'opened');
-                apollo.addClass(settings.wrapper, 'closed');
-
-                // Make the menu absolute positioned
-                if ( settings.absolute == 1 ) {
-                    apollo.addClass(settings.wrapper, 'absolutemenu');
-                }
-
-            } else if ( viewportwidth > settings.width ) {
-
-                // Hide the toggle button(s)
-                apollo.addClass(togglebutton, 'close');
-                togglebutton.style.display = "none";
-                var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
-                forEach(subtoggles, function(value, prop) {
-                    apollo.removeClass(subtoggles[prop].parentNode.getElementsByTagName('ul')[0], settings.hideclass);
-                    apollo.addClass(subtoggles[prop], [settings.hideclass, 'close']);
-                });
-
-                // Show the menu and remove all classes
-                apollo.removeClass(settings.wrapper, ['opened', 'closed']);
-
-                // Undo absolute positioning
-                if ( settings.absolute == 1 && apollo.hasClass(settings.wrapper, 'absolutemenu') ) {
-                    apollo.removeClass(settings.wrapper, 'absolutemenu');
-                }
-            }
-        }
-
-        // Sticky menu body height
-        function stickyMenu() {
-
-            if ( settings.sticky == 1 ) {
-
-                // The current menu and viewport heights
-                var menuheight = settings.wrapper.offsetHeight;
-                var viewportheight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
-                // Add the overflow class but only if there is space
-                if ( viewportheight <= menuheight && !apollo.hasClass(document.body, 'bodyoverflowhidden') ) {
-
-                    apollo.addClass(document.body, 'bodyoverflowhidden');
-                    apollo.addClass(settings.wrapper, 'menuoverflowauto');
-
-                } else if ( viewportheight > menuheight ) {
-
-                    if ( apollo.hasClass(document.body, 'bodyoverflowhidden') ) {
-                        apollo.removeClass(document.body, 'bodyoverflowhidden');
-                        apollo.removeClass(settings.wrapper, 'menuoverflowauto');
-                    }
-
-                    // Make sticky
-                    if ( !apollo.hasClass(settings.wrapper, 'sticky') ) {
-                        apollo.addClass(settings.wrapper, 'sticky');
-                    }
-
-                    // Add padding only if menu is closed or when value is stored
-                    if ( !apollo.hasClass(settings.wrapper, 'opened') && !apollo.hasClass(document.body, 'sticky-initiated') ) {
-
-                        // Calculate the height
-                        var paddingtop = menuheight.toString() + 'px';
-
-                        // Set the padding on the body
-                        document.body.setAttribute('style', 'padding-top:' + paddingtop);
-                        apollo.addClass(document.body, 'sticky-initiated');
-                    }
-                }
-            }
-        }
-
-        // Initial load
-        classes();
-        stickyMenu();
-
-        window.addEventListener('resize', function() {
-            classes();
-            stickyMenu();
-        }, true);
-
-        // Clicking the toggle button
-        togglebutton.onclick = function() {
-
-            // Add classes accordingly
-            if ( apollo.hasClass(settings.wrapper, 'closed') ) {
-                apollo.removeClass(settings.wrapper, 'closed');
-                apollo.addClass(settings.wrapper, 'opened');
-                apollo.addClass(togglebutton, 'close');
-            } else if ( apollo.hasClass(settings.wrapper, 'opened') ) {
-                apollo.removeClass(settings.wrapper, 'opened');
-                apollo.addClass(settings.wrapper, 'closed');
-                apollo.removeClass(togglebutton, 'close');
-            }
-
-            // Check if the menu still fits
-            stickyMenu();
-
-            return false;
-        }
-
-        // Clicking the sub toggles button
-        var subtoggles = document.getElementsByClassName(settings.subtoggleclass);
-        forEach(subtoggles, function(value, prop) {
-
-            var subtoggle = subtoggles[prop];
-            var submenu = subtoggle.parentNode.getElementsByTagName('ul')[0];
-
-            // Click buttons and show submenu
-            subtoggle.onclick = function() {
-
-                // Add classes accordingly
-                if ( apollo.hasClass(submenu, settings.hideclass) ) {
-                    apollo.removeClass(submenu, settings.hideclass);
-                    apollo.addClass(subtoggle, 'close');
-                } else if ( !apollo.hasClass(submenu, settings.hideclass) ) {
-                    apollo.addClass(submenu, settings.hideclass);
-                    apollo.removeClass(subtoggle, 'close');
-                }
-
-                // Check if the menu still fits
-                stickyMenu();
-            }
-        });
-    }
-
-    /**
-     * Initialize Plugin
-     * @public
-     * @param {Object} options User settings
-     */
-    exports.init = function ( options ) {
-        // feature test
-        if ( !supports ) return;
-        settings = extend( defaults, options || {} ); // Merge user options with defaults
-        initialize(settings);
-    };
-
-    // Public APIs
-    return exports;
-
-});
-
-responsivemenu.init({
-    wrapper: document.getElementsByClassName('navbar')[0],
-    before_element: document.getElementsByClassName('brand')[0],
-    absolute: 1
-});
+    return f.init = function (a) {
+        return g ? (d = j(h, a || {}), void c(d)) : void(document.body.className += " " + d.noresponsivemenuclass)
+    }, f
+}), responsivemenu.init({wrapper: document.querySelector(".jt_navigation_container")});
