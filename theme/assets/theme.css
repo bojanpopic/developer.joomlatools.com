@@ -557,10 +557,12 @@ html.oldie .jt_navigation_container ul li a {
     .footer__item--social-touch:last-child {
         margin-right: 0; }
 }
+
 /**Specifically For framework/plugins.md**/
 th{
     min-width: 180px;
 }
+
 /* Setting a proper readable font-size */
 .book.font-size-0 .book-body .page-inner section {
     font-size: 13px;
@@ -664,5 +666,4 @@ th{
 
 .jt_header * {
     -webkit-font-smoothing: subpixel-antialiased;
-
 }
