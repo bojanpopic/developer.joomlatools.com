@@ -104,19 +104,19 @@ button.rm-closed {
 [tabindex="-1"]:focus {
     outline: none !important; }
 
-.jt_brand .joomlatools_logo, .jts-icon--twitter, .jts-icon--facebook, .jts-icon--googleplus, .jts-icon--youtube, .jts-icon--newsletter {
+.joomlatools_logo, .jts-icon--twitter, .jts-icon--facebook, .jts-icon--googleplus, .jts-icon--youtube, .jts-icon--newsletter {
     background-image: url('images/jts-sprite.png');
     background-repeat: no-repeat; }
 @media screen and (min-width: 0) {
-    .jt_brand .joomlatools_logo, .jts-icon--twitter, .jts-icon--facebook, .jts-icon--googleplus, .jts-icon--youtube, .jts-icon--newsletter {
+    .joomlatools_logo, .jts-icon--twitter, .jts-icon--facebook, .jts-icon--googleplus, .jts-icon--youtube, .jts-icon--newsletter {
         background-image: url('images/jts-sprite--large.png');
         background-size: 142px 54px; } }
 
 @media screen and (min-width: 0) {
-    .jt_brand .joomlatools_logo {
+    .joomlatools_logo {
         background-size: 110px 42px; } }
 @media screen and (min-width: 768px) {
-    .jt_brand .joomlatools_logo {
+    .joomlatools_logo {
         background-size: 142px 54px; } }
 
 .jt_header, .footer_container {
@@ -125,6 +125,11 @@ button.rm-closed {
     line-height: 1.5em;
     font-weight: 400;
     -webkit-font-smoothing: subpixel-antialiased; }
+.jt_header, .jt_header *, .jt_header *:before, .jt_header *:after, .footer_container, .footer_container *, .footer_container *:before, .footer_container *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-font-smoothing: subpixel-antialiased;}
 
 .jt_header {
     margin: 0;
@@ -140,10 +145,6 @@ button.rm-closed {
     position: relative;
     line-height: 20px;
     z-index: 99; }
-.jt_header, .jt_header *, .jt_header *:before, .jt_header *:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box; }
 
 body.js-enabled .jt_header {
     min-height: 48px;
@@ -199,16 +200,18 @@ body.js-enabled .jt_header {
     margin: 0;
     padding: 15px 0 14px;
     background-position: 0 0; }
-.jt_brand .joomlatools_logo {
+@media screen and (min-width: 768px) {
+    .jt_brand {
+        padding: 12px 0; } }
+
+.joomlatools_logo {
     display: block;
     overflow: hidden;
     width: 110px;
     height: 0;
     padding-top: 19px; }
 @media screen and (min-width: 768px) {
-    .jt_brand {
-        padding: 12px 0; }
-    .jt_brand .joomlatools_logo {
+    .joomlatools_logo {
         width: 142px;
         padding-top: 24px; } }
 
@@ -241,26 +244,47 @@ body.js-enabled .jt_header {
         clear: none;
         float: right;
         margin: 0;
-        box-shadow: none; }
-    .jt_navigation_container ul li {
-        float: left; } }
-.jt_navigation_container ul li {
+        box-shadow: none; } }
+.jt_navigation_container li {
     display: block; }
-.jt_navigation_container ul li a {
+@media screen and (min-width: 600px) {
+    .jt_navigation_container li {
+        float: left; } }
+.jt_navigation_container li.user {
+    position: relative; }
+.jt_navigation_container li.user a:after {
+    display: none; }
+@media screen and (min-width: 600px) {
+    .jt_navigation_container li.user {
+        margin-left: 10px; }
+    .jt_navigation_container li.user a {
+        background: #fff;
+        border-radius: 40px;
+        color: #006eb3;
+        padding: 4px 12px;
+        margin: 8px 0;
+        height: 31px;
+        border: 1px solid #006eb3; }
+    .jt_navigation_container li.user a:before {
+        margin-left: 2px; }
+    .jt_navigation_container li.user a:hover {
+        color: #111111;
+        text-decoration: underline; } }
+.jt_navigation_container li.user--logged-in a {
+    padding-left: 36px; }
+.jt_navigation_container li a {
     display: block;
     color: #ffffff;
     text-decoration: none;
     letter-spacing: 0.1em;
     padding: 13px 15px 14px;
     position: relative; }
-.jt_navigation_container ul li a:link {
-    color: #fff; }
 @media screen and (min-width: 600px) {
-    .jt_navigation_container ul li a {
+    .jt_navigation_container li a {
         padding: 13px 9px 14px;
         height: 47px;
         font-size: 0.875em; }
-    .jt_navigation_container ul li a:after {
+    .jt_navigation_container li a:after {
         display: block;
         visibility: hidden;
         content: " ";
@@ -270,54 +294,34 @@ body.js-enabled .jt_header {
         right: 9px;
         height: 2px;
         background: #fff; }
-    .jt_navigation_container ul li a:focus:after, .jt_navigation_container ul li a:hover:after, .jt_navigation_container ul li a:active:after {
+    .jt_navigation_container li a:focus:after, .jt_navigation_container li a:hover:after, .jt_navigation_container li a:active:after {
         visibility: visible; } }
 @media screen and (min-width: 43.75em) {
-    .jt_navigation_container ul li a {
+    .jt_navigation_container li a {
         padding-left: 13px;
         padding-right: 13px;
         font-size: 0.9375em; }
-    .jt_navigation_container ul li a:after {
+    .jt_navigation_container li a:after {
         left: 13px;
         right: 13px; } }
 @media screen and (min-width: 768px) {
-    .jt_navigation_container ul li a {
+    .jt_navigation_container li a {
         padding-left: 16px;
         padding-right: 16px;
         font-size: 1em; }
-    .jt_navigation_container ul li a:after {
+    .jt_navigation_container li a:after {
         left: 16px;
         right: 16px; } }
 @media screen and (min-width: 1024px) {
-    .jt_navigation_container ul li a {
+    .jt_navigation_container li a {
         padding-left: 20px;
         padding-right: 20px; }
-    .jt_navigation_container ul li a:after {
+    .jt_navigation_container li a:after {
         left: 20px;
         right: 20px; } }
-.jt_navigation_container ul li.user {
-    position: relative; }
-.jt_navigation_container ul li.user a:after {
-    display: none; }
-@media screen and (min-width: 600px) {
-    .jt_navigation_container ul li.user {
-        margin-left: 10px; }
-    .jt_navigation_container ul li.user a {
-        background: #fff;
-        border-radius: 40px;
-        color: #006eb3;
-        padding: 4px 12px;
-        margin: 8px 0;
-        height: 31px;
-        border: 1px solid #006eb3; }
-    .jt_navigation_container ul li.user a:before {
-        margin-left: 2px; }
-    .jt_navigation_container ul li.user a:hover {
-        color: #111111;
-        text-decoration: underline; } }
-.jt_navigation_container ul li.user.user--logged-in a {
-    padding-left: 36px; }
-.jt_navigation_container ul li.user .gravatar {
+.jt_navigation_container li.active a:after {
+    visibility: visible; }
+.jt_navigation_container .gravatar {
     display: inline-block;
     width: 27px;
     height: 27px;
@@ -327,86 +331,28 @@ body.js-enabled .jt_header {
     top: 1px;
     left: 1px;
     background: #ddd; }
-.jt_navigation_container ul li.user img {
+.jt_navigation_container .gravatar img {
     max-width: none;
     display: block;
     width: 27px;
     height: 27px;
     border-radius: 50%; }
-.jt_navigation_container ul li.active a:after {
-    visibility: visible; }
 
-.jt_header--static .jt_navigation_container ul {
-    clear: none;
-    float: right;
-    margin: 0;
-    box-shadow: none; }
-.jt_header--static .jt_navigation_container ul li {
-    float: left; }
-.jt_header--static .jt_navigation_container ul > li a {
-    padding: 13px 9px 14px;
-    height: 47px;
-    font-size: 0.875em;
-    padding-left: 13px;
-    padding-right: 13px;
-    font-size: 0.9375em;
-    padding-left: 16px;
-    padding-right: 16px;
-    font-size: 1em;
-    padding-left: 20px;
-    padding-right: 20px; }
-.jt_header--static .jt_navigation_container ul > li a:after {
-    display: block;
-    visibility: hidden;
-    content: " ";
-    position: absolute;
-    bottom: 10px;
-    left: 9px;
-    right: 9px;
-    height: 2px;
-    background: #fff; }
-.jt_header--static .jt_navigation_container ul > li a:focus:after, .jt_header--static .jt_navigation_container ul > li a:hover:after, .jt_header--static .jt_navigation_container ul > li a:active:after {
-    visibility: visible; }
-.jt_header--static .jt_navigation_container ul > li a:after {
-    left: 13px;
-    right: 13px; }
-.jt_header--static .jt_navigation_container ul > li a:after {
-    left: 16px;
-    right: 16px; }
-.jt_header--static .jt_navigation_container ul > li a:after {
-    left: 20px;
-    right: 20px; }
-.jt_header--static .jt_navigation_container ul > li.user {
-    margin-left: 10px; }
-.jt_header--static .jt_navigation_container ul > li.user a {
-    background: #fff;
-    border-radius: 40px;
-    color: #006eb3;
-    padding: 4px 12px;
-    margin: 8px 0;
-    height: 31px;
-    border: 1px solid #006eb3; }
-.jt_header--static .jt_navigation_container ul > li.user a:before {
-    margin-left: 2px; }
-.jt_header--static .jt_navigation_container ul > li.user a:hover {
-    color: #111111;
-    text-decoration: underline; }
-
-body .jt_navigation_container ul .user--logged-in {
+body .jt_navigation_container .user--logged-in {
     display: none; }
-body.user-logged-in .jt_navigation_container ul .user--logged-out {
+body.user-logged-in .jt_navigation_container .user--logged-out {
     display: none; }
-body.user-logged-in .jt_navigation_container ul .user--logged-in {
+body.user-logged-in .jt_navigation_container .user--logged-in {
     display: block; }
 
-html.oldie .jt_navigation_container ul {
+html.oldie .jt_navigation_container {
     clear: none;
     float: right;
     margin: 0;
     box-shadow: none; }
-html.oldie .jt_navigation_container ul li {
+html.oldie .jt_navigation_container li {
     float: left; }
-html.oldie .jt_navigation_container ul li a {
+html.oldie .jt_navigation_container li a {
     color: #fff; }
 
 .footer_container {
@@ -418,19 +364,12 @@ html.oldie .jt_navigation_container ul li a {
     clear: both;
     content: "";
     display: table; }
-.footer_container, .footer_container *, .footer_container *:before, .footer_container *:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box; }
-.footer_container .footer__content {
+
+.footer__content {
     max-width: 1080px;
     margin: 0 auto;
     padding: 30px 15px; }
-.footer_container .footer__content__top::after, .footer_container .footer__content__bottom::after {
-    clear: both;
-    content: "";
-    display: table; }
-.footer_container h2 {
+.footer__content h2 {
     padding: 0;
     display: inline-block;
     color: #fff;
@@ -439,20 +378,15 @@ html.oldie .jt_navigation_container ul li a {
     border-bottom: 1px solid #006eb3;
     margin: 0 0 12px;
     font-weight: 400; }
-.footer_container a {
+.footer__content a {
     text-decoration: underline; }
-.footer_container a, .footer_container a:hover, .footer_container a:focus, .footer_container a:active {
+.footer__content a, .footer__content a:hover, .footer__content a:focus, .footer__content a:active {
     color: #fff; }
-.footer_container a:hover, .footer_container a:focus {
+.footer__content a:hover, .footer__content a:focus {
     text-decoration: none; }
-.footer_container p {
-    margin: 0 0 15px; }
-.footer_container .newsfeed {
-    margin-bottom: 24px; }
-.footer_container .newsfeed .newsfeed__item {
-    line-height: 1.5em;
-    padding: 5px 10px 5px 0; }
-.footer_container hr {
+.footer__content p {
+    margin: 0 0 1em; }
+.footer__content hr {
     clear: both;
     float: none;
     width: 100%;
@@ -460,33 +394,46 @@ html.oldie .jt_navigation_container ul li a {
     border: none;
     margin: 0 auto 24px;
     background: #006eb3; }
-.footer_container .footer__copyright {
+
+.footer__content__top::after, .footer__content__bottom::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.newsfeed {
+    margin-bottom: 24px; }
+.newsfeed .newsfeed__item {
+    line-height: 1.5em;
+    padding: 5px 10px 5px 0; }
+
+.footer__copyright {
     text-align: left;
     margin-bottom: 24px; }
 @media screen and (min-width: 768px) {
-    .footer_container .footer__copyright {
+    .footer__copyright {
         margin-bottom: 0; } }
-.footer_container .footer__menu {
+
+.footer__menu {
     text-align: left; }
-.footer_container .footer__menu ul {
+.footer__menu ul {
     margin: 0 0 1.5em;
     padding: 0;
     list-style: none;
     background: none; }
-.footer_container .footer__menu ul::after {
+.footer__menu ul::after {
     clear: both;
     content: "";
     display: table; }
-.footer_container .footer__menu ul li {
+.footer__menu li {
     display: block;
     float: left;
     margin-left: 6px;
     margin-right: 6px;
     line-height: 1.5em; }
-.footer_container .footer__menu ul li:first-child {
+.footer__menu li:first-child {
     margin-left: 0; }
 @media screen and (min-width: 768px) {
-    .footer_container .footer__menu ul li {
+    .footer__menu li {
         margin-right: 0;
         margin-left: 12px; } }
 
@@ -506,11 +453,11 @@ html.oldie .jt_navigation_container ul li a {
     padding-right: 24px;
     margin-bottom: 12px;
     line-height: 22px; }
-.social_list li a {
+.social_list a {
     display: inline-block;
     color: #fff;
     text-decoration: none; }
-.social_list li a span:before {
+.social_list span:before {
     display: inline-block;
     font-size: 24px;
     width: 24px;
@@ -556,114 +503,4 @@ html.oldie .jt_navigation_container ul li a {
         width: 48.2106681966%; }
     .footer__item--social-touch:last-child {
         margin-right: 0; }
-}
-
-.jt_header * {
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-
-/**Specifically For framework/plugins.md**/
-th{
-    min-width: 180px;
-}
-
-/* Setting a proper readable font-size */
-.book.font-size-0 .book-body .page-inner section {
-    font-size: 13px;
-}
-.book.font-size-1 .book-body .page-inner section {
-    font-size: 15px;
-}
-.book.font-size-2 .book-body .page-inner section {
-    font-size: 17px;
-}
-.book.font-size-3 .book-body .page-inner section {
-    font-size: 19px;
-}
-.book.font-size-4 .book-body .page-inner section {
-    font-size: 21px;
-}
-.book.font-family-1 {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    font-weight: 400;
-}
-
-/* Hide summary sections by default */
-.summary li > .articles {
-    display: none;
-}
-
-/* And show the sections when active */
-.summary li .expanded,
-.summary .active .articles,
-.summary .active-parent .articles {
-    display: block;
-}
-
-/* setting font for sidebar */
-.summary {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    line-height: 1.5em;
-    font-weight: 400;
-}
-
-/* A top and bottom border for sections */
-.chapter {
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-}
-
-/* default border and background color */
-.summary > .active,
-.summary > .active-parent {
-    background: white;
-    border-top-color: #ddd;
-    border-bottom-color: #ddd;
-}
-
-/* The other default themes */
-.color-theme-1 .summary > .active,
-.color-theme-1 .summary > .active-parent,
-.color-theme-2 .summary > .active,
-.color-theme-2 .summary > .active-parent {
-    background: #222;
-    border-top-color: black;
-    border-bottom-color: black;
-}
-
-/* no top border fo the first item */
-.summary > .active:first-child {
-    border-top-color: transparent;
-}
-
-/* hide checkmarks */
-.book .book-summary ul.summary li.done > a i {
-    display: none;
-}
-
-/* active links should be bold */
-.book .book-summary ul.summary li.active > a {
-    font-weight: bold;
-}
-
-/* Proper Timble color for links */
-.book .book-summary ul.summary > li a:hover,
-.book .book-summary ul.summary li.active > a {
-    color: #2889CE;
-}
-
-/* Accessible links */
-.book .book-body .page-wrapper .page-inner section.normal a {
-    text-decoration: underline;
-    color: #2889CE;
-}
-.book .book-body .page-wrapper .page-inner section.normal a:hover,
-.book .book-body .page-wrapper .page-inner section.normal a:focus {
-    text-decoration: none;
-}
-
-/* Gitbook credits */
-.book .book-summary ul.summary .gitbook-link {
-    font-size: 13px;
 }
