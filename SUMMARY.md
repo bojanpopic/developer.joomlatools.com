@@ -12,7 +12,7 @@
         	* [Nooku components](extensions/logman/plugins/nooku.md)
         	* [Activities](extensions/logman/plugins/activities.md)
         * [Translations](extensions/logman/translations.md)
-* [Framework](framework/bootstrap.md)
+* [Framework](framework/template-system.md)
     * [Template System](framework/template-system.md)
         * [Custom CSS](framework/custom-css.md)
         * [Bootstrap](framework/bootstrap.md)

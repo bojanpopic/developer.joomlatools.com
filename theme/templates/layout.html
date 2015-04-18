@@ -14,6 +14,7 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ staticBase }}/images/apple-touch-icon-precomposed-152.png">
         <link rel="shortcut icon" href="{{ staticBase }}/images/favicon.ico" type="image/x-icon">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         {% block head %}{% endblock %}
         {{ htmlSnippet("head:end")|default("") }}
     </head>
@@ -26,4 +27,15 @@
         {{ htmlSnippet("body:end")|default("") }}
     </body>
     {{ htmlSnippet("html:end")|default("") }}
+
+    <script>
+        require(["gitbook", "jquery"], function(gitbook, $) {
+            var load = function(){
+                $('ul.summary li.active').parents('ul.articles').show().addClass('expanded').parent('li').addClass('active-parent');
+            };
+            $(document).ready(load)
+
+            gitbook.events.bind("page.change", load);
+        });
+    </script>
 </html>

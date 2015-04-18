@@ -1,0 +1,12 @@
+{
+  "name": "joomlatools-developer",
+  "description": "",
+  "homepage": "",
+  "keywords": [],
+  "author": "",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "shared.joomlatools.com": "joomlatools/shared.joomlatools.com#master"
+  }
+}
