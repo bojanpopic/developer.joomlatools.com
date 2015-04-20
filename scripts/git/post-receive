@@ -32,6 +32,9 @@ do
         cd /tmp
         rm -Rf $TMP_CLONE
 
+        echo "Purging CloudFlare cache .."
+        curl -vs -o /dev/null -X DELETE "https://api.cloudflare.com/client/v4/zones/IDENTIFIER/purge_cache" -H "X-Auth-Email: ACCOUNT" -H "X-Auth-Key: API_KEY" -H "Content-Type: application/json" --data '{"purge_everything":true}' > /dev/null 2>&1
+
         echo "Done"
     else
         echo "You pushed $CURRENT_BRANCH instead of $BRANCH, skipping deployment"
