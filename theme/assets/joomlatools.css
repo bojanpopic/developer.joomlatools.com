@@ -319,7 +319,7 @@ body.js-enabled .jt_header {
         left: 20px;
         right: 20px; } }
 .jt_navigation_container li.active a:after {
-    visibility: visible; }
+    opacity: 1; }
 .jt_navigation_container .gravatar {
     display: inline-block;
     width: 27px;
