@@ -9,6 +9,11 @@
     z-index: 1;
 }
 
+/* Overwriting the anitaliasing on fonts for our menu */
+.jt_menu__item a {
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
 /* Setting a proper readable font-size */
 .book.font-size-0 .book-body .page-inner section {
     font-size: 13px;
