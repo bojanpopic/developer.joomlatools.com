@@ -7,6 +7,6 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "shared.joomlatools.com": "joomlatools/shared.joomlatools.com#master"
+      "shared.joomlatools.com": "git@github.com:joomlatools/shared.joomlatools.com.git#master"
   }
 }
