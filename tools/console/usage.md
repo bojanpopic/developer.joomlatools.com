@@ -57,6 +57,7 @@ For more information on the symlinker, run:
       joomla extension:symlink  --help
 
 ## Install Joomla extensions
+
 You can use discover install on command line to install extensions.
 
     joomla extension:install testsite com_awesome
@@ -70,5 +71,5 @@ For more information, run:
 Alternatively, you can install extensions using their installation packages using the `extension:installfile` command. Example:
 
     joomla extension:installfile testsite /home/vagrant/com_component.v1.x.zip /home/vagrant/plg_plugin.v2.x.tar.gz
-    
+
 This will install both the com_component.v1.x.zip and plg_plugin.v2.x.tar.gz packages.
