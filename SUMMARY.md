@@ -29,4 +29,5 @@
 	* [Console](tools/console/introduction.md)
 	    * [Installation](tools/console/installation.md)
 	    * [Usage](tools/console/usage.md)
-	    * [FAQs](tools/console/faq.md)    
+        * [Plugins](tools/console/plugins.md)
+	    * [FAQs](tools/console/faq.md)

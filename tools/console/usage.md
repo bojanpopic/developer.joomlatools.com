@@ -2,7 +2,9 @@
 
 <!-- toc -->
 
-## Create a new Joomla site
+## Managing sites
+
+### Create a new Joomla site
 
 To create a site with the latest Joomla version, run:
 
@@ -10,7 +12,7 @@ To create a site with the latest Joomla version, run:
 
 The newly installed site will be available at /var/www/testsite and testsite.dev after that. You can login into your fresh Joomla installation using these credentials: `admin` / `admin`.
 
-By default web server root is set to _/var/www_. You can pass _--www=/my/server/path_ to commands for custom values.
+By default, the web server root is set to _/var/www_. You can pass _--www=/my/server/path_ to commands for custom values.
 
 You can choose the Joomla version or the sample data to be installed:
 
@@ -18,21 +20,19 @@ You can choose the Joomla version or the sample data to be installed:
 
 You can pick any branch from the Git repository (e.g. master, staging) or any version from 2.5.0 and up using this command.
 
-You can also add your projects into the new site by symlinking. See the [Symlinking section](#symlink-your-code-into-a-joomla-installation) below for detailed information.
-
-    joomla site:create testsite --symlink=project1,project2
-
 For more information and available options, try running:
 
     joomla site:create --help
 
-## Delete an existing site
+### Delete an existing site
 
 You can delete the sites you have created by running:
 
     joomla site:delete testsite
 
-## Symlink your code into a Joomla installation
+## Components and extensions
+
+### Symlink your code into a Joomla installation
 
 Let's say you are working on your own Joomla component called _Awesome_ and want to develop it with the latest Joomla version.
 
@@ -56,7 +56,7 @@ For more information on the symlinker, run:
 
       joomla extension:symlink  --help
 
-## Install Joomla extensions
+### Install Joomla extensions
 
 You can use discover install on command line to install extensions.
 
@@ -74,7 +74,7 @@ Alternatively, you can install extensions using their installation packages usin
 
 This will install both the com_component.v1.x.zip and plg_plugin.v2.x.tar.gz packages.
 
-## Register Extensions
+### Register Extensions
 
 With the `extension:register` command you can insert your extension into the `extensions` table without the need for a complete install package with a manifest file.
 
@@ -120,7 +120,8 @@ Other options available for all extension types: `--enabled`, `--client_id`
 
 There a few other commands available for you to try out as well :
 
-* `joomla site:token sitename user` : generates an authentication token for the given `user` to automatically login to `sitename` using the ?auth_token query argument. *Note* requires the [Koowa framework](https://github.com/joomlatools/koowa) to be installed in your `site`.
+* `joomla site:token sitename user` : generates an authentication token for the given `user` to automatically login to `sitename` using the ?auth_token query argument.
+*Note:* requires the [Koowa framework](https://github.com/joomlatools/koowa) to be installed in your `site`.
 * `joomla versions` : list the available Joomla versions.
  * Use `joomla versions --refresh` to get the latest tags and branches from the official [Joomla CMS](https://github.com/joomla/joomla-cms) repository.
  * To purge the cache of all Joomla packages, add the `--clear-cache` flag to this command.
