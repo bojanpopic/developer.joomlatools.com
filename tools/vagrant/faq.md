@@ -7,7 +7,7 @@
 * Ubuntu 12.10 (Precise) 64 bit
 * Apache
 * MySQL
-* PHP 5.4 
+* PHP 5.4
 * Composer
 * Phpmyadmin
 * Xdebug
@@ -21,7 +21,7 @@
 Apache serves files from the `www` folder using the IP:
 
     http://33.33.33.58/
-    
+
 If you have setup your hosts file correctly as shown above, you can now also access the default www/ folder at:
 
 	http://joomla.dev
@@ -33,10 +33,10 @@ It is advised to use virtual hosts for development. See below for our virtual ho
 You can reach the box by using the command:
 
 	$ vagrant ssh
-	
+
 ## Can I create a new site from the command line?
 
-The Vagrant box has our [Joomla Console](https://github.com/joomlatools/joomla-console) script pre-installed.
+The Vagrant box has our [Joomla Console](http://developer.joomlatools.com/tools/console) script pre-installed.
 To create a site with the latest Joomla version, run:
 
     joomla site:create testsite
@@ -67,7 +67,7 @@ Save this file and restart the Vagrant box. (```vagrant reload```)
 
 The "Projects" folder from your host machine will now be available inside the Vagrant box through _/home/vagrant/Projects_.
 
-Next step is to create the new site you'll be working on. SSH into the box (```vagrant ssh```) and execute the following command: 
+Next step is to create the new site you'll be working on. SSH into the box (```vagrant ssh```) and execute the following command:
 
     joomla site:create testsite --joomla=3.2 --symlink=awesome
 
@@ -77,28 +77,28 @@ Or to symlink your code into an existing site:
 
 Run discover install to make your component available to Joomla and you are good to go!
 
-For more information on the symlinker, refer to the [Joomla Console](http://www.joomlatools.com/developer/tools/console) documentation or run:
+For more information on the symlinker, refer to the [Joomla Console](http://developer.joomlatools.com/tools/console) documentation or run:
 
-      joomla extension:symlink  --help    
-    
+      joomla extension:symlink  --help
+
 ## Where can I find phpmyadmin?
 
 After you modify /etc/hosts as shown above you can use phpMyAdmin at
 
     http://phpmyadmin.joomla.dev
-    
+
 ## I don't like the command line! Is there another way to manage the Vagrant box?
 
 There's a great tool we use to start and manage our Vagrant boxes, called [Vagrant Manager](http://vagrantmanager.com/).  It is currently available on OS X only, though!
 
 To create a new Joomla site or symlink an extension, you will still need the command line however.
-    
-## Can I use webgrind? 
+
+## Can I use webgrind?
 
 After you modify /etc/hosts as shown above go to
 
     http://webgrind.joomla.dev
-    
+
 ## Can I sftp into my box?
 
 Use following details to connect:
@@ -107,7 +107,7 @@ Use following details to connect:
     Port: 2222
     User: vagrant
     Password: vagrant
-    
+
 ## How do I stop the box?
 
 Simply type
@@ -116,14 +116,15 @@ Simply type
 vagrant halt
 ```
 
-## How do I destroy a box? 
-	
-To completely destroy the virtual image, run 
+## How do I destroy a box?
+
+To completely destroy the virtual image, run
 
 ```
-vagrant destroy 
+vagrant destroy
 ```
-To create the image again run: 
+
+To create the image again run:
 
 ```
 vagrant up
