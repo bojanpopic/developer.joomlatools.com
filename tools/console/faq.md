@@ -14,4 +14,4 @@ For more information, take a look at our [Joomlatools Vagrant box](https://githu
 
 ## Can I add custom functionality?
 
-You most certainly can! We have created a plugin system that allows you to insert custom commands very easily. See the [Plugins](plugins/README.md) section for more information and examples.
+You most certainly can! We have created a plugin system that allows you to insert 3rd part and custom commands very easily. See the [Plugins](plugins.md) section for more information and examples.
