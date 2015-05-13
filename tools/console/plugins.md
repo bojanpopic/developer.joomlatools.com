@@ -42,6 +42,8 @@ To remove a plugin, run the uninstall command:
 
 It's very easy to create your own command. We'll run you through the process in the following steps.
 
+If you want to dive right into a working code example, take a look at the source of our [backup plugin](https://github.com/joomlatools/joomla-console-backup-plugin).
+
 ### Implementing a new command
 
 Commands should always go into the `Foo/Console/Command` directory, where `Foo` is your name or company name. This path must be the same as the namespace of the command class.
