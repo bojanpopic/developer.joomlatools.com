@@ -28,6 +28,10 @@ If for some reason, you need to change the details of this mock user, you can ov
 }
 ```
 
+## How can I debug my own packages?
+
+Having trouble? You can increase Composer's verbosity setting (`-v|vv|vvv`) to gather more information. Increasing Composer's verbosity will also enable Joomla's log messages.
+
 ## Where can I find an example component?
 
 We have published a very basic example component on [GitHub](https://github.com/joomlatools/joomla-com_helloworld). Then we've published this component on [Packagist](https://packagist.org/packages/joomlatools/com_helloworld) to make it available through Composer.
