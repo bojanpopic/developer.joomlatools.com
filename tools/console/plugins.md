@@ -8,15 +8,15 @@ You can easily add your own commands that are specific to your workflow. You can
 
 ## Installing plugins
 
-We have created a separate [example plugin](https://github.com/joomlatools/joomla-console-backup-plugin) that adds a backup command to the console tool.
+We have created a separate [example plugin](https://github.com/joomlatools/joomla-console-backup) that adds a backup command to the console tool.
 
-Plugins should be published on [Packagist](https://packagist.org/) because they will be installed using Composer in the background. You just need to pass their package name. In the case of our example, the package name is `joomlatools/joomla-console-backup-plugin`.
+Plugins should be published on [Packagist](https://packagist.org/) because they will be installed using Composer in the background. You just need to pass their package name. In the case of our example, the package name is `joomlatools/joomla-console-backup`.
 
 1.  Install with the following command
 
- `$ joomla plugin:install joomlatools/joomla-console-backup-plugin`
+ `$ joomla plugin:install joomlatools/joomla-console-backup`
 
- You can specify a specific version or branch by appending the version number to the package name. For example: `joomlatools/joomla-console-backup-plugin:dev-master`. Version constraints follow [Composer's convention](https://getcomposer.org/doc/01-basic-usage.md#package-versions).
+ You can specify a specific version or branch by appending the version number to the package name. For example: `joomlatools/joomla-console-backup:dev-master`. Version constraints follow [Composer's convention](https://getcomposer.org/doc/01-basic-usage.md#package-versions).
 
 1. Verify that the plugin is available:
 
@@ -36,13 +36,13 @@ Plugins should be published on [Packagist](https://packagist.org/) because they 
 
 To remove a plugin, run the uninstall command:
 
-`$ joomla plugin:uninstall joomlatools/joomla-console-backup-plugin`
+`$ joomla plugin:uninstall joomlatools/joomla-console-backup`
 
 ## Creating custom plugins
 
 It's very easy to create your own command. We'll run you through the process in the following steps.
 
-If you want to dive right into a working code example, take a look at the source of our [backup plugin](https://github.com/joomlatools/joomla-console-backup-plugin).
+If you want to dive right into a working code example, take a look at the source of our [backup plugin](https://github.com/joomlatools/joomla-console-backup).
 
 ### Implementing a new command
 
