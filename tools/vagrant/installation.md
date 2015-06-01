@@ -18,7 +18,7 @@ vagrant up
 
     This will download the complete [Vagrant box](https://atlas.hashicorp.com/joomlatools/boxes/box) and get it running.
 
-1. Add the following line into your ***hosts file*** (`/etc/hosts` on Linux and Mac OS X, for other operating systems see [here](http://en.wikipedia.org/wiki/Hosts_(file)#Location_in_the_file_system))
+1. Add the following line into your ***hosts file*** (`/etc/hosts` on Linux and Mac OS X, for other operating systems see [here][1]
 
     ```
 33.33.33.58 joomla.box webgrind.joomla.box phpmyadmin.joomla.box
@@ -29,3 +29,5 @@ vagrant up
 There will be two new folders created called `www` and `Projects`. These folders act as shared folders between your host computer and the box.
 
 If everything is setup, we will show you how to install your first Joomla site on the  [getting started page](getting-started.md).
+
+   [1]: http://en.wikipedia.org/wiki/Hosts_(file)#Location_in_the_file_system
