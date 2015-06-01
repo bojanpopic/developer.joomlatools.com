@@ -12,4 +12,8 @@ joomla site:create mysite
 
     _Note_: the box always creates a separate virtual host for every Joomla installation but you have to add the hostname to your `/etc/hosts` file yourself. After adding the `33.33.33.58 mysite.dev` line you can browse to the site via [mysite.dev](http://mysite.dev).
 
-1. You can now symlink and install your custom extensions into the site, manage PHP versions and much more using the pre-installed [Joomla Console](../console/usage.md) package.
+Now that you have a fresh Joomla installation, you can now [symlink](../console/usage.md#symlink-your-code-into-a-joomla-installation) and [install your custom extensions](../console/usage.md#install-joomla-extensions) into this site.
+
+This can all be done using the `joomla` command, which is the  [Joomla Console](../console/usage.md) package that is preinstalled on the box. It has everything you need to work with Joomla sites and is the most important piece of our Vagrant box.
+
+To find out more about its options and usage, you can get an overview by running the `joomla list` command, or head over to the [documentation pages](../console/usage.md) for a full explanation.
