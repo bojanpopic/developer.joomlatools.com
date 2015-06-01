@@ -6,7 +6,7 @@
 
 There's a great tool we use to start and manage our Vagrant boxes once you've installed them, called [Vagrant Manager](http://vagrantmanager.com/).  It is currently available on OS X only, though!
 
-If the Vagrant box is running, you can execute commands on the box using just your browser. All you need is to browse to the [web terminal](http://joomla.box:3000/)). No need to connect via the command line at all.
+If the Vagrant box is running, you can execute commands on the box using just your browser. All you need is to browse to the [web terminal](http://joomla.box:3000/). No need to connect via the command line at all.
 
 ## How can I access the command line on the box?
 
@@ -103,6 +103,22 @@ Use following details to connect:
 ## How do I stop the box?
 
 Run `vagrant halt` to stop the box.
+
+## How can I update the box to the latest version?
+
+If a new version of the box is released, Vagrant will let you know when you run `vagrant up`. It's important to note that Vagrant stores the original box separately. Your running Vagrant environment is actually a _copy_ of that box. From the [Vagrant docs](https://docs.vagrantup.com/v2/boxes/versioning.html):
+
+> Finally, you can update boxes with vagrant box update. This will download and install the new box. This will not magically update running Vagrant environments. If a Vagrant environment is already running, you'll have to destroy and recreate it to acquire the new updates in the box. The update command just downloads these updates locally.
+
+In short: if you have important data *on* the box, be sure to back it up first. You could use our [backup plugin](https://github.com/joomlatools/joomla-console-backup) to backup website files and databases.
+
+In summary, you need to run these commands to update a box:
+
+```
+vagrant box update
+vagrant destroy
+vagrant up
+```
 
 ## How do I destroy a box?
 
