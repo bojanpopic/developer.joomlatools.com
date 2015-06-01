@@ -25,6 +25,7 @@
 	    * [FAQ](tools/composer/faq.md)
 	* [Vagrant](tools/vagrant/introduction.md)
 	    * [Installation](tools/vagrant/installation.md)
+        * [Getting Started](tools/vagrant/getting-started.md)
 	    * [FAQ](tools/vagrant/faq.md)
 	* [Console](tools/console/introduction.md)
 	    * [Installation](tools/console/installation.md)

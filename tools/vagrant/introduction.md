@@ -11,34 +11,30 @@ This box is a self-contained Joomla developer environment and has everything you
 The box comes with the following technologies installed and configured by default:
 
 * Ubuntu 14.04
-* PHP 5.5 _but you can install any PHP version you want_
+* PHP 5.5 
 * Apache 2.4
 * Ruby 2.2
 * MySQL 5.5
 * Node 0.10
-
-PHP comes with these extensions out of the box:
-
-* APCu and Opcache
-* Xdebug
-* GD and Imagick
-* Mcrypt
-* PDO, SQLite and MySQL(i)
-* cURL
 
 On top of that, you have these developer tools at your disposal right away:
 
 * [Joomla Console](http://github.com/joomlatools/joomla-console)
 * [Composer](https://getcomposer.org/)
 * [PhpMetrics](https://github.com/Halleck45/PhpMetrics)
+* [Webgrind](https://code.google.com/p/webgrind/)
 * [Git](https://git-scm.com/)
 * [NPM](https://www.npmjs.com/)
+* [Bundler](http://bundler.io/)
 * [RubyGems](https://rubygems.org/)
+* [Capistrano](http://capistranorb.com)
+* [UglifyJS](https://github.com/mishoo/UglifyJS)
 
 To help you manage the development server via your browser, we've included these projects:
 
 * [Wetty](https://github.com/krishnasrinivas/wetty)
 * [PimpMyLog](http://www.pimpmylog.com)
 * [PhpMyAdmin](http://www.phpmyadmin.net/)
+* [Mailcatcher](http://mailcatcher.me/)
 
 To get started, head over to the [installation page](installation.md).
