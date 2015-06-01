@@ -2,104 +2,96 @@
 
 <!-- toc -->
 
-## What does the box contain?
+## I don't like the command line! Is there another way to manage the Vagrant box?
 
-* Ubuntu 12.10 (Precise) 64 bit
-* Apache
-* MySQL
-* PHP 5.4
-* Composer
-* Phpmyadmin
-* Xdebug
-* Webgrind
-* Mailcatcher
-* Less compiler
-* UglifyJS
+There's a great tool we use to start and manage our Vagrant boxes once you've installed them, called [Vagrant Manager](http://vagrantmanager.com/).  It is currently available on OS X only, though!
 
-## How do I access my site?
+If the Vagrant box is running, you can execute commands on the box using just your browser. All you need is to browse to the [web terminal](http://joomla.box:3000/)). No need to connect via the command line at all.
 
-Apache serves files from the `www` folder using the IP:
+## How can I access the command line on the box?
 
-    http://33.33.33.58/
+You can always run commands via the web terminal, accessible at [joomla.box:3000](http://joomla.box:3000) as soon as the box is up.
 
-If you have setup your hosts file correctly as shown above, you can now also access the default www/ folder at:
+Alternatively, you can SSH into the box by using the command:
 
-	http://joomla.dev
+	vagrant ssh
 
-It is advised to use virtual hosts for development. See below for our virtual host manager.
+## How can I access the MySQL databases?
 
-## Can I SSH into my box?
+The MySQL server on the box runs with these default user credentials:
 
-You can reach the box by using the command:
+* User: root
+* Password: root
 
-	$ vagrant ssh
+So to connect via PHP you would pass in these details:
 
-## Can I create a new site from the command line?
+```php
+$connection = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
+```
 
-The Vagrant box has our [Joomla Console](http://developer.joomlatools.com/tools/console) script pre-installed.
-To create a site with the latest Joomla version, run:
+If you prefer to, you can use phpMyAdmin at [phpmyadmin.joomla.box](http://phpmyadmin.joomla.box) if you setup your hosts file correctly, as described in the installation steps.
 
-    joomla site:create testsite
+We highly recommend the [Sequel Pro](http://www.sequelpro.com/) desktop client on Mac OS X over the use of phpMyAdmin however. You can connect to the database using a desktop client with the following details:
 
-The newly installed site will be available in the /testsite subfolder at http://joomla.dev/testsite after that. The files are located at /var/www/testsite.
-You can login into your fresh Joomla installation using these credentials: `admin` / `admin`.
+* Host: 33.33.33.58
+* User: root
+* Password: root
 
-For more information, please refer to the [Joomla Console](http://www.joomlatools.com/developer/tools/console) repository.
+## Where are the error logs and access logs?
 
-*Note*: The script also creates a new virtual host when creating a new site. If you add the following line into your /etc/hosts file on your host machine:
+You can access Apache, MySQL and system logs via the browser at [joomla.box/pimpmylog](http://joomla.box/pimpmylog).
 
-    33.33.33.58 testsite.dev
+## How to test e-mails?
 
-you can access it directly at http://testsite.dev.
+We have installed [MailCatcher](http://mailcatcher.me) on the box. You can access it via the [dashboard](http://joomla.box).
 
-## How should I test my component's code on the Vagrant box?
+PHP is configured to automatically send any mail to MailCatcher. You can test this real quick by creating a new Joomla site, creating a contact form and submitting it. Your message will show up in [MailCatcher](http://joomla.box:1080/) immediately.
 
-Let's say you are working on your own Joomla component called _Awesome_ and want to continue working on it using the Vagrant box. You can use the _Projects_ folder in the repository root for your projects.
+If your applications use SMTP, you can configure your SMTP server as follows to send everything to MailCatcher:
 
-But if you would like to use a custom folder we should start by making the source code available to the Vagrant box. Let's assume the source code is located at _/Users/myname/Projects/awesome_ :
+* IP: 127.0.0.1
+* Port: 1025
 
-Copy the ```config.custom.yaml-dist``` file to ```config.custom.yaml``` and edit with your favorite text editor. Make it look like this:
-
-    synced_folders:
-      /home/vagrant/Projects: /Users/myname/Projects
-
-Save this file and restart the Vagrant box. (```vagrant reload```)
-
-The "Projects" folder from your host machine will now be available inside the Vagrant box through _/home/vagrant/Projects_.
-
-Next step is to create the new site you'll be working on. SSH into the box (```vagrant ssh```) and execute the following command:
-
-    joomla site:create testsite --joomla=3.2 --symlink=awesome
-
-Or to symlink your code into an existing site:
-
-    joomla extension:symlink testsite awesome
-
-Run discover install to make your component available to Joomla and you are good to go!
-
-For more information on the symlinker, refer to the [Joomla Console](http://developer.joomlatools.com/tools/console) documentation or run:
-
-      joomla extension:symlink  --help
-
-## Where can I find phpmyadmin?
+## Where can I find phpMyAdmin?
 
 After you modify /etc/hosts as shown above you can use phpMyAdmin at
 
     http://phpmyadmin.joomla.dev
 
-## I don't like the command line! Is there another way to manage the Vagrant box?
+## How can I use PhpMetrics?
 
-There's a great tool we use to start and manage our Vagrant boxes, called [Vagrant Manager](http://vagrantmanager.com/).  It is currently available on OS X only, though!
+To gather various metrics about your PHP project, you can invoke [PhpMetrics](https://github.com/Halleck45/PhpMetrics) from the command line. Please note that PhpMetrics uses a lot of memory and so it is best to increase the allowed memory limit first.
 
-To create a new Joomla site or symlink an extension, you will still need the command line however.
+Let's say you want to analyze the `mysite` site which you installed using `joomla site:create mysite`:
 
-## Can I use webgrind?
+1. Open up the [web terminal](http://joomla.box:3000)
+1. Increase the memory limit:
+
+    ```
+box php:ini memory_limit 1024M
+    ```
+
+1. Now run phpmetrics:
+
+    ```
+phpmetrics --report-html=/var/www/mysite/report.html /var/www/mysite
+    ```
+
+1. Revert the memory limit to its original value:
+
+    ```
+box php:ini memory_limit 256M
+    ```
+
+1. Read the generated report at [joomla.box/mysite/report.html](http://joomla.box/mysite/report.html).
+
+## How to use Webgrind?
 
 After you modify /etc/hosts as shown above go to
 
     http://webgrind.joomla.dev
 
-## Can I sftp into my box?
+## Can I SFTP into my box?
 
 Use following details to connect:
 
@@ -110,22 +102,10 @@ Use following details to connect:
 
 ## How do I stop the box?
 
-Simply type
-
-```
-vagrant halt
-```
+Run `vagrant halt` to stop the box.
 
 ## How do I destroy a box?
 
-To completely destroy the virtual image, run
+To completely destroy the virtual image, run `vagrant destroy`.
 
-```
-vagrant destroy
-```
-
-To create the image again run:
-
-```
-vagrant up
-```
+To create the image again run `vagrant up`.
