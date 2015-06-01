@@ -24,7 +24,7 @@
 	    * [Distributing Packages](tools/composer/creating.md)
 	    * [FAQ](tools/composer/faq.md)
 	* [Vagrant](tools/vagrant/introduction.md)
-	    * [How to use](tools/vagrant/howto.md)
+	    * [Installation](tools/vagrant/installation.md)
 	    * [FAQ](tools/vagrant/faq.md)
 	* [Console](tools/console/introduction.md)
 	    * [Installation](tools/console/installation.md)
