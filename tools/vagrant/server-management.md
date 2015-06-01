@@ -14,7 +14,19 @@ To start everything up again, run `box server:start`.
 
 ## Edit php.ini settings
 
-You can lookup
+To retrieve a value from the currently installed PHP version, you can use the `box php:ini <directive>` command. For example, to get the current `mysql.default_socket` value:
+
+    `box php:ini mysql.default_socket`
+
+To change this value into something else, append the new value:
+
+    `box php:ini mysql.default_socket /path/to/new/socket`
+
+The script puts these directives into an additional config file that overrides the default values. To remove your new configuration again, pass in an empty value:
+
+    `box php:ini mysql.default_socket ""`
+
+You can verify if the changes succeeded by taking a look at [joomla.box/phpinfo](http://joomla.box/phpinfo).
 
 ## Switch PHP version
 
@@ -28,7 +40,7 @@ To install one of the available versions, for example 5.3.18, execute:
 
     `box php:use 5.3.18`
 
-The script will check if this version has been installed and if not, will attempt to build it. Please note that building PHP might take a while.
+The script will check if this version has been installed and if not, will attempt to build it. Please note that building PHP might take a while. Once done you can verify if the install succeeded by browsing to [joomla.box/phpinfo](http://joomla.box/phpinfo).
 
 Get a list of PHP versions you built using the `box php:list` command.
 
