@@ -1,19 +1,40 @@
-# Vagrant
+# Vagrant Box
 
-## Introduction
+## A Joomla LAMP stack that just works
 
-You are a Joomla web agency and you have a team of 10 developers and designers working on projects. Some of your staff is using Ubuntu, most are on Mac OS, a few are still on Windows. Further your team is working on various projects with completely different stacks: Joomla, PHP, server setup, tools… all are different.
+Our [Joomlatools Vagrant box](https://github.com/joomlatools/joomla-vagrant) is a preconfigured Vagrant Box that comes with a working LAMP Stack to get you up and running building Joomla sites in no time.
 
-You could set up different local servers, one for each project? That’s a lot of overhead. Work remotely all the time, slow and time consuming. Use a tool like WAMP or MAMP or a set of command line scripts for Bash… All great options, yet none of them are ideal.
+This box is a self-contained Joomla developer environment and has everything you need right from the start. You don't have to worry about setting up Vagrant, provisioning the server or even configuring Joomla installations. Since everything is packaged into the box, you can simply focus on your code.
 
-What about when a new developer joins your team? He will need to spend half a day setting up his machine. And another half for that new project coming up. Time lost from actual coding work. Or how about fixing that nasty bug your co-worker reported but you still cannot replicate? It works on your machine, right?
+## Features
 
-There should be a better way to do this!
+The box comes with the following technologies installed and configured by default:
 
-## Vagrant to the rescue!
+* Ubuntu 14.04
+* PHP 5.5 
+* Apache 2.4
+* Ruby 2.2
+* MySQL 5.5
+* Node 0.10
 
-[Vagrant](http://vagrantup.com) is a tool for managing virtual machines from providers such as VMWare and Virtualbox.
+On top of that, you have these developer tools at your disposal right away:
 
-It lets you create, setup and destroy virtual machines with a single command. It comes with a base operating system and builds called boxes and server provisioning software to make it easy to install and configure the virtual machine to your needs.
+* [Joomla Console](http://github.com/joomlatools/joomla-console)
+* [Composer](https://getcomposer.org/)
+* [PhpMetrics](https://github.com/Halleck45/PhpMetrics)
+* [Webgrind](https://code.google.com/p/webgrind/)
+* [Git](https://git-scm.com/)
+* [NPM](https://www.npmjs.com/)
+* [Bundler](http://bundler.io/)
+* [RubyGems](https://rubygems.org/)
+* [Capistrano](http://capistranorb.com)
+* [UglifyJS](https://github.com/mishoo/UglifyJS)
 
-By downloading our pre-built [Vagrant box](https://github.com/joomlatools/joomla-vagrant), you can set up a Joomla development environment from scratch in minutes.
+To help you manage the development server via your browser, we've included these projects:
+
+* [Wetty](https://github.com/krishnasrinivas/wetty)
+* [PimpMyLog](http://www.pimpmylog.com)
+* [PhpMyAdmin](http://www.phpmyadmin.net/)
+* [Mailcatcher](http://mailcatcher.me/)
+
+To get started, head over to the [installation page](installation.md).

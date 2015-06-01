@@ -10,7 +10,7 @@ A Unix based operating system such as MacOS or Linux. (Windows users can use our
 
 Definitely! We have created a pre-configured box to build Joomla sites. You just need to download it and you're ready to go.
 
-For more information, take a look at our [Joomlatools Vagrant box](https://github.com/joomlatools/joomla-vagrant)!
+For more information, take a look at our [Joomlatools Vagrant box](../vagrant/introduction.md)!
 
 ## Can I add custom functionality?
 
