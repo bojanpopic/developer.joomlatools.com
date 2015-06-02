@@ -11,7 +11,7 @@ This box is a self-contained Joomla developer environment and has everything you
 The box comes with the following technologies installed and configured by default:
 
 * Ubuntu 14.04
-* PHP 5.5 
+* PHP 5.5
 * Apache 2.4
 * Ruby 2.2
 * MySQL 5.5
@@ -24,11 +24,13 @@ On top of that, you have these developer tools at your disposal right away:
 * [PhpMetrics](https://github.com/Halleck45/PhpMetrics)
 * [Webgrind](https://code.google.com/p/webgrind/)
 * [Git](https://git-scm.com/)
-* [NPM](https://www.npmjs.com/)
-* [Bundler](http://bundler.io/)
-* [RubyGems](https://rubygems.org/)
+* [LESS](http://lesscss.org/)
+* [SASS](http://sass-lang.com/)
 * [Capistrano](http://capistranorb.com)
 * [UglifyJS](https://github.com/mishoo/UglifyJS)
+* [RubyGems](https://rubygems.org/)
+* [NPM](https://www.npmjs.com/)
+* [Bundler](http://bundler.io/)
 
 To help you manage the development server via your browser, we've included these projects:
 
