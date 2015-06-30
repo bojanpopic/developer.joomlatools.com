@@ -1,4 +1,7 @@
-## Distributing packages
+---
+layout: default
+title: Distributing packages
+---
 
 The previous example is a very basic way to use our [Composer plugin](https://github.com/joomlatools/joomla-composer). To make use of all Composer's features, for example automatically upgrading to the latest version, you are better off creating a package using your extension's source code. 
 

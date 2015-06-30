@@ -1,4 +1,7 @@
-# Custom Icon Sizes in DOCman
+---
+layout: default
+title: Custom Icon Sizes in DOCman
+---
 
 DOCman comes with a couple of different icon sizes used on the frontend. When you want a size other than the default you can use a little CSS to make the change. 
 
@@ -11,7 +14,7 @@ We expect you to have a good understanding of the following for this article:
 
 The easiest way to change the sizes for all the "joomlatools icons" on the whole site at once is by using a CSS override. The most proper way of changing the icon sizes is by adding the following snippet of CSS to [your custom CSS file](/framework/custom-css.html).
 
-```css
+{% highlight css %}
 body .koowa.koowa .koowa_header__image,
 body .koowa.koowa [class^="koowa_icon--"],
 body .koowa.koowa [class*=" koowa_icon--"],
@@ -24,7 +27,7 @@ body .koowa.koowa [class*=" koowa_icon--"]:before {
   max-width: 32px;
   max-height: 32px;
 }
-```
+{% endhighlight %}
 
 This will change all the icon sizes on the whole website for both the DOCman components and modules and the FILEman components from whatever size they are to 32x32 pixels.
 
@@ -32,7 +35,7 @@ This will change all the icon sizes on the whole website for both the DOCman com
 
 You might not want to change all the icons though. To exercise a bit more control you could change the above CSS in something like the following:
 
-```css
+{% highlight css %}
 body .koowa.koowa .com_docman .koowa_header__image,
 body .koowa.koowa .com_docman [class^="koowa_icon--"],
 body .koowa.koowa .com_docman [class*=" koowa_icon--"],
@@ -45,11 +48,11 @@ body .koowa.koowa .com_docman [class*=" koowa_icon--"]:before {
     max-width: 32px;
     max-height: 32px;
 }
-```
+{% endhighlight %}
 
 This code will only change all the icons within the DOCman component. The DOCman module will still have the smaller icons. If you want to have slightly larger icons in the module you could add the following snippet below the last one:
 
-```css
+{% highlight css %}
 body .koowa.koowa .mod_docman .koowa_header__image,
 body .koowa.koowa .mod_docman [class^="koowa_icon--"],
 body .koowa.koowa .mod_docman [class*=" koowa_icon--"],
@@ -62,7 +65,7 @@ body .koowa.koowa .mod_docman [class*=" koowa_icon--"]:before {
 	max-width: 24px;
     max-height: 24px;
 }
-```
+{% endhighlight %}
 
 That style rule will make all the icons in all DOCman modules 24x24 pixels.
 
@@ -70,7 +73,7 @@ That style rule will make all the icons in all DOCman modules 24x24 pixels.
 
 For the sake of illustration lets say you wanted to "drill down" to change only the size within the DOCman filtered table view. You could do that like this: 
 
-```css
+{% highlight css %}
 body .koowa.koowa .docman_table_layout--filtered_table .koowa_header__image,
 body .koowa.koowa .docman_table_layout--filtered_table [class^="koowa_icon--"],
 body .koowa.koowa .docman_table_layout--filtered_table [class*=" koowa_icon--"],
@@ -83,7 +86,7 @@ body .koowa.koowa .docman_table_layout--filtered_table [class*=" koowa_icon--"]:
 	max-width: 32px;
     max-height: 32px;
 }
-```
+{% endhighlight %}
 
 ## Find your class name
 
@@ -91,13 +94,13 @@ So how can you find out what CSS class you need? In the above examples you can s
 
 By inspecting the page elements you can see that we are adding a `<div class="koowa">` with either an extra `"com_docman"` or `"mod_docman"` class around all our views. The child of this container will contain the name of the view. For example, on the default hierarchical view the class name of that inner `<div>` would be: `"docman_list_layout--default"`. And would would look like this:
 
-```html
+{% highlight html %}
 <div class="koowa com_docman">
   <div class="docman_list_layout docman_list_layout--default">
     …
   </div>
 </div>
-```
+{% endhighlight %}
 
 As you can see; you can target exactly what you want. A few useful examples would be:
 
@@ -112,13 +115,13 @@ As you can see; you can target exactly what you want. A few useful examples woul
 
 The rest of the CSS will always be the same. Only the new rules you make will affect any change.
 
-```css
+{% highlight css %}
 body .koowa.koowa [your class(es)] .koowa_header__image,
 body .koowa.koowa [your class(es)] [class^="koowa_icon--"],
 body .koowa.koowa [your class(es)] [class*=" koowa_icon--"],
 body .koowa.koowa [your class(es)] [class^="koowa_icon--"]:before,
 body .koowa.koowa [your class(es)] [class*=" koowa_icon--"]:before { }
-```
+{% endhighlight %}
 
 ### A little explanation on this:
 

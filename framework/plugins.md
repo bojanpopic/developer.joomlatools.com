@@ -1,4 +1,7 @@
-# Plugins
+---
+layout: default
+title: Plugins
+---
 
 In [Nooku Framework](http://www.nooku.org/) any controller, view or model method that has an `_action` prefix can be intercepted via the Nooku Event API which is can be subscribed to by the Joomla plugin system. In contrast to Joomla, events in Nooku are not hardcoded, but are generated on the fly in a consistent and standardized fashion.
 
@@ -14,7 +17,7 @@ Here we provide an overview of the concepts, classes and objects involved in cre
 
 To get us started, here is a very simple example of a plugin that has three event handlers: one for each of the model, view and controller. Our plugin is called `Example`, in the `Acme` component plugin group, and we are focusing on a model entity named `Bar`.
 
-```php
+{% highlight php %}
 class PlgAcmeExample extends PlgKoowaSubscriber
 {
     function onBeforeAcmeBarControllerBrowse(KEventInterface $event)
@@ -36,7 +39,7 @@ class PlgAcmeExample extends PlgKoowaSubscriber
 		}      
 	}
 }
-```
+{% endhighlight %}
 
 The above code shows some important concepts that we'll refer to throughout in this guide, but it is non-exhaustive. We will show you how all the pieces fit together to build events dynamically in the sections to come. 
 
@@ -113,12 +116,12 @@ When subscribers to the Event API are notified of a given event they get a nicel
 
 For example, our `PlgAcmeExample` plugin `onBeforeAcmeBarControllerBrowse` event handler will get an `$event` variable containing the following properties :
 
-```php
+{% highlight php %}
     $event->subject;
     $event->action;
     $event->data;
     $event->result;
-```
+{% endhighlight %}
 
 In addition, the `$event` object variable exposes methods to interrogate and control the event, like `stopPropagation`,  `canPropogate`, attribute getters and setters and the ever relevant, `getTarget` and `setTarget`.
 
@@ -247,7 +250,7 @@ If you have ever created a Joomla plugin, the process is exactly the same. A plu
 
 The XML file contains a description of the plugin so that Joomla knows what it is installing.
 
-```xml
+{% highlight xml %}
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="2.5" type="plugin" group="acme">
     <name>Example Plugin</name>
@@ -259,7 +262,7 @@ The XML file contains a description of the plugin so that Joomla knows what it i
         <filename plugin="example">example.php</filename>
     </files>
 </extension>
-```
+{% endhighlight %}
 
 This represents the minimum required contents of the manifest file. You can adjust the values accordingly. There are plenty more options you
 can configure for the XML file, but you need to specify at least these. For more information consult the [Joomla 2.5+ documentation](https://docs.joomla.org/J2.5:Creating_a_Plugin_for_Joomla).
@@ -309,7 +312,7 @@ column to indicate the plugin is disabled; click that red cross to enable the pl
 A better question would be **"What's not possible?"**. To get a feel for the potential, lets extend the signature of our example `PlgAcmeExample` plugin so that it that takes advantage of all the opportunities exposed in just the MVC layer, again only for one entity `Bar`.
 
 <a name="first_acme"></a>
-```php
+{% highlight php %}
 <?php
 class PlgAcmeExample extends PlgKoowaSubscriber
 {
@@ -341,7 +344,7 @@ class PlgAcmeExample extends PlgKoowaSubscriber
     function onBeforeAcmeBarViewRender(KEventInterface $event);
     function onAfterAcmeBarViewRender(KEventInterface $event);
 }
-```
+{% endhighlight %}
 
 If you count them, that's twenty two (22) distinct opportunities for a developer to augment the `Acme` component's treatment of the `Bar` entity in exactly the way they choose; **and that's for just one entity type**.
 If the extension were to have another entity called `Foo`, then there are twenty two more.

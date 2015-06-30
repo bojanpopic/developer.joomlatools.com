@@ -1,4 +1,7 @@
-# Server management
+---
+layout: default
+title: Server management
+---
 
 <!-- toc -->
 

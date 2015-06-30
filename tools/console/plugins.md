@@ -1,4 +1,7 @@
-# Plugins
+---
+layout: default
+title: Plugins
+---
 
 <!-- toc -->
 
@@ -52,7 +55,7 @@ Commands should always go into the `Foo/Console/Command` directory, where `Foo` 
 1. Create a file Hello.php in that new directory.
 1. Put in the following PHP code:
 
-  ```php
+  {% highlight php %}
   <?php
   namespace Foo\Console\Command; // Namespace should be the same as the directory the file is in!
 
@@ -72,7 +75,7 @@ Commands should always go into the `Foo/Console/Command` directory, where `Foo` 
           $output->writeln('foobar!');
       }
   }
-  ```
+ {% endhighlight %}
 
 The entire tool is build using Symfony's Console package. Commands subclass their `Command` class. You can find complete instructions on how to build a symfony console command with extra arguments and options on [their documentation pages](http://symfony.com/doc/current/components/console/introduction.html).
 

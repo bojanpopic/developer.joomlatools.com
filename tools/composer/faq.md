@@ -1,4 +1,7 @@
-# FAQs
+---
+layout: default
+title: FAQs
+---
 
 <!-- toc -->
 

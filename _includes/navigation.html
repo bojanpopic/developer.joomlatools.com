@@ -1,0 +1,10 @@
+<ul>
+    {% assign entries = site.pages | sort: "path" %}
+    {% for entry in entries %}
+
+    <li>
+        <a class="depth-{{ entry.url | split: "/" | size }}{% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title }}</a>
+    </li>
+
+    {% endfor %}
+</ul>

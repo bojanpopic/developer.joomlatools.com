@@ -1,4 +1,7 @@
-# FAQs
+---
+layout: default
+title: FAQs
+---
 
 <!-- toc -->
 
@@ -25,9 +28,9 @@ The MySQL server on the box runs with these default user credentials:
 
 So to connect via PHP you would pass in these details:
 
-```php
+{% highlight php %}
 $connection = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
-```
+{% endhighlight %}
 
 If you prefer to, you can use phpMyAdmin at [phpmyadmin.joomla.box](http://phpmyadmin.joomla.box) if you setup your hosts file correctly, as described in the installation steps.
 
@@ -67,21 +70,21 @@ Let's say you want to analyze the `mysite` site which you installed using `jooml
 1. Open up the [web terminal](http://joomla.box:3000)
 1. Increase the memory limit:
 
-    ```
+{% highlight bash %}
 box php:ini memory_limit 1024M
-    ```
+{% endhighlight %}
 
 1. Now run phpmetrics:
 
-    ```
+{% highlight bash %}
 phpmetrics --report-html=/var/www/mysite/report.html /var/www/mysite
-    ```
+{% endhighlight %}
 
 1. Revert the memory limit to its original value:
 
-    ```
+{% highlight bash %}
 box php:ini memory_limit 256M
-    ```
+{% endhighlight %}
 
 1. Read the generated report at [joomla.box/mysite/report.html](http://joomla.box/mysite/report.html).
 

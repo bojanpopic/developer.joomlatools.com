@@ -1,4 +1,7 @@
-# Usage
+---
+layout: default
+title: Usage
+---
 
 <!-- toc -->
 

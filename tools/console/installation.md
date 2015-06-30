@@ -1,4 +1,7 @@
-# Installation
+---
+layout: default
+title: Installation
+---
 
 1. Install using Composer:
 
