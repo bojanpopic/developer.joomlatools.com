@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Custom Icon Sizes in DOCman
+title: Icon Sizes
 ---
 
 DOCman comes with a couple of different icon sizes used on the frontend. When you want a size other than the default you can use a little CSS to make the change. 

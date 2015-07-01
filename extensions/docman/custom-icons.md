@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Custom Icons in DOCman
+title: Custom Icons
 ---
 
 When we released the stable 2.0 releases of our extensions we introduced an icon font to display all our icons. If you need to change the icons that we chose it’s possible to override them. To follow this tutorial you need a good understanding of CSS and templating/overriding in Joomla.
@@ -59,12 +59,14 @@ We recommend creating a new icons.css stylesheet because every time you update y
 If you use Protostar you could search for the following line in the index.php file
 
 {% highlight php %}
+<?php
 $doc->addStyleSheet('templates/'.$this->template.'/css/template.css');
 {% endhighlight %}
 
 And right below add this line:
 
 {% highlight php %}
+<?php
 $doc->addStyleSheet( 'templates/' . $this->template . '/icons.css' );
 {% endhighlight %}
 
