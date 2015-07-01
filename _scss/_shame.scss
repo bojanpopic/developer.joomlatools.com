@@ -9,10 +9,14 @@ body {
   font-size: 15px;
 
   -webkit-font-smoothing: antialiased;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .main {
   display: flex;
+  flex-grow: 1;
 }
 
 .sidebar {
@@ -79,4 +83,33 @@ body {
 
   border: 1px solid darken(#f8f8f8, 8%);
   border-radius: 6px;
+}
+
+table {
+  width: 100%;
+  overflow: auto;
+
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  margin-bottom: 16px;
+}
+
+table th {
+  font-weight: bold;
+}
+
+table th,
+table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
 }
