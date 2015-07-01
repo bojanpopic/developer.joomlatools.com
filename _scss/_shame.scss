@@ -19,7 +19,20 @@ body {
     margin: 0;
     padding: 0;
 
+    ul ul {
+      display: none;
+    }
+
     li {
+      &.depth-2 a { padding-left: 30px; }
+      &.depth-3 a { padding-left: 45px; }
+      &.depth-4 a { padding-left: 60px; }
+
+      &.active {
+        > ul {
+          display: block;
+        }
+      }
 
       a {
         display: block;
@@ -27,14 +40,20 @@ body {
         color: #364149;
         text-decoration: none;
 
-        &.active {
-          font-weight: bold;
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+
+        &:hover {
           color: #2889CE;
         }
 
-        &.depth-3 { padding-left: 30px; }
-        &.depth-4 { padding-left: 45px; }
-        &.depth-5 { padding-left: 60px; }
+        &.current {
+          color: #2889CE;
+
+          background-color: white;
+          border-top-color: #E8E8E8;
+          border-bottom-color: #E8E8E8;
+        }
       }
     }
   }

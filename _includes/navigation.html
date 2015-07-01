@@ -1,10 +1,44 @@
-<ul>
-    {% assign entries = site.pages | sort: "path" %}
-    {% for entry in entries %}
+{% assign depth-previous = "0" %}
+{% assign entries = site.pages | sort: "path" %}
+{% assign total = site.pages | size %}
 
-    <li>
-        <a class="depth-{{ entry.url | split: "/" | size }}{% if page.url contains entry.url %} active{% endif %}" href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title }}</a>
-    </li>
+{% for entry in entries %}
+    {% assign i = i | plus: 1 %}
 
-    {% endfor %}
-</ul>
+    {% if entry.url != "/index.html" %}
+        {% assign page-url = page.url | remove: ".html" %}
+        {% assign entry-url = entry.url | remove: ".html" %}
+
+        {% assign depth = entry.url | remove_first: "/" | split: "/" | size %}
+        {% assign level = depth | minus: depth-previous %}
+
+        {% if level != 0 %}
+            {% if level <= 0 %}
+                {% assign level-bis = level | remove: '-' %}
+                {% for num in (1...level-bis) %}
+                     </li></ul>
+                {% endfor %}
+            {% else %}
+                {% for num in (1...level) %}
+                    <ul>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+
+        {% if level == 0 %}
+        </li>
+        {% endif %}
+
+        <li class="depth-{{ depth }}{% if page-url contains entry-url %} active{% endif %}">
+            <a class="{% if page.url contains entry.url %} current{% endif %}" href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title }}</a>
+
+        {% if total == i %}
+            {% for num in (1...depth) %}
+                </li></ul>
+            {% endfor %}
+        {% endif %}
+
+        {% assign depth-previous = depth %}
+    {% endif %}
+
+{% endfor %}
