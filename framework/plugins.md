@@ -18,6 +18,7 @@ Here we provide an overview of the concepts, classes and objects involved in cre
 To get us started, here is a very simple example of a plugin that has three event handlers: one for each of the model, view and controller. Our plugin is called `Example`, in the `Acme` component plugin group, and we are focusing on a model entity named `Bar`.
 
 {% highlight php %}
+<?php
 class PlgAcmeExample extends PlgKoowaSubscriber
 {
     function onBeforeAcmeBarControllerBrowse(KEventInterface $event)
@@ -117,10 +118,11 @@ When subscribers to the Event API are notified of a given event they get a nicel
 For example, our `PlgAcmeExample` plugin `onBeforeAcmeBarControllerBrowse` event handler will get an `$event` variable containing the following properties :
 
 {% highlight php %}
-    $event->subject;
-    $event->action;
-    $event->data;
-    $event->result;
+<?php
+$event->subject;
+$event->action;
+$event->data;
+$event->result;
 {% endhighlight %}
 
 In addition, the `$event` object variable exposes methods to interrogate and control the event, like `stopPropagation`,  `canPropogate`, attribute getters and setters and the ever relevant, `getTarget` and `setTarget`.

@@ -2,6 +2,12 @@
 {% assign entries = site.pages | sort: "path" %}
 {% assign total = site.pages | size %}
 
+<ul>
+    <li>
+        <a class="{% if page.url contains "/index.html" %} current{% endif %}" href="/index.html">Introduction</a>
+    </li>
+</ul>
+
 {% for entry in entries %}
     {% assign i = i | plus: 1 %}
 
