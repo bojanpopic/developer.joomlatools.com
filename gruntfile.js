@@ -8,6 +8,16 @@ module.exports = function(grunt) {
 
         // Copy files
         copy: {
+            main: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['bower_components/shared.joomlatools.com/files/images/*.png'],
+                        dest: 'images',
+                        flatten: true
+                    },
+                ]
+            },
             css: {
                 files: [
                     {
@@ -108,6 +118,6 @@ module.exports = function(grunt) {
     });
 
     // The dev task will be used during development
-    grunt.registerTask('default', ['browserSync', 'watch']);
+    grunt.registerTask('default', ['browserSync', 'copy', 'watch']);
 
 };
