@@ -7,6 +7,8 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-      "shared.joomlatools.com": "git@github.com:joomlatools/shared.joomlatools.com.git#master"
+    "shared.joomlatools.com": "git@github.com:joomlatools/shared.joomlatools.com.git#master",
+    "illusion": "timble/illusion#3.0.0",
+    "neat": "1.7.2"
   }
 }
