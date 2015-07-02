@@ -9,7 +9,9 @@ $border-box-sizing: false; // Used by bourbon/neat
 @import "../bower_components/shared.joomlatools.com/files/scss/_variables";
 
 @import "shame";
-@import "syntax";
+
+@import "utilities/skiplink";
+@import "utilities/syntax";
 
 // The Joomlatools header and footer
 @import "../bower_components/shared.joomlatools.com/files/scss/_joomlatools";

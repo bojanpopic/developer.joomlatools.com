@@ -1,50 +1,35 @@
-{% assign depth-previous = "0" %}
-{% assign entries = site.pages | sort: "path" %}
-{% assign total = site.pages | size %}
-
-<ul>
-    <li>
-        <a class="{% if page.url contains "/index.html" %} current{% endif %}" href="/index.html">Introduction</a>
-    </li>
-</ul>
-
-{% for entry in entries %}
-    {% assign i = i | plus: 1 %}
-
-    {% if entry.url != "/index.html" %}
-        {% assign page-url = page.url | remove: ".html" %}
-        {% assign entry-url = entry.url | remove: ".html" %}
-
-        {% assign depth = entry.url | remove_first: "/" | split: "/" | size %}
-        {% assign level = depth | minus: depth-previous %}
-
-        {% if level != 0 %}
-            {% if level <= 0 %}
-                {% assign level-bis = level | remove: '-' %}
-                {% for num in (1...level-bis) %}
-                     </li></ul>
-                {% endfor %}
-            {% else %}
-                {% for num in (1...level) %}
-                    <ul>
-                {% endfor %}
-            {% endif %}
-        {% endif %}
-
-        {% if level == 0 %}
-        </li>
-        {% endif %}
-
-        <li class="depth-{{ depth }}{% if page-url contains entry-url %} active{% endif %}">
-            <a class="{% if page.url contains entry.url %} current{% endif %}" href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title }}</a>
-
-        {% if total == i %}
-            {% for num in (1...depth) %}
-                </li></ul>
-            {% endfor %}
-        {% endif %}
-
-        {% assign depth-previous = depth %}
-    {% endif %}
-
-{% endfor %}
+<div class="jt_header">
+    <div class="jt_navigation_container">
+        <div class="jt_navigation__inner">
+            <a class="jt_brand" href="http://www.joomlatools.com/">
+                <span class="joomlatools_logo">Joomlatools</span>
+            </a>
+            <ul class="rm-closed">
+                <li class="jt_menu__item" role="menuitem">
+                    <a href="http://www.joomlatools.com/extensions">Extensions</a>
+                </li>
+                <li class="jt_menu__item" role="menuitem">
+                    <a href="http://www.joomlatools.com/pricing">Pricing</a>
+                </li>
+                <li class="jt_menu__item" role="menuitem">
+                    <a href="http://blog.joomlatools.com">Blog</a>
+                </li>
+                <li class="jt_menu__item" role="menuitem">
+                    <a href="http://demo.joomlatools.com">Demo</a>
+                </li>
+                <li class="jt_menu__item" role="menuitem">
+                    <a href="http://support.joomlatools.com">Support</a>
+                </li>
+                <li class="jt_menu__item user user--logged-in" id="user-logged-in" role="menuitem">
+                    <a href="http://support.joomlatools.com/dashboard">
+                        <span class="gravatar"><img src="" /></span>
+                        Account
+                    </a>
+                </li>
+                <li class="jt_menu__item user user--logged-out" id="btn-login" role="menuitem">
+                    <a href="http://support.joomlatools.com/login">Log in</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

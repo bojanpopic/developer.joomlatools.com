@@ -1,35 +1,25 @@
-<div class="jt_header">
-    <div class="jt_navigation_container">
-        <div class="jt_navigation__inner">
-            <a class="jt_brand" href="http://www.joomlatools.com/">
-                <span class="joomlatools_logo">Joomlatools</span>
-            </a>
-            <ul class="rm-closed">
-                <li class="jt_menu__item" role="menuitem">
-                    <a href="http://www.joomlatools.com/extensions">Extensions</a>
-                </li>
-                <li class="jt_menu__item" role="menuitem">
-                    <a href="http://www.joomlatools.com/pricing">Pricing</a>
-                </li>
-                <li class="jt_menu__item" role="menuitem">
-                    <a href="http://blog.joomlatools.com">Blog</a>
-                </li>
-                <li class="jt_menu__item" role="menuitem">
-                    <a href="http://demo.joomlatools.com">Demo</a>
-                </li>
-                <li class="jt_menu__item" role="menuitem">
-                    <a href="http://support.joomlatools.com">Support</a>
-                </li>
-                <li class="jt_menu__item user user--logged-in" id="user-logged-in" role="menuitem">
-                    <a href="http://support.joomlatools.com/dashboard">
-                        <span class="gravatar"><img src="" /></span>
-                        Account
-                    </a>
-                </li>
-                <li class="jt_menu__item user user--logged-out" id="btn-login" role="menuitem">
-                    <a href="http://support.joomlatools.com/login">Log in</a>
-                </li>
-            </ul>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+<body class="page-{{ page.title | downcase | replace: ' ', '_' | replace: '&', '-' }} subscribe-from-top {{ css-class }} no-js">
+    <script data-inline type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.body;var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg," js-enabled")}</script>
+    <script type="text/javascript">if (top.location != self.location) { top.location = self.location.href; }</script>
+
+    <div class="site">
+        <div class="skip">
+            <div class="container__skip">
+                <a href="#content">Skip to main content</a>
+            </div>
         </div>
-    </div>
-</div>
+        {% include navigation.html %}

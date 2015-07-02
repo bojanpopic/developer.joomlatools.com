@@ -30,6 +30,21 @@ module.exports = function(grunt) {
             }
         },
 
+        // Uglify
+        uglify: {
+            options: {
+                soureMap: true
+            },
+            build: {
+                files: {
+                    'js/scripts.js': [
+                        'bower_components/shared.joomlatools.com/files/js/joomlatools.js',
+                        'bower_components/apollo/dist/apollo.js'
+                    ]
+                }
+            }
+        },
+
         // Browser Sync
         browserSync: {
             dev: {
@@ -86,6 +101,15 @@ module.exports = function(grunt) {
                 tasks: ['sass', 'copy:css'],
                 options: {
                     interrupt: false,
+                    atBegin: true
+                }
+            },
+            uglify: {
+                files: [
+                ],
+                tasks: ['uglify'],
+                options: {
+                    interrupt: true,
                     atBegin: true
                 }
             },

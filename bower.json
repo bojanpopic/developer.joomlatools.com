@@ -7,6 +7,7 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
+    "apollo": "toddmotto/apollo#1.7.0",
     "shared.joomlatools.com": "git@github.com:joomlatools/shared.joomlatools.com.git#master",
     "illusion": "timble/illusion#3.0.0",
     "neat": "1.7.2"
