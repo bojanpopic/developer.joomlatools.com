@@ -214,7 +214,7 @@ That will load your icons.css file into the template.
 
 Next open the style.css file (contained within the root of the icon font zip you downloaded) and copy the contents and paste them in your icons.css file:
 
-[joomla] > templates > protostar > icons.css
+```[joomla] > templates > protostar > icons.css```
 
 Now we’ve got to update the CSS style declarations to match those used by DOCman. Look for the area that starts with "[class^=".
 
