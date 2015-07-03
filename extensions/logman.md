@@ -1,4 +1,7 @@
-# LOGman
+---
+layout: default
+title: LOGman
+---
 
 LOGman is our activity logging extension for Joomla!. It is built on top of a reusable activities component that exposes an API for developing powerful activity aware applications.
 

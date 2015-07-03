@@ -1,28 +1,31 @@
-# Installation
+---
+layout: default
+title: Installation
+---
 
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
 1. Run the following command in a folder of your choice:
 
-    ```bash
+{% highlight bash %}
 vagrant init joomlatools/box
-    ```
+{% endhighlight %}
 
     This will create a `Vagrantfile` in your current directory.
 
 1. Now start the box by executing this command:
 
-    ```bash
+{% highlight bash %}
 vagrant up
-    ```
+{% endhighlight %}
 
     This will download the complete [Vagrant box](https://atlas.hashicorp.com/joomlatools/boxes/box) and get it running.
 
 1. Add the following line into your ***hosts file*** (`/etc/hosts` on Linux and Mac OS X, for other operating systems see [here][1]
 
-    ```
+{% highlight vim %}
 33.33.33.58 joomla.box webgrind.joomla.box phpmyadmin.joomla.box
-    ```
+{% endhighlight %}
 
 1. The dashboard is now available at [joomla.box](http://joomla.box)
 

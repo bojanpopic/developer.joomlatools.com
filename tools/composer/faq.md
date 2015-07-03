@@ -1,6 +1,10 @@
-# FAQs
+---
+layout: default
+title: FAQs
+---
 
-<!-- toc -->
+* Table of Content
+{:toc}
 
 ## How does it work?
 
@@ -16,7 +20,7 @@ The installer injects a user called `root` into the Joomla application at runtim
 
 If for some reason, you need to change the details of this mock user, you can override them by adding a `joomla` block into the `config` section of your `composer.json`. Example:  
 
-```js
+{% highlight js %}
 {
     "config": {
         "joomla": {
@@ -26,7 +30,7 @@ If for some reason, you need to change the details of this mock user, you can ov
         }
     }
 }
-```
+{% endhighlight %}
 
 ## How can I debug my own packages?
 

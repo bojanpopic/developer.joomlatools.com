@@ -1,0 +1,19 @@
+.highlight {
+  overflow: auto;
+
+  margin-bottom: 16px;
+
+  border: 1px solid darken(#f8f8f8, 8%);
+  border-radius: 6px;
+
+  pre {
+    padding: 10px;
+  }
+
+  code {
+    padding: 2px 6px;
+    margin: 0;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+  }
+}

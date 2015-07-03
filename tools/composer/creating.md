@@ -1,18 +1,21 @@
-## Distributing packages
+---
+layout: default
+title: Distributing packages
+---
 
 The previous example is a very basic way to use our [Composer plugin](https://github.com/joomlatools/joomla-composer). To make use of all Composer's features, for example automatically upgrading to the latest version, you are better off creating a package using your extension's source code.
 
 Create a `composer.json` file in the root of your project. This file defines your package. The package definition should contain the following basic information to make it installable into Joomla:
 
-```json
+{% highlight json %}
 {
-    	"name": "vendor/my-extension",
-        "type": "joomla-installer",
-    	"require": {
-        	"joomlatools/installer": "*"
-    	}
+    "name": "vendor/my-extension",
+    "type": "joomla-installer",
+    "require": {
+        "joomlatools/installer": "*"
+    }
 }
-```
+{% endhighlight %}
 
 If you want to make your extension available directly from Github or any other VCS, you want to make sure that the file layout in your repo resembles your install package.
 

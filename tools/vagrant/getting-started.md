@@ -1,6 +1,10 @@
-# Getting started
+---
+layout: default
+title: Getting started
+---
 
-<!-- toc -->
+* Table of Content
+{:toc}
 
 ## Creating new Joomla sites
 
@@ -8,9 +12,9 @@
 
 1. Create your first Joomla website with this command:
 
-    ```
+{% highlight bash %}
 joomla site:create mysite
-    ```
+{% endhighlight %}
 
 1. Your new site is available at [joomla.box/mysite](http://joomla.box/mysite). You can login using the credentials  `admin` / `admin`.
 

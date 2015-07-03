@@ -1,4 +1,12 @@
-#Translations
+---
+layout: default
+title: Translations
+---
+
+* Table of Content
+{:toc}
+
+## Introduction
 
 LOGman provides a simple yet powerful system for translating activity messages, leveraged through our own translator which sits on top of Joomla's translation system.
 

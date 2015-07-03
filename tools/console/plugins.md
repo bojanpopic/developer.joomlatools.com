@@ -1,6 +1,10 @@
-# Plugins
+---
+layout: default
+title: Plugins
+---
 
-<!-- toc -->
+* Table of Content
+{:toc}
 
 ## Introduction
 
@@ -52,27 +56,27 @@ Commands should always go into the `Foo/Console/Command` directory, where `Foo` 
 1. Create a file Hello.php in that new directory.
 1. Put in the following PHP code:
 
-  ```php
-  <?php
-  namespace Foo\Console\Command; // Namespace should be the same as the directory the file is in!
+{% highlight php %}
+<?php
+namespace Foo\Console\Command; // Namespace should be the same as the directory the file is in!
 
-  use Symfony\Component\Console\Command\Command;
-  use Symfony\Component\Console\Input\InputInterface;
-  use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
-  class Bar extends Command
+class Bar extends Command
+{
+  protected function configure()
   {
-      protected function configure()
-      {
-          $this->setName('bar')
-               ->setDescription('foo bar command');
-      }
-      protected function execute(InputInterface $input, OutputInterface $output)
-      {
-          $output->writeln('foobar!');
-      }
+      $this->setName('bar')
+           ->setDescription('foo bar command');
   }
-  ```
+  protected function execute(InputInterface $input, OutputInterface $output)
+  {
+      $output->writeln('foobar!');
+  }
+}
+{% endhighlight %}
 
 The entire tool is build using Symfony's Console package. Commands subclass their `Command` class. You can find complete instructions on how to build a symfony console command with extra arguments and options on [their documentation pages](http://symfony.com/doc/current/components/console/introduction.html).
 
@@ -80,7 +84,7 @@ The entire tool is build using Symfony's Console package. Commands subclass thei
 
 To make your plugin installable, you need to add a Composer manifest. Create a file `composer.json` in the root directory of this plugin with the following information:
 
-```js
+{% highlight js %}
 {
   "name": "foo/bar",
   "description": "My awesome plugin for joomla-console"
@@ -89,7 +93,7 @@ To make your plugin installable, you need to add a Composer manifest. Create a f
     "psr-0": {"Foo\\": "/"}
   }
 }
-```
+{% endhighlight %}
 
 A quick explanation of these fields:
 

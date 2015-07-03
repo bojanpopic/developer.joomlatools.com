@@ -1,4 +1,7 @@
-# Installing Packages
+---
+layout: default
+title: Installing Packages
+---
 
 First make sure you have composer installed on your machine. On the Composer website you will find a [Getting Started](http://getcomposer.org/doc/00-intro.md) guide.
 
@@ -8,7 +11,7 @@ Let’s say you want to install the extension `com_xyz` and you’ve downloaded 
 
 Your `composer.json` contents should then look as follows:
 
-```js
+{% highlight js %}
 {
     "repositories": [
         {
@@ -32,7 +35,7 @@ Your `composer.json` contents should then look as follows:
         "vendor/xyz": "1.0.0"
     }
 }
-```
+{% endhighlight %}
 
 Using this JSON file, we have now defined our own custom package. Pay attention to the following settings:
 
@@ -41,9 +44,9 @@ Using this JSON file, we have now defined our own custom package. Pay attention 
 
 Save this file and run from your console and within the joomla root folder:
 
-```bash
+{% highlight bash %}
 composer install
-```
+{% endhighlight %}
 
 Executing `composer install` will now fetch the `joomlatools/installer` plugin and use it to install the package into your Joomla installation.
 
