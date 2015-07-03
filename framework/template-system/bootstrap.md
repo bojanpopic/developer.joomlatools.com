@@ -10,7 +10,7 @@ title: Disable / enable bootstrap CSS
 
 Some Joomla 2.5 templates are already shipped with a Bootstrap file. There are also Joomla 3 templates that are designed to work without Bootstrap. For these templates we built a switch to either disable or enable the bootstrap file that is shipped with our extensions.
 
-**Note:** this switch is only available since our 2.0 stable versions.
+Note: this switch is only available since our 2.0 stable versions.
 
 ## Do I need this?
 
@@ -32,10 +32,9 @@ Example:
 
 [yourwebsite]/templates/[yourtemplate]/disable-koowa-bootstrap.txt
 
-**Notes:**
+Notes:
 
 1. The [yourwebsite] and [yourtemplate] in the above example are there to help you understand the structure. For example this could be a real-life example: www.mywebsite.com/templates/protostar/disable-koowa-bootstrap.txt
-
 2. This file should be empty
 
 ## Enabling bootstrap.css on Joomla 3
@@ -48,10 +47,9 @@ Example:
 
 [yourwebsite]/templates/[yourtemplate]/enable-koowa-bootstrap.txt
 
-**Notes:**
+Notes:
 
 1. The [yourwebsite] and [yourtemplate] in the above example are there to help you understand the structure. For example this could be a real-life example: www.mywebsite.com/templates/protostar/enable-koowa-bootstrap.txt
-
 2. This file should be empty.
 
 ## Disclaimer
