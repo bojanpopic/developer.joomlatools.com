@@ -12,7 +12,7 @@ Sometimes you want to change the look and feel of one of our extensions. One way
 
 Doing custom CSS overrides is not something that is as easy as adding a file somewhere, like template overrides. Joomla does not provide a native mechanism to load overriding css files based on placement in the template's directory structure. With template overrides we have the ./html directory of the template, but with CSS there is no counterpart.
 
-## 1. Adding custom CSS to a commercial or free template
+## Adding custom CSS to a commercial or free template
 
 It’s important when adding custom CSS to a template you do so in such a way that you can still safely update the template without losing any of the changes you have made.
 
@@ -20,7 +20,7 @@ Most Joomla templates have built-in functionality for this. They either allow yo
 
 For more information on how to do this please check the website of your template provider. Chances are high that this functionality is already documented on their website somewhere. If not just send them a message and ask what the proper method is to add your own CSS to their templates.
 
-## 2. Adding custom CSS to any template
+## Adding custom CSS to any template
 
 In case the template developer didn't provide a mechanism for you to easily add custom styling,  you can still do so with relative ease by adding your own custom.css file to the relevant template files.
 
@@ -37,7 +37,7 @@ Making it the last style reference in the head will help ensure that your custom
 
 Note : It should be noted that this method requires that you make the change again if you find the need to upgrade the template. Therefore the first method is always recommended.
 
-## 3. Media File Locations
+## Media File Locations
 
 A couple of things to keep in mind when attempting to update the look and feel of our extensions.
 

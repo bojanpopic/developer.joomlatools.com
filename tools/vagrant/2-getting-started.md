@@ -47,12 +47,12 @@ Or to symlink your code into an existing site:
 
 Run discover install in the Joomla Extensions manager to make your component available to Joomla and you are good to go!
 
-For more information on the symlinker, refer to the [Joomla Console docs](../console/usage.md) or run:
+For more information on the symlinker, refer to the [Joomla Console docs](../console/2-usage.html) or run:
 
       joomla extension:symlink  --help
 
 ## Next steps
 
-The `joomla` command is the most important piece in our Vagrant box. It's the workhorse for everything related to Joomla on the box. This [Joomla Console](../console/introduction.md) package can do a whole lot more except installing sites. You can also automatically [install your custom extensions](../console/usage.md#install-joomla-extensions) and even create your own [plugins](../console/plugins.md).
+The `joomla` command is the most important piece in our Vagrant box. It's the workhorse for everything related to Joomla on the box. This [Joomla Console](../console.html) package can do a whole lot more except installing sites. You can also automatically [install your custom extensions](../console/2-usage.html#install-joomla-extensions) and even create your own [plugins](../console/3-plugins.html).
 
-To find out more about its options and usage, you can get an overview by running the `joomla list` command, or head over to the [documentation pages](../console/usage.md) for a full explanation.
+To find out more about its options and usage, you can get an overview by running the `joomla list` command, or head over to the [documentation pages](../console/2-usage.html) for a full explanation.

@@ -60,6 +60,7 @@ However, you are free to name your plugin anything you like.
 ## PHP Class
 
 The class that matches our new manifest starts out looking something like
+
 {% highlight php %}
 <?php
 class PlgDocmanDocument extends PlgKoowaSubscriber{}
@@ -174,21 +175,26 @@ public function onAfterDocmanDocumentControllerEdit(KEventInterface $event)
 {
     //The result of the controller action is stored in the "result" property
     $row = $event->result;
+    
     //The row contains properties that map to the database table columns
     $description = $row->description;
+    
     //You can now do anything you want with the data, for example look for certain keywords
     $year = $author = null;
     if(preg_match('#{year:([\s0-9]*)}#', $description, $match)){
         $year = trim($match[1]);
     }
+    
     //Or get the author?
     if(preg_match('#{author:([\s\w]*)}#', $description, $match)){
         $author = trim($match[1]);
     }
+    
     //Now do some custom query to store these values, perhaps store in a table using $row->id as an index?
     if($year){
         //Do something
     }
+    
     if($author){
         //Do something
     }

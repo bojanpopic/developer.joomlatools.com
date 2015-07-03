@@ -14,7 +14,7 @@ The first part of this tutorial shows you how to change your frontend icons. The
 
 ![Select icon](https://farm6.staticflickr.com/5593/15135621962_f947e74be7_o.png)
 
-## 1. Changing DOCman Document Icons in the Front End
+## Changing DOCman Document Icons in the Front End
 
 There are three ways to get your own custom icons in DOCman:
 
@@ -22,11 +22,11 @@ There are three ways to get your own custom icons in DOCman:
 2. [by using background images ](#2-using-background-images)
 3. [by using a custom icon font](#3-using-a-custom-icon-font)
 
-### 1. Upload custom icons
+### Upload custom icons
 
 This technique is described in detail [on our blog](http://blog.joomlatools.com/2014/10/how-to-get-your-own-custom-icons-to-docman.html).
 
-### 2. Using background images
+### Using background images
 
 In this second technique we are going to override the default icons. This will change all icons on your website at once. It’s no longer possible to use the icons we picked since we’re using / overriding the existing markup.
 
@@ -59,7 +59,7 @@ To start with clean classes you need to add some CSS to your website. If you’r
 
 We recommend creating a new icons.css stylesheet because every time you update your template there’s a chance you will remove your style declarations contained within the master template css file. This way all you will need to do is repeat steps 3 & 4 to bring back your new icons.
 
-**Protostar Template Example**
+#### Protostar Template Example
 
 If you use Protostar you could search for the following line in the index.php file
 
@@ -104,7 +104,7 @@ There’s actually only one property you have to add per class in order for this
 }
 {% endhighlight %}
 
-**Guidance on choosing your icon image**
+#### Guidance on choosing your icon image
 
 1. You preferably want to work with transparent PNG files since they can be used on any background color.
 2. The icon area is either 16x16 pixels, 24x24 pixels or 48x48 pixels so make sure your image is at least 48x48 pixels.
@@ -113,7 +113,7 @@ There’s actually only one property you have to add per class in order for this
 
 Note: You can also use larger images like 600x600 pixels but this will drastically slow down your website. We recommend using a maximum width and height of 96 pixels.
 
-**An example of a finished icon overwrite using images**
+#### An example of a finished icon overwrite using images
 
 {% highlight css %}
 .koowa [class^="koowa_icon--"]:before,
@@ -201,7 +201,7 @@ To start with clean classes you need to add some CSS to your website. If you’r
 
 We recommend creating a new icons.css stylesheet because every time you update your template there’s a chance you will remove your style declarations contained within the master template css file. This way all you will need to do is repeat steps 3 & 4 to re-instate your new icons.
 
-**Protostar Template Example**
+#### Protostar Template Example
 
 If you use Protostar you could search for the following line in the index.php file
 
@@ -285,7 +285,7 @@ To actually make this work you should change it to:
 
 The important part here is that the "content" property doesn’t get changed. You have to do this manually for all 9 icons.
 
-**An example of a finished icon overwrite (icons.css) using a font**
+#### An example of a finished icon overwrite (icons.css) using a font
 
 {% highlight css %}
 @font-face {

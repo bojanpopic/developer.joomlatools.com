@@ -82,11 +82,11 @@ Nooku provides the Event API, but for a Joomla plugin to make use of it needs to
 
 For example, the event handler that is registered for the event named **"onBeforeAcmeBarControllerBrowse"** is our `PlgAcmeExample::onBeforeAcmeBarControllerBrowse()` method.
  
->**Technical Tip:** `PlgKoowaSubscriber` plugins will not fire for native Joomla! plugin events because they aren't connected to `JEventDispatcher`. 
+>**Technical Tip:** `PlgKoowaSubscriber` plugins will not fire for native Joomla plugin events because they aren't connected to `JEventDispatcher`. 
  
 ### PlgKoowaAbstract
 
-If you want your plugin to simply take advantage of the native Joomla! (and other extension events), it need only extend [`PlgKoowaAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). It won't pick up the MVC events that we are focused on here. We highlight it because `PlgKoowaSubscriber` is a child class, and is an important piece of the plugin functionality.
+If you want your plugin to simply take advantage of the native Joomla (and other extension events), it need only extend [`PlgKoowaAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). It won't pick up the MVC events that we are focused on here. We highlight it because `PlgKoowaSubscriber` is a child class, and is an important piece of the plugin functionality.
 
 This class extends directly from `JPlugin` and will work like any other plugin; but, you have the added bonus of direct access to the Framework object manager, not to mention allowing the plugin to have its own [object identifier](http://guides.nooku.org/essentials/object-management.html). 
 
