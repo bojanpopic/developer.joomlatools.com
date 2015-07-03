@@ -3,7 +3,8 @@ layout: default
 title: Disable / enable bootstrap CSS
 ---
 
-How to disable or enable the bootstrap CSS file for DOCman and FILEman?
+* Table of Content
+{:toc}
 
 ## Introduction
 

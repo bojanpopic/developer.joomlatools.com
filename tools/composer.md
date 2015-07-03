@@ -3,6 +3,9 @@ layout: default
 title: Composer
 ---
 
+* Table of Content
+{:toc}
+
 ## Introduction
 
 Are you a developer and tired of re-installing the same extensions over and over again or every time you start a new Joomla project? Wouldn’t it be great if you could install and update multiple Joomla extensions in one go, without lifting a finger?

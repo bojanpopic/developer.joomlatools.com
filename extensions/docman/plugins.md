@@ -5,14 +5,14 @@ title: Plugins
 
 **Read the [Framework Plugins](/framework/plugins.html) guide to get the absolute most out of this tutorial**. We build on concepts that are covered in that guide.  
 
-There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
-Perhaps you want to send an email when a document is uploaded. Maybe you want add some data to the list of documents before
-it gets rendered to the screen. Whatever you would like to do is possible with Plugins and our Event driven architecture. 
-
-
-<!-- toc -->
+* Table of Content
+{:toc}
 
 ## Introduction
+
+There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
+Perhaps you want to send an email when a document is uploaded. Maybe you want add some data to the list of documents before
+it gets rendered to the screen. Whatever you would like to do is possible with Plugins and our Event driven architecture.
 
 DOCman is a Nooku Framework powered extension and as such, has access to a powerful, yet simple event architecture. Almost ANY action in DOCman can have an event listener registered against it. Not only that, but multiple listeners can be registered for a single event.
 
@@ -117,11 +117,12 @@ So let's go ahead and work out what events we need to respond to:
 Therefore the event method names we need are:
 
 {% highlight php %}
+<?php
 class PlgDocmanDocument extends PlgKoowaSubscriber
 {
-        onAfterDocmanDocumentControllerAdd(KEventInterface $event){}
-        onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
-        onAfterDocmanDocumentControllerDelete(KEventInterface $event){}
+    onAfterDocmanDocumentControllerAdd(KEventInterface $event){}
+    onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
+    onAfterDocmanDocumentControllerDelete(KEventInterface $event){}
 }
 {% endhighlight %}
 
@@ -130,14 +131,15 @@ Pretty simple so far right?
 Now consider save events, these cover both add and edit (create and update), so the simplest way to have both of these methods run the same code is have one call the other.
 
 {% highlight php %}
+<?php
 class PlgKoowaDocman extends PlgKoowaSubscriber
 {
-        onAfterDocmanDocumentControllerAdd(KEventInterface $event)
-        {
-            return $this->onAfterDocmanDocumentControllerEdit($event);
-        }
-        onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
-        onAfterDocmanDocumentControllerDelete(KEventInterface $event){}
+    onAfterDocmanDocumentControllerAdd(KEventInterface $event)
+    {
+        return $this->onAfterDocmanDocumentControllerEdit($event);
+    }
+    onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
+    onAfterDocmanDocumentControllerDelete(KEventInterface $event){}
 }
 {% endhighlight %}
 
@@ -150,6 +152,7 @@ First things first; we need to get the document that was added/edited. This is c
 Secondly we need to get the `description` field of the document entity that we're going to check for the keywords.
 
 {% highlight php %}
+<?php
 public function onAfterDocmanDocumentControllerEdit(KEventInterface $event)
 {
     //The result of the controller action is stored in the "result" property
@@ -166,6 +169,7 @@ If you were to `var_dump($description)` or use your favorite debugger you should
 Once we have the description, we can do some simple regular expression matches on it to extract the year and the author:
 
 {% highlight php %}
+<?php
 public function onAfterDocmanDocumentControllerEdit(KEventInterface $event)
 {
     //The result of the controller action is stored in the "result" property

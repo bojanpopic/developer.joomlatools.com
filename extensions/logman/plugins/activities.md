@@ -3,6 +3,11 @@ layout: default
 title: Activities
 ---
 
+* Table of Content
+{:toc}
+
+## Introduction
+
 In LOGman, activity objects fully adhere to the [Activity Streams specification](http://activitystrea.ms/) by implementing the **ComActivitiesActivityInterface**. Through this interface, activities effectively expose data to the outer world.
 
 In the previous sections, we have seen that components can be integrated with LOGman by using plugins. These plugins take care of the activity logging process and make them available to LOGman.

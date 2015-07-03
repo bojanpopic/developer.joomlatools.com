@@ -3,6 +3,11 @@ layout: default
 title: Nooku components
 ---
 
+* Table of Content
+{:toc}
+
+## Introduction
+
 Joomla! components built on top of the [Nooku Framework](http://www.nooku.org) can also be easily integrated with LOGman.
 
 For logging activities of Nooku powered components, we just need to wire activity loggers to the controllers performing the actions that we want to log. This may be 

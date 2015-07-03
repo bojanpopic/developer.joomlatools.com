@@ -3,7 +3,8 @@ layout: default
 title: FAQs
 ---
 
-<!-- toc -->
+* Table of Content
+{:toc}
 
 ## What are the requirements to run this application?
 

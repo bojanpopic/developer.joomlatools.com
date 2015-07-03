@@ -3,7 +3,10 @@ layout: default
 title: Server management
 ---
 
-<!-- toc -->
+* Table of Content
+{:toc}
+
+## Introduction
 
 The basic LAMP stack consists out of Apache 2.4, PHP 5.5 and MySQL 5.5. The most important tasks can be done easily using the `box` command via [the web terminal](http://joomla.box:3000), or by SSHing into the box with `vagrant ssh`.
 

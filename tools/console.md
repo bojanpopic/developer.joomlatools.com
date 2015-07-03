@@ -3,6 +3,9 @@ layout: default
 title: Console
 ---
 
+* Table of Content
+{:toc}
+
 ## Introduction
 
 Testing Joomla extensions can be a tedious task. You need to setup different versions of Joomla, install your extensions, configure Joomla, run different tests… Doing all this manually is very laborious and time consuming.

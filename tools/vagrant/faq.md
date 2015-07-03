@@ -3,7 +3,8 @@ layout: default
 title: FAQs
 ---
 
-<!-- toc -->
+* Table of Content
+{:toc}
 
 ## I don't like the command line! Is there another way to manage the Vagrant box?
 

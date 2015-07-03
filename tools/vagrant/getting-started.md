@@ -3,7 +3,8 @@ layout: default
 title: Getting started
 ---
 
-<!-- toc -->
+* Table of Content
+{:toc}
 
 ## Creating new Joomla sites
 

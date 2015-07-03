@@ -3,7 +3,8 @@ layout: default
 title: Usage
 ---
 
-<!-- toc -->
+* Table of Content
+{:toc}
 
 ## Managing sites
 

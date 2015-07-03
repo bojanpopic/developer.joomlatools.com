@@ -3,15 +3,18 @@ layout: default
 title: Plugins
 ---
 
+* Table of Content
+{:toc}
+
+## Introduction
+
 In [Nooku Framework](http://www.nooku.org/) any controller, view or model method that has an `_action` prefix can be intercepted via the Nooku Event API which is can be subscribed to by the Joomla plugin system. In contrast to Joomla, events in Nooku are not hardcoded, but are generated on the fly in a consistent and standardized fashion.
 
 Each controller, view and model action is exposed through a **before** and **after** command which is translated by a special event command handler and then is broadcast to any object that subscribes to it. 
 
 This [inversion of control](http://en.wikipedia.org/wiki/Inversion_of_control) mechanism allows for the intercepting of actions both before and after they occur. Extensions that use the Nooku Framework can take advantage of this fact to improve the granularity of the functionality that they can offer up for customization. A component inverts nearly complete control of its data flow out of the box.
 
-Here we provide an overview of the concepts, classes and objects involved in creating a Joomla plugin that can intercept action events. 
-
-<!-- toc -->
+Here we provide an overview of the concepts, classes and objects involved in creating a Joomla plugin that can intercept action events.
 
 ## Easy example
 

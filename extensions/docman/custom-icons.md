@@ -3,6 +3,11 @@ layout: default
 title: Custom Icons
 ---
 
+* Table of Content
+{:toc}
+
+## Introduction
+
 When we released the stable 2.0 releases of our extensions we introduced an icon font to display all our icons. If you need to change the icons that we chose it’s possible to override them. To follow this tutorial you need a good understanding of CSS and templating/overriding in Joomla.
 
 The first part of this tutorial shows you how to change your frontend icons. The last part shows you how to change the administrator icons as well.

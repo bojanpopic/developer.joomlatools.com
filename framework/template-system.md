@@ -3,6 +3,11 @@ layout: default
 title: Template System
 ---
 
+* Table of Content
+{:toc}
+
+## Introduction
+
 Joomlatools extension templates expose unparalleled flexibility and power. What follows is a high level overview of the structures
 we use so that you can better understand what's happening in each layout.
 

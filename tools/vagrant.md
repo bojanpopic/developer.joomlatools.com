@@ -3,6 +3,9 @@ layout: default
 title: Vagrant Box
 ---
 
+* Table of Content
+{:toc}
+
 ## A Joomla LAMP stack that just works
 
 Our [Joomlatools Vagrant box](https://github.com/joomlatools/joomla-vagrant) is a preconfigured Vagrant Box that comes with a working LAMP Stack to get you up and running building Joomla sites in no time.

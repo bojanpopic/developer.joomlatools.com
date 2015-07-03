@@ -3,6 +3,9 @@ layout: default
 title: Overrides
 ---
 
+* Table of Content
+{:toc}
+
 ## Template and Layout Considerations
 
 When you look at a Joomlatools component view your are seeing the output of a template. The template system follows the same rules

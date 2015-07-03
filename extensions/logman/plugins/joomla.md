@@ -3,6 +3,11 @@ layout: default
 title: Joomla components
 ---
 
+* Table of Content
+{:toc}
+
+## Introduction
+
 By utilizing Joomla's event system, third party components built on top of Joomla! can be easily integrated with LOGman. 
 
 *For information on integrating a component within the Joomla! event system, please refer to the [Plugin](http://docs.joomla.org/Plugin) and [Events](http://docs.joomla.org/Plugin/Events) Joomla! guides.*

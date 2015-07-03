@@ -3,6 +3,11 @@ layout: default
 title: Layouts
 ---
 
+* Table of Content
+{:toc}
+
+## Introduction
+
 ## Additional Layouts
 
 In some situations you may want to keep the current core layout available, but would like to render a very similar layout

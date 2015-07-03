@@ -3,6 +3,11 @@ layout: default
 title: Icon Sizes
 ---
 
+* Table of Content
+{:toc}
+
+## Introduction
+
 DOCman comes with a couple of different icon sizes used on the frontend. When you want a size other than the default you can use a little CSS to make the change. 
 
 We expect you to have a good understanding of the following for this article:
