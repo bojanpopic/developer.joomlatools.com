@@ -15,7 +15,7 @@ Your `composer.json` contents should then look as follows:
             "type": "package",
             "package": {
                 "name": "vendor/xyz",
-                "type": "joomlatools-installer",
+                "type": "joomla-installer",
                 "version": "1.0.0",
                 "dist": {
                     "url": "file:////Users/YourName/Downloads/com_xyz.tar.gz",
@@ -39,11 +39,11 @@ Using this JSON file, we have now defined our own custom package. Pay attention 
 * The `type` has to be set to `joomlatools-installer`
 * Make sure the `url` directive points to the location of the install package.
 
-Save this file and run from your console and within the joomla root folder: 
+Save this file and run from your console and within the joomla root folder:
 
 ```bash
 composer install
-``` 
+```
 
 Executing `composer install` will now fetch the `joomlatools/installer` plugin and use it to install the package into your Joomla installation.
 
@@ -52,4 +52,3 @@ You should get output similar to the following:
 ![Console output](http://farm6.staticflickr.com/5475/10689162794_875325a8f0_o.png)
 
 *Congratulations*, your Joomla setup has already been completed! Leaving you plenty of time to start cracking on your new templates and/or extensions!
-
