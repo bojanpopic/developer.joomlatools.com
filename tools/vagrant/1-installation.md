@@ -31,6 +31,6 @@ vagrant up
 
 There will be two new folders created called `www` and `Projects`. These folders act as shared folders between your host computer and the box.
 
-If everything is setup, we will show you how to install your first Joomla site on the  [getting started page](getting-started.md).
+If everything is setup, we will show you how to install your first Joomla site on the [getting started page](2-getting-started.html).
 
    [1]: http://en.wikipedia.org/wiki/Hosts_(file)#Location_in_the_file_system
