@@ -82,6 +82,19 @@ module.exports = function(grunt) {
             }
         },
 
+        // Autoprefixer
+        autoprefixer: {
+            options: {
+                browsers: ['> 5%', 'last 2 versions', 'ie 11', 'ie 10', 'ie 9']
+            },
+            files: {
+                expand: true,
+                flatten: true,
+                src: 'css/*.css',
+                dest: 'css/'
+            }
+        },
+
         // Shell commands
         shell: {
             jekyllBuild: {
@@ -98,7 +111,7 @@ module.exports = function(grunt) {
                     '_scss/style.scss',
                     '_scss/**/*.scss'
                 ],
-                tasks: ['sass', 'copy:css'],
+                tasks: ['sass', 'autoprefixer', 'copy:css'],
                 options: {
                     interrupt: false,
                     atBegin: true

@@ -8,6 +8,7 @@
     },
     "devDependencies": {
       "grunt": "latest",
+      "grunt-autoprefixer": "latest",
       "grunt-browser-sync": "latest",
       "grunt-contrib-copy": "latest",
       "grunt-contrib-uglify": "latest",

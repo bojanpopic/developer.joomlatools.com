@@ -1,22 +1,28 @@
-# Site settings
-title: Your awesome title
-email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
+# Site info
+name: Joomlatools Developer
+url: http://developer.joomlatools.com
+main_title: Joomlatools - Joomla extensions that just work!
+description: We're a close-knit team of product designers who help grow businesses and work to create simple and powerful Joomla extensions.
+domain: developer.joomlatools.com
 
-# Build settings
-markdown: kramdown
-highlighter: pygments
+# Blog separator
+excerpt_separator: <!--more-->
 
-exclude: ['node_modules']
+# Pagination
+permalink: "/blog/:year/:month/:title.html"
+paginate: 8
+paginate_path: "/blog/page:num"
+paginate_limit: 7
 
-# Collections
-collections:
-  extensions:
-    output: true
+# We don't want to publish some files
+exclude: [
+  'bower_components',
+  'node_modules',
+  '.gitignore',
+  'bower.json',
+  'Gemfile',
+  'Gemfile.lock',
+  'gruntfile.js',
+  'package.json',
+  'README.md'
+]

@@ -6,10 +6,15 @@ $border-box-sizing: false; // Used by bourbon/neat
 @import "../bower_components/neat/app/assets/stylesheets/neat";
 @import "../bower_components/illusion/sass/illusion";
 
+@import "utilities/variables";
 @import "../bower_components/shared.joomlatools.com/files/scss/_variables";
 
-@import "shame";
-
+@import "atoms/a";
+@import "atoms/blockquote";
+@import "atoms/body";
+@import "atoms/table";
+@import "molecules/highlight";
+@import "organisms/page";
 @import "utilities/skiplink";
 @import "utilities/syntax";
 
