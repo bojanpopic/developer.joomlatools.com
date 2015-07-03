@@ -49,6 +49,6 @@ For more information on the symlinker, refer to the [Joomla Console docs](../con
 
 ## Next steps
 
-The `joomla` command is the most important piece in our Vagrant box. to everything related to Joomla on the box. This command is the [Joomla Console](../console/introduction.md) package and can do a whole lot more except installing sites. You can also automatically [install your custom extensions](../console/usage.md#install-joomla-extensions) and even create your own [plugins](../console/plugins.md).
+The `joomla` command is the most important piece in our Vagrant box. It's the workhorse for everything related to Joomla on the box. This [Joomla Console](../console/introduction.md) package can do a whole lot more except installing sites. You can also automatically [install your custom extensions](../console/usage.md#install-joomla-extensions) and even create your own [plugins](../console/plugins.md).
 
 To find out more about its options and usage, you can get an overview by running the `joomla list` command, or head over to the [documentation pages](../console/usage.md) for a full explanation.
