@@ -15,7 +15,7 @@ for a special purpose. Maybe you want a differently formatted list of items, or 
  from your site that's related to the current item being shown. Whatever the reason, we need to take a slightly different approach
  to that of the Template Override.
 
- **Don't worry;** Its very similar and is straight forward with Joomla! 2.5+ .
+ **Don't worry;** Its very similar and is straight forward with Joomla 2.5+ .
 
 Once you have identified the layout that you want to augment, copy it to the same folder that you would have for a template
 override **BUT** under a different name, i.e. `customlist.html.php`. This will let you load your new layout for a given item, just by adding

@@ -32,7 +32,7 @@ Each part of the above message contains variable parts and constant parts. Let u
 * the
 * title
 
-LOGman's activity message translations are not that different from regular Joomla! translations. They also have a key and a value. For example, the translation for the above message is:
+LOGman's activity message translations are not that different from regular Joomla translations. They also have a key and a value. For example, the translation for the above message is:
 
 	KLS_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT="{actor} {action} the {object.type} with the title {object}"
 
@@ -95,7 +95,7 @@ Some message parameters such as {action} can also be translated by adding transl
 
 Not all parameters on keys are translatable (providing a key for each article title wouldn’t make sense). This is internally defined by each activity object.
 
-When translating each variable our translator will first look up for `KLS_` prefixed keys. If none is found, non-prefixed keys (without the `KLS_` prefix) will be used if defined. This is useful for re-using Joomla! core translations and overriding them if needed.
+When translating each variable our translator will first look up for `KLS_` prefixed keys. If none is found, non-prefixed keys (without the `KLS_` prefix) will be used if defined. This is useful for re-using Joomla core translations and overriding them if needed.
 
 ## Context translations
 
@@ -111,7 +111,7 @@ The problem with the phrase above is that it is slightly grammatically incorrect
 
 	Carlos borró el grupo de usuarios con el título Clientes
 
-The translation of the word `user` in Spanish is `usuario`. This value is provided by the `USER` translation key defined in Joomla! core translations. The `{object.subtype}` placeholder gets replaced with this value. However, instead of `usuario` (singular) we should have `usuarios` (plural).
+The translation of the word `user` in Spanish is `usuario`. This value is provided by the `USER` translation key defined in Joomla core translations. The `{object.subtype}` placeholder gets replaced with this value. However, instead of `usuario` (singular) we should have `usuarios` (plural).
 
 This is where context translations become useful. They provide a way to force translations in a given context.
 
@@ -133,6 +133,6 @@ As a rule of thumb, always favor context translations over hardcoded variable tr
 
 ## How to translate?
 
-Translating activity messages to another language is just a matter of providing a LOGman language file for the desired language, just as it is done with any regular Joomla! extension.
+Translating activity messages to another language is just a matter of providing a LOGman language file for the desired language, just as it is done with any regular Joomla extension.
 
 As always, a great starting point is to use the English language translations file that is provided with LOGman.

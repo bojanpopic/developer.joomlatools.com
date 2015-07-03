@@ -8,9 +8,9 @@ title: Joomla components
 
 ## Introduction
 
-By utilizing Joomla's event system, third party components built on top of Joomla! can be easily integrated with LOGman. 
+By utilizing Joomla's event system, third party components built on top of Joomla can be easily integrated with LOGman. 
 
-*For information on integrating a component within the Joomla! event system, please refer to the [Plugin](http://docs.joomla.org/Plugin) and [Events](http://docs.joomla.org/Plugin/Events) Joomla! guides.*
+*For information on integrating a component within the Joomla event system, please refer to the [Plugin](http://docs.joomla.org/Plugin) and [Events](http://docs.joomla.org/Plugin/Events) Joomla guides.*
 
 Once an application makes use of Joomla's event system, you can go ahead and create a plugin that listens for events and then notifies LOGman of the event.
 
@@ -116,7 +116,7 @@ As mentioned above, the base **ComLogmanPluginJoomla** class also provides suppo
 
 As with our previous example, under some circumstances all will work out of the box. However, sometimes the plugin needs a bit of help for figuring it out.
 
-For logging state changes, the plugin needs to know the name of the Joomla! table class that defines the event object, a.k.a the resource. By default this is assumed to be `JTable{Resource}`. This is needed because unfortunately, the `onContentChangeState` event only provides the IDs of the resources which state is changing. Otherwise speaking, we need to load the resources ourselves in order to get the activity data to be logged.
+For logging state changes, the plugin needs to know the name of the Joomla table class that defines the event object, a.k.a the resource. By default this is assumed to be `JTable{Resource}`. This is needed because unfortunately, the `onContentChangeState` event only provides the IDs of the resources which state is changing. Otherwise speaking, we need to load the resources ourselves in order to get the activity data to be logged.
 
 In our example, the Table class being used for newsfeeds resources is **NewsfeedsTableNewsfeed**. For telling the plugin which table class to use we must override the **_getItems** method using the following code block:
 

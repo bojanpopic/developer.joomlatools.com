@@ -3,7 +3,7 @@ layout: default
 title: LOGman
 ---
 
-LOGman is our activity logging extension for Joomla!. It is built on top of a reusable activities component that exposes an API for developing powerful activity aware applications.
+LOGman is our activity logging extension for Joomla. It is built on top of a reusable activities component that exposes an API for developing powerful activity aware applications.
 
 The API was greatly inspired and fully adheres to the [Activitiy Streams specification](http://activitystrea.ms/). It currently supports and extends the [first version](http://activitystrea.ms/specs/json/1.0/) of the specification. This is an excellent source of information for any developer looking forward to develop applications that deal with activity streams.  
 
