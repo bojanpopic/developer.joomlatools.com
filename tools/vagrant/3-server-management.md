@@ -22,15 +22,21 @@ To start everything up again, run `box server:start`.
 
 To retrieve a value from the currently installed PHP version, you can use the `box php:ini <directive>` command. For example, to get the current `mysql.default_socket` value:
 
-    box php:ini mysql.default_socket
+{% highlight bash %}
+box php:ini mysql.default_socket
+{% endhighlight %}
 
 To change this value into something else, append the new value:
 
-    box php:ini mysql.default_socket /path/to/new/socket
+{% highlight bash %}
+box php:ini mysql.default_socket /path/to/new/socket
+{% endhighlight %}
 
 The script puts these directives into an additional config file that overrides the default values. To remove your new configuration again, pass in an empty value:
 
-    box php:ini mysql.default_socket ""
+{% highlight bash %}
+box php:ini mysql.default_socket ""
+{% endhighlight %}
 
 You can verify if the changes succeeded by taking a look at [joomla.box/phpinfo](http://joomla.box/phpinfo).
 
@@ -40,11 +46,15 @@ We have created a tool that can build and install any PHP version from 5.2.0 and
 
 To get a list of the PHP versions you can install, run this command:
 
-    box php:versions
+{% highlight bash %}
+box php:versions
+{% endhighlight %}
 
 To install one of the available versions, for example 5.3.18, execute:
 
-    box php:use 5.3.18
+{% highlight bash %}
+box php:use 5.3.18
+{% endhighlight %}
 
 The script will check if this version has been installed and if not, will attempt to build it. Please note that building PHP might take a while. Once done you can verify if the install succeeded by browsing to [joomla.box/phpinfo](http://joomla.box/phpinfo).
 
@@ -52,7 +62,9 @@ Get a list of PHP versions you built using the `box php:list` command.
 
 To restore the default PHP installation again, run:
 
-    box php:reset
+{% highlight bash %}
+box php:reset
+{% endhighlight %}
 
 For more options, run `box list`.
 

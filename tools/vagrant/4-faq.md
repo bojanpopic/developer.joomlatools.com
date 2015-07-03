@@ -99,10 +99,10 @@ After you modify /etc/hosts as shown above go to
 
 Use following details to connect:
 
-    Host: 127.0.0.1
-    Port: 2222
-    User: vagrant
-    Password: vagrant
+* Host: 127.0.0.1
+* Port: 2222
+* User: vagrant
+* Password: vagrant
 
 ## How do I stop the box?
 
@@ -118,11 +118,11 @@ In short: if you have important data *on* the box, be sure to back it up first. 
 
 In summary, you need to run these commands to update a box:
 
-```
+{% highlight bash %}
 vagrant box update
 vagrant destroy
 vagrant up
-```
+{% endhighlight %}
 
 ## How do I destroy a box?
 
