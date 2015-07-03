@@ -8,12 +8,6 @@ domain: developer.joomlatools.com
 # Blog separator
 excerpt_separator: <!--more-->
 
-# Pagination
-permalink: "/blog/:year/:month/:title.html"
-paginate: 8
-paginate_path: "/blog/page:num"
-paginate_limit: 7
-
 # We don't want to publish some files
 exclude: [
   'bower_components',
