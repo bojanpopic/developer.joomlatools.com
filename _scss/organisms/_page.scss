@@ -1,6 +1,7 @@
 .site, .main {
   display: flex;
   flex: 1 1 auto;
+  overflow: hidden;
 }
 
 .site {
@@ -19,6 +20,8 @@
 
   background-color: #fafafa;
   border-right: 1px solid #E8E8E8;
+
+  max-width: 90%;
 
   ul {
     list-style: none;
@@ -64,13 +67,14 @@
     }
   }
 
-  &.toggled {
+  &.toggled.toggled.toggled {
     display: none;
   }
 }
 
 .content {
   flex: 1 1 auto;
+  position: relative;
 }
 
 .scrollable {

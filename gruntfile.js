@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                         src: ['bower_components/shared.joomlatools.com/files/images/*.png'],
                         dest: 'images',
                         flatten: true
-                    },
+                    }
                 ]
             },
             css: {
@@ -24,6 +24,16 @@ module.exports = function(grunt) {
                         expand: true,
                         src: ['css/*.css'],
                         dest: '_site/css',
+                        flatten: true
+                    }
+                ]
+            },
+            js: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['js/*.js'],
+                        dest: '_site/js',
                         flatten: true
                     }
                 ]
@@ -39,6 +49,7 @@ module.exports = function(grunt) {
                 files: {
                     'js/scripts.js': [
                         'bower_components/apollo/dist/apollo.js',
+                        'bower_components/domready/ready.js',
                         'bower_components/shared.joomlatools.com/files/js/joomlatools.js',
                         '_scripts/main.js'
                     ]
@@ -122,7 +133,7 @@ module.exports = function(grunt) {
                 files: [
                     '_scripts/*.js'
                 ],
-                tasks: ['uglify'],
+                tasks: ['uglify', 'copy:js'],
                 options: {
                     interrupt: true,
                     atBegin: true
