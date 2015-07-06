@@ -71,9 +71,13 @@
 
 .content {
   flex: 1 1 auto;
+}
+
+.scrollable {
+  position: relative;
+  flex: 1 1 auto;
   max-width: 700px;
   padding: 20px 50px;
-  position: relative;
 }
 
 .sidebar,
