@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                         src: ['bower_components/shared.joomlatools.com/files/images/*.png'],
                         dest: 'images',
                         flatten: true
-                    },
+                    }
                 ]
             },
             css: {
@@ -24,6 +24,16 @@ module.exports = function(grunt) {
                         expand: true,
                         src: ['css/*.css'],
                         dest: '_site/css',
+                        flatten: true
+                    }
+                ]
+            },
+            js: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['js/*.js'],
+                        dest: '_site/js',
                         flatten: true
                     }
                 ]
@@ -38,8 +48,10 @@ module.exports = function(grunt) {
             build: {
                 files: {
                     'js/scripts.js': [
+                        'bower_components/apollo/dist/apollo.js',
+                        'bower_components/domready/ready.js',
                         'bower_components/shared.joomlatools.com/files/js/joomlatools.js',
-                        'bower_components/apollo/dist/apollo.js'
+                        '_scripts/main.js'
                     ]
                 }
             }
@@ -98,7 +110,7 @@ module.exports = function(grunt) {
         // Shell commands
         shell: {
             jekyllBuild: {
-                command: 'bundle exec jekyll build --config _config.yml'
+                command: 'bundle exec jekyll build --config _config.yml,_config.dev.yml'
             }
         },
 
@@ -119,8 +131,9 @@ module.exports = function(grunt) {
             },
             uglify: {
                 files: [
+                    '_scripts/*.js'
                 ],
-                tasks: ['uglify'],
+                tasks: ['uglify', 'copy:js'],
                 options: {
                     interrupt: true,
                     atBegin: true
