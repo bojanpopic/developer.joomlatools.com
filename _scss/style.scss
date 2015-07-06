@@ -8,6 +8,7 @@ $border-box-sizing: false; // Used by bourbon/neat
 
 @import "utilities/variables";
 @import "../bower_components/shared.joomlatools.com/files/scss/_variables";
+@import "utilities/accessibility";
 
 @import "atoms/a";
 @import "atoms/blockquote";
@@ -22,3 +23,5 @@ $border-box-sizing: false; // Used by bourbon/neat
 
 // The Joomlatools header and footer
 @import "../bower_components/shared.joomlatools.com/files/scss/_joomlatools";
+
+@import "shame";

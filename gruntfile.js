@@ -38,8 +38,9 @@ module.exports = function(grunt) {
             build: {
                 files: {
                     'js/scripts.js': [
+                        'bower_components/apollo/dist/apollo.js',
                         'bower_components/shared.joomlatools.com/files/js/joomlatools.js',
-                        'bower_components/apollo/dist/apollo.js'
+                        '_scripts/main.js'
                     ]
                 }
             }
@@ -119,6 +120,7 @@ module.exports = function(grunt) {
             },
             uglify: {
                 files: [
+                    '_scripts/*.js'
                 ],
                 tasks: ['uglify'],
                 options: {

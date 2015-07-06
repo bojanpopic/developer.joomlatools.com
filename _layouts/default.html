@@ -6,6 +6,9 @@
         </div>
 
         <div class="content">
+
+            <button id="sidebar-toggle" class="sidebar-toggle" aria-hidden="true" aria-pressed="false" aria-controls="navigation" onclick="apollo.toggleClass(document.getElementById('navigation'), 'is-shown');apollo.toggleClass(document.getElementById('hamburger'), 'close');hamburger()"><span class="lines"></span></button>
+
             <h1>{{ page.title }}</h1>
 
             {{ content }}

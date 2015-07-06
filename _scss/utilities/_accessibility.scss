@@ -1,0 +1,35 @@
+/* Visually hide stuff but keep it accessible */
+/* Don't use display: none to hide elements to keep thing accessible */
+.accessible-hide {
+  // Winning over other classes
+  &.accessible-hide.accessible-hide.accessible-hide {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+  }
+}
+
+/* Negative tabindex make sure you can jump to other areas without visually visible */
+/* We are using this to jump to #content area when using the skiplink */
+[tabindex="-1"]:focus {
+  outline: none!important;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  &:focus {
+    outline: 2px solid $jt-cta;
+  }
+
+  &:focus:hover {
+    outline: none;
+  }
+}
