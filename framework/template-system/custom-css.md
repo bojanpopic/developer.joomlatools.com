@@ -1,6 +1,6 @@
 ---
 layout: default
-title: How to add custom CSS to your template?
+title: Custom CSS
 ---
 
 * Table of Content

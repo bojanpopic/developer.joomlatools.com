@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Disable / enable bootstrap CSS
+title: Bootstrap CSS
 ---
 
 * Table of Content
