@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Vagrant Box
+title: Vagrant
 ---
 
 * Table of Content
