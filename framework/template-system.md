@@ -61,8 +61,8 @@ When using `import()`, a second argument can be supplied to pass additional vari
 
 {% highlight php %}
 <?= import('default_list.html', array(
-        'title' => translate('This is my list')
-        )) ?>
+    'title' => translate('This is my list')
+    )) ?>
 {% endhighlight %}
 
 This will create a variable in the partial called `$title` with a value of `This is my list` in the imported template. In addition,
@@ -94,7 +94,7 @@ The Framework comes packaged with several helpers, including but not limited to:
 Helpers are invoked using the `helper` [template function](#functions). That function can take two arguments and a example could look something like:
 
 {% highlight php %}
-<?=  helper('com://site/acme.template.helper.foo.bar', array('of' => 'options'));
+<?= helper('com://site/acme.template.helper.foo.bar', array('of' => 'options'));
 {% endhighlight %}
 
 The first argument is a **required** string that is the helper's Object Identifier with a method name concatenated on the end with a period (.)
@@ -115,6 +115,7 @@ Our example helper call looks for the following class and tries to fire the `bar
 <a name="myhelper"></a>
 
 {% highlight php %}
+<?php
 /**
  * file would be located at components/com_acme/template/helper/foo.php
  */
