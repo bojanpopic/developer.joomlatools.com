@@ -11,7 +11,7 @@
 {% for entry in entries %}
     {% assign i = i | plus: 1 %}
 
-    {% if entry.url != "/index.html" %}
+    {% if entry.url != "/index.html" and entry.url != "/404.html" %}
         {% assign page-url = page.url | remove: ".html" %}
         {% assign entry-url = entry.url | remove: ".html" %}
 

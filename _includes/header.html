@@ -12,8 +12,8 @@
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
-<body class="page-{{ page.title | downcase | replace: ' ', '_' | replace: '&', '-' }} subscribe-from-top {{ css-class }} no-js">
-    <script data-inline type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.body;var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg," js-enabled")}</script>
+<body class="{{ css-class }} no-js">
+    <script data-inline type="text/javascript">function hasClass(e,t){return e.className.match(new RegExp("(\\s|^)"+t+"(\\s|$)"))}var el=document.body;var cl="no-js";if(hasClass(el,cl)){var reg=new RegExp("(\\s|^)"+cl+"(\\s|$)");el.className=el.className.replace(reg,"js-enabled")}</script>
     <script type="text/javascript">if (top.location != self.location) { top.location = self.location.href; }</script>
 
     {% if site.google-analytics != nil %}
