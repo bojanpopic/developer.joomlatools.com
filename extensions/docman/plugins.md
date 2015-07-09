@@ -1,15 +1,18 @@
-# Plugins
+---
+layout: default
+title: Plugins
+---
 
 **Read the [Framework Plugins](/framework/plugins.html) guide to get the absolute most out of this tutorial**. We build on concepts that are covered in that guide.  
 
-There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
-Perhaps you want to send an email when a document is uploaded. Maybe you want add some data to the list of documents before
-it gets rendered to the screen. Whatever you would like to do is possible with Plugins and our Event driven architecture. 
-
-
-<!-- toc -->
+* Table of Content
+{:toc}
 
 ## Introduction
+
+There are times when you may want to alter or augment the functionality of DOCman to suit a specific need in a given situation.
+Perhaps you want to send an email when a document is uploaded. Maybe you want add some data to the list of documents before
+it gets rendered to the screen. Whatever you would like to do is possible with Plugins and our Event driven architecture.
 
 DOCman is a Nooku Framework powered extension and as such, has access to a powerful, yet simple event architecture. Almost ANY action in DOCman can have an event listener registered against it. Not only that, but multiple listeners can be registered for a single event.
 
@@ -35,7 +38,7 @@ A plugin consists of at least 2 files, a PHP class and an XML descriptor.
 
 This is what our _bare bones_ plugin manifest file should look like. 
 
-```xml
+{% highlight xml %}
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="2.5" type="plugin" group="docman">
     <name>DOCman Document Plugin</name>
@@ -47,7 +50,7 @@ This is what our _bare bones_ plugin manifest file should look like.
         <filename plugin="document">document.php</filename>
     </files>
 </extension>
-```
+{% endhighlight %}
 We've made our `group` attribute "docman" because we are altering the data from DOCman. The system will make sure that this group of plugins is loaded whenever a DOCman event is broadcast. Also for the sake of illustration, we have named our plugin `document` in 
 
 `<filename plugin="document">document.php</filename>` 
@@ -57,14 +60,15 @@ However, you are free to name your plugin anything you like.
 ## PHP Class
 
 The class that matches our new manifest starts out looking something like
-```php
+
+{% highlight php %}
 <?php
 class PlgDocmanDocument extends PlgKoowaSubscriber{}
-```
+{% endhighlight %}
 
 ### Basic Example Method
 
-```php
+{% highlight php %}
 <?php
 class PlgDocmanDocument extends PlgKoowaSubscriber
 {
@@ -78,8 +82,7 @@ class PlgDocmanDocument extends PlgKoowaSubscriber
         );
     }
 }
-
-```
+{% endhighlight %}
 
 Here is an event handler that we might use to help moderate document submissions. 
 We are doing two things here: 
@@ -114,30 +117,32 @@ So let's go ahead and work out what events we need to respond to:
 
 Therefore the event method names we need are:
 
-```php
+{% highlight php %}
+<?php
 class PlgDocmanDocument extends PlgKoowaSubscriber
 {
-        onAfterDocmanDocumentControllerAdd(KEventInterface $event){}
-        onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
-        onAfterDocmanDocumentControllerDelete(KEventInterface $event){}
+    onAfterDocmanDocumentControllerAdd(KEventInterface $event){}
+    onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
+    onAfterDocmanDocumentControllerDelete(KEventInterface $event){}
 }
-```
+{% endhighlight %}
 
 Pretty simple so far right?
 
 Now consider save events, these cover both add and edit (create and update), so the simplest way to have both of these methods run the same code is have one call the other.
 
-```php
+{% highlight php %}
+<?php
 class PlgKoowaDocman extends PlgKoowaSubscriber
 {
-        onAfterDocmanDocumentControllerAdd(KEventInterface $event)
-        {
-            return $this->onAfterDocmanDocumentControllerEdit($event);
-        }
-        onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
-        onAfterDocmanDocumentControllerDelete(KEventInterface $event){}
+    onAfterDocmanDocumentControllerAdd(KEventInterface $event)
+    {
+        return $this->onAfterDocmanDocumentControllerEdit($event);
+    }
+    onAfterDocmanDocumentControllerEdit(KEventInterface $event){}
+    onAfterDocmanDocumentControllerDelete(KEventInterface $event){}
 }
-```
+{% endhighlight %}
 
 Now, let's flesh out the edit event.
 
@@ -147,7 +152,8 @@ First things first; we need to get the document that was added/edited. This is c
 
 Secondly we need to get the `description` field of the document entity that we're going to check for the keywords.
 
-```php
+{% highlight php %}
+<?php
 public function onAfterDocmanDocumentControllerEdit(KEventInterface $event)
 {
     //The result of the controller action is stored in the "result" property
@@ -155,7 +161,7 @@ public function onAfterDocmanDocumentControllerEdit(KEventInterface $event)
     //The row contains properties that map to the database table columns
     $description = $row->description;
 }
-```
+{% endhighlight %}
 
 If you were to `var_dump($description)` or use your favorite debugger you should find that it contains the value of the `description` field.
 
@@ -163,31 +169,37 @@ If you were to `var_dump($description)` or use your favorite debugger you should
 
 Once we have the description, we can do some simple regular expression matches on it to extract the year and the author:
 
-```php
+{% highlight php %}
+<?php
 public function onAfterDocmanDocumentControllerEdit(KEventInterface $event)
 {
     //The result of the controller action is stored in the "result" property
     $row = $event->result;
+    
     //The row contains properties that map to the database table columns
     $description = $row->description;
+    
     //You can now do anything you want with the data, for example look for certain keywords
     $year = $author = null;
     if(preg_match('#{year:([\s0-9]*)}#', $description, $match)){
         $year = trim($match[1]);
     }
+    
     //Or get the author?
     if(preg_match('#{author:([\s\w]*)}#', $description, $match)){
         $author = trim($match[1]);
     }
+    
     //Now do some custom query to store these values, perhaps store in a table using $row->id as an index?
     if($year){
         //Do something
     }
+    
     if($author){
         //Do something
     }
 }
-```
+{% endhighlight %}
 
 Simple as that :)
 

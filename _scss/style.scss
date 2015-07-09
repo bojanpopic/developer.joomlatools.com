@@ -1,0 +1,27 @@
+// Vendor variable overrides
+$border-box-sizing: false; // Used by bourbon/neat
+
+// Vendor
+@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
+@import "../bower_components/neat/app/assets/stylesheets/neat";
+@import "../bower_components/illusion/sass/illusion";
+
+@import "utilities/variables";
+@import "../bower_components/shared.joomlatools.com/files/scss/_variables";
+@import "utilities/accessibility";
+
+@import "atoms/a";
+@import "atoms/blockquote";
+@import "atoms/body";
+@import "atoms/code";
+@import "atoms/headings";
+@import "atoms/table";
+@import "molecules/highlight";
+@import "organisms/page";
+@import "utilities/skiplink";
+@import "utilities/syntax";
+
+// The Joomlatools header and footer
+@import "../bower_components/shared.joomlatools.com/files/scss/_joomlatools";
+
+@import "shame";

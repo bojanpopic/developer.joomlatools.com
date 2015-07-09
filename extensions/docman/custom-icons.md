@@ -1,4 +1,12 @@
-# Custom Icons in DOCman
+---
+layout: default
+title: Custom Icons
+---
+
+* Table of Content
+{:toc}
+
+## Introduction
 
 When we released the stable 2.0 releases of our extensions we introduced an icon font to display all our icons. If you need to change the icons that we chose it’s possible to override them. To follow this tutorial you need a good understanding of CSS and templating/overriding in Joomla.
 
@@ -6,7 +14,7 @@ The first part of this tutorial shows you how to change your frontend icons. The
 
 ![Select icon](https://farm6.staticflickr.com/5593/15135621962_f947e74be7_o.png)
 
-## 1. Changing DOCman Document Icons in the Front End
+## Changing DOCman Document Icons in the Front End
 
 There are three ways to get your own custom icons in DOCman:
 
@@ -14,11 +22,11 @@ There are three ways to get your own custom icons in DOCman:
 2. [by using background images ](#2-using-background-images)
 3. [by using a custom icon font](#3-using-a-custom-icon-font)
 
-### 1. Upload custom icons
+### Upload custom icons
 
 This technique is described in detail [on our blog](http://blog.joomlatools.com/2014/10/how-to-get-your-own-custom-icons-to-docman.html).
 
-### 2. Using background images
+### Using background images
 
 In this second technique we are going to override the default icons. This will change all icons on your website at once. It’s no longer possible to use the icons we picked since we’re using / overriding the existing markup.
 
@@ -26,7 +34,7 @@ If you’re feeling old school or if you need to use icons with multiple colors 
 
 Currently we are using the following classes for our 9 base icons:
 
-```css
+{% highlight css %}
 .koowa_icon--archive
 .koowa_icon--audio
 .koowa_icon--default
@@ -36,7 +44,7 @@ Currently we are using the following classes for our 9 base icons:
 .koowa_icon--pdf
 .koowa_icon--spreadsheet
 .koowa_icon--video
-```
+{% endhighlight %}
 
 These are the 9 icons you can find in the image below from left to right. We are using the :before [pseudo](http://coding.smashingmagazine.com/2011/07/13/learning-to-use-the-before-and-after-pseudo-elements-in-css/) element to display the icons:
 
@@ -51,28 +59,30 @@ To start with clean classes you need to add some CSS to your website. If you’r
 
 We recommend creating a new icons.css stylesheet because every time you update your template there’s a chance you will remove your style declarations contained within the master template css file. This way all you will need to do is repeat steps 3 & 4 to bring back your new icons.
 
-**Protostar Template Example**
+#### Protostar Template Example
 
 If you use Protostar you could search for the following line in the index.php file
 
-```php
+{% highlight php %}
+<?php
 $doc->addStyleSheet('templates/'.$this->template.'/css/template.css');
-```
+{% endhighlight %}
 
 And right below add this line:
 
-```php
+{% highlight php %}
+<?php
 $doc->addStyleSheet( 'templates/' . $this->template . '/icons.css' );
-```
+{% endhighlight %}
 
 That will load your icons.css file into the template. Now add the following lines of code to your icons.css file:
 
-```css
+{% highlight css %}
 .koowa [class^="koowa_icon--"]:before,
 .koowa [class*=" koowa_icon--"]:before {
   content: " ";
 }
-```
+{% endhighlight %}
 
 By adding these lines we are telling the template to clear the content property by only showing a space instead. We do this because the icon font uses this content property to define which icon has to be showed. We added the body element before our class name so our new styles will always be more important than the original ones. This makes sure we won’t get any conflicts. **This is how the default DOCman icon styling is overridden.**
 
@@ -84,7 +94,7 @@ Now the only way to use images as icons is by using an image background.
 
 There’s actually only one property you have to add per class in order for this to work. Just add the correct image file path to each separate class using the background-image property like so:
 
-```css
+{% highlight css %}
 .koowa .koowa_icon--archive:before {
   background-image: url("images/custom_docman_icons/my_archive_icon.png");
 }
@@ -92,9 +102,9 @@ There’s actually only one property you have to add per class in order for this
 .koowa .koowa_icon--audio:before {
   background-image: url("images/custom_docman_icons/my_audio_icon.png");
 }
-```
+{% endhighlight %}
 
-**Guidance on choosing your icon image**
+#### Guidance on choosing your icon image
 
 1. You preferably want to work with transparent PNG files since they can be used on any background color.
 2. The icon area is either 16x16 pixels, 24x24 pixels or 48x48 pixels so make sure your image is at least 48x48 pixels.
@@ -103,9 +113,9 @@ There’s actually only one property you have to add per class in order for this
 
 Note: You can also use larger images like 600x600 pixels but this will drastically slow down your website. We recommend using a maximum width and height of 96 pixels.
 
-**An example of a finished icon overwrite using images**
+#### An example of a finished icon overwrite using images
 
-```css
+{% highlight css %}
 .koowa [class^="koowa_icon--"]:before,
 .koowa [class*=" koowa_icon--"]:before {
   content: " ";
@@ -146,7 +156,7 @@ Note: You can also use larger images like 600x600 pixels but this will drastical
 .koowa .koowa_icon--video:before {
   background-image: url("images/custom_docman_icons/my_video_icon.png");
 }
-```
+{% endhighlight %}
 
 ### 3. Using a Custom Icon Font
 
@@ -178,9 +188,9 @@ Just like in the image technique we are going to use the existing class names an
 
 Download the font that you created and unzip the file. Within this file you will find a couple of files and folders. Be sure to copy all the fonts from the "fonts" folder and add these files to your template. If you are using the “Protostar” template you could (for example) add the font files to:
 
-```
+{% highlight vim %}
 templates > protostar > fonts
-```
+{% endhighlight %}
 
 To start with clean classes you need to add some CSS to your website. If you’re using a free or commercial template and want to be able to update your template in the future we strongly recommend you to create a separate icons.css file instead of adding this css to the template main stylesheet. So how do you do that?
 
@@ -191,35 +201,35 @@ To start with clean classes you need to add some CSS to your website. If you’r
 
 We recommend creating a new icons.css stylesheet because every time you update your template there’s a chance you will remove your style declarations contained within the master template css file. This way all you will need to do is repeat steps 3 & 4 to re-instate your new icons.
 
-**Protostar Template Example**
+#### Protostar Template Example
 
 If you use Protostar you could search for the following line in the index.php file
 
-```php
+{% highlight php %}
 $doc->addStyleSheet('templates/'.$this->template.'/css/template.css');
-```
+{% endhighlight %}
 
 And right below add this line:
 
-```php
+{% highlight php %}
 $doc->addStyleSheet( 'templates/' . $this->template . '/icons.css' );
-```
+{% endhighlight %}
 
 That will load your icons.css file into the template.
 
 Next open the style.css file (contained within the root of the icon font zip you downloaded) and copy the contents and paste them in your icons.css file:
 
-[joomla] > templates > protostar > icons.css
+```[joomla] > templates > protostar > icons.css```
 
 Now we’ve got to update the CSS style declarations to match those used by DOCman. Look for the area that starts with "[class^=".
 
-```css
+{% highlight css %}
 [class^="icon-"], [class*=" icon-"] {
-```
+{% endhighlight %}
 
 This line has to be changed to the following:
 
-```css
+{% highlight css %}
 body .koowa .koowa_icon--default:before,
 body .koowa .koowa_icon--image:before,
 body .koowa .koowa_icon--video:before,
@@ -229,11 +239,11 @@ body .koowa .koowa_icon--pdf:before,
 body .koowa .koowa_icon--audio:before,
 body .koowa .koowa_icon--document:before,
 body .koowa .koowa_icon--spreadsheet:before {
-```
+{% endhighlight %}
 
 So the revised style declaration should now look something like this:
 
-```css
+{% highlight css %}
 body .koowa .koowa_icon--default:before,
 body .koowa .koowa_icon--image:before,
 body .koowa .koowa_icon--video:before,
@@ -253,31 +263,31 @@ body .koowa .koowa_icon--spreadsheet:before {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-```
+{% endhighlight %}
 
 Next we have to manually link the codes in the "content" property to the class names we are using. The codes in the “content:” property are characters from the “Private Use Area of Unicode”. Using these characters make sure that screen readers won’t read single Latin characters but just ignore the characters instead. These codes are usually generated by the tool you used to create the icon font. More information about this can be found on the [icomoon.io docs page](http://icomoon.io/#docs).
 
 We want to use the existing class names. But we need to add the new characters to them. So let’s say you’ve got the following class in your css file (that comes with the font) to represent the "image" icon:
 
-```css
+{% highlight css %}
 .icon-camera:before {
     content: "\e601";
 }
-```
+{% endhighlight %}
 
 To actually make this work you should change it to:
 
-```css
+{% highlight css %}
 .koowa .koowa_icon--image:before {
     content: "\e601";
 }
-```
+{% endhighlight %}
 
 The important part here is that the "content" property doesn’t get changed. You have to do this manually for all 9 icons.
 
-**An example of a finished icon overwrite (icons.css) using a font**
+#### An example of a finished icon overwrite (icons.css) using a font
 
-```css
+{% highlight css %}
 @font-face {
   font-family: 'icomoon';
   src:url('fonts/icomoon.eot');
@@ -345,7 +355,7 @@ body .koowa .koowa_icon--spreadsheet:before {
 .koowa .koowa_icon--spreadsheet:before {
   content: "\e608";
 }
-```
+{% endhighlight %}
 
 ## 2. Adding Custom Icons to the Administrator
 
@@ -359,11 +369,11 @@ To make things a little bit easier we’re just going to use the same file we al
 
 1. Download the administrator template index.php file
 2. locate the line that starts with a piece of code that looks like this:
-```php
+{% highlight php %}
 $doc->addStyleSheet('templates/' . $this->template ….
-```
+{% endhighlight %}
 3. Add the following line right below (replacing [your template] with protostar for example):
-```php
+{% highlight php %}
 $doc->addStyleSheet(JURI::root().'templates/[your template]/icons.css');
-```
+{% endhighlight %}
 4. Upload the index.php file and you should be good to go.

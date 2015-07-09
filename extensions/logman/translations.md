@@ -1,4 +1,12 @@
-#Translations
+---
+layout: default
+title: Translations
+---
+
+* Table of Content
+{:toc}
+
+## Introduction
 
 LOGman provides a simple yet powerful system for translating activity messages, leveraged through our own translator which sits on top of Joomla's translation system.
 
@@ -10,21 +18,21 @@ Activity messages typically follow the form:
 
 Each part of the above message contains variable parts and constant parts. Let us examine which parts are likely to change between each activity message and which parts remain constant:
 
-**Variables**
+### Variables
 
 * John Doe
 * deleted
 * article
 * Frequently Asked Questions
 
-**Constants**
+### Constants
 
 * the
 * with
 * the
 * title
 
-LOGman's activity message translations are not that different from regular Joomla! translations. They also have a key and a value. For example, the translation for the above message is:
+LOGman's activity message translations are not that different from regular Joomla translations. They also have a key and a value. For example, the translation for the above message is:
 
 	KLS_ACTOR_ACTION_OBJECTTYPE_TITLE_OBJECT="{actor} {action} the {object.type} with the title {object}"
 
@@ -37,7 +45,7 @@ Using the above example, the variables would be mapped accordingly:
 * {object.type} = article
 * {object} = Frequently Asked Questions
 
-##How does it work?
+## How does it work?
 
 LOGman has specially constructed translation strings that can be customized for different languages, actions and resources.
 
@@ -69,7 +77,7 @@ If we would like to use the previous example for article resources only, then we
 	
 By specifying the action and the object type in the key, the translation has been made more specific. This means that it will only get used for activities where articles get created.
 
-##Other languages
+## Other languages
 
 The same technique may be employed while translating activity messages to other languages, as this allows for changing the static components (words) of the translation key values for a given translation. Let’s switch to Spanish:
 
@@ -87,9 +95,9 @@ Some message parameters such as {action} can also be translated by adding transl
 
 Not all parameters on keys are translatable (providing a key for each article title wouldn’t make sense). This is internally defined by each activity object.
 
-When translating each variable our translator will first look up for `KLS_` prefixed keys. If none is found, non-prefixed keys (without the `KLS_` prefix) will be used if defined. This is useful for re-using Joomla! core translations and overriding them if needed.
+When translating each variable our translator will first look up for `KLS_` prefixed keys. If none is found, non-prefixed keys (without the `KLS_` prefix) will be used if defined. This is useful for re-using Joomla core translations and overriding them if needed.
 
-##Context translations
+## Context translations
 
 Sometimes the translation of a given word will depend upon the context of a message. Take the following translation as example:
 
@@ -103,7 +111,7 @@ The problem with the phrase above is that it is slightly grammatically incorrect
 
 	Carlos borró el grupo de usuarios con el título Clientes
 
-The translation of the word `user` in Spanish is `usuario`. This value is provided by the `USER` translation key defined in Joomla! core translations. The `{object.subtype}` placeholder gets replaced with this value. However, instead of `usuario` (singular) we should have `usuarios` (plural).
+The translation of the word `user` in Spanish is `usuario`. This value is provided by the `USER` translation key defined in Joomla core translations. The `{object.subtype}` placeholder gets replaced with this value. However, instead of `usuario` (singular) we should have `usuarios` (plural).
 
 This is where context translations become useful. They provide a way to force translations in a given context.
 
@@ -123,8 +131,8 @@ However, if the `object.type` variable was linkable or contained special formatt
 
 As a rule of thumb, always favor context translations over hardcoded variable translations in cases like this.
 
-##How to translate?
+## How to translate?
 
-Translating activity messages to another language is just a matter of providing a LOGman language file for the desired language, just as it is done with any regular Joomla! extension.
+Translating activity messages to another language is just a matter of providing a LOGman language file for the desired language, just as it is done with any regular Joomla extension.
 
 As always, a great starting point is to use the English language translations file that is provided with LOGman.

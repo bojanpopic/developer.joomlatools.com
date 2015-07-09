@@ -1,4 +1,12 @@
-# Template System
+---
+layout: default
+title: Template System
+---
+
+* Table of Content
+{:toc}
+
+## Introduction
 
 Joomlatools extension templates expose unparalleled flexibility and power. What follows is a high level overview of the structures
 we use so that you can better understand what's happening in each layout.
@@ -6,7 +14,7 @@ we use so that you can better understand what's happening in each layout.
 <a name="example-template"></a>
 To start lets consider the following example component view template, named `default.html.php`:
 
-```html
+{% highlight html %}
 <?= helper('behavior.koowa'); ?>
 <div id="example-template">
 <h1><?= translate('Example Title') ?></h1>
@@ -24,7 +32,7 @@ To start lets consider the following example component view template, named `def
 <style>
  .control select option:selected { color: red }
 </style>
-```
+{% endhighlight %}
 
 >This file gets loaded following the same rules as regular Joomla layouts. Get some more details
  in [Overrides](overrides.md)
@@ -39,9 +47,9 @@ Partials are a great way of separating layouts into manageable chunks. They are 
 their own, or included within another layout. We do this with the `import` template function. You saw an example of this above
 with the line that looks like:
 
-```php
+{% highlight php %}
 <?= import('default_list.html'); ?>
-```
+{% endhighlight %}
 **Note:** `<?=` is short for `<?php echo`, which gets replaced when the template is compiled.
 
 The `default_list.html` in this case is the name of the template file itself without the `php` file extension. The above
@@ -51,11 +59,11 @@ method will attempt include a file called `default_name.html.php` from the same 
 
 When using `import()`, a second argument can be supplied to pass additional variables to the included partial. For example:
 
-```php
+{% highlight php %}
 <?= import('default_list.html', array(
-        'title' => translate('This is my list')
-        )) ?>
-```
+    'title' => translate('This is my list')
+    )) ?>
+{% endhighlight %}
 
 This will create a variable in the partial called `$title` with a value of `This is my list` in the imported template. In addition,
  any variables that exist in the parent layout will be automatically be passed through to the partial.
@@ -85,9 +93,9 @@ The Framework comes packaged with several helpers, including but not limited to:
 
 Helpers are invoked using the `helper` [template function](#functions). That function can take two arguments and a example could look something like:
 
-```php
-<?=  helper('com://site/acme.template.helper.foo.bar', array('of' => 'options'));
-```
+{% highlight php %}
+<?= helper('com://site/acme.template.helper.foo.bar', array('of' => 'options'));
+{% endhighlight %}
 
 The first argument is a **required** string that is the helper's Object Identifier with a method name concatenated on the end with a period (.)
 
@@ -106,7 +114,8 @@ Our example helper call looks for the following class and tries to fire the `bar
 
 <a name="myhelper"></a>
 
-```php
+{% highlight php %}
+<?php
 /**
  * file would be located at components/com_acme/template/helper/foo.php
  */
@@ -121,7 +130,7 @@ class ComAcmeTemplateHelperFoo extends KTemplateHelperAbstract
            return '<div>'. $config->of .'</div>';
     }
 }
-```
+{% endhighlight %}
 If that class is not found the system looks for an appropriately named substitute in the `template/helper` fallback hierarchy:
 
  1. `com_acme/template/helper/foo.php` => `ComAcmeTemplateHelperFoo`
@@ -132,9 +141,9 @@ A helper identifier can take on the form of a fully qualified identifier as abov
 of the helper is used with the concatenated method. Hence, if we are working on a template in `com_acme` the following command will
 produce the same result as the previous example:
 
-```php
+{% highlight php %}
 <?=  helper('foo.bar', array('of' => 'options')); // Write Less Code
-```
+{% endhighlight %}
 The template engine assumes that the helper's identifier is `com://site/acme.template.helper.foo`.
 
 In this case the system assumes that your helper classes are located somewhere in the `template/helper` fallback
@@ -145,12 +154,12 @@ hierarchy:
 3. `libraries/koowa/library/template/helper`
 
 In our [example template](#example-template) in the introduction you saw us use this line of code in our example:
-```php
+{% highlight php %}
 <?= helper('listbox.category_id', array(
         'identifier'=>'com://site/acme.model.foos',
         'id' => 'category_select'
     )) ?>
-```
+{% endhighlight %}
 That call looks for the `listbox` helper and tries to invoke the `category_id` method of its interface. If there is not
 a `com_acme/template/helper/listbox.php` the system will load `libraries/koowa/components/com_koowa/template/helper/listbox.php`
 instead and then pass along the array of configuration options to the method.
@@ -212,16 +221,16 @@ For URLs in a layout that follow this form, Joomlatools relies on the use of ano
 `http://` scheme, relevant domain and path information for that resource.
 
 Above, we used the following to get a javascript file into the head of the page.
-```html
+{% highlight html %}
   <ktml:script src="media://com_acme/js/foo.js" />
-  ```
+{% endhighlight %}
 
 That `media://` scheme specification, gets replaced with the current URL for the media folder, i.e. `http://joomla.dev/media/`. In
 combination with the `ktml:script` tag, the final result gets added to the head in the form:
 
-```html
+{% highlight html %}
 <script type="text/javascript" src="http://joomla.dev/media/com_acme/js/foo.js"></script>
-```
+{% endhighlight %}
 There also `base://` and `root://` url schemes which load the `base` url and `root` url of your application, respectively.
 
 [**Version**](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/template/filter/version.php)

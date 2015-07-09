@@ -1,8 +1,16 @@
-#Joomla! components
+---
+layout: default
+title: Joomla components
+---
 
-By utilizing Joomla's event system, third party components built on top of Joomla! can be easily integrated with LOGman. 
+* Table of Content
+{:toc}
 
-*For information on integrating a component within the Joomla! event system, please refer to the [Plugin](http://docs.joomla.org/Plugin) and [Events](http://docs.joomla.org/Plugin/Events) Joomla! guides.*
+## Introduction
+
+By utilizing Joomla's event system, third party components built on top of Joomla can be easily integrated with LOGman. 
+
+*For information on integrating a component within the Joomla event system, please refer to the [Plugin](http://docs.joomla.org/Plugin) and [Events](http://docs.joomla.org/Plugin/Events) Joomla guides.*
 
 Once an application makes use of Joomla's event system, you can go ahead and create a plugin that listens for events and then notifies LOGman of the event.
 
@@ -36,12 +44,12 @@ With this in mind, let us re-develop the Newsfeeds LOGman plugin for logging new
 
 The first step is to create a `newsfeeds.php` file in the `plugins/logman/newsfeeds` directory. The file should contain the following content inside:
 
-```php
+{% highlight php %}
 <?php
-	class PlgLogmanNewsfeeds extends ComLogmanPluginJoomla
-	{
-	}
-```
+class PlgLogmanNewsfeeds extends ComLogmanPluginJoomla
+{
+}
+{% endhighlight %}
 
 Congratulations! you have just created your first LOGman plugin!.
 
@@ -57,16 +65,17 @@ Unfortunately, at this stage, the plugin will not be logging anything. We need t
 
 Add the following code inside the class:
 
-```php
-    protected function _initialize(KObjectConfig $config)
-    {
-        $config->append(array(
-            'resources' => array('newsfeed')
-        ));
+{% highlight php %}
+<?php
+protected function _initialize(KObjectConfig $config)
+{
+    $config->append(array(
+        'resources' => array('newsfeed')
+    ));
 
-        parent::_initialize($config);
-    }
-``` 
+    parent::_initialize($config);
+}
+{% endhighlight %}
 
 We have just changed the way the plugin initializes itself. By specifying resources in the config object we are telling the plugin which resources we are interested on. We are basically specifying the context we are interested on.
 
@@ -78,12 +87,13 @@ Out of the box, the plugin will guess two pieces of information that it needs to
 
 In the case of our example, the newsfeeds name can be grabbed using the `name` property. Because of this, we need to add the following piece of code in our plugin:
 
-```php
-    protected function _getNewsfeedObjectData($data, $event)
-    {
-        return array('id' => $data->id, 'name' => $data->name);
-    }
-```
+{% highlight php %}
+<?php
+protected function _getNewsfeedObjectData($data, $event)
+{
+    return array('id' => $data->id, 'name' => $data->name);
+}
+{% endhighlight %}
 
 The `_getNewsfeedObjectData` method gets called for getting the newsfeed data that will be passed to LOGman for logging the activity. The `$data` argument is the data passed to the event handler, i.e. the newsfeed object. The `$event` argument is a string containing the name of the event. The method should return an array containing at the very least the `id` and the `name` of the resource. Additionally, a `metadata` field can be provided with additional data that may be used for rendering activities. This field must contain an associative array of metadata.
 
@@ -106,20 +116,21 @@ As mentioned above, the base **ComLogmanPluginJoomla** class also provides suppo
 
 As with our previous example, under some circumstances all will work out of the box. However, sometimes the plugin needs a bit of help for figuring it out.
 
-For logging state changes, the plugin needs to know the name of the Joomla! table class that defines the event object, a.k.a the resource. By default this is assumed to be `JTable{Resource}`. This is needed because unfortunately, the `onContentChangeState` event only provides the IDs of the resources which state is changing. Otherwise speaking, we need to load the resources ourselves in order to get the activity data to be logged.
+For logging state changes, the plugin needs to know the name of the Joomla table class that defines the event object, a.k.a the resource. By default this is assumed to be `JTable{Resource}`. This is needed because unfortunately, the `onContentChangeState` event only provides the IDs of the resources which state is changing. Otherwise speaking, we need to load the resources ourselves in order to get the activity data to be logged.
 
 In our example, the Table class being used for newsfeeds resources is **NewsfeedsTableNewsfeed**. For telling the plugin which table class to use we must override the **_getItems** method using the following code block:
 
-```php
-	protected function _getItems($ids, $config)
-    {
-        $config->append(array(
-            'prefix' => 'NewsfeedsTable'
-        ));
+{% highlight php %}
+<?php
+protected function _getItems($ids, $config)
+{
+    $config->append(array(
+        'prefix' => 'NewsfeedsTable'
+    ));
 
-        return parent::_getItems($ids, $config);
-    }
-```
+    return parent::_getItems($ids, $config);
+}
+{% endhighlight %}
 
 The table class name is constructed with two variables that get passed to the **_getItems** method, `prefix` and `name`. In this case we are telling the getter method that `prefix` is `NewsfeedsTable`. By default, `name` corresponds to the resource name, i.e. **Newsfeed**, which is exactly what we need. Otherwise, `'name' => {name}` should be appended to the config object along with the prefix. By concatenating both (`prefix` + `name`), the getter is able to determine the class name, **NewsfeedsTableNewsfeed** for this example.
 
@@ -131,35 +142,36 @@ The previous section walked you through the process of creating a basic LOGman p
 
 All we need to do for listening to any event is to add a handler for it, i.e. a plugin method, to our plugin:
 
-```php
-	public function on{EventName}($arg1, $arg2, ...)
-	{
-		$this->log(
-			array(
-				'object' => array(
-					'package'  => {package},
-					'type'     => {type},
-					'id'       => {id},
-					'name'     => {name},
-					'metadata' => {metadata}
- 				),
-				'verb'   => {verb},
-				'actor'  => {actor},
-				'result' => {result}			
-			)
-		);
-	}
-```
+{% highlight php %}
+<?php
+public function on{EventName}($arg1, $arg2, ...)
+{
+    $this->log(
+        array(
+            'object' => array(
+                'package'  => {package},
+                'type'     => {type},
+                'id'       => {id},
+                'name'     => {name},
+                'metadata' => {metadata}
+            ),
+            'verb'   => {verb},
+            'actor'  => {actor},
+            'result' => {result}			
+        )
+    );
+}
+{% endhighlight %}
 
 where `{EventName}` is the name of the event we want to listen to. As an example, if we would like to listen to the **onUserLogin** event, our event handler must look like:
 
-```php
-    public function onUserLogin($user, $options = array())
-    {
-    	...
-    }
-
-```
+{% highlight php %}
+<?php
+public function onUserLogin($user, $options = array())
+{
+    ...
+}
+{% endhighlight %}
 
 For logging an activity the handler must issue a **log** call with some activity data. Part of this data is mandatory, the rest is of course optional. Let us start with the mandatory fields:
 
