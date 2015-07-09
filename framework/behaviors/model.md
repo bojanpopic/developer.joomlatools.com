@@ -1,4 +1,7 @@
-#Model Behaviors
+---
+layout: default
+title: Model
+---
 
 The ability to separate out strategies for building queries and models states helps to simplify model code. It also provides a number of opportunities to affect the input and the output of a given model at runtime.
 
@@ -6,9 +9,10 @@ Like all Framework behaviors, Model behaviors get fired before and after each ma
 
 Getting to know what the core framework behaviors do is part of the learning curve of using Nooku. The content of the Model `$_state` is coupled to the contents of a request coming down the chain from the dispatcher to the controller. The principal work of the model to take those values are relevant to it, building queries based on them and return that result. The model needs to explicitly identify values are relevant to it by `inserting` them into the state. By encapsulating all that work into different behaviors a model definition can become very short:
 
-```php
-class ComAcmeModelBars extends KModelDatabase {
-
+{% highlight php %}
+<?php
+class ComAcmeModelBars extends KModelDatabase 
+{
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
@@ -16,10 +20,9 @@ class ComAcmeModelBars extends KModelDatabase {
         ));
         parent::_initialize($config);
     }
-
-
 }
-```
+{% endhighlight %}
+
 That example has all of the Model behaviors that exist as part of the Framework and we describe them in brief below.
 
 + [Indexable](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/model/behavior/indexable.php#L16) Gets the index information from the associated table's schema and populates the state with those columns, and automatically builds the where part of the query based on those states.

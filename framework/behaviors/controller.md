@@ -1,4 +1,7 @@
-# Controller Behaviors
+---
+layout: default
+title: Controller
+---
 
 The core Controller package does a great job with handling the standard Browse, Read, Edit, Add and Delete (BREAD) requests and the action of rendering of those requests. Each of those expose before and after command chains, and we use a number of behaviors out of the box to augment Controller functionality and interface.
 

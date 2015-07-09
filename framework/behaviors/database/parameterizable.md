@@ -1,4 +1,12 @@
-# Parameterizable
+---
+layout: default
+title: Parameterizable
+---
+
+* Table of Content
+{:toc}
+
+## Introduction
 
 There is sometimes a need to store more than one value in a table column as a serialized string of some kind. Maybe each record in the table has different configuration settings, or maybe you simply require flexibility in data storage without the need, or in many cases, the ability to add columns to your table to hold individual pieces of data. With storage, you also want retrieval; you'll need to decode that data to use it in your application.
 
@@ -6,13 +14,9 @@ The Framework provides for both storing and retrieval of item level configuratio
 
 <!-- The Framework solves the problem of allowing custom fields in its components by providing a database behavior called Parameterizable: -->
 
-
-
 By making use of the [`KFilter`](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/libraries/filter) classes and `KConfigFormat` this behavior handles the saving and retrieving of non-normalized data in a given format.
 
 We take a walk through some of the related objects and classes to give you some insight on how this behavior works.
-
-<!-- toc -->
 
 ## Formats
 
@@ -40,7 +44,9 @@ Extending KObjectConfig provides a nice uniform interface for working with the d
 ## Using a Custom Column
 
 The column that gets used to store this data is specified in the objects configuration, and the default is 'parameters'.
-```php
+
+{% highlight php %}
+<?php
 class ComAcmeDatabaseBehaviorParameterizable extends KDatabaseParameterizable
 {
 	function _initialize(KObjectConfig $config)
@@ -51,7 +57,7 @@ class ComAcmeDatabaseBehaviorParameterizable extends KDatabaseParameterizable
 		parent::_initialize($config);
 	}
 }
-```
+{% endhighlight %}
 
 Parameters can actually be stored in any column of appropriate type (i.e. not `int` or `date`, but can be `text`, `blob` or `varchar`, etc). The class takes a `column` configuration option so we can tie this behavior to a column other than `parameters`.
 
@@ -61,20 +67,22 @@ For example, a column name like `config` or `settings` will be dealt with in the
 > **Did you know? **
 > You can also the Nooku Framework bootstrapper to configure this object and not even have to create the class. By creating a resources/config/bootstrapper.php file in your component and adding the following:
 
-```php
- return array(
-		 'identifiers' => array(
-			'com://site/acme.database.behavior.parameterizable =>
-				array('column' => 'settings')
-		)
+{% highlight php %}
+<?php
+return array(
+ 'identifiers' => array(
+    'com://site/acme.database.behavior.parameterizable =>
+        array('column' => 'settings')
+    )
 );
-```
+{% endhighlight %}
 
 ### KFilter and Formats
 
 A column format is defined either by the presence of a filter assigned to that column; or, if none is assigned, by the `type` actually defined in the  database schema for the column itself.
 
-```php
+{% highlight php %}
+<?php
 class ComAcmeDatabaseTableBars extends KDatabaseTableAbstract
 {
 	function _initialize(KObjectConfig $config)
@@ -86,7 +94,7 @@ class ComAcmeDatabaseTableBars extends KDatabaseTableAbstract
 		parent::_initialize($config);
 	}
 }
-```
+{% endhighlight %}
 
 For the Parameterizable behavior to do its work, the column to be used in  **must** have a valid format from above associated with it. The filter gets used by the behavior to make sure that the information gets written to the column in the right format. And since we filtered it using this format to store it, we must use the same format to unserialize the data and push it into the KObjectConfig object.
 
@@ -104,11 +112,13 @@ In the `Acme` extension `Bars` table we defined above, the `parameter` column ha
 
 When looking to interact with a row object's parameters we want to make sure that the "parameterizable" database behavior is present in that row's table. So we ask first:
 
-```php
+{% highlight php %}
+<?php
 if($bar->isParameterizable()) {
      $params =   $bar->getParameters();
 }
-```
+{% endhighlight %}
+
 This is good practice. If the behavior exists its **mixable** methods get added to the `$bar` row object's interface, which is why we can call `getParameters` . There is a risk of getting a fatal error if the behavior is not present in some context.
 
 In some of the examples above we have alluded to using a custom column name in the behavior, like `settings` or `config`, instead of the default `parameters`. If you do use a custom column, a method which is similar to `getParameters` be exposed for that column as well via PHP magic __call method. The column name `settings` yields callable `getSettings` in the row object's interface, and if `config` were used, `getConfig` would be callable too. 

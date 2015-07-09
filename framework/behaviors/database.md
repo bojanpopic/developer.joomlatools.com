@@ -1,4 +1,7 @@
-## Database Behaviors
+---
+layout: default
+title: Database
+---
 
 Utilizing database behaviors lets us create [Trigger](http://en.wikipedia.org/wiki/Database_trigger) like procedures in our applications, without having to store them with the database. They provide a means to contextually affect change both before and after `select`, `insert`, `update` and `delete` actions performed in the database layer.
 
