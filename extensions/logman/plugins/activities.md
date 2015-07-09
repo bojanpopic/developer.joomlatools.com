@@ -1,4 +1,12 @@
-# Activities
+---
+layout: default
+title: Activities
+---
+
+* Table of Content
+{:toc}
+
+## Introduction
 
 In LOGman, activity objects fully adhere to the [Activity Streams specification](http://activitystrea.ms/) by implementing the **ComActivitiesActivityInterface**. Through this interface, activities effectively expose data to the outer world.
 
@@ -14,12 +22,12 @@ For convenience, an activity override per component can also be defined, i.e. if
 
 Let us create our first activity override class. If we would like to create an activity override for a `bar` resource of our `foo` component we would add the following contents inside the `plugins/logman/foo/activity/bar.php` file:
 
-```php
+{% highlight php %}
 <?php
-	class PlgLogmanFooActivityBar extends ComLogmanModelEntityActivity
-	{
-	}
-```
+class PlgLogmanFooActivityBar extends ComLogmanModelEntityActivity
+{
+}
+{% endhighlight %}
 
 We have successfully told LOGman to use our own activity object instead of the default **ComLogmanModelEntityActivity** class. Each time an activity from a `bar` resource of the `foo` component gets loaded by LOGman, this is the activity class that will get used.
 
@@ -29,16 +37,17 @@ The activity format defines the text layout that is used for rendering activity 
 
 These layouts can be defined during instantiation:
 
-```php
-    protected function _initialize(KObjectConfig $config)
-    {
-        $config->append(
-        	array('format' => '{actor} {action} {object.type} title {object}'
-        );
-        
-        parent::_initialize($config);
-	}    
-```
+{% highlight php %}
+<?php
+protected function _initialize(KObjectConfig $config)
+{
+    $config->append(
+        array('format' => '{actor} {action} {object.type} title {object}'
+    );
+    
+    parent::_initialize($config);
+}    
+{% endhighlight %}
 
 The `{actor} {action} {object.type} title {object}` string is what we call a short format. Short formats contain tokens (with {} placeholders) and constants (like the word title in our previous example).
 
@@ -110,13 +119,14 @@ The base activity object getters make calls to `_{object}Config` methods (where 
 
 Let us assume that in our `bar` activity override, the main activity object URL is being wrongly set. Not a problem, we just need to change/override the way the URL property gets set in the configuration object. For this we would need to add the following code in our activity override class:
 
-```php
-	protected function _objectConfig(KObjectConfig $config)
-	{
-		$config->append(array('url' => 'option=com_foo&view=bar&id=' . $activity->row));
-		parent::_objectConfig($config);
-	}
-```
+{% highlight php %}
+<?php
+protected function _objectConfig(KObjectConfig $config)
+{
+    $config->append(array('url' => 'option=com_foo&view=bar&id=' . $activity->row));
+    parent::_objectConfig($config);
+}
+{% endhighlight %}
 
 That's it, just a couple of lines and we are all set.
 
@@ -135,41 +145,43 @@ If the the `objectName` property is set, the **_getObject** method will automati
 
 Let us suppose that we would like to add an additional dot property to the object activity object of our `bar` activity override. We do this as follows:
 
-```php
-	protected function _objectConfig(KObjectConfig $config)
-	{
-		$config->append(
-			array(
-				'bar' => array(
-					'object'     => true,
-					'objectName' => 'Howdy'
-				)
-			)
-		)
-	}
-```
+{% highlight php %}
+<?php
+protected function _objectConfig(KObjectConfig $config)
+{
+    $config->append(
+        array(
+            'bar' => array(
+                'object'     => true,
+                'objectName' => 'Howdy'
+            )
+        )
+    )
+}
+{% endhighlight %}
 
 By only providing a `bar` property which contains an array with its `object` key set to true, the object getter will automatically know that `bar` is supposed to be an activity object. The object getter will take care of instantiating it as such, just like it would with any other object. This means that all of the exposed above also applies to nested objects. Even better, there is no limit on how many objects can be nested:
 
-```php
-	protected function _objectConfig(KObjectConfig $config)
-	{
-		$config->append(
-			array(
-				'foo' => array(
-					'object'     => true,
-					'objectName' => 'This is Foo',
-					'bar' => array(
-						'object' => true,
-						'objectName' => 'This is Bar inside Foo'
-						'url' => 'option=bar&view=bars',
-						'find' => 'bar'
-					)
-				)
-			)
-		)
-	}
-```
+{% highlight php %}
+<?php
+protected function _objectConfig(KObjectConfig $config)
+{
+    $config->append(
+        array(
+            'foo' => array(
+                'object'     => true,
+                'objectName' => 'This is Foo',
+                'bar' => array(
+                    'object' => true,
+                    'objectName' => 'This is Bar inside Foo'
+                    'url' => 'option=bar&view=bars',
+                    'find' => 'bar'
+                )
+            )
+        )
+    )
+}
+{% endhighlight %}
 
 If we make a call like `$this->getActivityObject()->foo->bar` we get ourselves an activity object. Nice uh?. As mentioned above, a `displayName` will get set for both `foo` and `bar` objects using their corresponding `objectName` properties. You are of course free to change that by providing your own `displayName` properties. Their `displayName` properties will also get translated by default unless a `translate` property is provided for each of them with either a list of properties or their values set to false. We have also told the object getter to perform a search for `bar` on the the `bar` object configuration. This will internally trigger a call to `_findObjectBar` (if such a method exists) and set the deleted and url properties of the `bar` object accordingly.
 
@@ -184,19 +196,20 @@ If we take a closer look at the  **ComActivitiesModelEntityActivity::_findObject
 
 Let us suppose that in our hypothetical `com_foo` component, our `bar` resources get stored in a database table called `bars`. The identity column of this table is `bar_id`. If this is the case, then we would setup the above finder properties as follows:
 
-```php
-    protected function _initialize(KObjectConfig $config)
-    {
-        $config->append(
-        	array(
-            	'object_table'  => 'bars',
-            	'object_column' => 'bar_id',
-        	)
-        );
+{% highlight php %}
+<?php
+protected function _initialize(KObjectConfig $config)
+{
+    $config->append(
+        array(
+            'object_table'  => 'bars',
+            'object_column' => 'bar_id',
+        )
+    );
 
-        parent::_initialize($config);
-    }
-```
+    parent::_initialize($config);
+}
+{% endhighlight %}
 
 The object finder will now be able to determine if a given `bar` resource referenced in an activity record still exists.
 
@@ -216,20 +229,21 @@ Activity messages that get rendered by LOGman, are usually assigned an icon to e
 
 For changing the value of this property, we just need to override the **getPropertyImage** method inside the activity override class:
 
-```php
-	public function getPropertyImage()
-    {
-    	$images = array('walk' => 'icon-walk', 'run' => 'icon-run' , 'sit' => 'icon-sit');
-    	
-    	$image = 'icon-default';
-    	
-    	if (in_array($this->verb, array_keys($images))) {
-    		$image = $images[$this->verb];    	
-    	}
-    	
-    	return $image;
+{% highlight php %}
+<?php
+public function getPropertyImage()
+{
+    $images = array('walk' => 'icon-walk', 'run' => 'icon-run' , 'sit' => 'icon-sit');
+    
+    $image = 'icon-default';
+    
+    if (in_array($this->verb, array_keys($images))) {
+        $image = $images[$this->verb];    	
     }
-```
+    
+    return $image;
+}
+{% endhighlight %}
 
 An icon is often assigned to a given activity action, but you could perfectly assign one icon to all of the activities of a given resource and/or component. This is left to the implementer's discretion.
 
@@ -242,17 +256,18 @@ As an example, adding new activity objects is a breeze. Let's assume that our `b
 
 We can extend the activity by just adding a `baz` activity object to it. First we provide a getter for the object:
 
-```php
-	public function getActivityBaz()
-	{
-		$config = new KObjectConfig();
-	
-		// Set the baz activity object configuration
-		...
-		
-		return $this->_getObject($config);
-	}
-```
+{% highlight php %}
+<?php
+public function getActivityBaz()
+{
+    $config = new KObjectConfig();
+
+    // Set the baz activity object configuration
+    ...
+    
+    return $this->_getObject($config);
+}
+{% endhighlight %}
 
 Easy right?. Setting the object's configuration is nothing more than setting the data of the activity object we are creating. In this case, we are setting data from a `baz` related resource. This data may be grabbed from the activity row itself (possibly stored in the metadata property) or it can be queried directly from the database table holding `baz` rows. Anything works, this all depends on the implementation of the component being integrated, and whether or not the information is made available in the activities table.
 
@@ -266,13 +281,14 @@ which may translate to:
 	
 For the object to be renderable on JSON activity streams, we need the activity to be aware of this new object. We can easily do so by specifying this at instantiation time:
 
-```php
-	protected function _initialize(KObjectConfig $config)
-	{
-		$config->append(array('objects' => array('baz')));
-		parent::_initialize($config);
-	}
-```
+{% highlight php %}
+<?php
+protected function _initialize(KObjectConfig $config)
+{
+    $config->append(array('objects' => array('baz')));
+    parent::_initialize($config);
+}
+{% endhighlight %}
 
 By appending `baz` to the objects array, we are effectively telling the activity that we are adding a `baz` object. The `baz` activity object will now get displayed as part of the activity on JSON activity streams. JSON activity streams can be accessed by appending *&format=json&layout=stream* to the URL query.
 

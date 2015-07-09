@@ -1,8 +1,11 @@
 #!/bin/bash
 BRANCH="staging"
+DATASOURCE="http://support.joomlatools.xxx"
 
 ROOT="/var/www/developer.joomlatools.xxx"
 TMP_CLONE="/tmp/developer.joomlatools.xxx"
+
+source /etc/profile # Make sure RVM can be found
 
 while read oldrev newrev REF
 do
@@ -12,22 +15,10 @@ do
         git clone -b $BRANCH "$ROOT/git" $TMP_CLONE
 
         cd $TMP_CLONE
+        rm -f Gemfile
 
-        echo "Installing Gitbook plugins .."
-        gitbook install ./
-
-        echo "Building Gitbook site .."
-        gitbook build
-        STATUS=$?
-
-        if test $STATUS -eq 0
-        then
-            echo "Moving built site to $ROOT/public .."
-            rm -rf "$ROOT"/public/*
-            mv ./_book/* "$ROOT/public/"
-        else
-	        echo "Build failed!"
-        fi
+        echo "Building Jekyll site into $ROOT/public .."
+        jekyll build -d "$ROOT/public" --config _config.yml,"$ROOT/private/_config.yml"
 
         echo "Cleaning up .."
         cd /tmp
