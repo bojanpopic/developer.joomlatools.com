@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Activity API
+title: Activities
 ---
 
 * Table of Content
