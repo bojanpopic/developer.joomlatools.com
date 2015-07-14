@@ -8,7 +8,7 @@ title: Custom Parameters
 
 ## Goal
 
-There are times when you need to be able to store and display additional information about for your documents. This tutorial explains how you can custom fields to a document. You will:
+There are times when you need to be able to add custom parameters to your documents. This tutorial explains how you can do so.. You will learn how to :
 
 + add a ‘price’ field to a document form, in the site and administrator
 + display the price information on the frontend, in the document list and details view
@@ -54,7 +54,7 @@ Then, copy the **document** form:
 > `/administrator/components/com_docman/views/document/tmpl/default.html.php` **&#8594;** `/administrator/templates/isis/html/com_docman/document/default.html.php`  
 
 
-Because the backend of your website is used to edit and configure documents, the `default.html.php` layout is a form.
+Note : Because the backend of your website is used to edit and configure documents, the `default.html.php` layout contains the html form to edit your document.
 
 ### 2. Edit the document form templates
 
@@ -73,7 +73,7 @@ Then place the following code somewhere inside the `<form>` tag in each file.
         <label class="control-label">
                  <?= translate('Price'); ?>
          </label>
-        <div class=""controls"">
+        <div class="controls">
             <input required name="parameters[price]" value="<?= $document->getParameters()->price ?>" type="text"/>
         </div>
     </div>
@@ -98,16 +98,21 @@ Finally, open both your new frontend document display overrides
 Place the following markup wherever you would like to show the price.
 
 ```html
-<? if ($document->isParameterizable()  && $price = $document->getParameters()->price): ?>
+<? if ($document->isParameterizable()  && isset($document->getParameters()->price)): ?>
  <span class="label">
 	<?= translate('Price'); ?>
 </span>
 <span>
-	<?= $price ?>
+	<?= $document->getParameters()->price ?>
 </span>
 <? endif; ?>
 ```
 
+## In closing
+
+With these steps you have learned how you can add pricing, or any other type of information, to your documents. 
+
+You have learned a little about the `parameters` property, and the `getParameters` and `isParameterizable` methods of the `$document` entity object. Finally, you found out how to make use of them in both a form and in displaying that information to your users by using template overrides. 
 
 ## Relevant Resources
 
@@ -133,3 +138,5 @@ Major concepts and classes in the functioning of the Parameterizable database be
 + [Template System](../framework/template-system.md)
 + [Parameterizable Database Behavior](../framework/database-behavior-parameterizable.md)
 + <a href="http://jqueryvalidation.org/"  target="_blank">jquery.validator.js</a>
+
+
