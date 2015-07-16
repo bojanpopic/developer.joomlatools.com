@@ -2,7 +2,6 @@
 layout: default
 title: Custom Parameters
 ---
- ![Custom Price Field in DOCman](/resources/images/custom-field-in-document-end-result.png)
 
 * Table of Content
 {:toc}
@@ -14,8 +13,8 @@ There are times when you need to be able to add custom parameters to your docume
 + add a ‘price’ field to a document form, in the site and administrator
 + display the price information on the frontend, in the document list and details view
 
+![Custom Price Field in DOCman](/resources/images/custom-field-in-document-end-result.png)
 
-<!-- toc -->
 
 ## Solution
 
