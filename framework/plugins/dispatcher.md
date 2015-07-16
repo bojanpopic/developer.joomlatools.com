@@ -10,7 +10,7 @@ The HTTP dispatcher ([`KDispatcherHttp`](https://github.com/nooku/nooku-framewor
 		
 `_actionHead, _actionOptions, _actionGet, _actionPost, _actionPut, _actionDelete` and `_actionRedirect`		
 		
-That means our `Acme` component dispatcher, i.e. `com://site/acme.dispatcher.http` would have **before** and **after** events published for each of these eleven actions. Therefore, our  `Acme` component automatically broadcasts another twenty-two events.
+The end result is that our `Acme` component dispatcher, i.e. `com://site/acme.dispatcher.http` would have **before** and **after** events published for each of these eleven actions. That means that the `Acme` component automatically broadcasts another twenty-two events.
   
 
 ## Extended `PlgAcmeExample`		
