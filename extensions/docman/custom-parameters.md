@@ -65,7 +65,7 @@ Open both of your new document editing layouts:
 
 Then place the following code somewhere inside the `<form>` tag in each file.
 
-```html
+{% highlight php %}
 <? // Price ?>
 <? if ($document->isParameterizable()): ?>
 <div class="docman_grid">
@@ -79,8 +79,7 @@ Then place the following code somewhere inside the `<form>` tag in each file.
     </div>
 </div>
 <? endif; ?>
-```
-
+{% endhighlight %}
 
 **A note on validation**
 
@@ -97,7 +96,7 @@ Finally, open both your new frontend document display overrides
 
 Place the following markup wherever you would like to show the price.
 
-```html
+{% highlight php %}
 <? if ($document->isParameterizable()  && isset($document->getParameters()->price)): ?>
  <span class="label">
 	<?= translate('Price'); ?>
@@ -106,7 +105,7 @@ Place the following markup wherever you would like to show the price.
 	<?= $document->getParameters()->price ?>
 </span>
 <? endif; ?>
-```
+{% endhighlight %}
 
 ## In closing
 
