@@ -2,6 +2,7 @@
 layout: default
 title: Custom Parameters
 ---
+ ![Custom Price Field in DOCman](/resources/images/custom-field-in-document-end-result.png)
 
 * Table of Content
 {:toc}
@@ -22,7 +23,7 @@ To add pricing information about documents and then display that information to 
 
 >The [Framework Template System](../framework/template-system.md) topical guide is a nice primer on templates and template overrides in general.
 
-> There is also deeper background about using custom columns in your own components available in the [Framework Parameterizable](../framework/database-behavior-parameterizable.md) guide.
+<!-- There is also deeper background about using custom columns in your own components available in the [Framework Parameterizable](../framework/database-behavior-parameterizable.md) guide.-->
 
 ### 1. Create the template overrides
 
@@ -110,23 +111,16 @@ Place the following markup wherever you would like to show the price.
 
 ## In closing
 
-With these steps you have learned how you can add pricing, or any other type of information, to your documents. 
-
-You have learned a little about the `parameters` property, and the `getParameters` and `isParameterizable` methods of the `$document` entity object. Finally, you found out how to make use of them in both a form and in displaying that information to your users by using template overrides. 
+In this tutorial you learned how you can add custom fields to your documents. You also learned  about the `Parameterizable` table behavior and the `getParameters` and `isParameterizable` methods of the $document entity object.
 
 ## Relevant Resources
-
+<!-- wait until done
 ### Background
 
 [Parameterizable](framework/database-behavior-parameterizable.md)
 
 Major concepts and classes in the functioning of the Parameterizable database behavior.
-
-### Classes and Methods
-
-+ [KDatabaseBehaviorParameterizable::getParameters()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/behavior/parameterizable.php#L68)
-+ [KDatabaseRowAbstract::__call()](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/row/abstract.php#L628)
-
+-->
 ### Files
 
 + components/com_docman/view/document/tmpl/document.html.php
@@ -136,7 +130,5 @@ Major concepts and classes in the functioning of the Parameterizable database be
 ### Reading
 
 + [Template System](../framework/template-system.md)
-+ [Parameterizable Database Behavior](../framework/database-behavior-parameterizable.md)
+<!--+ [Parameterizable Database Behavior](../framework/database-behavior-parameterizable.md)-->
 + <a href="http://jqueryvalidation.org/"  target="_blank">jquery.validator.js</a>
-
-
