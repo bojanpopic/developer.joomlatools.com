@@ -32,14 +32,15 @@ You need to create three (3) template overrides for the frontend of your website
 
 Create a new folder in your template's `/html/` folder called `com_docman`. If you use the protostar template this will look like:
 
->`/templates/protostar/html/com_docman/document/`
+> `/templates/protostar/html/com_docman/document/`
 
 Into this new folder copy the **document** detail layouts:
->`/components/com_docman/views/document/tmpl/document.html.php` **&#8594;** `/templates/protostar/html/com_docman/document/document.html.php` 
->`/components/com_docman/views/document/tmpl/default.html.php` **&#8594;** `/templates/protostar/html/com_docman/document/default.html.php`
+
+> `/components/com_docman/views/document/tmpl/document.html.php` **&#8594;** `/templates/protostar/html/com_docman/document/document.html.php` 
+> `/components/com_docman/views/document/tmpl/default.html.php` **&#8594;** `/templates/protostar/html/com_docman/document/default.html.php`
 
 Then the **form** layout: 
->`/components/com_docman/views/document/tmpl/form.html.php` **&#8594;** `/templates/protostar/html/com_docman/document/form.html.php` 
+> `/components/com_docman/views/document/tmpl/form.html.php` **&#8594;** `/templates/protostar/html/com_docman/document/form.html.php` 
 
 ####**Back-end**
 
@@ -47,7 +48,7 @@ You will want to be able to edit pricing information in the backend as well. The
 
 In a similar step you just did for the frontend, create a new folder:
 
->`/administrator/templates/isis/html/com_docman/document`
+> `/administrator/templates/isis/html/com_docman/document`
  
 Then, copy the **document** form:
 
