@@ -119,6 +119,7 @@ In this tutorial you learned how you can add custom fields to your documents. Yo
 
 Major concepts and classes in the functioning of the Parameterizable database behavior.
 -->
+
 ### Files
 
 + components/com_docman/view/document/tmpl/document.html.php
