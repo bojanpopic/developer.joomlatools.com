@@ -109,7 +109,7 @@ Place the following markup wherever you would like to show the price.
 
 ## In closing
 
-In this tutorial you learned how you can add custom fields to your documents. You also learned  about the `Parameterizable` table behavior and the `getParameters` and `isParameterizable` methods of the $document entity object.
+In this tutorial you learned how you can add custom fields to your documents. You also learned  about the `Parameterizable` table behavior and the `getParameters` and `isParameterizable` methods of the `$document` entity object.
 
 ## Relevant Resources
 <!-- wait until done
