@@ -37,9 +37,11 @@ Create a new folder in your template's `/html/` folder called `com_docman`. If y
 Into this new folder copy the **document** detail layouts:
 
 > `/components/com_docman/views/document/tmpl/document.html.php` **&#8594;** `/templates/protostar/html/com_docman/document/document.html.php` 
+
 > `/components/com_docman/views/document/tmpl/default.html.php` **&#8594;** `/templates/protostar/html/com_docman/document/default.html.php`
 
 Then the **form** layout: 
+
 > `/components/com_docman/views/document/tmpl/form.html.php` **&#8594;** `/templates/protostar/html/com_docman/document/form.html.php` 
 
 ####**Back-end**
