@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Template System
+title: Templates
 ---
 
 * Table of Content
