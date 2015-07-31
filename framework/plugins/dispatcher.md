@@ -1,16 +1,18 @@
-# Dispatcher Plugin Events
+---
+layout: default
+title: Dispatcher Event Handlers
+---
 
 ## Introduction
 
-In the [Plugins topical guide](/framework/plugins.md) the focus was on the MVC layer of a component using `com_acme` as an example. For each MVC triad there are twenty-two plugin events that get broadcast via the Event API. 
+In the [Plugins topical guide](/framework/plugins.md) the focus was on the MVC layer of a component using `com_acme` as an example. For each MVC triad there are twenty-two plugin events that get broadcast via the Event API.
 
-However, there are another twenty-two plugin events that a plugin can tap into. Each Framework powered component has a dispatcher that acts as a bridge between the MVC and the Joomla dispatching process which gets used before the MVC layer is touched. 
+However, there are another twenty-two plugin events that a plugin can tap into. Each Framework powered component has a dispatcher. That structure acts as a bridge between the MVC and the Joomla dispatching process. In effect, the dispatcher fires before the MVC layer gets touched.
 
 [`KDispatcherAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/abstract.php#L16) is a special instance of [`KControllerAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/abstract.php#L16). This means its `_action` methods also get exposed through the Events API. 		
 		
 `KDispatcherAbstract` has four action methods:		
 		
-
 |method|description|
 |:---------|:---------------|
 |[`_actionDispatch`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/abstract.php)| Loads the controller and executing the right action on the controller. |
@@ -25,7 +27,8 @@ The HTTP dispatcher ([`KDispatcherHttp`](https://github.com/nooku/nooku-framewor
 		
 `_actionHead, _actionOptions, _actionGet, _actionPost, _actionPut, _actionDelete` and `_actionRedirect`		
 		
-The end result is that the `Acme` component dispatcher, i.e. `com://site/acme.dispatcher.http` has **before** and **after** events published for each of these eleven actions. That means that the `Acme` component automatically broadcasts another twenty-two events.
+The end result is that the Acme component dispatcher, i.e. `com://site/acme.dispatcher.http` has before and after events published for each of these eleven actions. That means that the Acme component broadcasts another twenty-two events.
+
   
 ## `PlgAcmeExample` with a Dispatcher Event Handler
 
@@ -43,4 +46,8 @@ class PlgAcmeExample extends PlgKoowaSubscriber
 }
 {% endhighlight %}
 
-The example above shows the `PlgAcmeExample` with a new event handler to be fired **before** the dispatch action is executed, and so effects every POST that comes to the component, no matter what entity the input is meant for.  
+The example above shows the `PlgAcmeExample` with a new event handler. It will fire **before** the **com_acme dispatcher** **post** action gets executed.
+The naming convention is close to the MVC listeners, but there is no entity: 
+
+on + [Before] + [Acme] + [Dispatcher] + [Post] 
+
