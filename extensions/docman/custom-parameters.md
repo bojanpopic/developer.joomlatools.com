@@ -19,7 +19,7 @@ There are times when you need to be able to add custom parameters to your docume
 
 To add pricing information about documents and then display that information to users you need to create a series of template overrides, and use a special property of the of the document entity called `parameters`.
 
->The [Framework Template System](../framework/template-system.md) topical guide is a nice primer on templates and template overrides in general.
+>The [Framework Template System](/framework/template-system.html) topical guide is a nice primer on templates and template overrides in general.
 
 ### 1. Create the template overrides
 
@@ -82,7 +82,7 @@ Then place the following code somewhere inside the `<form>` tag in each file.
 
 **A note on validation**
 
-Our forms get the validation javascript behavior [helper](/framework./template-system.md#helpers) loaded with a call to `<?= helper('behavior.validation') ?>`. Specifically, in the `form_scripts.html.php` (frontend) and `default.html.php` (backend) layout files.  This means you have enhanced validation for your form inputs. Note that in our example we've added the `required` attribute to the `parameters[price]` field.
+Our forms get the validation javascript behavior [helper](/framework/template-system.html#helpers) loaded with a call to `<?= helper('behavior.validation') ?>`. Specifically, in the `form_scripts.html.php` (frontend) and `default.html.php` (backend) layout files.  This means you have enhanced validation for your form inputs. Note that in our example we've added the `required` attribute to the `parameters[price]` field.
 
 Have a look through the [jQuery Validator plugin documentation](http://jqueryvalidation.org/documentation/) for more information. 
 
