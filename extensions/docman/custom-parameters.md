@@ -118,5 +118,5 @@ In this tutorial you learned how you can add custom fields to your documents. Yo
 
 ### Reading
 
-+ [Template System](../framework/template-system.html)
++ [Template System](/framework/template-system.html)
 + <a href="http://jqueryvalidation.org/">jquery.validator.js</a>
