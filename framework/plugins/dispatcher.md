@@ -1,17 +1,15 @@
 ---
 layout: default
-title: Dispatcher Event Handlers
+title: Dispatcher Events
 ---
 
 ## Introduction
 
-In the [Plugins topical guide](/framework/plugins.md) the focus was on the MVC layer of a component using `com_acme` as an example. For each MVC triad there are twenty-two plugin events that get broadcast via the Event API.
+Until now the focus was on the MVC layer of a component using `com_acme` as an example. For each MVC triad there are twenty-two plugin events that get broadcast via the Event API.
 
-However, there are another twenty-two plugin events that a plugin can tap into. Each Framework powered component has a dispatcher. That structure acts as a bridge between the MVC and the Joomla dispatching process. In effect, the dispatcher fires before the MVC layer gets touched.
-
-[`KDispatcherAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/abstract.php#L16) is a special instance of [`KControllerAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/controller/abstract.php#L16). This means its `_action` methods also get exposed through the Events API. 		
-		
-`KDispatcherAbstract` has four action methods:		
+However, there are another twenty-two plugin events that a plugin can tap into. Each Framework powered component has a dispatcher. The dispatcher acts as a [component front controller](https://en.wikipedia.org/wiki/Front_Controller_pattern). It routes the request to the correct controller, which then handles it form there.
+			
+[`KDispatcherAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/abstract.php#L16) has four action methods:		
 		
 |method|description|
 |:---------|:---------------|
@@ -23,14 +21,31 @@ However, there are another twenty-two plugin events that a plugin can tap into. 
 
 <!--`_actionDispatch, _actionForward, _actionFail,` and `_actionSend`		-->
 		
-The HTTP dispatcher ([`KDispatcherHttp`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php)), which extends from that abstract, adds seven more actions. The majority of these correspond to HTTP methods:		
-		
-`_actionHead, _actionOptions, _actionGet, _actionPost, _actionPut, _actionDelete` and `_actionRedirect`		
-		
-The end result is that the Acme component dispatcher, i.e. `com://site/acme.dispatcher.http` has before and after events published for each of these eleven actions. That means that the Acme component broadcasts another twenty-two events.
+The HTTP dispatcher (KDispatcherHttp) adds seven more actions. The majority of these correspond to HTTP methods:
 
+|method|description|
+|:---------|:---------------|
+|[`_actionHead`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php#L204)|Respond to request with headers only|
+|[`_actionOptions`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php#L341)|Respond with HTTP verbs allowed by controller for the authenticated user|	
+|[`_actionGet`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php#L171)|Execute the GET request against the right controller|
+|[`_actionPost`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php#L225P)|Interpret the POST request to determine the right non-safe action to take, i.e. `add`, `edit`, `delete` |
+|[`_actionPut`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php#L275)|Results in an `add` or `edit` action being called on the controller.|	
+|[`_actionDelete`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php#L321)|Handles the request made with DELETE HTTP method. Will execute `delete` on the controller.|
+|[`_actionRedirect`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php#L152)|Handles redirection after dispatching is complete, of if called from another dispatcher method|
+		
   
 ## `PlgAcmeExample` with a Dispatcher Event Handler
+
+Your plugin can control how any Joomlatools component handles the actions described above. A few example uses: 
+
++ component wide access control
++ HTTP method restriction
++ request logging
++ override all controller redirects
+
+You should use the dispatcher event handlers only when you want to effect a component wide process. If you wish to alter a process for a specific entity, use one of the MVC event handlers.       
+
+Here is the `PlgAcmeExample` with a new event handler. It checks that any POST request coming into `com_acme` has a `foo` variable before allowing the dispatcher to continue. 
 
 {% highlight php %} 
 class PlgAcmeExample extends PlgKoowaSubscriber
@@ -46,8 +61,7 @@ class PlgAcmeExample extends PlgKoowaSubscriber
 }
 {% endhighlight %}
 
-The example above shows the `PlgAcmeExample` with a new event handler. It will fire **before** the **com_acme dispatcher** **post** action gets executed.
-The naming convention is close to the MVC listeners, but there is no entity: 
+Note: The naming convention is close to the MVC listeners, but there is no entity: 
 
 on + [Before] + [Acme] + [Dispatcher] + [Post] 
 
