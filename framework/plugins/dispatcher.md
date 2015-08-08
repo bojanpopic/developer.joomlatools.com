@@ -7,9 +7,9 @@ title: Dispatcher Events
 
 Until now the focus was on the MVC layer of a component using `com_acme` as an example. For each MVC triad there are twenty-two plugin events that get broadcast via the Event API.
 
-However, there are another twenty-two plugin events that a plugin can tap into. Each Framework powered component has a dispatcher. The dispatcher acts as a [component front controller](https://en.wikipedia.org/wiki/Front_Controller_pattern). It routes the request to the correct controller, which then handles it form there.
+However, there are another twenty-two plugin events that a plugin can tap into. Each component has a dispatcher. The dispatcher acts as a [component front controller](https://en.wikipedia.org/wiki/Front_Controller_pattern). It routes the request to the correct controller, which then handles it form there.
 			
-[`KDispatcherAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/abstract.php#L16) has four action methods:		
+The abstract dispatcher [`KDispatcherAbstract`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/abstract.php#L16) has four action methods:		
 		
 |method|description|
 |:---------|:---------------|
@@ -21,7 +21,7 @@ However, there are another twenty-two plugin events that a plugin can tap into. 
 
 <!--`_actionDispatch, _actionForward, _actionFail,` and `_actionSend`		-->
 		
-The HTTP dispatcher (KDispatcherHttp) adds seven more actions. The majority of these correspond to HTTP methods:
+The HTTP dispatcher [`KDispatcherHttp`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/dispatcher/http.php) adds seven more actions which correspond to the HTTP methods:
 
 |method|description|
 |:---------|:---------------|
@@ -43,7 +43,7 @@ Your plugin can control how any Joomlatools component handles the actions descri
 + request logging
 + override all controller redirects
 
-You should use the dispatcher event handlers only when you want to effect a component wide process. If you wish to alter a process for a specific entity, use one of the MVC event handlers.       
+You should use the dispatcher event handlers only when you want to effect a component when it's being dispatched. If you wish to intercept an event for a specific entity, use one of the MVC event handlers.       
 
 Here is the `PlgAcmeExample` with a new event handler. It checks that any POST request coming into `com_acme` has a `foo` variable before allowing the dispatcher to continue. 
 
