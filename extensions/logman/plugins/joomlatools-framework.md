@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Nooku components
+title: Joomlatools Framework components
 ---
 
 * Table of Content
@@ -8,9 +8,9 @@ title: Nooku components
 
 ## Introduction
 
-Joomla components built on top of the [Nooku Framework](http://www.nooku.org) can also be easily integrated with LOGman.
+Joomla components built on top of the [Joomlatools Framework](/framework.html) can also be easily integrated with LOGman.
 
-For logging activities of Nooku powered components, we just need to wire activity loggers to the controllers performing the actions that we want to log. This may be 
+For logging activities of Joomlatools Framework powered components, we just need to wire activity loggers to the controllers performing the actions that we want to log. This may be 
 achieved by using LOGman plugins.
 
 To better illustrate all this, let us work on a LOGman plugin for logging DOCman documents activities.
@@ -28,7 +28,7 @@ class PlgLogmanDocman extends ComLogmanPluginKoowa
 }
 {% endhighlight %}
 
-Here we are extending **ComLogmanPluginKoowa**, which is the base plugin class for integrating Nooku components. This plugin makes sure that the component controllers become loggable, i.e. it attaches the loggable behavior to each controller that we would like to integrate. The loggable behavior is also preset with one or more loggers by the plugin.
+Here we are extending **ComLogmanPluginKoowa**, which is the base plugin class for integrating Joomlatools Framework components. This plugin makes sure that the component controllers become loggable, i.e. it attaches the loggable behavior to each controller that we would like to integrate. The loggable behavior is also preset with one or more loggers by the plugin.
 
 Next step is to tell the plugin which DOCman controller we would like log actions from, and define the logger that will be responsible for logging activities for this controller. We can do this by adding the following code:
 
@@ -65,7 +65,7 @@ $config->append(
 );          
 {% endhighlight %}
 
-The first `actions` parameter defines the events (we call these commands in Nooku) on which the logger will attempt to log activities. The second `title_column` parameter is a list of properties to test against the activity object for determining its title.
+The first `actions` parameter defines the events (we call these commands in Joomlatools Framework) on which the logger will attempt to log activities. The second `title_column` parameter is a list of properties to test against the activity object for determining its title.
 
 The base logger will basically log add, edit and delete actions from your controllers, assuming that the activity object title is stored on either a `title` or `name` property. If this is the case, the base logger will work for you as is. You may use the base logger along with your controller by initializing the plugin as follows:
 

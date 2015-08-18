@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Joomla components
+title: Joomla Framework
 ---
 
 * Table of Content

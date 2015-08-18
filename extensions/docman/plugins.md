@@ -14,7 +14,7 @@ There are times when you may want to alter or augment the functionality of DOCma
 Perhaps you want to send an email when a document is uploaded. Maybe you want add some data to the list of documents before
 it gets rendered to the screen. Whatever you would like to do is possible with Plugins and our Event driven architecture.
 
-DOCman is a Nooku Framework powered extension and as such, has access to a powerful, yet simple event architecture. Almost ANY action in DOCman can have an event listener registered against it. Not only that, but multiple listeners can be registered for a single event.
+DOCman is a Joomlatools Framework powered extension and as such, has access to a powerful, yet simple event architecture. Almost ANY action in DOCman can have an event listener registered against it. Not only that, but multiple listeners can be registered for a single event.
 
 In the majority of cases, you will want to register an event listener against a controller action. This is not a requirement though, you can also register listeners against all model, view and controller actions. 
 
@@ -91,7 +91,7 @@ We are doing two things here:
 
 Our `onBeforeDocumentControllerAdd` method follows a [specific naming convention](/framework/plugins.html#naming).
 
->Event names are built by Nooku's Event command handler, [KCommandHandlerEvent](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/command/handler/event.php#L120). 
+>Event names are built by Joomlatools Framework's Event command handler, [KCommandHandlerEvent](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/command/handler/event.php#L120). 
 
 That method reads as follows
 
