@@ -35,7 +35,7 @@ To start lets consider the following example component view template, named `def
 {% endhighlight %}
 
 >This file gets loaded following the same rules as regular Joomla layouts. Get some more details
- in [Overrides](overrides.md)
+ in [Overrides](overrides.html)
 
 This is not a great deal of code, but there is a lot going on. In this template we are making use of [Functions](#functions),
 [Helpers](#helpers), [Special Tags](#tags) and [Partials](#partials). Joomlatools components use all of
@@ -55,7 +55,7 @@ with the line that looks like:
 The `default_list.html` in this case is the name of the template file itself without the `php` file extension. The above
 method will attempt include a file called `default_name.html.php` from the same folder in which the parent files reside
 
-> The template system also applies [Template Overrides](layout-considerations.md#template-overrides) to partials.
+> The template system also applies [Template Overrides](layout-considerations.html#template-overrides) to partials.
 
 When using `import()`, a second argument can be supplied to pass additional variables to the included partial. For example:
 
