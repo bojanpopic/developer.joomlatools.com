@@ -10,8 +10,8 @@ The best way to showcase the core functionality of the Framework is to show you 
 Building a Todo management component will help get you acquainted with the fundamental concepts and some of the more advanced features
 that Joomlatools Framework provides.
 
-### Read the [Essentials](essentials.md)
+### Read the [Essentials](essentials.html)
 
-We want you get the most you can out of doing this exercise, which is why we strongly suggest that you read the [Essentials](essentials.md)
+We want you get the most you can out of doing this exercise, which is why we strongly suggest that you read the [Essentials](essentials.html)
 section of this Guide. Doing so will help you appreciate what's going on "under the hood", and can help you if you get into
 trouble.

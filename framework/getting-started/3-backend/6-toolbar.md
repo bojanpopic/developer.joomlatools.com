@@ -128,7 +128,7 @@ By illustration, we showed you how to use the `editor` helper. If you try to sav
  find that your Todo's description gets stripped of that HTML.
 
 Joomlatools Framework loads predefined column filters when dealing with your data, depending initially on the `type` we set for that column.
-For `description` we set the type to `longtext` (back in [Creating the Database](creating-the-database.md) ) and that column
+For `description` we set the type to `longtext` (back in [Creating the Database](creating-the-database.html) ) and that column
 type gets filtered as a `string` (see [KFilterString](http://api.nooku.org/class-KFilterString.html)).
 
 Since we want to allow HTML in our descriptions we'll need to let the Joomlatools Framework know that its OK to let HTML through.

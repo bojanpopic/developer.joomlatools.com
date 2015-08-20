@@ -109,7 +109,7 @@ which in the above example would be `ComKoowaControllerDefault`.
 
 That's part of the Magic.
 
->    Checkout [Naming Conventions](naming-conventions.md) to really get a handle on where your classes go.
+>    Checkout [Naming Conventions](naming-conventions.html) to really get a handle on where your classes go.
 
 So long as the class exists within the Framework, you can create an object from the identifier, and Joomlatools Framework will do the
 legwork _(and cache the result in APC for performance)_.

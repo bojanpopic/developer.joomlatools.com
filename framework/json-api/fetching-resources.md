@@ -7,7 +7,7 @@ title: Fetching Resources
 {:toc}
 
 This section provides a little guidance on how to query your new JSON api on how to:
-* [Sort](fetching-resources/sorting.md)
-* [Filter](fetching-resources/filtering.md)
-* [Paginate](fetching-resources/pagination.md)
-* [Get a Sparse Fieldset](fetching-resources/sparse-fieldset.md) (return only the fields you want).
+* [Sort](fetching-resources/sorting.html)
+* [Filter](fetching-resources/filtering.html)
+* [Paginate](fetching-resources/pagination.html)
+* [Get a Sparse Fieldset](fetching-resources/sparse-fieldset.html) (return only the fields you want).

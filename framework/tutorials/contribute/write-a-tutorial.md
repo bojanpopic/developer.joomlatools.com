@@ -6,7 +6,7 @@ title: Write a Tutorial
 Writing a tutorial for the Framework Guides is a great way to contribute to the community and solidify your own knowledge.
 We encourage you to share any accomplishments that you are proud of in Tutorial form. To help with that, we've provided the
 following formatting guide. It should help keep your submissions consistent with the rest of the tutorials and make sure
-your message gets across. To get started, check out the [Contribute](../contribute.md) page for general instructions.
+your message gets across. To get started, check out the [Contribute](../contribute.html) page for general instructions.
 
 * Table of Content
 {:toc}
@@ -24,15 +24,15 @@ You can provide your name, email and one url.
 
 ### File Name and Placement
 
-The guides and tutorials are written in Markdown and published using Gitbook. The file name will therefore need the '.md'
+The guides and tutorials are written in Markdown and published using Gitbook. The file name will therefore need the '.html'
 file extension. It should also be based on the Tutorial Title and be no more than four (4) words connected to each other with
-a hyphen '-'. Also,  the file name should not collide with any class names in the Framework, i.e. _kcontrollermodel.md_ .
+a hyphen '-'. Also,  the file name should not collide with any class names in the Framework, i.e. _kcontrollermodel.html_ .
 
-Place your tutorial in the ./tutorials directory of this book, and add the appropriate entry in the SUMMARY.md file under:
-    * [Tutorials](tutorials.md)
+Place your tutorial in the ./tutorials directory of this book, and add the appropriate entry in the SUMMARY.html file under:
+    * [Tutorials](tutorials.html)
 
 Here’s a good example based on our [Tutorial Title](#tutorial-title) from above:
-    _tutorials/building-permissable-behaviors.md_ .
+    _tutorials/building-permissable-behaviors.html_ .
 
 ### Skill Level
 

@@ -61,7 +61,7 @@ and the same in reverse.
 
 #### Controllers
 
-Controllers are always singular, this is due in part to the fact that the [BREAD](BREAD.md) actions (more on that later) refer to a
+Controllers are always singular, this is due in part to the fact that the [BREAD](BREAD.html) actions (more on that later) refer to a
 single resource type, eg, an article, or a post.
 
 Your controller classes always go in the in the `./controller` directory of your component; NOT the plural <span style="color:red">./controllers</span>.
@@ -86,7 +86,7 @@ First though, let's summarize their major characteristics:
 
 * singular or plural depending upon the view being requested.
 * generally map to a database table
-* either return multiple rows or a single row (The "B" and the "R" in [BREAD](BREAD.md), respectively ).
+* either return multiple rows or a single row (The "B" and the "R" in [BREAD](BREAD.html), respectively ).
 * have several possible format types: HTML, JSON, CSV, RSS or any others that you create yourself.
 
 Your component views go into their own folder in the  `./views` folder. The file names of the actual view classes correspond directly to the

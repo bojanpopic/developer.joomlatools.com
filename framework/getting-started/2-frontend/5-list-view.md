@@ -8,7 +8,7 @@ title: List View
 
 Your component Views are how you present your data to the world.
 
-We got you started off in the [Frontend](front-end.md) part of the tutorial by creating a file called
+We got you started off in the [Frontend](front-end.html) part of the tutorial by creating a file called
 
     /components/com_todo/view/items/tmpl/default.html.php
 

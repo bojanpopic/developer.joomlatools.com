@@ -33,7 +33,7 @@ making the "Writing Less Code" possible (See #5 below).
 ##4 Convention Over Configuration
 
 As you will see in the coming chapters, the Framework relies heavily on a set of strict conventions to provide predictability for both you (the developer)
-and the other objects in the system. Get to know the rules _(the [Naming Conventions](essentials/naming-conventions.md) section gives an excellent overview)_...
+and the other objects in the system. Get to know the rules _(the [Naming Conventions](essentials/naming-conventions.html) section gives an excellent overview)_...
 they are the "Key" to unlocking the power of Joomlatools Framework.
 
 ##5 - Write Less Code

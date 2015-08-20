@@ -47,7 +47,7 @@ class PlgAcmeExample extends PlgKoowaSubscriber
 
 The above code shows some important concepts that we'll refer to throughout in this guide, but it is non-exhaustive. We will show you how all the pieces fit together to build events dynamically in the sections to come. 
 
->For a really good specific example of building a working plugin checkout the [DOCman Plugin Tutorial](extensions/docman/plugins.md).
+>For a really good specific example of building a working plugin checkout the [DOCman Plugin Tutorial](extensions/docman/plugins.html).
 
 
 ## The MVC layer

@@ -19,7 +19,7 @@ Before doing so, replace the prefix '#__' with the prefix you chose during Jooml
 
 ## Naming Conventions Explained
 
-Have a good look at the [Essentials > Naming Conventions](/essentials/naming-conventions.md) page. There is an easy for follow section for the database side of things.
+Have a good look at the [Essentials > Naming Conventions](/essentials/naming-conventions.html) page. There is an easy for follow section for the database side of things.
 
 The name of the table is `#__todo_items`. 'todo' is the name of our component, followed by the name of the entity we want
 to store in this table which in this case is simply 'items'. This name should always be plural; a table is always a collection of items.

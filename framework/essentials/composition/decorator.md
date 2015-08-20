@@ -18,4 +18,4 @@ title: Composition
     style="width:100px; height: 30px;"
     allowTransparency="true"></iframe>
 
-Read the [Contribute](../contribute.md) page of this book for details.
+Read the [Contribute](../contribute.html) page of this book for details.
