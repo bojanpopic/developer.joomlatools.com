@@ -8,22 +8,23 @@ title: Links
 
 The links property in general is used to specify resource relationships for resource objects. In our default implementation we include the “self” relationship which shows the link that this document is in response to and the mime type of the request:
 
-{% highlight javascript %}
-    "self": {
-        href: "http://joomla.dev/component/tada?view=todos&format=json&limit=2",
-        type: "application/json; version=1.0"
-    }
+{% highlight json %}
+"self": {
+    href: "http://joomla.dev/component/tada?view=todos&format=json&limit=2",
+    type: "application/json; version=1.0"
+}
 {% endhighlight %}
-
 
 When appropriate, we also include “next” and “previous” pagination links in the section in the exact same form.
-{% highlight javascript %}
-    "next":
-    {
-        href: "http://joomla.dev/component/tada?view=todos&format=json&limit=2&offset=2",
-        type: "application/json; version=1.0"
-    }
+
+{% highlight json %}
+"next":
+{
+    href: "http://joomla.dev/component/tada?view=todos&format=json&limit=2&offset=2",
+    type: "application/json; version=1.0"
+}
 {% endhighlight %}
+
 **Remember, this happens automatically! You do not have to do anything.**
 
 You can define how your named entity will render with no problem at all. Just create a JSON view class and define a method with the form ‘_get’ + The name of your entity
