@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Custom CSS
+title: Stylesheets
 ---
 
 * Table of Content
@@ -35,7 +35,7 @@ Most often, this strategy involves editing the template’s index.php file. Simp
 
 Making it the last style reference in the head will help ensure that your customizations take precedent. You may also want to make that same change in other page level template files e.g in the component.php file so that your changes carry through to component only pages.
 
-Note : It should be noted that this method requires that you make the change again if you find the need to upgrade the template. Therefore the first method is always recommended.
+Note: It should be noted that this method requires that you make the change again if you find the need to upgrade the template. Therefore the first method is always recommended.
 
 ## Media File Locations
 
@@ -51,6 +51,4 @@ This means that all an extension’s Javascript, CSS and images can be found it�
 
 The best way to narrow down what CSS class or id to override or extend and in which file an element’s style is specified is to use your browser’s inspector implementation, e.g. Google Chrome Inspect Element functionality. This will show you the styles of the elements you want to change and in what file they can be found.
 
-There are some good tutorials out there on how to do this. For example,  here is a video tutorial on how to use Google Chrome Inspector : http://www.youtube.com/watch?v=cnWL2d9bGPk
-
-
+There are some good tutorials out there on how to do this. For example, a video tutorial on [how to use Google Chrome Inspector](http://www.youtube.com/watch?v=cnWL2d9bGPk).

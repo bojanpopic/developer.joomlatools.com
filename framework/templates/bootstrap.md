@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Bootstrap CSS
+title: Bootstrap
 ---
 
 * Table of Content
