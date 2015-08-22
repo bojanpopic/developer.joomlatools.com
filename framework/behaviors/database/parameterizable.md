@@ -3,118 +3,222 @@ layout: default
 title: Parameterizable
 ---
 
+Parameterizable is a database behavior. It allows you to define custom attributes for an entity. The behavior provides an API to get and set the attributes. Ultimately, the attributes get serialised into a single database field.
+
+This approach follows the  Entity Attribute Value (EAV) data model. The EAV pattern allows for the storing of a  flexible set of attributes about an entity. Traditionally, EAV does this by using an extra table with three columns: entity, attribute, and value. Each attribute gets its own line in that table. This approach be bulky and makes retrieving data more complicated. Parameterizable follows the EAV model, but stores the attributes along with the entity itself.
+
+This guide walks you through some of the related objects and classes.
+
 * Table of Content
 {:toc}
 
-## Introduction
 
-There is sometimes a need to store more than one value in a table column as a serialized string of some kind. Maybe each record in the table has different configuration settings, or maybe you simply require flexibility in data storage without the need, or in many cases, the ability to add columns to your table to hold individual pieces of data. With storage, you also want retrieval; you'll need to decode that data to use it in your application.
+## Using parameters
 
-The Framework provides for both storing and retrieval of item level configuration or customized inputs (custom fields) in a component's tables with a database behavior called **Parameterizable**, i.e. [`KDatabaseBehaviorParameterizable`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/behavior/parameterizable.php#L16)
 
-<!-- The Framework solves the problem of allowing custom fields in its components by providing a database behavior called Parameterizable: -->
+The Parameterizable API provides both `getParameters` and `setPropertyParameters` methods. Use them to interact with the data stored in the database column.
 
-By making use of the [`KFilter`](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/libraries/filter) classes and `KConfigFormat` this behavior handles the saving and retrieving of non-normalized data in a given format.
 
-We take a walk through some of the related objects and classes to give you some insight on how this behavior works.
+### getParameters()
 
-## Formats
+The data from the column gets unserialized and cached in the `$_parameters` property of the behavior object.  That object gets returned as a `KObjectConfig` instance in the defined format.
 
-Data stored in this way needs a **format**. There are a number of formats available for storing information in a column, and anywhere else for that matter, e.g perhaps a file. Currently the following formats are supported by the Framework:
 
-+ php  (parameters are stored as php arrays)
-+ yaml
-+ xml
-+ ini
-+ json
+Here is an example usage:
 
-These formats are mostly used to store, retrieve and encapsulate **configuration** objects, and as such, they are all available for inspection at [libraries/koowa/libraries/object/config/](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/libraries/object/config).  All of these classes extend from KConfigObject.
+{% highlight php %}
 
-## KConfigObject
+if($bar->isParameterizable()) :
 
-When we ask a row object for its `parameters` the behavior returns an object that extends from [KConfigObject](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/object/config/config.php#L19).
->KObjectConfig class plays a key role in all the major objects in the Framework. Each of them uses this object to provide for its configuration.
+	$parameters = $bar->getParameters(); // get the params
 
-In fact, we build this object based primarily on the format that the `parameters` table column is **filtered** with, and if no filter exists then the `type` attribute of the table schema. The data from that column is then injected into the object.
+endif;
+{% endhighlight %}
 
-Extending KObjectConfig provides a nice uniform interface for working with the data contained in the object no matter what format its in, with some very useful methods for doing so.
 
-> **Technical Tip:** Each `KObjectConfig[Format]` implements the `serialziable` interface and extends `KObjectConfigFormat`, and so provides the option of storing and retrieving parameters to a file.
+
+### setPropertyParameters($values)
+
+The `setPropertyParameters` merges the incoming values. Merging preserves attributes that exists already in the `$_parameters` object. Only attributes that are set in the `$values` input will be overwritten. 
+
+
+{% highlight php %}
+
+$bar->setPropertyParameters(array(‘more’ => ‘This param gets merged’, ‘foo’ => ‘This is my overridden Foo Param’));`
+
+{% endhighlight %}
+
+
+
+### Remove or set a specific attribute
+
+
+To unset a specific value, use the `KObjectConfig::remove($name)`, or `KObjectConfig::offsetUnset($name)` methods, e.g. :
+
+
+{% highlight php %}
+
+$bar->getParameters()->remove(‘foo’) ;
+
+{% endhighlight %}
+
+There are a few ways to add or set an attribute in the `$_parameters` property:
+
+
+{% highlight php %}
+
+$bar->getParameters()->offsetSet($offset, $value);
+
+$bar->getParameters()->set($name, $value)
+
+$bar->getParameters()->name = $value;
+
+{% endhighlight %}
+
+Each of these produces the exact same effect.
+
+
+### The `save` entity method
+
+The example `$bar` variable is an entity row object. `$bar->save()`  triggers either an `insert` or `update` on the `bars` table object.  Parameterizable both `_beforeInsert` and `_beforeInsert`. These handle the conversion of the `$_parameters` object to a formatted string .  That string is then stored in the `parameters` field of the database. 
+
+
+### What does isParameterizable() do ?
+
+
+
+{% highlight php %}
+
+if($bar->isParameterizable()) {
+
+   $params =   $bar->getParameters();
+
+}
+
+{% endhighlight %}
+
+The isParameterizable() method is a virtual method. The inclusion of a row object's database behaviors are all testable with this pattern: 
+
+`is`[Behaviorname] 
+
+These virtual methods all function as a result of the [`KDatabaseRowAbstract` magic `__call` method](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/database/row/abstract.php#L649). When invoked it :
+
++ checks whether the table object has the particular behavior. 
+
++ if so, it loads the behavior object at runtime 
+
++ adds the behavior's mixable methods to the row objects interface, e.g. `getParameters()`  
+
+
+If a behavior object has not been loaded and mixed in, its methods are not available. Calling `$bar->getParameters()` would result in a thrown `BadMethodCallException`.
 
 ## Using a Custom Column
 
-The column that gets used to store this data is specified in the objects configuration, and the default is 'parameters'.
+
 
 {% highlight php %}
+
 class ComAcmeDatabaseBehaviorParameterizable extends KDatabaseParameterizable
 {
-	function _initialize(KObjectConfig $config)
-	{
-		$config->append(array(
-			'column' => 'settings' // or whatever column you want!
-		));
-		parent::_initialize($config);
-	}
+
+ function _initialize(KObjectConfig $config)
+ {
+    $config->append(array(
+       'column' => 'settings' // or whatever column name you want
+    ));
+
+    parent::_initialize($config);
+ }
 }
+
 {% endhighlight %}
 
-Parameters can actually be stored in any column of appropriate type (i.e. not `int` or `date`, but can be `text`, `blob` or `varchar`, etc). The class takes a `column` configuration option so we can tie this behavior to a column other than `parameters`.
+The table column used to store the parameters gets specified in the object configuration. In the `_initialize` method, the default is 'parameters'. You are free to use any column name. In the example above the `settings` column will be used.
 
-For example, a column name like `config` or `settings` will be dealt with in the same way as `parameters`. Simply specify the column in the `_initialize` config object of a new class that extends this `KDatabaseBehaviorParameterizable` as we have done above.
-
-
-> **Did you know? **
-> You can also the Nooku Framework bootstrapper to configure this object and not even have to create the class. By creating a resources/config/bootstrapper.php file in your component and adding the following:
+A custom column name will add a new virtual `get` method to the row object's interface. This method has the same function as `getParameters`.  With the column name defined as 'settings'  you can call `getSettings`:
 
 {% highlight php %}
- return array(
-		 'identifiers' => array(
-			'com://site/acme.database.behavior.parameterizable =>
-				array('column' => 'settings')
-		)
+
+ $bar->getSettings(); // passes through to $bar->getParameters();
+
+{% endhighlight %}
+
+> Technical Tip : Use `blob` as your column type if you are storing a large amount of data. It has a much higher compression ratio than `text`.
+
+
+
+**Did you know? **
+
+You can also the Nooku Framework bootstrapper to configure the example object. In that case no specialised class for your component. Do this by creating a resources/config/bootstrapper.php file in your component and adding the following:
+
+
+
+{% highlight php %}
+
+return array(
+     'identifiers' => array(
+       'com://site/acme.database.behavior.parameterizable => array('column' => 'settings')
+    )
 );
+
 {% endhighlight %}
 
-### KFilter and Formats
 
-A column format is defined either by the presence of a filter assigned to that column; or, if none is assigned, by the `type` actually defined in the  database schema for the column itself.
+## Available Formats
+
+There are many formats available for storing information in your column. The following are currently supported by the Framework:
+
++ [php](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/object/config/php.php#L16)
+
++ [yaml](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/object/config/yaml.php#L16)
+
++ [xml](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/object/config/xml.php#L16)
+
++ [ini](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/object/config/ini.php#L16)
+
++ [json](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/object/config/json.php#L16)
+
+Note : the PHP format will store the parameters as PHP arrays.
+
+## Format
+
+The `getParameters` call returns an  [KObjectConfigFormat](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/libraries/object/config/format.php#L19) object, an extension of KObjectConfig.
+
+The format class used depends on what filter the table object has specified for that column. If no filter exists for that column then the `type` attribute of the table object’s schema.
+
+
+### Define the Column Format
+
 
 {% highlight php %}
+
 class ComAcmeDatabaseTableBars extends KDatabaseTableAbstract
 {
-	function _initialize(KObjectConfig $config)
-	{
-		$config->append(array(
-			'filters' => array('parameters'   => array('json')
-		));
-
-		parent::_initialize($config);
-	}
+ function _initialize(KObjectConfig $config)
+ {
+    $config->append(array(
+       'filters' => array('parameters'   => array('json')
+    ));
+    parent::_initialize($config);
+ }
 }
+
 {% endhighlight %}
 
-For the Parameterizable behavior to do its work, the column to be used in  **must** have a valid format from above associated with it. The filter gets used by the behavior to make sure that the information gets written to the column in the right format. And since we filtered it using this format to store it, we must use the same format to unserialize the data and push it into the KObjectConfig object.
+Column filter formats gets defined in the table object. The `filters` setting in the `$config` variable takes an array of column names. Each of these can have an array of filter formats. Those filters process data before it gets written to the table column.
 
-In the `Acme` extension `Bars` table we defined above, the `parameter` column has `KFilterJson` filter attached to it.  Hence if we set the `parameter` column of a row object to an array, that filter will take care of turning the array into a json string for database storage. When we try to retrieve the column with `getParameters()`, the method sees KFilterJson and builds and returns a KObjectConfigJson object with the data.
+Your column format gets defined by the presence of a filter assigned to that column.  If a column has no filter, the parameterizable behavior will use JSON. 
 
-### Facts
 
-+ Parameterizable asks the table object for the filter which is applied to that column, because the filter defines the format.
 
-+ Therefore to assign a desired format, we just need to tell the table object which one we want for that column.
+## Summary
 
-+ The format specified in the column's filter lets `getParameters()` know what strategy to use to pack and unpack your data.
++ Make sure that  Parameterizable gets included and mixed in with `isParameterizable`
 
-## isParameterizable()?
++ Using a custom column results in a new virtual `get` method.
 
-When looking to interact with a row object's parameters we want to make sure that the "parameterizable" database behavior is present in that row's table. So we ask first:
++ Parameterizable asks the table object for the filter which gets applied to that column. The filter or the type property of the column schema defines the format.
 
-{% highlight php %}
-if($bar->isParameterizable()) {
-     $params =   $bar->getParameters();
-}
-{% endhighlight %}
++ To define format other than JSON, set the table object filters.
 
-This is good practice. If the behavior exists its **mixable** methods get added to the `$bar` row object's interface, which is why we can call `getParameters` . There is a risk of getting a fatal error if the behavior is not present in some context.
-
-In some of the examples above we have alluded to using a custom column name in the behavior, like `settings` or `config`, instead of the default `parameters`. If you do use a custom column, a method which is similar to `getParameters` be exposed for that column as well via PHP magic __call method. The column name `settings` yields callable `getSettings` in the row object's interface, and if `config` were used, `getConfig` would be callable too. 
++ The format lets `getParameters()` know how  to serialise and unserialise your data.
