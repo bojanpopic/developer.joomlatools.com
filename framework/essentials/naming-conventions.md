@@ -1,21 +1,15 @@
 ---
 layout: default
 title: Naming Conventions
-index: 1
 ---
 
 * Table of Content
 {:toc}
 
-There are some specific naming conventions that the framework uses for its default "magic" implementation.
+The framework relies heavily on the placement of class files and naming of classes and tables. There are some specific naming conventions that the framework uses for its default "magic" implementation.
 
-Because the framework relies HEAVILY on the proper placement of class files and naming of class and naming of tables, if you
-get them wrong, you may end up scratching your head saying “why isn’t this class being included?” or "Why is my View not being shown".
-Your best, first stop in figuring out what happened to you class is to check these conventions.
-
-When we talk about Naming Conventions for classes, really, what we are describing is the work being done by the Object Manager
-in combination with the Class Locator packages of the framework. These structures help locate and load the appropriate files that
-your application is trying to use. Step through them to really get a sense of what is happening.
+The Object Manager in combination with the Class Locator packages helps locate and load the appropriate files that
+your application is trying to use.
 
 ### Library Classes
 
@@ -133,7 +127,7 @@ Following our com_foo example:
 * foo_baz_bar_id
 
 <span class="note">
-**Note**: The framework will automatically translate the primary key into a property of the name `id`. You can just refer to it as $object->id.
+**Note**: The framework will automatically translate the primary key into a property of the name `id`. You can just refer to it as `$object->id`.
 When data is requested by the model from the database, data will be returned as an entity object.
 </span>
 
