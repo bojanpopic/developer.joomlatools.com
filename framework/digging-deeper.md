@@ -43,20 +43,13 @@ Components are typically built in the MVC pattern of _Models, Views_ and _Contro
 By using HMVC (more later on the **H**) in Joomlatools Framework, your components can easily be built up from other components.  This in turn,
 allows you to maximize code reuse, and speed up your development lifecycle.
 
-**This is important**
-
-<pre>Joomlatools Framework's component architecture allows you to use other Components inside Components.
-<b>Write once use everywhere!</b></pre>
+Joomlatools Framework's component architecture allows you to use other Components inside Components. Write once use everywhere!
 
 The H of HMVC stands for hierarchical. The principle is that software applications can be built up hierarchically, through the use of composition of other self contained MVC triads. Each MVC triad is only aware of a single incoming request, to a controller, and the request is dispatched as appropriate. The following diagram should help solidify the concept:
 
 ![HMVC Triads](/resources/images/hmvc.png)
 
 The power of this concept lies in the simplicity of its implementation, small reusable blocks that make up a larger more complex system. By developing stand alone, self contained MVC triads and components one can build up a system out of predefined parts, in much the same way as you build a house out of lego. It also makes testing a great deal easier, and components can be developed independently and concurrently, thus speeding up development again.
-
-#### Why HMVC?
-
-Joomlatools Framework uses the HMVC design pattern to support its 'component' based architecture, but let's talk about "Why".
 
 #### What's wrong with MVC?
 
