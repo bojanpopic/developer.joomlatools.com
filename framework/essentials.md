@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Essentials
+index: 1
 ---
 
 ## Object Management

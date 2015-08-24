@@ -14,9 +14,8 @@ your message gets across. To get started, check out the [Contribute](../contribu
 ### Tutorial Title
 
 The title should be clear and concise. It should contain the principal subject and the task at hand.
-For example:
 
-<pre><b>"Building 'Permissable' Behaviors for Your Component"</b></pre>
+For example: "Building 'Permissable' Behaviors for Your Component"
 
 ### Author (optional)
 

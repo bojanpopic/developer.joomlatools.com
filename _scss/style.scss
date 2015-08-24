@@ -17,6 +17,8 @@ $border-box-sizing: false; // Used by bourbon/neat
 @import "atoms/headings";
 @import "atoms/table";
 @import "molecules/highlight";
+@import "molecules/note";
+@import "molecules/toc";
 @import "organisms/page";
 @import "utilities/skiplink";
 @import "utilities/syntax";

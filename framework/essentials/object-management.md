@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Object Management
+index: 2
 ---
 
 * Table of Content
