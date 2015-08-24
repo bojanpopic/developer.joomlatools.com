@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Naming Conventions
+index: 1
 ---
 
 * Table of Content

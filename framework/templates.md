@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Templates
+index: 6
 ---
 
 * Table of Content

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Tutorials
+index: 7
 ---
 
 * Table of Content

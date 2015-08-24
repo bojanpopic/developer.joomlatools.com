@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Getting Started
+index: 2
 ---
 
 The best way to showcase the core functionality of the Framework is to show you step by step how to build something real.

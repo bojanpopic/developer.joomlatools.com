@@ -15,40 +15,43 @@ This is why we can use id=1 without having to write a model at all.
 To illustrate filtering, let’s assume that we’ve created ComTadaModelTodos and added category_id as a state in our class, and account for it in our query building strategy (_buildQueryWhere):
 
 {% highlight php %}
-    class ComTadaModelTodos extends KModelDatabase
+<?php
+class ComTadaModelTodos extends KModelDatabase
+{
+    public function __construct(KObjectConfig $config)
     {
-        public function __construct(KObjectConfig $config)
-        {
-            parent::__construct($config);
-            $this->getState()->insert(‘category_id’, ‘init’);
-        }
-        protected function _buildQueryWhere(KDatabaseQueryInterface $query)
-        {
-            if($this->getState()->category_id){
-                $query->where('tbl.category_id = ' . $this->getState()->category_id);
-            }
-            parent::_buildQueryWhere($query)
-        }
+        parent::__construct($config);
+        $this->getState()->insert(‘category_id’, ‘init’);
     }
+    protected function _buildQueryWhere(KDatabaseQueryInterface $query)
+    {
+        if($this->getState()->category_id){
+            $query->where('tbl.category_id = ' . $this->getState()->category_id);
+        }
+        parent::_buildQueryWhere($query)
+    }
+}
 {% endhighlight %}
+
 Now, a request to the API that has a category_id set will yield only those results:
-{% highlight javascript %}
+
+{% highlight json %}
+{
+    "id": "2",
+    "uuid": "6631d2b4-8b78-4e70-ab0e-d1db2d1e4dd1",
+    "title": "Water the Lawn",
+    "slug": "water-the-lawn",
+    "description": "My grass is so dry, we need more rain. ",
+    "enabled": "1",
+    "category_id": "15",
+    "params": null,
+    "links":
     {
-        "id": "2",
-        "uuid": "6631d2b4-8b78-4e70-ab0e-d1db2d1e4dd1",
-        "title": "Water the Lawn",
-        "slug": "water-the-lawn",
-        "description": "My grass is so dry, we need more rain. ",
-        "enabled": "1",
-        "category_id": "15",
-        "params": null,
-        "links":
+        "self":
         {
-            "self":
-            {
-                "href": "http://joomla.dev/component/tada/todo?slug=water-the-lawn&format=json",
-                "type": "application/json; version=1.0"
-            }
+            "href": "http://joomla.dev/component/tada/todo?slug=water-the-lawn&format=json",
+            "type": "application/json; version=1.0"
         }
     }
+}
 {% endhighlight %}

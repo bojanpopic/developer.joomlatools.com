@@ -10,6 +10,7 @@ Sorting results is a snap. Like the “Indexable” behavior above, each model d
 
 The `sort` variable gives us the column by which to sort our results.
 The `direction` is either the familiar `asc` for ascending (which is the default) and `desc` for descending. In combination, they get used in the Model to build the `order by` part of your query. A request in our example with `&sort=category_id&direction=desc` will produce a query against database that has the following:
+
 {% highlight mysql %}
     ORDER BY tbl.category_id DESC
 {% endhighlight %}

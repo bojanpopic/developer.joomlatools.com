@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Plugins
+index: 5
 ---
 
 * Table of Content

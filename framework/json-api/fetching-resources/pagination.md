@@ -9,7 +9,7 @@ title: Composition
 # Pagination on Resource Collections
 
 In keeping with good API design, additional pagination information is provided. The limit, offset, & total are sent along with the response document as part of the meta property in the top level object.
-{% highlight javascript %}
+{% highlight json %}
     "offset": 0,
     "limit": 2,
     "total": 7,
