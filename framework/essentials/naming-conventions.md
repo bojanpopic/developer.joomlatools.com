@@ -18,7 +18,7 @@ Classes in the framework (located in koowa/libraries/) follow a very simple nami
 * `KControllerModel` : koowa/libraries/controller/model.php
 * `KViewHtml` : koowa/libraries/view/html.php
 
-There is one exception, a file can go into a subfolder as long as it has the exact same name with the folder:
+There is one exception, a file can go into a subdirectory as long as it has the exact same name with the directory:
 
 * `KCommandChain` : koowa/libraries/command/chain/chain.php
 
@@ -31,7 +31,7 @@ Components are currently located in three places:
 * libraries/koowa/components
 
 <span class="note">
-**Note**: Components in libraries/koowa/components folder are non-dispatchable and serve as a building block for extensions.
+**Note**: Components in libraries/koowa/components directory are non-dispatchable and serve as a building block for extensions.
 </span>
 
 Class names for Components are very similar to Library classes in how they relate to the above directories, but always take the `Com` prefix.
@@ -73,7 +73,7 @@ First though, let's summarize their major characteristics:
 * Either return multiple rows or a single row (The "Browse" and the "Read" in [BREAD](/framework/digging-deeper.html#bread)).
 * Have several possible format types: HTML, JSON, CSV, RSS.
 
-Your component views go into their own folder in the `views` folder. The file names of the actual view classes correspond directly to the
+Your component views go into their own directory in the `views` directory. The file names of the actual view classes correspond directly to the
 format they are meant to represent. Also, singular and plural views (and their directories) are separated and named accordingly, so if we keep running with our current `com_foo` example:
 
 * `com_foo/views/bars/html.php` : list view (plural)

@@ -103,7 +103,7 @@ Using our `com://site/foo.controller.bar` identifier the default hierarchy for c
 
 This hierarchy is important.
 
-+ It looks for the class first inside your component's ./controller folder, by the **name** (which is the `<File>`) part of the identifier.
++ It looks for the class first inside your component's ./controller directory, by the **name** (which is the `<File>`) part of the identifier.
 + If found, it uses that class.
 + If not, **it means that you haven't written one** and the Framework will then cycle through the rest of the hierarchy to find the first class that exists,
 which in the above example would be `ComKoowaControllerDefault`.

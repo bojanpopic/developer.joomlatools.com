@@ -42,7 +42,7 @@ Using this JSON file, we have now defined our own custom package. Pay attention 
 * The `type` has to be set to `joomlatools-installer`
 * Make sure the `url` directive points to the location of the install package.
 
-Save this file and run from your console and within the joomla root folder:
+Save this file and run from your console and within the joomla root directory:
 
 {% highlight bash %}
 composer install

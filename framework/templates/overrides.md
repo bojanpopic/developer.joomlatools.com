@@ -28,11 +28,11 @@ Template overrides allow you to change how a component's output is rendered with
 template files. The main benefit of this is that component upgrades won't overwrite your modified files.
 
 The template engine we use is similar to that of Joomla, but turbo charged! All Joomlatools templates can be overridden
-from within the active application template, and follow the same folder structure as standard Joomla template overrides.
+from within the active application template, and follow the same directory structure as standard Joomla template overrides.
 
-In order to override a component view layout, you must create a few folders and a PHP file within the active application template folder.
+In order to override a component view layout, you must create a few directories and a PHP file within the active application template directory.
 
-The folder structure is as follows:
+The directory structure is as follows:
 
 	/templates
 		-> template_name
@@ -42,7 +42,7 @@ The folder structure is as follows:
 						-> layout_name.php
 
 * **template_name** - this is the name of the active application template
-* **html** - all template overrides go in an **html** folder
+* **html** - all template overrides go in an **html** directory
 * **com_component_name** - this is the name of the component, e.g. com_docman, com_fileman, etc
 * **view_name** - the name name of the view whose template is being overridden
 * **layout_name** - the specific layout being overridden, e.g. default.html.php, list.html.php

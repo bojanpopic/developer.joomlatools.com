@@ -45,7 +45,7 @@ $config->append(
 
 Here we define a controllers array which contains controller/logger pairs. Each listed controller will get a loggable behavior attached with its corresponding logger.
 
-In this case the logger identifier `plg:logman.docman.logger.document` points to the **PlgLogmanDocmanLoggerDocument** class located in the `plugins/logman/docman/logger/document.php` file. For consistency, and when creating plugins, we recommend that loggers are placed in a logger folder, even though they could be loaded from anywhere within the plugin directory.
+In this case the logger identifier `plg:logman.docman.logger.document` points to the **PlgLogmanDocmanLoggerDocument** class located in the `plugins/logman/docman/logger/document.php` file. For consistency, and when creating plugins, we recommend that loggers are placed in a logger directory, even though they could be loaded from anywhere within the plugin directory.
 
 ##Loggers
 

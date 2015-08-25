@@ -73,7 +73,7 @@ We discuss each in more detail below in [MVC Actions and Events](#mvc-actions-an
 
 ## Plugin classes
 
-There are two plugin classes that are important for you to know about to start building your own plugins. The first is `PlgKoowaAbstract` and the second is `PlgKoowaSubscriber`. They reside in the [library's plugin folder](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/plugins/koowa) but we describe them a little here.
+There are two plugin classes that are important for you to know about to start building your own plugins. The first is `PlgKoowaAbstract` and the second is `PlgKoowaSubscriber`. They reside in the [library's plugin directory](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/plugins/koowa) but we describe them a little here.
 
 ### PlgKoowaSubscriber: The actual subscriber 
 
@@ -274,7 +274,7 @@ This represents the minimum required contents of the manifest file. You can adju
 can configure for the XML file, but you need to specify at least these. For more information consult the [Joomla 2.5+ documentation](https://docs.joomla.org/J2.5:Creating_a_Plugin_for_Joomla).
 
 The XML file should have the same name as your plugin (see the `<filename plugin="example">` line). Your XML file would in this example
-be named `example.xml`. Lastly, the `group` attribute of the `extension` tag tells Joomla in which folder to place your plugin, but also should match the name of the component that you want to augment. In our example, this plugin is specifically for our imaginary `com_acme` component extension.
+be named `example.xml`. Lastly, the `group` attribute of the `extension` tag tells Joomla in which directory to place your plugin, but also should match the name of the component that you want to augment. In our example, this plugin is specifically for our imaginary `com_acme` component extension.
 
 
 #### PHP Class Naming

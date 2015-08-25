@@ -16,7 +16,7 @@ Additionally, these plugins can also provide activity overrides that will get us
 
 By providing activity overrides, the developer automatically gains control on how the activity exposes its data, and thus, how this data gets rendered.
 
-Activity overrides can be provided by simply including activity classes in an `activity` folder located in your LOGman plugin root directory. The override filename must match the resource type as stored in the activities datababase, i.e. for a overriding a `user` activity, the override filename would be `user.php`.
+Activity overrides can be provided by simply including activity classes in an `activity` directory located in your LOGman plugin root directory. The override filename must match the resource type as stored in the activities datababase, i.e. for a overriding a `user` activity, the override filename would be `user.php`.
 
 For convenience, an activity override per component can also be defined, i.e. if the resource override `activity/user.php` is not found, LOGman will look for a component wide activity override inside the `activity/users.php` file (users being the package/component holding the resource referenced by the activity). If none is found, then the default activity object will get used.
 
@@ -292,4 +292,4 @@ protected function _initialize(KObjectConfig $config)
 
 By appending `baz` to the objects array, we are effectively telling the activity that we are adding a `baz` object. The `baz` activity object will now get displayed as part of the activity on JSON activity streams. JSON activity streams can be accessed by appending *&format=json&layout=stream* to the URL query.
 
-When working with activity overrides, we strongly encourage developers to review the entire activity package (classes under the `activity` folder of the base activity component located at `libraries/koowa/components/com_activities`) as well as the **ComActivitiesModelEntityActivity** and **ComLogmanModelEntityActivity** implementations. Knowing the ins and outs of activity entities will be of great help while developing activity overrides for your LOGman plugins.
+When working with activity overrides, we strongly encourage developers to review the entire activity package (classes under the `activity` directory of the base activity component located at `libraries/koowa/components/com_activities`) as well as the **ComActivitiesModelEntityActivity** and **ComLogmanModelEntityActivity** implementations. Knowing the ins and outs of activity entities will be of great help while developing activity overrides for your LOGman plugins.

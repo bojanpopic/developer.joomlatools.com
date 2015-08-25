@@ -5,7 +5,7 @@ title: Installation
 
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
-1. Run the following command in a folder of your choice:
+1. Run the following command in a directory of your choice:
 
 {% highlight bash %}
 vagrant init joomlatools/box
@@ -29,7 +29,7 @@ vagrant up
 
 1. The dashboard is now available at [joomla.box](http://joomla.box)
 
-There will be two new folders created called `www` and `Projects`. These folders act as shared folders between your host computer and the box.
+There will be two new directories created called `www` and `Projects`. These directories act as shared directories between your host computer and the box.
 
 If everything is setup, we will show you how to install your first Joomla site on the [getting started page](2-getting-started.html).
 
