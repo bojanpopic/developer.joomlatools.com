@@ -30,7 +30,7 @@ Plugins should be published on [Packagist](https://packagist.org/) because they 
 
   `$ joomla site:backup sitename`
 
-  The tarball and mysql dump will be stored in your home folder. You can change this location using the `--directory` flag.
+  The tarball and mysql dump will be stored in your home directory. You can change this location using the `--directory` flag.
 
 1. For all available options, run
 

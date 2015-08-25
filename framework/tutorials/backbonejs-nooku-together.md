@@ -51,7 +51,7 @@ With all that done we can get to work powering the todo list with data from the 
 ## TodoMVC Backbone Example...Where?
 
 We are going to use the TodoMVC CSS and Javascript to make things easy. You could write your own CSS to make things blend better, as this is merely a tutorial the default will do.
-To help things along we've placed the Backbone.js assets in the Joomla `/media/com_todo/lib/backbone` folder for you already.
+To help things along we've placed the Backbone.js assets in the Joomla `/media/com_todo/lib/backbone` directory for you already.
 
 ### Create the "Backbone" View and Controller
 
@@ -61,7 +61,7 @@ There are a number of approaches that you can take to serve up your single page 
 
 **Here are the steps:**
 
-1. Add a new folder to the `/site/components/com_todo/views/` directory view called **backbone**
+1. Add a new directory to the `/site/components/com_todo/views/` directory view called **backbone**
 2. Then add another **tmpl** to that directory;
 3. Finally, add a new file called `default.html.php`. This will hold all the markup for our single page application, loading all of the Javascript and styling we need.
 4. Place the following code in `/com_todo/controller/backbone.php`
@@ -123,7 +123,7 @@ Backbone Models represent one entity item, containing a representation your appl
 ### Collections
 
 Backbone Collections are lists or sets of Models but they can and do hold more processing logic as it relates to these lists.
->If models tend to represent a single row of data, a Backbone Collection is more analogous to a table full of data … or a small slice or page of that table, or a collection of rows that belong together for a particular reason — all of the messages in this particular folder, all of the documents belonging to this particular author, and so on. Collections maintain indexes of their models, both in order, and for lookup by id.
+>If models tend to represent a single row of data, a Backbone Collection is more analogous to a table full of data … or a small slice or page of that table, or a collection of rows that belong together for a particular reason — all of the messages in this particular directory, all of the documents belonging to this particular author, and so on. Collections maintain indexes of their models, both in order, and for lookup by id.
 [Annotated Backbone.js](http://backbonejs.org/docs/backbone.html#section-39)
 
 ### The “Sync”

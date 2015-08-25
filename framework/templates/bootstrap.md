@@ -26,7 +26,7 @@ Doing this on a template level also means that the file is being disabled/enable
 
 On Joomla 2.5 our bootstrap.css file is loaded by default. Therefore it’s only possible to disable the file here.
 
-Disabling is as easy as adding a file to your template root folder which is called: disable-koowa-bootstrap.txt
+Disabling is as easy as adding a file to your template root directory which is called: disable-koowa-bootstrap.txt
 
 Example:	
 
@@ -41,7 +41,7 @@ Notes:
 
 On Joomla 3 we never load any bootstrap.css file by default. Therefore it’s only possible to enable the file here and not possible to disable it.
 
-Enabling is as easy as adding a file to your template root folder which is called: enable-koowa-bootstrap.txt
+Enabling is as easy as adding a file to your template root directory which is called: enable-koowa-bootstrap.txt
 
 Example:
 

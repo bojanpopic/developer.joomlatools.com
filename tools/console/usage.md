@@ -42,7 +42,7 @@ Let's say you are working on your own Joomla component called _Awesome_ and want
 
 By default your code is assumed to be in _~/Projects_. You can pass _--projects-dir=/my/code/is/here_ to commands for custom values.
 
-Please note that your source code should resemble the Joomla folder structure for symlinking to work well. For example your administrator section should reside in ~/Projects/awesome/administrator/components/com_awesome.
+Please note that your source code should resemble the Joomla directory structure for symlinking to work well. For example your administrator section should reside in ~/Projects/awesome/administrator/components/com_awesome.
 
 Now to create a new site, execute the site:create command and add a symlink option:
 
@@ -52,7 +52,7 @@ Or to symlink your code into an existing site:
 
     joomla extension:symlink testsite awesome
 
-This will symlink all the folders from the _awesome_ folder into _testsite.dev_.
+This will symlink all the directories from the _awesome_ directory into _testsite.dev_.
 
 Run discover install to make your component available to Joomla and you are good to go!
 

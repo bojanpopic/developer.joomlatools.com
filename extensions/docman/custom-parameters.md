@@ -27,11 +27,11 @@ To add pricing information about documents and then display that information to 
 
 You need to create three (3) template overrides for the frontend of your website. There are two files for displaying documents to your users and one file where editing takes place.  
 
-Create a new folder in your template's `/html/` folder called `com_docman`. If you use the protostar template this will look like:
+Create a new directory in your template's `/html/` directory called `com_docman`. If you use the protostar template this will look like:
 
 `/templates/protostar/html/com_docman/document/`
 
-Into this new folder copy the **document** detail layouts:
+Into this new directory copy the **document** detail layouts:
 
 `/components/com_docman/views/document/tmpl/document.html.php` **&#8594;** `/templates/protostar/html/com_docman/document/document.html.php` 
 
@@ -45,7 +45,7 @@ Then the **form** layout:
 
 You will want to be able to edit pricing information in the backend as well. The overrides work in exactly the same way, but the filenames are slightly different. Let’s assume that you are using the default administrator template, **Isis**. 
 
-In a similar step you just did for the frontend, create a new folder:
+In a similar step you just did for the frontend, create a new directory:
 
 `/administrator/templates/isis/html/com_docman/document`
  

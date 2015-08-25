@@ -43,9 +43,9 @@ A couple of things to keep in mind when attempting to update the look and feel o
 
 ### Finding Media Files
 
-Our extensions follow Joomla standards for storing media assets. They can be found in the /media/[extension name] directory, e.g /media/com_docman. This /media folder is actually the location where you should be able to find media assets for each component you have installed if they also follow these standards.
+Our extensions follow Joomla standards for storing media assets. They can be found in the /media/[extension name] directory, e.g /media/com_docman. This /media directory is actually the location where you should be able to find media assets for each component you have installed if they also follow these standards.
 
-This means that all an extension’s Javascript, CSS and images can be found it’s corresponding directory in the extension’s media folder.
+This means that all an extension’s Javascript, CSS and images can be found it’s corresponding directory in the extension’s media directory.
 
 ### Finding CSS Styles
 

@@ -54,7 +54,7 @@ with the line that looks like:
 **Note:** `<?=` is short for `<?php echo`, which gets replaced when the template is compiled.
 
 The `default_list.html` in this case is the name of the template file itself without the `php` file extension. The above
-method will attempt include a file called `default_name.html.php` from the same folder in which the parent files reside
+method will attempt include a file called `default_name.html.php` from the same directory in which the parent files reside
 
 > The template system also applies [Template Overrides](layout-considerations.html#template-overrides) to partials.
 
@@ -226,7 +226,7 @@ Above, we used the following to get a javascript file into the head of the page.
   <ktml:script src="media://com_acme/js/foo.js" />
 {% endhighlight %}
 
-That `media://` scheme specification, gets replaced with the current URL for the media folder, i.e. `http://joomla.dev/media/`. In
+That `media://` scheme specification, gets replaced with the current URL for the media directory, i.e. `http://joomla.dev/media/`. In
 combination with the `ktml:script` tag, the final result gets added to the head in the form:
 
 {% highlight html %}

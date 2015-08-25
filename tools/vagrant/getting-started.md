@@ -24,7 +24,7 @@ Now that the Joomla site is running, we can push our own work into it.
 
 ## Symlink your code into a Joomla site
 
-Let's say you are working on your own Joomla component called _Awesome_ and want to continue working on it using the Vagrant box. We should start by making the source code available to the Vagrant box. You can move your existing code into the _Projects_ folder, which is automatically created for you in the directory where you executed `vagrant up`.
+Let's say you are working on your own Joomla component called _Awesome_ and want to continue working on it using the Vagrant box. We should start by making the source code available to the Vagrant box. You can move your existing code into the _Projects_ directory, which is automatically created for you in the directory where you executed `vagrant up`.
 
 Or, even better, you can tell the box to include other directories. Let's assume the source code is located at `/Users/myname/Projects/awesome`:
 
@@ -35,7 +35,7 @@ Create a file called `config.custom.yaml` ([example](https://github.com/joomlato
 
 Save this file and restart the Vagrant box using the `vagrant reload` command.
 
-The _"Projects"_ folder from your host machine will now be available inside the Vagrant box at _/home/vagrant/Projects_.
+The _"Projects"_ directory from your host machine will now be available inside the Vagrant box at _/home/vagrant/Projects_.
 
 Next step is to create the new site you'll be working on. Execute the following command on the box (via the [web terminal](http://joomla.box:3000) or through `vagrant ssh`):
 

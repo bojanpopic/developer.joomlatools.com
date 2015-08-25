@@ -63,11 +63,11 @@ And then add the following line of code to the file:
 If you have read the [HMVC](/essentials/hmvc.html) article, you will know that it's the view's responsibility to render things to the screen.
 So that's what we'll do next:  _Create a View_.
 
-The first view we will add, is the view that renders our list of todo items. For this, create the following file and folder structure:
+The first view we will add, is the view that renders our list of todo items. For this, create the following file and directory structure:
 
     /components/com_todo/view/items/tmpl/default.html.php
 
-> Notice that the folder name "items" is plural, and not "item", which is singular.
+> Notice that the directory name "items" is plural, and not "item", which is singular.
 > This is part of the framework's [Naming Conventions](/essentials/naming-conventions.html): Since we're creating a view that's
 going to display multiple todo items, we use the plural form "items". Later on we will set up the view that displays a single blog
 post, which will have a singular name, "post".
@@ -82,7 +82,7 @@ We don't have a list of items to display just yet, so inside the newly created d
 
 Also in the [HMVC](/essentials/hmvc.html) article you learned that a controller loads a model. The default controller that Joomlatools Framework
 would create for you expects a model, which in turn expects a database table by default. As we don't have a database yet, we will
-bypass this behavior by extending our items model from [`KModelAbstract`](http://api.nooku.org/class-KModelAbstract.html) instead. Please create the the following file and folder structure:
+bypass this behavior by extending our items model from [`KModelAbstract`](http://api.nooku.org/class-KModelAbstract.html) instead. Please create the the following file and directory structure:
 
      /components/com_todo/model/items.php
 
@@ -155,7 +155,7 @@ Now we insert some sample data into the blog table. Again, replace #__ with your
 
 
 Now we have a database defined let's get rid of the `ComTodoModelItems` class we created in the previous part. For this
-delete the `/components/com_todo/model/` folder, or at least the enclosed file in
+delete the `/components/com_todo/model/` directory, or at least the enclosed file in
 
     DELETE     /components/com_todo/model/items.php
 

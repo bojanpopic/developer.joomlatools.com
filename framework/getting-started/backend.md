@@ -51,7 +51,7 @@ When there is no `view` parameter in the request, Joomlatools Framework tries to
 But this won't work because we haven't defined the view by that name, nor have we defined a table to match.
 
 As you can see the `view` is very important. It tells the component dispatcher which `Controller` to load, which loads the `Model`
- and the actual `View` object. The `view` in a Joomlatools Framework component is fundamental. This is why that at the very least the folder
+ and the actual `View` object. The `view` in a Joomlatools Framework component is fundamental. This is why that at the very least the directory
  structure and the template of the view needs to be defined.
 
 The Framework needs to know how you want that information rendered.
@@ -382,7 +382,7 @@ If you were wondering about the `<ktml:style src="[url]" />` tag, that's a speci
 >"I want the stylesheet in the `src` attribute pushed into the `<head />` tag of this page".
 
 And if you happened to noticed `media://` in that url, well that also gets filtered to the URL of your `/media`
-folder, which in our case is `http://joomla.dev/todo/media/` ... _**That is handy**_
+directory, which in our case is `http://joomla.dev/todo/media/` ... _**That is handy**_
 
 You may have also noticed the `<?= helper('behavior.koowa'); ?>` line. It loads the Javascript required for the toolbar
 to work.
