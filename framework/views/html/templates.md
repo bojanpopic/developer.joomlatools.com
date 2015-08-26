@@ -213,7 +213,7 @@ output. We use the `ktml` namespace to avoid name collisions with other tags.
 and replace it back into the template object.
 * `<ktml:message>` - Render the response flash messages.
 
-### Other Special Filters
+### Special filters
 
 [**Assets**](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/template/filter/asset.php)
 
@@ -253,11 +253,51 @@ only run when we want to bypass the application template, for example in a modal
 This is a _Module_ focused filter. When a Joomlatools module is rendered, this filter allows for an appropriate [`chrome`](http://docs.joomla.org/Module_chrome) style to be applied to the
 module content.
 
+## Shortcuts
+
+The framework provides some handy shortcuts and syntactical sugar for use in our view templates. They help keep templates clean and function names more relevant.
+
+Here are some of them:
+
+* `object()` => [`KObject::getObject()`](http://api.nooku.org/source-class-KObject.html#_getObject)
+* `translate()` => [`KObject::getObject('translator')->translate()'`](http://api.nooku.org/source-class-KTranslatorAbstract.html#_translate)
+* `route()` => [`KViewTemplate::getRoute()`](http://api.nooku.org/source-class-KViewTemplate.html#_getRoute)
+* `json()` => `json_encode()`
+* `format()` => `sprintf()`
+* `replace()` => `strtr()`
+* `escape()` => [`KTemplate::escape()`](http://api.nooku.org/source-class-KTemplate.html#_escape)
+* `helper()` => [`KTemplate::invoke()`](http://api.nooku.org/source-class-KTemplate.html#_invoke)
+* `import()` => [`KTemplateEngineKoowa::_import()`](http://api.nooku.org/source-class-KTemplateEngineKoowa.html#__import)
+* `parameters()` => [`KTemplate::getParameters()`](http://api.nooku.org/source-class-KTemplate.html#_getParameters)
+
+### Translate
+
+Use the `translate` shortcut to translate a string:
+
+{% highlight php %}
+<?= translate('Title') ?>
+{% endhighlight %}
+
+### Helpers
+
+Use the `helper` shortcut to load the `date.humanize` helper to make date information easier to read for us humans:
+
+{% highlight php %}
+<?= helper('date.humanize', array('date' => $activity->created_on )); ?>
+{% endhighlight %}
+
+### Route
+
+Use the `route` shortcut to build the URL to the singular view:
+
+{% highlight php %}
+<a href="<?= route('view=item&id='. $item->id ) ?>">
+    <?= $item->title ?>
+</a>
+{% endhighlight %}
+
 ## Summing Up
 
 We've taken a high level look at the Joomlatools template system. With a solid understanding of these fundamental pieces you can
-easily gain insight into what's happening in those templates.  More importantly, you can also customize all of the Joomlatools extensions and
+easily gain insight into what's happening in those templates. More importantly, you can also customize all of the Joomlatools extensions and
 add information that you want to see.
-
-
-
