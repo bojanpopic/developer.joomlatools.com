@@ -3,8 +3,8 @@ pages:
     level1:
       - title: DOCman
         level2:
+        - title: Custom Fields
         - title: Custom Icons
-        - title: Custom Parameters
         - title: Icon Sizes
         - title: Plugins
       - title: LOGman

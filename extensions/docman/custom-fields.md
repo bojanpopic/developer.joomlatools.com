@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Custom Parameters
+title: Custom Fields
 ---
 
 * Table of Content
