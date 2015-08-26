@@ -3,8 +3,9 @@ pages:
     level1:
       - title: DOCman
         level2:
+        - title: Bootstrap
+        - title: Custom Fields
         - title: Custom Icons
-        - title: Custom Parameters
         - title: Icon Sizes
         - title: Plugins
       - title: LOGman
@@ -26,22 +27,24 @@ pages:
         level2:
          - title: Naming Conventions
          - title: Object Management
-      - title: Templates
+      - title: Views
         level2:
-          - title: Bootstrap
-          - title: Layouts
-          - title: Overrides
-          - title: Stylesheets
+          - title: HTML
+            level3:
+            - title: Templates
+            - title: Layouts
+            - title: Overrides
+            - title: Stylesheets
+          - title: JSON
+            level3:
+              - title: Structure
+              - title: Fetching
       - title: Plugins
         level2:
           - title: Dispatcher Events
           - title: Plugin Groups
-      - title: JSON API
-        level2:
-          - title: Fetching Resources
-          - title: Document Structure
+
       - title: Digging Deeper
-      - title: Tutorials
   - title: Tools
     level1:
       - title: Composer

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Custom Parameters
+title: Custom Fields
 ---
 
 * Table of Content
@@ -14,7 +14,7 @@ Want to add custom parameters to your documents? This tutorial explains how you 
 ![Custom Price Field in DOCman](/resources/images/custom-field-in-document-end-result.png)
 
 <span class="note">
-**Note**: The [Framework Template System](/framework/templates.html) guide is a nice primer on templates and template overrides in general.
+**Note**: The [Framework Template System](/framework/views/templates.html) guide is a nice primer on templates and template overrides in general.
 </span>
 
 ## Create template overrides
