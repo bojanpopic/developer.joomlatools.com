@@ -17,7 +17,7 @@ Want to add custom parameters to your documents? This tutorial explains how you 
 **Note**: The [Framework Template System](/framework/templates.html) guide is a nice primer on templates and template overrides in general.
 </span>
 
-## 1. Create the template overrides
+## Create template overrides
 
 To add pricing information about documents you need to create a series of template overrides.
 
@@ -54,7 +54,7 @@ Copy the following file into this new directory:
 **Note**: Because the backend of your website is used to edit and configure documents, the `default.html.php` layout contains the HTML form to edit your document.
 </span>
 
-## 2. Edit form layouts
+## Edit form layouts
 
 By using the `parameters` property of the document entity we can store the price information.
 
@@ -91,7 +91,7 @@ This means you have enhanced validation abilities for the input field. In our ex
 
 Have a look through the [jQuery Validator plugin documentation](http://jqueryvalidation.org/documentation/) for more information.
 
-## 3. Show price information
+## Show price information
 
 Open both your new front-end document display overrides:
 
