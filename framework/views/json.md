@@ -1,10 +1,9 @@
 ---
 layout: default
-title: JSON API
-index: 4
+title: JSON
 ---
 
 If you've ever argued with your team about the way your JSON responses should be formatted, [JSON API](http://jsonapi.org/) is your anti-bikeshedding weapon.
 
-* [Document Structure](json-api/document-structure.html)
-* [Fetching Resources](json-api/fetching-resources.html)
+* [Document structure](json-api/structure.html)
+* [Fetching resources](json-api/fetching.html)

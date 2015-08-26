@@ -6,10 +6,6 @@ title: Layouts
 * Table of Content
 {:toc}
 
-## Introduction
-
-## Additional Layouts
-
 In some situations you may want to keep the current core layout available, but would like to render a very similar layout
 for a special purpose. Maybe you want a differently formatted list of items, or maybe you want some other piece of information
  from your site that's related to the current item being shown. Whatever the reason, we need to take a slightly different approach
@@ -21,7 +17,7 @@ Once you have identified the layout that you want to augment, copy it to the sam
 override **BUT** under a different name, i.e. `customlist.html.php`. This will let you load your new layout for a given item, just by adding
 `layout=custom` to the URL of the page.
 
-## Alternative Menu Item Choices
+## Alternative Menu Items
 
 If you would like to have your new layout available as a menu item, that is straight forward as well. In similar way, copy the original
 layout xml file from the component view's layout director to the same override directory, and rename it to match your new layout name,
@@ -33,11 +29,11 @@ After that, just open that file and edit the `title` attribute in the `<layout>`
 that view, like perhaps:
 
 {% highlight xml %}
- <layout title="Custom List">
- 		<message>
- 			<![CDATA[COM_DOCMAN_VIEW_LIST_DESCRIPTION]]>
- 		</message>
- 	</layout>
+<layout title="Custom List">
+	<message>
+		<![CDATA[COM_DOCMAN_VIEW_LIST_DESCRIPTION]]>
+	</message>
+</layout>
 {% endhighlight %}
 
 With that, you should see something similar to this when you're creating a new menu item:
