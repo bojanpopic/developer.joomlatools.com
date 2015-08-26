@@ -6,8 +6,7 @@ title: Setup
 * Table of Content
 {:toc}
 
-To help you get moving we suggest (and assume for the rest of the tutorial) that you have the Vagrant box from
-[developer.joomlatools.com](http://developer.joomlatools.com/tools/vagrant/introduction.html) on your local machine.
+To help you get moving we suggest that you have our [Vagrant box](/tools/vagrant.html) installed.
 
 After you get your vagrant box set up and running, `ssh` into it
 
@@ -21,7 +20,4 @@ After that, make sure Joomlatools Framework is installed with the following line
 
     $ composer require --working-dir=/var/www/todo nooku/nooku-framework:2.*
 
-That's it! Those two commands have installed Joomla and the Framework, and your tutorial sandbox
-should be available at [http://joomla.dev/todo/](http://joomla.dev/todo/).
-
->At the very least you need Joomla with Joomlatools Framework installed in your preferred development environment.
+That's it! Your Joomla site is now available at [http://joomla.dev/todo/](http://joomla.dev/todo/).
