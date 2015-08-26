@@ -36,7 +36,7 @@ Copy the following files into this new directory:
 
 * `/components/com_docman/views/document/tmpl/document.html.php`
 * `/components/com_docman/views/document/tmpl/default.html.php`
-* `/components/com_docman/views/document/tmpl/form.html.php
+* `/components/com_docman/views/document/tmpl/form.html.php`
 
 ### Back-end
 
@@ -91,7 +91,7 @@ This means you have enhanced validation abilities for the input field. In our ex
 
 Have a look through the [jQuery Validator plugin documentation](http://jqueryvalidation.org/documentation/) for more information.
 
-## 3. Add price information
+## 3. Show price information
 
 Open both your new front-end document display overrides:
 
