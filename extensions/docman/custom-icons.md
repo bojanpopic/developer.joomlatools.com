@@ -158,7 +158,7 @@ Note: You can also use larger images like 600x600 pixels but this will drastical
 }
 {% endhighlight %}
 
-### 3. Using a Custom Icon Font
+### Using a Custom Icon Font
 
 A better solution might be to use your own custom icon font. This technique works almost the same as the one with images but we’ve got a few extra steps to do.
 
@@ -357,7 +357,7 @@ body .koowa .koowa_icon--spreadsheet:before {
 }
 {% endhighlight %}
 
-## 2. Adding Custom Icons to the Administrator
+## Adding Custom Icons to the Administrator
 
 Right now we’ve only covered how to add the images to the frontend, but wouldn’t it be useful to have the same icons display on the administrator side?
 
