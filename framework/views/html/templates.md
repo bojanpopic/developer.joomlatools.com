@@ -192,13 +192,7 @@ for example is that calling `object()` inside a template file is the same as cal
 
 ## Tags
 
-Tags are one more important part of the template dialect that Joomlatools uses. The engine finds the
-[`style`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/template/filter/style.php),
-[`script`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/template/filter/script.php),
-[`meta`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/template/filter/meta.php),
-[`link`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/template/filter/link.php)
-and
-[`title`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/components/com_koowa/template/filter/title.php) tags
+Tags are one more important part of the template dialect that Joomlatools uses. The engine finds the `style`, `script`, `meta`, `link` and `title`
 in a template, filters them out, and adds them to the head document. The `style` and `script` tags
 can optionally be given the `data-inline` attribute, which lets them stay exactly where there are in the layout.
 
@@ -226,11 +220,11 @@ Above, we used the following to get a javascript file into the head of the page.
   <ktml:script src="media://com_acme/js/foo.js" />
 {% endhighlight %}
 
-That `media://` scheme specification, gets replaced with the current URL for the media directory, i.e. `http://joomla.dev/media/`. In
+That `media://` scheme specification, gets replaced with the current URL for the media directory, i.e. `http://joomla.box/media/`. In
 combination with the `ktml:script` tag, the final result gets added to the head in the form:
 
 {% highlight html %}
-<script type="text/javascript" src="http://joomla.dev/media/com_acme/js/foo.js"></script>
+<script type="text/javascript" src="http://joomla.box/media/com_acme/js/foo.js"></script>
 {% endhighlight %}
 There also `base://` and `root://` url schemes which load the `base` url and `root` url of your application, respectively.
 

@@ -20,4 +20,4 @@ After that, make sure Joomlatools Framework is installed with the following line
 
     $ composer require --working-dir=/var/www/todo nooku/nooku-framework:2.*
 
-That's it! Your Joomla site is now available at [http://joomla.dev/todo/](http://joomla.dev/todo/).
+That's it! Your Joomla site is now available at [http://joomla.box/todo/](http://joomla.box/todo/).

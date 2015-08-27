@@ -27,7 +27,30 @@ VALUES
 {% endhighlight %}
 
 <span class="note">
-**Tip**: When using our Vagrant box you can use [http://phpmyadmin.joomla.dev](http://phpmyadmin.joomla.dev).
+**Tip**: When using our Vagrant box you can use [http://phpmyadmin.joomla.box](http://phpmyadmin.joomla.box).
+</span>
+
+## Database table
+
+The following snippet defines the database schema of our component and inserts some sample data.
+
+Execute it in the `sites_todo` database, replace `#__` with your database prefix:
+
+{% highlight mysql %}
+CREATE TABLE IF NOT EXISTS `#__todo_items` (
+  `todo_item_id` SERIAL,
+  `title` varchar(255) NOT NULL,
+  `description` longtext NOT NULL
+);
+
+INSERT INTO `#__todo_items` (`title`, `description`) VALUES
+    ('todo item one', 'This is the first Todo'),
+    ('todo item two', 'This is the second Todo'),
+    ('todo item three', 'This is the third Todo');
+{% endhighlight %}
+
+<span class="note">
+**More**: Read more on the [Naming Conventions of database tables](/framework/essentials/naming-conventions.html#databases).
 </span>
 
 ## Entry Point
@@ -48,37 +71,6 @@ Add the following snippet to the file:
     ->dispatch();                                   // call the dispatch action
 {% endhighlight %}
 
-## Database Table
-
-The following snippet defines the database schema of our component, execute it in the `sites_todo` database.
-
-Replace `#__` with your database prefix:
-
-{% highlight mysql %}
-CREATE TABLE IF NOT EXISTS `#__todo_items` (
-  `todo_item_id` SERIAL,
-  `title` varchar(255) NOT NULL,
-  `description` longtext NOT NULL
-);
-{% endhighlight %}
-
-<span class="note">
-**More**: Read more on the [Naming Conventions](/framework/essentials/naming-conventions.html#databases) of database tables.
-</span>
-
-### Insert sample data
-
-Insert some sample data into the database table.
-
-Replace `#__` with your database prefix:
-
-{% highlight mysql %}
-INSERT INTO `#__todo_items` (`title`, `description`) VALUES
-    ('todo item one', 'This is the first Todo'),
-    ('todo item two', 'This is the second Todo'),
-    ('todo item three', 'This is the third Todo');
-{% endhighlight %}
-
 ## List View
 
 If you are familiar with [HMVC](/framework/digging-deeper.html#hmvc) you know that it's the view's responsibility to render things to the screen.
@@ -90,7 +82,7 @@ First we will add the view that renders our list of todo items. For this, create
     /components/com_todo/view/items/tmpl/default.html.php
 
 <span class="note">
-**More**: Read more on the [Naming Conventions](/framework/essentials/naming-conventions.html#views) of Views.
+**More**: Read more on the [Naming Conventions of Views](/framework/essentials/naming-conventions.html#views).
 </span>
 
 ### Display data
@@ -98,27 +90,26 @@ First we will add the view that renders our list of todo items. For this, create
 Writing templates is like writing regular HTML and PHP, but simpler. Add the following snippet to the view:
 
 {% highlight php %}
-    <ul>
+<ul>
     <? foreach($items as $item) : ?>
-        <li>
-            <?=$item->id?>.
-            <?=$item->title?>
-            <?=$item->text?>
-        </li>
+    <li>
+        <?=$item->id?>.
+        <?=$item->title?>
+        <?=$item->text?>
+    </li>
     <? endforeach; ?>
-    </ul>
+</ul>
 {% endhighlight %}
 
 This code will render an unordered list for each entity in `$items` object displaying the id, title and description.
 
-See [http://joomla.dev/todo/index.php?option=com_todo&view=items](http://joomla.dev/todo/index.php?option=com_todo&view=items)
-
 ![My Joomlatools Framework Powered Todo List](/resources/images/todotutorial/front-end-view.png)
 
-Note that we have only added a template here; no `View` class. This is because Joomlatools Framework will fallback on default classes
-whenever your component does not contain a specific class that it's looking for, in this case the `items` HTML view. So
-when `ComTodoViewItemsHtml` is not found, it will simply fall back on [`ComKoowaViewHtml`](http://api.nooku.org/class-ComKoowaViewHtml.html), and assume that since you're requesting
-the `items view`, that you want to view a list of Todo items.
+Test yourself: [http://joomla.box/todo/index.php?option=com_todo&view=items](http://joomla.box/todo/index.php?option=com_todo&view=items)
+
+<span class="note">
+**Note**: You only added a template! The framework will fallback on default classes whenever your component does not contain a specific class.
+</span>
 
 ## Tips & Tricks
 

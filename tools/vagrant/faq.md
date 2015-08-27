@@ -60,7 +60,7 @@ If your applications use SMTP, you can configure your SMTP server as follows to 
 
 After you modify /etc/hosts as shown above you can use phpMyAdmin at
 
-    http://phpmyadmin.joomla.dev
+    http://phpmyadmin.joomla.box
 
 ## How can I use PhpMetrics?
 
@@ -93,7 +93,7 @@ box php:ini memory_limit 256M
 
 After you modify /etc/hosts as shown above go to
 
-    http://webgrind.joomla.dev
+    http://webgrind.joomla.box
 
 ## Can I SFTP into my box?
 
