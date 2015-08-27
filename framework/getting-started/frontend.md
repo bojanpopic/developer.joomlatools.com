@@ -27,7 +27,7 @@ VALUES
 {% endhighlight %}
 
 <span class="note">
-**Tip**: When using our Vagrant box you can use [http://phpmyadmin.joomla.dev](http://phpmyadmin.joomla.dev).
+**Tip**: When using our Vagrant box you can use [http://phpmyadmin.joomla.box](http://phpmyadmin.joomla.box).
 </span>
 
 ## Database table
@@ -105,7 +105,7 @@ This code will render an unordered list for each entity in `$items` object displ
 
 ![My Joomlatools Framework Powered Todo List](/resources/images/todotutorial/front-end-view.png)
 
-Test yourself: [http://joomla.dev/todo/index.php?option=com_todo&view=items](http://joomla.dev/todo/index.php?option=com_todo&view=items)
+Test yourself: [http://joomla.box/todo/index.php?option=com_todo&view=items](http://joomla.box/todo/index.php?option=com_todo&view=items)
 
 <span class="note">
 **Note**: You only added a template! The framework will fallback on default classes whenever your component does not contain a specific class.

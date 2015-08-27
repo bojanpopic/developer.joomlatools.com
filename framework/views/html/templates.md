@@ -220,11 +220,11 @@ Above, we used the following to get a javascript file into the head of the page.
   <ktml:script src="media://com_acme/js/foo.js" />
 {% endhighlight %}
 
-That `media://` scheme specification, gets replaced with the current URL for the media directory, i.e. `http://joomla.dev/media/`. In
+That `media://` scheme specification, gets replaced with the current URL for the media directory, i.e. `http://joomla.box/media/`. In
 combination with the `ktml:script` tag, the final result gets added to the head in the form:
 
 {% highlight html %}
-<script type="text/javascript" src="http://joomla.dev/media/com_acme/js/foo.js"></script>
+<script type="text/javascript" src="http://joomla.box/media/com_acme/js/foo.js"></script>
 {% endhighlight %}
 There also `base://` and `root://` url schemes which load the `base` url and `root` url of your application, respectively.
 

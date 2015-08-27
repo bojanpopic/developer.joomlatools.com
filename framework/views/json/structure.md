@@ -57,7 +57,7 @@ In the default document structure, we’ve chosen to use the word “entities”
     {
         "self":
         {
-            "href": "http://joomla.dev/component/tada/todo?slug=walk-the-dog&format=json",
+            "href": "http://joomla.box/component/tada/todo?slug=walk-the-dog&format=json",
             "type": "application/json; version=1.0"
         }
     }
@@ -85,7 +85,7 @@ Similarly, we send a Collection of Resources as JSON array of resource objects o
     {
         "self":
         {
-            "href": "http://joomla.dev/component/tada/todo?slug=walk-the-dog&format=json",
+            "href": "http://joomla.box/component/tada/todo?slug=walk-the-dog&format=json",
             "type": "application/json; version=1.0"
         }
     }
@@ -103,7 +103,7 @@ Similarly, we send a Collection of Resources as JSON array of resource objects o
     {
         "self":
         {
-            "href": "http://joomla.dev/component/tada/todo?slug=water-the-lawn&format=json",
+            "href": "http://joomla.box/component/tada/todo?slug=water-the-lawn&format=json",
             "type": "application/json; version=1.0"
         }
     }
@@ -139,7 +139,7 @@ The links property in general is used to specify resource relationships for reso
 
 {% highlight json %}
 "self": {
-    href: "http://joomla.dev/component/tada?view=todos&format=json&limit=2",
+    href: "http://joomla.box/component/tada?view=todos&format=json&limit=2",
     type: "application/json; version=1.0"
 }
 {% endhighlight %}
@@ -149,7 +149,7 @@ When appropriate, we also include “next” and “previous” pagination links
 {% highlight json %}
 "next":
 {
-    href: "http://joomla.dev/component/tada?view=todos&format=json&limit=2&offset=2",
+    href: "http://joomla.box/component/tada?view=todos&format=json&limit=2&offset=2",
     type: "application/json; version=1.0"
 }
 {% endhighlight %}
