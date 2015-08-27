@@ -8,7 +8,7 @@ title: Frontend
 
 ## Register
 
-The first thing you need to do is make sure our component is registered in the database.
+First you need to register the new component in Joomla.
 
 Knowing that the component is going to be called `com_todo` you can execute the following snippet in the `sites_todo` database.
 
