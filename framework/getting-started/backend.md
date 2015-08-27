@@ -72,7 +72,7 @@ The result will be:
 
 ![Success, our first Todos Table.](/resources/images/todotutorial/backend-todos-first-list.png)
 
-Test yourself: [http://joomla.box/todo/administrator/index.php?option=com_todo&view=items](http://joomla.box/todo/administrator/index.php?option=com_todo&view=items)
+Test yourself: [http://joomla.box/todo/administrator/index.php?option=com_todo&view=items](http://joomla.box/todo/administrator/index.php?option=com_todo&view=items){:target="_blank"}
 
 <span class="note">
 **Tip**: [Tags](http://localhost:3383/framework/views/html/templates.html#tags), like `<ktml:module>` are an important part of the template layer.
@@ -178,4 +178,4 @@ class ComTodoDispatcherHttp extends ComKoowaDispatcherHttp
 
 `?option=com_todo` will now redirect to `?option=com_todo&view=items`.
 
-Test yourself: [http://joomla.box/todo/administrator/index.php?option=com_todo](http://joomla.box/todo/administrator/index.php?option=com_todo).
+Test yourself: [http://joomla.box/todo/administrator/index.php?option=com_todo](http://joomla.box/todo/administrator/index.php?option=com_todo){:target="_blank"}.
