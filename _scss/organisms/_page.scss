@@ -33,9 +33,10 @@
     }
 
     li {
-      ul a        { padding-left: 30px; }
-      ul ul a     { padding-left: 45px; }
-      ul ul ul a  { padding-left: 60px; }
+      ul a            { padding-left: 30px; }
+      ul ul a         { padding-left: 45px; }
+      ul ul ul a      { padding-left: 60px; }
+      ul ul ul ul a   { padding-left: 75px; }
 
       &.active {
         > ul {
