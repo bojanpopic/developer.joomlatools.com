@@ -39,6 +39,14 @@ pages:
             level3:
               - title: Structure
               - title: Fetching
+      - title: Behaviors
+        level2:
+          - title: Database
+            level3:
+              - title: Parameterizable
+          - title: Controller
+          - title: Model
+          - title: View
       - title: Plugins
         level2:
           - title: Dispatcher Events
