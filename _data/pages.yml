@@ -58,6 +58,9 @@ pages:
           - title: Usage
           - title: Plugins
           - title: FAQ
+      - title: Platform
+        level2:
+          - title: Installation
       - title: Vagrant
         level2:
           - title: Installation
