@@ -1,0 +1,66 @@
+pages:
+  - title: Extensions
+    level1:
+      - title: DOCman
+        level2:
+        - title: Bootstrap
+        - title: Custom Fields
+        - title: Custom Icons
+        - title: Icon Sizes
+        - title: Plugins
+      - title: LOGman
+        level2:
+          - title: Plugins
+            level3:
+              - title: Activities
+              - title: Joomla Framework
+              - title: Joomlatools Framework
+          - title: Translations
+  - title: Framework
+    level1:
+      - title: Getting Started
+        level2:
+          - title: Setup
+          - title: Frontend
+          - title: Backend
+      - title: Essentials
+        level2:
+         - title: Naming Conventions
+         - title: Object Management
+      - title: Views
+        level2:
+          - title: HTML
+            level3:
+            - title: Templates
+            - title: Layouts
+            - title: Overrides
+            - title: Stylesheets
+          - title: JSON
+            level3:
+              - title: Structure
+              - title: Fetching
+      - title: Plugins
+        level2:
+          - title: Dispatcher Events
+          - title: Plugin Groups
+
+      - title: Digging Deeper
+  - title: Tools
+    level1:
+      - title: Composer
+        level2:
+          - title: Installation
+          - title: Distribution
+          - title: FAQ
+      - title: Console
+        level2:
+          - title: Installation
+          - title: Usage
+          - title: Plugins
+          - title: FAQ
+      - title: Vagrant
+        level2:
+          - title: Installation
+          - title: Getting Started
+          - title: Server Management
+          - title: FAQ
