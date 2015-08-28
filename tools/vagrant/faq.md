@@ -1,130 +1,131 @@
-# FAQs
+---
+layout: default
+title: FAQs
+---
 
-<!-- toc -->
+* Table of Content
+{:toc}
 
-## What does the box contain?
+## I don't like the command line! Is there another way to manage the Vagrant box?
 
-* Ubuntu 12.10 (Precise) 64 bit
-* Apache
-* MySQL
-* PHP 5.4 
-* Composer
-* Phpmyadmin
-* Xdebug
-* Webgrind
-* Mailcatcher
-* Less compiler
-* UglifyJS
+There's a great tool we use to start and manage our Vagrant boxes once you've installed them, called [Vagrant Manager](http://vagrantmanager.com/).  It is currently available on OS X only, though!
 
-## How do I access my site?
+If the Vagrant box is running, you can execute commands on the box using just your browser. All you need is to browse to the [web terminal](http://joomla.box:3000/). No need to connect via the command line at all.
 
-Apache serves files from the `www` folder using the IP:
+## How can I access the command line on the box?
 
-    http://33.33.33.58/
-    
-If you have setup your hosts file correctly as shown above, you can now also access the default www/ folder at:
+You can always run commands via the web terminal, accessible at [joomla.box:3000](http://joomla.box:3000) as soon as the box is up.
 
-	http://joomla.dev
+Alternatively, you can SSH into the box by using the command:
 
-It is advised to use virtual hosts for development. See below for our virtual host manager.
+	vagrant ssh
 
-## Can I SSH into my box?
+## How can I access the MySQL databases?
 
-You can reach the box by using the command:
+The MySQL server on the box runs with these default user credentials:
 
-	$ vagrant ssh
-	
-## Can I create a new site from the command line?
+* User: root
+* Password: root
 
-The Vagrant box has our [Joomla Console](https://github.com/joomlatools/joomla-console) script pre-installed.
-To create a site with the latest Joomla version, run:
+So to connect via PHP you would pass in these details:
 
-    joomla site:create testsite
+{% highlight php %}
+$connection = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
+{% endhighlight %}
 
-The newly installed site will be available in the /testsite subfolder at http://joomla.dev/testsite after that. The files are located at /var/www/testsite.
-You can login into your fresh Joomla installation using these credentials: `admin` / `admin`.
+If you prefer to, you can use phpMyAdmin at [phpmyadmin.joomla.box](http://phpmyadmin.joomla.box) if you setup your hosts file correctly, as described in the installation steps.
 
-For more information, please refer to the [Joomla Console](http://www.joomlatools.com/developer/tools/console) repository.
+We highly recommend the [Sequel Pro](http://www.sequelpro.com/) desktop client on Mac OS X over the use of phpMyAdmin however. You can connect to the database using a desktop client with the following details:
 
-*Note*: The script also creates a new virtual host when creating a new site. If you add the following line into your /etc/hosts file on your host machine:
+* Host: 33.33.33.58
+* User: root
+* Password: root
 
-    33.33.33.58 testsite.dev
+## Where are the error logs and access logs?
 
-you can access it directly at http://testsite.dev.
+You can access Apache, MySQL and system logs via the browser at [joomla.box/pimpmylog](http://joomla.box/pimpmylog).
 
-## How should I test my component's code on the Vagrant box?
+## How to test e-mails?
 
-Let's say you are working on your own Joomla component called _Awesome_ and want to continue working on it using the Vagrant box. You can use the _Projects_ folder in the repository root for your projects.
+We have installed [MailCatcher](http://mailcatcher.me) on the box. You can access it via the [dashboard](http://joomla.box).
 
-But if you would like to use a custom folder we should start by making the source code available to the Vagrant box. Let's assume the source code is located at _/Users/myname/Projects/awesome_ :
+PHP is configured to automatically send any mail to MailCatcher. You can test this real quick by creating a new Joomla site, creating a contact form and submitting it. Your message will show up in [MailCatcher](http://joomla.box:1080/) immediately.
 
-Copy the ```config.custom.yaml-dist``` file to ```config.custom.yaml``` and edit with your favorite text editor. Make it look like this:
+If your applications use SMTP, you can configure your SMTP server as follows to send everything to MailCatcher:
 
-    synced_folders:
-      /home/vagrant/Projects: /Users/myname/Projects
+* IP: 127.0.0.1
+* Port: 1025
 
-Save this file and restart the Vagrant box. (```vagrant reload```)
-
-The "Projects" folder from your host machine will now be available inside the Vagrant box through _/home/vagrant/Projects_.
-
-Next step is to create the new site you'll be working on. SSH into the box (```vagrant ssh```) and execute the following command: 
-
-    joomla site:create testsite --joomla=3.2 --symlink=awesome
-
-Or to symlink your code into an existing site:
-
-    joomla extension:symlink testsite awesome
-
-Run discover install to make your component available to Joomla and you are good to go!
-
-For more information on the symlinker, refer to the [Joomla Console](http://www.joomlatools.com/developer/tools/console) documentation or run:
-
-      joomla extension:symlink  --help    
-    
-## Where can I find phpmyadmin?
+## Where can I find phpMyAdmin?
 
 After you modify /etc/hosts as shown above you can use phpMyAdmin at
 
-    http://phpmyadmin.joomla.dev
-    
-## I don't like the command line! Is there another way to manage the Vagrant box?
+    http://phpmyadmin.joomla.box
 
-There's a great tool we use to start and manage our Vagrant boxes, called [Vagrant Manager](http://vagrantmanager.com/).  It is currently available on OS X only, though!
+## How can I use PhpMetrics?
 
-To create a new Joomla site or symlink an extension, you will still need the command line however.
-    
-## Can I use webgrind? 
+To gather various metrics about your PHP project, you can invoke [PhpMetrics](https://github.com/Halleck45/PhpMetrics) from the command line. Please note that PhpMetrics uses a lot of memory and so it is best to increase the allowed memory limit first.
+
+Let's say you want to analyze the `mysite` site which you installed using `joomla site:create mysite`:
+
+1. Open up the [web terminal](http://joomla.box:3000)
+1. Increase the memory limit:
+
+{% highlight bash %}
+box php:ini memory_limit 1024M
+{% endhighlight %}
+
+1. Now run phpmetrics:
+
+{% highlight bash %}
+phpmetrics --report-html=/var/www/mysite/report.html /var/www/mysite
+{% endhighlight %}
+
+1. Revert the memory limit to its original value:
+
+{% highlight bash %}
+box php:ini memory_limit 256M
+{% endhighlight %}
+
+1. Read the generated report at [joomla.box/mysite/report.html](http://joomla.box/mysite/report.html).
+
+## How to use Webgrind?
 
 After you modify /etc/hosts as shown above go to
 
-    http://webgrind.joomla.dev
-    
-## Can I sftp into my box?
+    http://webgrind.joomla.box
+
+## Can I SFTP into my box?
 
 Use following details to connect:
 
-    Host: 127.0.0.1
-    Port: 2222
-    User: vagrant
-    Password: vagrant
-    
+* Host: 127.0.0.1
+* Port: 2222
+* User: vagrant
+* Password: vagrant
+
 ## How do I stop the box?
 
-Simply type
+Run `vagrant halt` to stop the box.
 
-```
-vagrant halt
-```
+## How can I update the box to the latest version?
 
-## How do I destroy a box? 
-	
-To completely destroy the virtual image, run 
+If a new version of the box is released, Vagrant will let you know when you run `vagrant up`. It's important to note that Vagrant stores the original box separately. Your running Vagrant environment is actually a _copy_ of that box. From the [Vagrant docs](https://docs.vagrantup.com/v2/boxes/versioning.html):
 
-```
-vagrant destroy 
-```
-To create the image again run: 
+> Finally, you can update boxes with vagrant box update. This will download and install the new box. This will not magically update running Vagrant environments. If a Vagrant environment is already running, you'll have to destroy and recreate it to acquire the new updates in the box. The update command just downloads these updates locally.
 
-```
+In short: if you have important data *on* the box, be sure to back it up first. You could use our [backup plugin](https://github.com/joomlatools/joomla-console-backup) to backup website files and databases.
+
+In summary, you need to run these commands to update a box:
+
+{% highlight bash %}
+vagrant box update
+vagrant destroy
 vagrant up
-```
+{% endhighlight %}
+
+## How do I destroy a box?
+
+To completely destroy the virtual image, run `vagrant destroy`.
+
+To create the image again run `vagrant up`.

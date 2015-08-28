@@ -1,5 +1,4 @@
-/_book
+/.sass-cache
+/_site
 /node_modules
-!/node_modules/gitbook-plugin-apiary
-bower_components
-
+/bower_components

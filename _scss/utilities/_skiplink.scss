@@ -1,0 +1,28 @@
+.skip {
+  background: $jts-brand;
+
+  .container__skip {
+    @include clearfix;
+    margin: 0 auto;
+    max-width: $jts-maxwidth;
+  }
+
+  a {
+    display: block;
+    float: left;
+    padding: 0 24px;
+    color: #fff;
+    height: 0;
+    overflow: hidden;
+
+    &:focus {
+      margin: 10px;
+      height: 24px;
+      overflow: visible;
+    }
+
+    &:visited {
+      color: #fff;
+    }
+  }
+}

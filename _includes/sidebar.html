@@ -1,0 +1,57 @@
+<ul>
+    <li>
+        <a{% if page.url == '/index.html' %} class="current"{% endif %} href="/">Introduction</a>
+    </li>
+{% for link in site.data.pages.pages %}
+
+    {% assign hasLevel1 = link.level1 != undefined %}
+
+    {% assign level0 = page.url | remove: '.html' | remove_first: '/' | split: '/' %}
+    {% assign level0 = level0.first | capitalize %}
+    {% capture url %}/{{ link.title | slugify }}.html{% endcapture %}
+
+    <li{% if level0 == link.title %} class="active"{% endif %}>
+        <a{% if page.url == url %} class="current"{% endif %} href="{{ url }}">{{ link.title }}</a>
+
+
+        {% if hasLevel1 and level0 == link.title %}
+        <ul>
+        {% for level1 in link.level1 %}
+            {% capture path %}/{{ link.title | slugify }}/{{ level1.title | slugify }}{% endcapture %}
+            {% capture url %}{{ path }}.html{% endcapture %}
+            <li{% if page.url contains path %} class="active"{% endif %}>
+                <a{% if page.url == url %} class="current"{% endif %} href="{{ url }}">{{ level1.title }}</a>
+
+                {% assign hasLevel2 = level1.level2 != undefined %}
+
+                {% if hasLevel2 %}
+                <ul>
+                    {% for level2 in level1.level2 %}
+                    {% capture path %}/{{ link.title | slugify }}/{{ level1.title | slugify }}/{{ level2.title | slugify }}{% endcapture %}
+                    {% capture url %}{{ path }}.html{% endcapture %}
+                    <li{% if page.url contains path %} class="active"{% endif %}>
+                        <a{% if page.url == url %} class="current"{% endif %} href="{{ url }}">{{ level2.title }}</a>
+
+                        {% assign hasLevel3 = level2.level3 != undefined %}
+
+                        {% if hasLevel3 %}
+                        <ul>
+                            {% for level3 in level2.level3 %}
+                            {% capture url %}/{{ link.title | slugify }}/{{ level1.title | slugify }}/{{ level2.title | slugify }}/{{ level3.title | slugify }}.html{% endcapture %}
+                            <li{% if url == page.url %} class="active"{% endif %}>
+                            <a{% if url == page.url %} class="current"{% endif %} href="{{ url }}">{{ level3.title }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        </li>
+{% endfor %}
+</ul>
