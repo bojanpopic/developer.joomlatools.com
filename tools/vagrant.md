@@ -25,7 +25,7 @@ The box comes with the following technologies installed and configured by defaul
 
 On top of that, you have these developer tools at your disposal right away:
 
-* [Joomla Console](http://github.com/joomlatools/joomla-console)
+* [Joomla Console](console.html)
 * [Composer](https://getcomposer.org/)
 * [PhpMetrics](https://github.com/Halleck45/PhpMetrics)
 * [Webgrind](https://code.google.com/p/webgrind/)

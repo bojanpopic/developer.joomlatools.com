@@ -12,7 +12,10 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        src: ['bower_components/shared.joomlatools.com/files/images/*.png'],
+                        src: [
+                            'bower_components/shared.joomlatools.com/files/images/*.png',
+                            'bower_components/shared.joomlatools.com/files/images/*.ico'
+                        ],
                         dest: 'images',
                         flatten: true
                     }

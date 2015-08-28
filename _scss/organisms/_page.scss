@@ -28,14 +28,14 @@
     margin: 0;
     padding: 0;
 
-    ul ul {
+    ul {
       display: none;
     }
 
     li {
-      &.depth-2 a { padding-left: 30px; }
-      &.depth-3 a { padding-left: 45px; }
-      &.depth-4 a { padding-left: 60px; }
+      ul a        { padding-left: 30px; }
+      ul ul a     { padding-left: 45px; }
+      ul ul ul a  { padding-left: 60px; }
 
       &.active {
         > ul {
@@ -80,7 +80,7 @@
 .scrollable {
   position: relative;
   flex: 1 1 auto;
-  max-width: 800px;
+  max-width: 900px;
   padding: 20px 50px;
 }
 

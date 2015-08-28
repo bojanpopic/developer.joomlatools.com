@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Plugins
+index: 5
 ---
 
 * Table of Content
@@ -8,11 +9,11 @@ title: Plugins
 
 ## Introduction
 
-In [Nooku Framework](http://www.nooku.org/) any controller, view or model method that has an `_action` prefix can be intercepted via the Nooku Event API which is can be subscribed to by the Joomla plugin system. In contrast to Joomla, events in Nooku are not hardcoded, but are generated on the fly in a consistent and standardized fashion.
+In [Joomlatools Framework](/framework.html/) any controller, view or model method that has an `_action` prefix can be intercepted via the Joomlatools Framework Event API which is can be subscribed to by the Joomla plugin system. In contrast to Joomla, events in Joomlatools Framework are not hardcoded, but are generated on the fly in a consistent and standardized fashion.
 
 Each controller, view and model action is exposed through a **before** and **after** command which is translated by a special event command handler and then is broadcast to any object that subscribes to it. 
 
-This [inversion of control](http://en.wikipedia.org/wiki/Inversion_of_control) mechanism allows for the intercepting of actions both before and after they occur. Extensions that use the Nooku Framework can take advantage of this fact to improve the granularity of the functionality that they can offer up for customization. A component inverts nearly complete control of its data flow out of the box.
+This [inversion of control](http://en.wikipedia.org/wiki/Inversion_of_control) mechanism allows for the intercepting of actions both before and after they occur. Extensions that use the Joomlatools Framework can take advantage of this fact to improve the granularity of the functionality that they can offer up for customization. A component inverts nearly complete control of its data flow out of the box.
 
 Here we provide an overview of the concepts, classes and objects involved in creating a Joomla plugin that can intercept action events.
 
@@ -47,7 +48,7 @@ class PlgAcmeExample extends PlgKoowaSubscriber
 
 The above code shows some important concepts that we'll refer to throughout in this guide, but it is non-exhaustive. We will show you how all the pieces fit together to build events dynamically in the sections to come. 
 
->For a really good specific example of building a working plugin checkout the [DOCman Plugin Tutorial](extensions/docman/plugins.md).
+>For a really good specific example of building a working plugin checkout the [DOCman Plugin Tutorial](extensions/docman/plugins.html).
 
 
 ## The MVC layer
@@ -72,11 +73,11 @@ We discuss each in more detail below in [MVC Actions and Events](#mvc-actions-an
 
 ## Plugin classes
 
-There are two plugin classes that are important for you to know about to start building your own plugins. The first is `PlgKoowaAbstract` and the second is `PlgKoowaSubscriber`. They reside in the [library's plugin folder](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/plugins/koowa) but we describe them a little here.
+There are two plugin classes that are important for you to know about to start building your own plugins. The first is `PlgKoowaAbstract` and the second is `PlgKoowaSubscriber`. They reside in the [library's plugin directory](https://github.com/nooku/nooku-framework/tree/master/code/libraries/koowa/plugins/koowa) but we describe them a little here.
 
 ### PlgKoowaSubscriber: The actual subscriber 
 
-Nooku provides the Event API, but for a Joomla plugin to make use of it needs to become a 'subscriber'.  To make that happen the plugin simply needs to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). 
+Joomlatools Framework provides the Event API, but for a Joomla plugin to make use of it needs to become a 'subscriber'.  To make that happen the plugin simply needs to extend from [`PlgKoowaSubscriber`](https://github.com/nooku/nooku-framework/blob/master/code/libraries/koowa/plugins/koowa/subscriber.php). 
 
  As soon as a `PlgKoowaSubscriber` plugin is instantiated it loads up the singleton instance of the `KEventPublisher`, and adds its own callable methods that begin with the letters **'on'** as event listeners for each of the similarly named events. In other words, it `subscribes` those `on` methods to specific `on` events. 
 
@@ -273,7 +274,7 @@ This represents the minimum required contents of the manifest file. You can adju
 can configure for the XML file, but you need to specify at least these. For more information consult the [Joomla 2.5+ documentation](https://docs.joomla.org/J2.5:Creating_a_Plugin_for_Joomla).
 
 The XML file should have the same name as your plugin (see the `<filename plugin="example">` line). Your XML file would in this example
-be named `example.xml`. Lastly, the `group` attribute of the `extension` tag tells Joomla in which folder to place your plugin, but also should match the name of the component that you want to augment. In our example, this plugin is specifically for our imaginary `com_acme` component extension.
+be named `example.xml`. Lastly, the `group` attribute of the `extension` tag tells Joomla in which directory to place your plugin, but also should match the name of the component that you want to augment. In our example, this plugin is specifically for our imaginary `com_acme` component extension.
 
 
 #### PHP Class Naming
@@ -362,4 +363,4 @@ If the extension were to have another entity called `Foo`, then there are twenty
 
 ## In closing
 
-Component extensions developed with the Nooku Framework exposes all of its MVC actions to the Event API, both before and after they fire. This gives automatic and granular opportunities for sites that use the component to alter its functionality at run time with normal Joomla plugins. We've taken a look at the major areas to help you understand what is available in Joomlatools component extensions, and what you could have in your own Nooku Framework powered components. 
+Component extensions developed with the Joomlatools Framework exposes all of its MVC actions to the Event API, both before and after they fire. This gives automatic and granular opportunities for sites that use the component to alter its functionality at run time with normal Joomla plugins. We've taken a look at the major areas to help you understand what is available in Joomlatools component extensions, and what you could have in your own Joomlatools Framework powered components. 
