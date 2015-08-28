@@ -3,6 +3,5 @@ layout: default
 title: Models
 ---
 
-## Database Behaviors
-
-* [Parameterizable](/framework/models/database/behaviors/parameterizable.html)
+* [Model Behaviors](/framework/models/behaviors.html)
+* [Database Behaviors](/framework/models/database/behaviors.html)

@@ -29,6 +29,7 @@ pages:
          - title: Object Management
       - title: Models
         level2:
+          - title: Behaviors
           - title: Database
             level3:
               - title: Behaviors
@@ -46,14 +47,9 @@ pages:
             level3:
               - title: Structure
               - title: Fetching
-      - title: Behaviors
+      - title: Controllers
         level2:
-          - title: Database
-            level3:
-              - title: Parameterizable
-          - title: Controller
-          - title: Model
-          - title: View
+          - title: Behaviors
       - title: Plugins
         level2:
           - title: Dispatcher Events
