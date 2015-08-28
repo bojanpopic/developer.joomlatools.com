@@ -37,9 +37,23 @@
                         {% if hasLevel3 %}
                         <ul>
                             {% for level3 in level2.level3 %}
-                            {% capture url %}/{{ link.title | slugify }}/{{ level1.title | slugify }}/{{ level2.title | slugify }}/{{ level3.title | slugify }}.html{% endcapture %}
-                            <li{% if url == page.url %} class="active"{% endif %}>
-                            <a{% if url == page.url %} class="current"{% endif %} href="{{ url }}">{{ level3.title }}</a>
+                            {% capture path %}/{{ link.title | slugify }}/{{ level1.title | slugify }}/{{ level2.title | slugify }}/{{ level3.title | slugify }}{% endcapture %}
+                            {% capture url %}{{ path }}.html{% endcapture %}
+                            <li{% if url contains path %} class="active"{% endif %}>
+                                <a{% if page.url == url %} class="current"{% endif %} href="{{ url }}">{{ level3.title }}</a>
+
+                                {% assign hasLevel4 = level3.level4 != undefined %}
+
+                                {% if hasLevel3 %}
+                                <ul>
+                                    {% for level4 in level3.level4 %}
+                                    {% capture url %}/{{ link.title | slugify }}/{{ level1.title | slugify }}/{{ level2.title | slugify }}/{{ level3.title | slugify }}/{{ level4.title | slugify }}.html{% endcapture %}
+                                    <li{% if url == page.url %} class="active"{% endif %}>
+                                        <a{% if url == page.url %} class="current"{% endif %} href="{{ url }}">{{ level4.title }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
                             </li>
                             {% endfor %}
                         </ul>
