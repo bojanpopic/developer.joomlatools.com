@@ -1,0 +1,14 @@
+#markdown-toc {
+  border-left: 4px solid $jts-brand;
+  line-height: 1.8em;
+
+  &, ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 12px;
+  }
+
+  & {
+    margin-bottom: 1.8em;
+  }
+}

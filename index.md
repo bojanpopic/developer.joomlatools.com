@@ -3,19 +3,27 @@ layout: default
 title: Joomlatools Developer Zone
 ---
 
-## Introduction
+## Extensions
 
-If you are a web developer and you create custom Joomla websites or components, you require tools that allow you to focus on what matters most: solving your client's problems.
+If you are looking to customize some functionality in our Joomlatools extensions you have come to the right place. Extension specific information will help to get exactly what you want out of our extension.
 
-On our Joomlatools developer portal you will find developer tools, tutorials, code snippets and examples we use ourselves to speed up, improve and simplify all our Joomla related development work.
+* [DOCman](/extensions/docman.html)
+* [LOGman](/extensions/logman.html)
 
-In the months to come we will be adding more goodies. 
-Check back often and happy coding!
+## Framework
 
-## Contributing
+[Joomlatools Framework](/framework.html) is a modern PHP framework, which provides a number of amazing features to extension that use it. It provides an unparalleled combination of **flexibility**, **re-usability** and **extensibility**.
 
-Check our [contributing](https://github.com/joomlatools/developer.joomlatools.com/blob/master/CONTRIBUTING.md) guide.
+All Joomlatools extensions are built on top of this framework.
 
-## License
+## Tools
 
-This documentation is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. See the accompanying `LICENSE` file for more information.
+We developed a set of free and open source Joomla development tools. In fact, they aren't just for extension developers, but are ideal for template work, and general Joomla site building.
+
+* [Composer](/tools/composer.html) - Extension installer for Joomla
+* [Console](/tools/console.html) - Command line interface for Joomla
+* [Vagrant](/tools/vagrant.html) - Preconfigured Vagrant box for Joomla
+
+<span class="note">
+**License & Contributions**: This documentation is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. See the accompanying [LICENSE](https://github.com/joomlatools/developer.joomlatools.com/blob/master/LICENSE) and [CONTRIBUTING](https://github.com/joomlatools/developer.joomlatools.com/blob/master/CONTRIBUTING.md) file for more information.
+</span>

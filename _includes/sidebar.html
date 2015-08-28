@@ -1,50 +1,57 @@
-{% assign depth-previous = "0" %}
-{% assign entries = site.pages | sort: "path" %}
-{% assign total = site.pages | size %}
-
 <ul>
     <li>
-        <a class="{% if page.url contains "/index.html" %} current{% endif %}" href="/index.html">Introduction</a>
+        <a{% if page.url == '/index.html' %} class="current"{% endif %} href="/">Introduction</a>
     </li>
-</ul>
+{% for link in site.data.pages.pages %}
 
-{% for entry in entries %}
-    {% assign i = i | plus: 1 %}
+    {% assign hasLevel1 = link.level1 != undefined %}
 
-    {% if entry.url != "/index.html" and entry.url != "/404.html" %}
-        {% assign page-url = page.url | remove: ".html" %}
-        {% assign entry-url = entry.url | remove: ".html" %}
+    {% assign level0 = page.url | remove: '.html' | remove_first: '/' | split: '/' %}
+    {% assign level0 = level0.first | capitalize %}
+    {% capture url %}/{{ link.title | slugify }}.html{% endcapture %}
 
-        {% assign depth = entry.url | remove_first: "/" | split: "/" | size %}
-        {% assign level = depth | minus: depth-previous %}
+    <li{% if level0 == link.title %} class="active"{% endif %}>
+        <a{% if page.url == url %} class="current"{% endif %} href="{{ url }}">{{ link.title }}</a>
 
-        {% if level != 0 %}
-            {% if level <= 0 %}
-                {% assign level-bis = level | remove: '-' %}
-                {% for num in (1...level-bis) %}
-                     </li></ul>
-                {% endfor %}
-            {% else %}
-                {% for num in (1...level) %}
-                    <ul>
-                {% endfor %}
-            {% endif %}
+
+        {% if hasLevel1 and level0 == link.title %}
+        <ul>
+        {% for level1 in link.level1 %}
+            {% capture path %}/{{ link.title | slugify }}/{{ level1.title | slugify }}{% endcapture %}
+            {% capture url %}{{ path }}.html{% endcapture %}
+            <li{% if page.url contains path %} class="active"{% endif %}>
+                <a{% if page.url == url %} class="current"{% endif %} href="{{ url }}">{{ level1.title }}</a>
+
+                {% assign hasLevel2 = level1.level2 != undefined %}
+
+                {% if hasLevel2 %}
+                <ul>
+                    {% for level2 in level1.level2 %}
+                    {% capture path %}/{{ link.title | slugify }}/{{ level1.title | slugify }}/{{ level2.title | slugify }}{% endcapture %}
+                    {% capture url %}{{ path }}.html{% endcapture %}
+                    <li{% if page.url contains path %} class="active"{% endif %}>
+                        <a{% if page.url == url %} class="current"{% endif %} href="{{ url }}">{{ level2.title }}</a>
+
+                        {% assign hasLevel3 = level2.level3 != undefined %}
+
+                        {% if hasLevel3 %}
+                        <ul>
+                            {% for level3 in level2.level3 %}
+                            {% capture url %}/{{ link.title | slugify }}/{{ level1.title | slugify }}/{{ level2.title | slugify }}/{{ level3.title | slugify }}.html{% endcapture %}
+                            <li{% if url == page.url %} class="active"{% endif %}>
+                            <a{% if url == page.url %} class="current"{% endif %} href="{{ url }}">{{ level3.title }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
         {% endif %}
-
-        {% if level == 0 %}
         </li>
-        {% endif %}
-
-        <li class="depth-{{ depth }}{% if page-url contains entry-url %} active{% endif %}">
-            <a class="{% if page.url contains entry.url %} current{% endif %}" href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title }}</a>
-
-        {% if total == i %}
-            {% for num in (1...depth) %}
-                </li></ul>
-            {% endfor %}
-        {% endif %}
-
-        {% assign depth-previous = depth %}
-    {% endif %}
-
 {% endfor %}
+</ul>
