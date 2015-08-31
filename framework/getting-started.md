@@ -7,6 +7,6 @@ The best way to showcase the core functionality of the Joomlatools Framework is 
 
 Building a Todo management component will help get you acquainted with the fundamental concepts and some of the more advanced features that the framework provides.
 
-* [Setup](getting-started/1-setup.html)
-* [Frontend](getting-started/2-frontend.html)
-* [Backend](getting-started/3-backend.html)
+* [Setup](getting-started/setup.html)
+* [Frontend](getting-started/frontend.html)
+* [Backend](getting-started/backend.html)
