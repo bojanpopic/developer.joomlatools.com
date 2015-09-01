@@ -93,9 +93,9 @@ Writing templates is like writing regular HTML and PHP, but simpler. Add the fol
 <ul>
     <? foreach($items as $item) : ?>
     <li>
-        <?=$item->id?>.
-        <?=$item->title?>
-        <?=$item->text?>
+        <?= $item->id ?>.
+        <?= $item->title ?>
+        <?= $item->description ?>
     </li>
     <? endforeach; ?>
 </ul>
