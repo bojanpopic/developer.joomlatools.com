@@ -10,6 +10,8 @@ $border-box-sizing: false; // Used by bourbon/neat
 @import "../bower_components/shared.joomlatools.com/files/scss/_variables";
 @import "utilities/accessibility";
 
+@import "misc/mixins";
+
 @import "atoms/a";
 @import "atoms/blockquote";
 @import "atoms/body";
@@ -21,6 +23,7 @@ $border-box-sizing: false; // Used by bourbon/neat
 @import "molecules/note";
 @import "molecules/toc";
 @import "organisms/page";
+@import "utilities/grid";
 @import "utilities/skiplink";
 @import "utilities/syntax";
 

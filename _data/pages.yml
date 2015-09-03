@@ -20,7 +20,6 @@ pages:
     level1:
       - title: Getting Started
         level2:
-          - title: Setup
           - title: Frontend
           - title: Backend
       - title: Essentials
