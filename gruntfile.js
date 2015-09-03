@@ -157,6 +157,7 @@ module.exports = function(grunt) {
                     '404.html',
                     '_config.yml',
                     '_config.dev.yml',
+                    'contribute.md',
                     'extensions.md',
                     'framework.md',
                     'index.md',
