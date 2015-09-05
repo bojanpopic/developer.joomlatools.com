@@ -18,4 +18,4 @@ For more information, take a look at our [Joomlatools Vagrant box](../vagrant.ht
 
 ## Can I add custom functionality?
 
-You most certainly can! We have created a plugin system that allows you to insert 3rd part and custom commands very easily. See the [Plugins](3-plugins.html) section for more information and examples.
+You most certainly can! We have created a plugin system that allows you to insert 3rd party and custom commands very easily. See the [Plugins](3-plugins.html) section for more information and examples.
