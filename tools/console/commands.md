@@ -21,9 +21,9 @@ title: Commands
 				{% if info.name == command %}
 {{ info.description }}
 
-* Syntax: `{{ info.usage }}`
+* Syntax: `joomla {{ info.usage }}`
 
-{{ info.help }}
+{{ info.help | process_help }}
 					
 					{% break %}
 				{% endif %} 
