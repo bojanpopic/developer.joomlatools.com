@@ -62,6 +62,7 @@ pages:
         level2:
           - title: Installation
           - title: Usage
+          - title: Commands
           - title: Plugins
           - title: FAQ
       - title: Vagrant

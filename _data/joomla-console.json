@@ -1,0 +1,3703 @@
+{
+  "commands": [
+    {
+      "name": "help",
+      "usage": [
+        "help [--xml] [--format FORMAT] [--raw] [--] [<command_name>]"
+      ],
+      "description": "Displays help for a command",
+      "help": "The <info>help</info> command displays help for a given command:\n\n  <info>php /home/vagrant/.composer/vendor/bin/joomla help list</info>\n\nYou can also output the help in other formats by using the <comment>--format</comment> option:\n\n  <info>php /home/vagrant/.composer/vendor/bin/joomla help --format=xml list</info>\n\nTo display the list of available commands, please use the <info>list</info> command.",
+      "definition": {
+        "arguments": {
+          "command_name": {
+            "name": "command_name",
+            "is_required": false,
+            "is_array": false,
+            "description": "The command name",
+            "default": "help"
+          }
+        },
+        "options": {
+          "xml": {
+            "name": "--xml",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "To output help as XML",
+            "default": false
+          },
+          "format": {
+            "name": "--format",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "The output format (txt, xml, json, or md)",
+            "default": "txt"
+          },
+          "raw": {
+            "name": "--raw",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "To output raw command help",
+            "default": false
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "list",
+      "usage": [
+        "list [--xml] [--raw] [--format FORMAT] [--] [<namespace>]"
+      ],
+      "description": "Lists commands",
+      "help": "The <info>list</info> command lists all commands:\n\n  <info>php /home/vagrant/.composer/vendor/bin/joomla list</info>\n\nYou can also display the commands for a specific namespace:\n\n  <info>php /home/vagrant/.composer/vendor/bin/joomla list test</info>\n\nYou can also output the information in other formats by using the <comment>--format</comment> option:\n\n  <info>php /home/vagrant/.composer/vendor/bin/joomla list --format=xml</info>\n\nIt's also possible to get raw list of commands (useful for embedding command runner):\n\n  <info>php /home/vagrant/.composer/vendor/bin/joomla list --raw</info>",
+      "definition": {
+        "arguments": {
+          "namespace": {
+            "name": "namespace",
+            "is_required": false,
+            "is_array": false,
+            "description": "The namespace name",
+            "default": null
+          }
+        },
+        "options": {
+          "xml": {
+            "name": "--xml",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "To output list as XML",
+            "default": false
+          },
+          "raw": {
+            "name": "--raw",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "To output raw command list",
+            "default": false
+          },
+          "format": {
+            "name": "--format",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "The output format (txt, xml, json, or md)",
+            "default": "txt"
+          }
+        }
+      }
+    },
+    {
+      "name": "symlink",
+      "usage": [
+        "symlink <source> <target>"
+      ],
+      "description": "Symlink extensions into Joomla sites for easier development",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "source": {
+            "name": "source",
+            "is_required": true,
+            "is_array": false,
+            "description": "Source dir (usually from an IDE workspace)",
+            "default": null
+          },
+          "target": {
+            "name": "target",
+            "is_required": true,
+            "is_array": false,
+            "description": "Target dir (usually a Joomla site)",
+            "default": null
+          }
+        },
+        "options": {
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "versions",
+      "usage": [
+        "versions [--refresh] [--clear-cache] [--repo REPO]"
+      ],
+      "description": "Show available versions in Joomla Git repository",
+      "help": "",
+      "definition": {
+        "arguments": [],
+        "options": {
+          "refresh": {
+            "name": "--refresh",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Refresh the versions cache",
+            "default": false
+          },
+          "clear-cache": {
+            "name": "--clear-cache",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Clear the downloaded files cache",
+            "default": false
+          },
+          "repo": {
+            "name": "--repo",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Alternative Git repository to clone. To use joomlatools/joomla-platform, use --repo=platform.",
+            "default": "https://github.com/joomla/joomla-cms.git"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "cache:clear",
+      "usage": [
+        "cache:clear [--www WWW] [--application-url APPLICATION-URL] [-g|--group GROUP] [-c|--client CLIENT] [--] <site>"
+      ],
+      "description": "Clear the Joomla cache",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "application-url": {
+            "name": "--application-url",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "URL to access the site via HTTP. Used for clearing APC cache using a temporary script that we access via HTTP since we cannot clear APC over the command line.",
+            "default": "http://localhost/<site>"
+          },
+          "group": {
+            "name": "--group",
+            "shortcut": "-g",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": true,
+            "description": "Specify a cache group to delete",
+            "default": []
+          },
+          "client": {
+            "name": "--client",
+            "shortcut": "-c",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Specify the client cache to delete",
+            "default": 0
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "cache:list",
+      "usage": [
+        "cache:list [--www WWW] [--application-url APPLICATION-URL] [-c|--client CLIENT] [--] <site>"
+      ],
+      "description": "List all caches for a client",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "application-url": {
+            "name": "--application-url",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "URL to access the site via HTTP. Used for clearing APC cache using a temporary script that we access via HTTP since we cannot clear APC over the command line.",
+            "default": "http://localhost/<site>"
+          },
+          "client": {
+            "name": "--client",
+            "shortcut": "-c",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Specify the client cache to list",
+            "default": 0
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "cache:purge",
+      "usage": [
+        "cache:purge [--www WWW] [--application-url APPLICATION-URL] [--] <site>"
+      ],
+      "description": "Purge all expired cache files",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "application-url": {
+            "name": "--application-url",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "URL to access the site via HTTP. Used for clearing APC cache using a temporary script that we access via HTTP since we cannot clear APC over the command line.",
+            "default": "http://localhost/<site>"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "database:drop",
+      "usage": [
+        "database:drop [--www WWW] [-L|--mysql-login MYSQL-LOGIN] [-H|--mysql-host MYSQL-HOST] [--mysql_db_prefix MYSQL_DB_PREFIX] [-db|--mysql-database MYSQL-DATABASE] [--mysql-driver MYSQL-DRIVER] [--] <site>"
+      ],
+      "description": "Drop the site's database",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "mysql-login": {
+            "name": "--mysql-login",
+            "shortcut": "-L",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL credentials in the form of user:password",
+            "default": "root:root"
+          },
+          "mysql-host": {
+            "name": "--mysql-host",
+            "shortcut": "-H",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL host",
+            "default": "localhost"
+          },
+          "mysql_db_prefix": {
+            "name": "--mysql_db_prefix",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database prefix",
+            "default": "sites_"
+          },
+          "mysql-database": {
+            "name": "--mysql-database",
+            "shortcut": "-db",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database name. If set, the --mysql_db_prefix option will be ignored.",
+            "default": null
+          },
+          "mysql-driver": {
+            "name": "--mysql-driver",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL driver",
+            "default": "mysqli"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "database:install",
+      "usage": [
+        "database:install [--www WWW] [-L|--mysql-login MYSQL-LOGIN] [-H|--mysql-host MYSQL-HOST] [--mysql_db_prefix MYSQL_DB_PREFIX] [-db|--mysql-database MYSQL-DATABASE] [--mysql-driver MYSQL-DRIVER] [--sample-data SAMPLE-DATA] [--sql-dumps SQL-DUMPS] [-d|--drop] [-e|--skip-exists-check] [--] <site>"
+      ],
+      "description": "Install the Joomla database",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "mysql-login": {
+            "name": "--mysql-login",
+            "shortcut": "-L",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL credentials in the form of user:password",
+            "default": "root:root"
+          },
+          "mysql-host": {
+            "name": "--mysql-host",
+            "shortcut": "-H",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL host",
+            "default": "localhost"
+          },
+          "mysql_db_prefix": {
+            "name": "--mysql_db_prefix",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database prefix",
+            "default": "sites_"
+          },
+          "mysql-database": {
+            "name": "--mysql-database",
+            "shortcut": "-db",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database name. If set, the --mysql_db_prefix option will be ignored.",
+            "default": null
+          },
+          "mysql-driver": {
+            "name": "--mysql-driver",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL driver",
+            "default": "mysqli"
+          },
+          "sample-data": {
+            "name": "--sample-data",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Sample data to install (default|blog|brochure|learn|testing). Ignored if custom dump files are given using --sql-dumps.",
+            "default": null
+          },
+          "sql-dumps": {
+            "name": "--sql-dumps",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": true,
+            "description": "Full path to SQL dump file to import. If not set, the command will use the default Joomla installation files.",
+            "default": []
+          },
+          "drop": {
+            "name": "--drop",
+            "shortcut": "-d",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Drop database if it already exists",
+            "default": false
+          },
+          "skip-exists-check": {
+            "name": "--skip-exists-check",
+            "shortcut": "-e",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not check if database already exists or not.",
+            "default": false
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "extension:disable",
+      "usage": [
+        "extension:disable [--www WWW] [--] <site> <extension>"
+      ],
+      "description": "Disable a Joomla extension",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          },
+          "extension": {
+            "name": "extension",
+            "is_required": true,
+            "is_array": false,
+            "description": "Extension name",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "extension:enable",
+      "usage": [
+        "extension:enable [--www WWW] [--] <site> <extension>"
+      ],
+      "description": "Enable a Joomla extension",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          },
+          "extension": {
+            "name": "extension",
+            "is_required": true,
+            "is_array": false,
+            "description": "Extension name",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "extension:install",
+      "usage": [
+        "extension:install [--www WWW] [--] <site> <extension> (<extension>)..."
+      ],
+      "description": "Install extensions into a site using the discover method",
+      "help": "After copying or symlinking your extension code into the Joomla application, you can use this command to\nhave Joomla automatically find the extension files and install it:\n\n    <info>joomla extension:install testsite com_foobar</info>\n\nThe extension argument should match the element name (<comment>com_foobar</comment>) as defined in your extension XML manifest.\n\nFor more information about Joomla's discover method, refer to the official documentation: https://docs.joomla.org/Help34:Extensions_Extension_Manager_Discover",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          },
+          "extension": {
+            "name": "extension",
+            "is_required": true,
+            "is_array": true,
+            "description": "A list of extensions to install to the site using discover install. Use 'all' to install all discovered extensions.",
+            "default": []
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "extension:installfile",
+      "usage": [
+        "extension:installfile [--www WWW] [--] <site> <extension> (<extension>)..."
+      ],
+      "description": "Install packaged extensions for file or directory into a site",
+      "help": "You can install extensions using their installation packages using this command:\n\n    <info>joomla extension:installfile testsite /home/vagrant/com_component.v1.x.zip /home/vagrant/plg_plugin.v2.x.tar.gz</info>\n\nThis will install both the <comment>com_component.v1.x.zip</comment> and <comment>plg_plugin.v2.x.tar.gz</comment> packages.\nYou can also point to the directory where the extracted package can be found.",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          },
+          "extension": {
+            "name": "extension",
+            "is_required": true,
+            "is_array": true,
+            "description": "A list of full paths to extension packages (file or directory) to install",
+            "default": []
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "extension:register",
+      "usage": [
+        "extension:register [--www WWW] [--folder FOLDER] [--enabled [ENABLED]] [--client_id CLIENT_ID] [--element ELEMENT] [--position POSITION] [--] <site> <extension> [<type>]"
+      ],
+      "description": "Register an extension with the `#__extensions` table.",
+      "help": "You can register your extension in the extensions table without the need for a complete install package containing a valid XML manifest file.\n\n    <info>joomla extension:register testsite com_foobar</info>\n\nThe type of extension that gets registered is based on the first 4 characters of the extension argument you pass in. Example:\n\n* com_ => component\n* mod_ => module\n* plg_ => plugin (the plg_ will get stripped from the element field)\n* lib_ => library\n* pkg_ => package\n* tpl_ => template (the tpl_ will get stripped from the name and element field)\n* lng_ => language\n\nThis example registers an extension of the ‘plugin’ type:\n\n    <info>joomla extension:register testsite plg_foobar</info>\n\nYou can use naming without the type prefixes by adding a type argument to the end of the command:\n\n    <info>joomla extension:register testsite foobar package</info>\n\nIn all cases, if the type is not specified or recognized then the default value, component, will be used.\n\nWhen registering a plugin type you can use the <comment>--folder</comment> option to specify the plugin group that will get registered with the record. This defaults to <comment>system</comment>. Example:\n\n    <info>joomla extension:register testsite foobar plugin --folder=content</info>\n\nFor a language type extension, you should use the <comment>--element</comment> option to ensure your language files can be loaded correctly:\n\n    <info>joomla extension:register testsite spanglish language --element=en-GB</info>\n\nWhen registering a module type extension, you can use the <comment>--position</comment> option to ensure your module displays where you would like it to. A record gets added to the <comment>#_modules</comment> table:\n\n    <info>joomla extension:register testsite mod_foobar --position=debug</info>",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          },
+          "extension": {
+            "name": "extension",
+            "is_required": true,
+            "is_array": false,
+            "description": "Extension name",
+            "default": null
+          },
+          "type": {
+            "name": "type",
+            "is_required": false,
+            "is_array": false,
+            "description": "Type of extension being registered.",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "folder": {
+            "name": "--folder",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Specifically for the Plugin typed extension, default \"system\"",
+            "default": null
+          },
+          "enabled": {
+            "name": "--enabled",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Enabled or not, default is \"1\"",
+            "default": 1
+          },
+          "client_id": {
+            "name": "--client_id",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "\"0\" for Site, \"1\" for Administrator",
+            "default": null
+          },
+          "element": {
+            "name": "--element",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Provide the element name for languages",
+            "default": null
+          },
+          "position": {
+            "name": "--position",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Provide the position the module should appear",
+            "default": null
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "extension:symlink",
+      "usage": [
+        "extension:symlink [--www WWW] [--projects-dir PROJECTS-DIR] [--] <site> <symlink> (<symlink>)..."
+      ],
+      "description": "Symlink projects into a site",
+      "help": "This command will symlink the directories from the <comment>--projects-dir</comment> directory into the given site. This is ideal for testing your custom extensions while you are working on them.\nYour source code should resemble the Joomla directory structure for symlinking to work well. For example, the directory structure of your component should look like this:\n\n administrator/components/com_foobar\n components/com_foobar\n media/com_foobar\n\nTo symlink <comment>com_foobar</comment> into your tesite:\n\n    <info>joomla extension:symlink testsite com_foobar</info>\n\nYou can now use the <comment>extension:register</comment> or <comment>extension:install</comment> commands to make your component available to Joomla.\n\nNote that you can use the <comment>site:create</comment> command to both create a new site and symlink your projects into it using the <comment>--symlink</comment> flag.",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          },
+          "symlink": {
+            "name": "symlink",
+            "is_required": true,
+            "is_array": true,
+            "description": "A list of directories to symlink from projects directory. Use 'all' to symlink every directory.",
+            "default": []
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "projects-dir": {
+            "name": "--projects-dir",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Directory where your custom projects reside",
+            "default": "/home/vagrant/Projects"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "extension:uninstall",
+      "usage": [
+        "extension:uninstall [--www WWW] [--] <site> <extensions> (<extensions>)..."
+      ],
+      "description": "Uninstall un-protected extensions from a site",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          },
+          "extensions": {
+            "name": "extensions",
+            "is_required": true,
+            "is_array": true,
+            "description": "The 3rd party extensions to uninstall from the site",
+            "default": []
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "finder:index",
+      "usage": [
+        "finder:index [--www WWW] [-p|--purge] [--] <site>"
+      ],
+      "description": "Run the Smart Search indexer",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "purge": {
+            "name": "--purge",
+            "shortcut": "-p",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Purge existing indexes first",
+            "default": false
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "finder:purge",
+      "usage": [
+        "finder:purge [--www WWW] [--] <site>"
+      ],
+      "description": "Purge the Smart Search index",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "plugin:install",
+      "usage": [
+        "plugin:install <package>"
+      ],
+      "description": "Install plugin",
+      "help": "You can install plugins into the Joomla Console to add new commands or extend the symlinking logic. Plugins are installed using Composer and must be available on Packagist.\nYou then pass their package name to this command. In the case of our example, the package name is <comment>joomlatools/joomla-console-backup</comment>:\n\n  <info>joomla plugin:install joomlatools/joomla-console-backup</info>\n\nYou can specify a specific version or branch by appending the version number to the package name. Version constraints follow Composer’s convention:\n\n  <info>joomla plugin:install joomlatools/joomla-console-backup:dev-develop</info>\n\nRefer to the online documentation at the following URL on how to write your own plugins: http://developer.joomlatools.com/tools/console/plugins.html#creating-custom-plugins",
+      "definition": {
+        "arguments": {
+          "package": {
+            "name": "package",
+            "is_required": true,
+            "is_array": false,
+            "description": "The Composer package name and version. Example: vendor/foo-bar:1.*",
+            "default": null
+          }
+        },
+        "options": {
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "plugin:list",
+      "usage": [
+        "plugin:list"
+      ],
+      "description": "List installed plugins",
+      "help": "",
+      "definition": {
+        "arguments": [],
+        "options": {
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "plugin:uninstall",
+      "usage": [
+        "plugin:uninstall <package>"
+      ],
+      "description": "Used for uninstalling plugins",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "package": {
+            "name": "package",
+            "is_required": true,
+            "is_array": false,
+            "description": "The composer package containing the plugin to uninstall",
+            "default": null
+          }
+        },
+        "options": {
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "site:checkin",
+      "usage": [
+        "site:checkin [--www WWW] [--user-column USER-COLUMN] [--date-column DATE-COLUMN] [--] <site> [<tables>]..."
+      ],
+      "description": "Checks in all of the database tables of a site",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          },
+          "tables": {
+            "name": "tables",
+            "is_required": false,
+            "is_array": true,
+            "description": "A list of tables to check in",
+            "default": []
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "user-column": {
+            "name": "--user-column",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "The check in user column name",
+            "default": "checked_out"
+          },
+          "date-column": {
+            "name": "--date-column",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "The check in date column name",
+            "default": "checked_out_time"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "site:configure",
+      "usage": [
+        "site:configure [--www WWW] [-L|--mysql-login MYSQL-LOGIN] [-H|--mysql-host MYSQL-HOST] [--mysql_db_prefix MYSQL_DB_PREFIX] [-db|--mysql-database MYSQL-DATABASE] [--mysql-driver MYSQL-DRIVER] [--overwrite] [--interactive] [--] <site>"
+      ],
+      "description": "Configure a Joomla site",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "mysql-login": {
+            "name": "--mysql-login",
+            "shortcut": "-L",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL credentials in the form of user:password",
+            "default": "root:root"
+          },
+          "mysql-host": {
+            "name": "--mysql-host",
+            "shortcut": "-H",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL host",
+            "default": "localhost"
+          },
+          "mysql_db_prefix": {
+            "name": "--mysql_db_prefix",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database prefix",
+            "default": "sites_"
+          },
+          "mysql-database": {
+            "name": "--mysql-database",
+            "shortcut": "-db",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database name. If set, the --mysql_db_prefix option will be ignored.",
+            "default": null
+          },
+          "mysql-driver": {
+            "name": "--mysql-driver",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL driver",
+            "default": "mysqli"
+          },
+          "overwrite": {
+            "name": "--overwrite",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Overwrite configuration.php or .env file if it already exists",
+            "default": false
+          },
+          "interactive": {
+            "name": "--interactive",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Prompt for configuration details",
+            "default": false
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "site:create",
+      "usage": [
+        "site:create [--www WWW] [-L|--mysql-login MYSQL-LOGIN] [-H|--mysql-host MYSQL-HOST] [--mysql_db_prefix MYSQL_DB_PREFIX] [-db|--mysql-database MYSQL-DATABASE] [--mysql-driver MYSQL-DRIVER] [--release RELEASE] [--sample-data SAMPLE-DATA] [--symlink SYMLINK] [--repo REPO] [--clear-cache] [--projects-dir PROJECTS-DIR] [--disable-ssl] [--ssl-crt SSL-CRT] [--ssl-key SSL-KEY] [--ssl-port SSL-PORT] [--interactive] [--] <site>"
+      ],
+      "description": "Create a new Joomla site from scratch",
+      "help": "To create a site with the latest Joomla version, run:\n\n   <info>joomla site:create foobar</info>\n\nThe newly installed site will be available at <comment>/var/www/foobar</comment> and <comment>foobar.dev</comment> after that. You can login into your fresh Joomla installation using these credentials: admin/admin.\nBy default, the web server root is set to <comment>/var/www</comment>. You can pass <comment>–www=/my/server/path</comment> to commands for custom values.\n\nYou can choose the Joomla version or the sample data to be installed. A more elaborate example:\n\n   <info>joomla site:create testsite --joomla=2.5 --sample-data=blog</info>",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "mysql-login": {
+            "name": "--mysql-login",
+            "shortcut": "-L",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL credentials in the form of user:password",
+            "default": "root:root"
+          },
+          "mysql-host": {
+            "name": "--mysql-host",
+            "shortcut": "-H",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL host",
+            "default": "localhost"
+          },
+          "mysql_db_prefix": {
+            "name": "--mysql_db_prefix",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database prefix",
+            "default": "sites_"
+          },
+          "mysql-database": {
+            "name": "--mysql-database",
+            "shortcut": "-db",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database name. If set, the --mysql_db_prefix option will be ignored.",
+            "default": null
+          },
+          "mysql-driver": {
+            "name": "--mysql-driver",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL driver",
+            "default": "mysqli"
+          },
+          "release": {
+            "name": "--release",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Joomla version. Can be a release number (2, 3.2, ..) or branch name. Run `joomla versions` for a full list. Use \"none\" for an empty virtual host.",
+            "default": "latest"
+          },
+          "sample-data": {
+            "name": "--sample-data",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Sample data to install (default|blog|brochure|learn|testing)",
+            "default": null
+          },
+          "symlink": {
+            "name": "--symlink",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "A comma separated list of directories to symlink from the projects directory. Use 'all' to symlink every folder.",
+            "default": null
+          },
+          "repo": {
+            "name": "--repo",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Alternative Git repository to clone. To use joomlatools/joomla-platform, use --repo=platform.",
+            "default": null
+          },
+          "clear-cache": {
+            "name": "--clear-cache",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Update the list of available tags and branches from the Joomla repository",
+            "default": false
+          },
+          "projects-dir": {
+            "name": "--projects-dir",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Directory where your custom projects reside",
+            "default": "/home/vagrant/Projects"
+          },
+          "disable-ssl": {
+            "name": "--disable-ssl",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable SSL for this site",
+            "default": false
+          },
+          "ssl-crt": {
+            "name": "--ssl-crt",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "The full path to the signed cerfificate file",
+            "default": "/etc/apache2/ssl/server.crt"
+          },
+          "ssl-key": {
+            "name": "--ssl-key",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "The full path to the private cerfificate file",
+            "default": "/etc/apache2/ssl/server.key"
+          },
+          "ssl-port": {
+            "name": "--ssl-port",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "The port on which the server will listen for SSL requests",
+            "default": "443"
+          },
+          "interactive": {
+            "name": "--interactive",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Prompt for configuration details",
+            "default": false
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "site:delete",
+      "usage": [
+        "site:delete [--www WWW] [-L|--mysql-login MYSQL-LOGIN] [-H|--mysql-host MYSQL-HOST] [--mysql_db_prefix MYSQL_DB_PREFIX] [-db|--mysql-database MYSQL-DATABASE] [--mysql-driver MYSQL-DRIVER] [--skip-database] [--skip-vhost] [--] <site>"
+      ],
+      "description": "Delete a site",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "mysql-login": {
+            "name": "--mysql-login",
+            "shortcut": "-L",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL credentials in the form of user:password",
+            "default": "root:root"
+          },
+          "mysql-host": {
+            "name": "--mysql-host",
+            "shortcut": "-H",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL host",
+            "default": "localhost"
+          },
+          "mysql_db_prefix": {
+            "name": "--mysql_db_prefix",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database prefix",
+            "default": "sites_"
+          },
+          "mysql-database": {
+            "name": "--mysql-database",
+            "shortcut": "-db",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database name. If set, the --mysql_db_prefix option will be ignored.",
+            "default": null
+          },
+          "mysql-driver": {
+            "name": "--mysql-driver",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL driver",
+            "default": "mysqli"
+          },
+          "skip-database": {
+            "name": "--skip-database",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Leave the database intact",
+            "default": false
+          },
+          "skip-vhost": {
+            "name": "--skip-vhost",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Leave the virtual host intact",
+            "default": false
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "site:deploy",
+      "usage": [
+        "site:deploy [--www WWW] [-U|--user USER] [-P|--password [PASSWORD]] [--] <site> <server>"
+      ],
+      "description": "Deploy your website with git-ftp",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          },
+          "server": {
+            "name": "server",
+            "is_required": true,
+            "is_array": false,
+            "description": "FTP server to deploy to. You can add a different port or subdirectory. Example: ftp://ftp.domain.com:21/httpdocs",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "user": {
+            "name": "--user",
+            "shortcut": "-U",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "FTP user",
+            "default": "vagrant"
+          },
+          "password": {
+            "name": "--password",
+            "shortcut": "-P",
+            "accept_value": true,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "FTP password. Omit for interactive password prompt.",
+            "default": null
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "site:download",
+      "usage": [
+        "site:download [--www WWW] [--release RELEASE] [--refresh] [--clear-cache] [--repo REPO] [--] <site>"
+      ],
+      "description": "Download and extract the given Joomla version",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "release": {
+            "name": "--release",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Joomla version. Can be a release number (2, 3.2, ..) or branch name. Run `joomla versions` for a full list. Use \"none\" for an empty virtual host.",
+            "default": "latest"
+          },
+          "refresh": {
+            "name": "--refresh",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Update the list of available tags and branches from the Joomla repository",
+            "default": false
+          },
+          "clear-cache": {
+            "name": "--clear-cache",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Clear the downloaded files cache",
+            "default": false
+          },
+          "repo": {
+            "name": "--repo",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Alternative Git repository to clone. To use joomlatools/joomla-platform, use --repo=platform.",
+            "default": null
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "site:install",
+      "usage": [
+        "site:install [--www WWW] [-L|--mysql-login MYSQL-LOGIN] [-H|--mysql-host MYSQL-HOST] [--mysql_db_prefix MYSQL_DB_PREFIX] [-db|--mysql-database MYSQL-DATABASE] [--mysql-driver MYSQL-DRIVER] [--sample-data SAMPLE-DATA] [--overwrite] [-d|--drop] [--symlink SYMLINK] [--projects-dir PROJECTS-DIR] [--interactive] [-e|--skip-exists-check] [--] <site>"
+      ],
+      "description": "Install an existing Joomla codebase. Sets up configuration and installs the database.",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "mysql-login": {
+            "name": "--mysql-login",
+            "shortcut": "-L",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL credentials in the form of user:password",
+            "default": "root:root"
+          },
+          "mysql-host": {
+            "name": "--mysql-host",
+            "shortcut": "-H",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL host",
+            "default": "localhost"
+          },
+          "mysql_db_prefix": {
+            "name": "--mysql_db_prefix",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database prefix",
+            "default": "sites_"
+          },
+          "mysql-database": {
+            "name": "--mysql-database",
+            "shortcut": "-db",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL database name. If set, the --mysql_db_prefix option will be ignored.",
+            "default": null
+          },
+          "mysql-driver": {
+            "name": "--mysql-driver",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "MySQL driver",
+            "default": "mysqli"
+          },
+          "sample-data": {
+            "name": "--sample-data",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Sample data to install (default|blog|brochure|learn|testing)",
+            "default": null
+          },
+          "overwrite": {
+            "name": "--overwrite",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Overwrite configuration.php if it already exists",
+            "default": false
+          },
+          "drop": {
+            "name": "--drop",
+            "shortcut": "-d",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Drop database if it already exists",
+            "default": false
+          },
+          "symlink": {
+            "name": "--symlink",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "A comma separated list of directories to symlink from the projects directory. Use 'all' to symlink every folder.",
+            "default": null
+          },
+          "projects-dir": {
+            "name": "--projects-dir",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Directory where your custom projects reside",
+            "default": "/home/vagrant/Projects"
+          },
+          "interactive": {
+            "name": "--interactive",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Prompt for configuration details",
+            "default": false
+          },
+          "skip-exists-check": {
+            "name": "--skip-exists-check",
+            "shortcut": "-e",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not check if database already exists or not.",
+            "default": false
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "site:token",
+      "usage": [
+        "site:token [--www WWW] [--] <site> <username>"
+      ],
+      "description": "Generate a login token for a user name to be used for JWT authentication",
+      "help": "Add the token to your query string such as <comment>?auth_token=TOKEN</comment> and the given user will be automatically logged in",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          },
+          "username": {
+            "name": "username",
+            "is_required": true,
+            "is_array": false,
+            "description": "User name to generate the token for",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "vhost:create",
+      "usage": [
+        "vhost:create [--www WWW] [--disable-ssl] [--ssl-crt SSL-CRT] [--ssl-key SSL-KEY] [--ssl-port SSL-PORT] [--] <site>"
+      ],
+      "description": "Creates a new Apache2 virtual host",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name. Also used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "www": {
+            "name": "--www",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "Web server root",
+            "default": "/var/www"
+          },
+          "disable-ssl": {
+            "name": "--disable-ssl",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable SSL for this site",
+            "default": false
+          },
+          "ssl-crt": {
+            "name": "--ssl-crt",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "The full path to the signed cerfificate file",
+            "default": "/etc/apache2/ssl/server.crt"
+          },
+          "ssl-key": {
+            "name": "--ssl-key",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "The full path to the private cerfificate file",
+            "default": "/etc/apache2/ssl/server.key"
+          },
+          "ssl-port": {
+            "name": "--ssl-port",
+            "shortcut": "",
+            "accept_value": true,
+            "is_value_required": true,
+            "is_multiple": false,
+            "description": "The port on which the server will listen for SSL requests",
+            "default": "443"
+          },
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "vhost:remove",
+      "usage": [
+        "vhost:remove <site>"
+      ],
+      "description": "Removes an Apache2 virtual host",
+      "help": "",
+      "definition": {
+        "arguments": {
+          "site": {
+            "name": "site",
+            "is_required": true,
+            "is_array": false,
+            "description": "Alphanumeric site name, used in the site URL with .dev domain",
+            "default": null
+          }
+        },
+        "options": {
+          "help": {
+            "name": "--help",
+            "shortcut": "-h",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this help message",
+            "default": false
+          },
+          "quiet": {
+            "name": "--quiet",
+            "shortcut": "-q",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not output any message",
+            "default": false
+          },
+          "verbose": {
+            "name": "--verbose",
+            "shortcut": "-v|-vv|-vvv",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug",
+            "default": false
+          },
+          "version": {
+            "name": "--version",
+            "shortcut": "-V",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Display this application version",
+            "default": false
+          },
+          "ansi": {
+            "name": "--ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Force ANSI output",
+            "default": false
+          },
+          "no-ansi": {
+            "name": "--no-ansi",
+            "shortcut": "",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Disable ANSI output",
+            "default": false
+          },
+          "no-interaction": {
+            "name": "--no-interaction",
+            "shortcut": "-n",
+            "accept_value": false,
+            "is_value_required": false,
+            "is_multiple": false,
+            "description": "Do not ask any interactive question",
+            "default": false
+          }
+        }
+      }
+    }
+  ],
+  "namespaces": [
+    {
+      "id": "_global",
+      "commands": [
+        "help",
+        "list",
+        "symlink",
+        "versions"
+      ]
+    },
+    {
+      "id": "cache",
+      "commands": [
+        "cache:clear",
+        "cache:list",
+        "cache:purge"
+      ]
+    },
+    {
+      "id": "database",
+      "commands": [
+        "database:drop",
+        "database:install"
+      ]
+    },
+    {
+      "id": "extension",
+      "commands": [
+        "extension:disable",
+        "extension:enable",
+        "extension:install",
+        "extension:installfile",
+        "extension:register",
+        "extension:symlink",
+        "extension:uninstall"
+      ]
+    },
+    {
+      "id": "finder",
+      "commands": [
+        "finder:index",
+        "finder:purge"
+      ]
+    },
+    {
+      "id": "plugin",
+      "commands": [
+        "plugin:install",
+        "plugin:list",
+        "plugin:uninstall"
+      ]
+    },
+    {
+      "id": "site",
+      "commands": [
+        "site:checkin",
+        "site:configure",
+        "site:create",
+        "site:delete",
+        "site:deploy",
+        "site:download",
+        "site:install",
+        "site:token"
+      ]
+    },
+    {
+      "id": "vhost",
+      "commands": [
+        "vhost:create",
+        "vhost:remove"
+      ]
+    }
+  ]
+}
