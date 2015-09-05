@@ -44,7 +44,7 @@ title: Commands
 	{% endfor %}
   </tbody>
   {% endif %}
-  {% if info.definition.options.size > 0 %}
+  {% if info.definition.options.size > ignored.size %}
   <thead>
     <tr>
       <th>Options</th>
