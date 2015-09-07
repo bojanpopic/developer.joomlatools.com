@@ -60,8 +60,7 @@ pages:
           - title: FAQ
       - title: Console
         level2:
-          - title: Installation
-          - title: Usage
+          - title: Getting Started
           - title: Commands
             level3:
               - title: Cache
@@ -75,7 +74,6 @@ pages:
           - title: FAQ
       - title: Vagrant
         level2:
-          - title: Installation
           - title: Getting Started
           - title: Server Management
           - title: FAQ
