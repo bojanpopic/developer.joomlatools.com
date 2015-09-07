@@ -12,8 +12,8 @@ title: Getting started
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
 1. Run the following commands in a directory of your choice to download and start the Vagrant box:
 
-    `$ vagrant init joomlatools/box`<br />
-    `$ vagrant up`
+    `vagrant init joomlatools/box`<br />
+    `vagrant up`
 
 1. Add the following line into your ***hosts file*** (`/etc/hosts` on Linux and Mac OS X, for other operating systems see [here][1]):
 
