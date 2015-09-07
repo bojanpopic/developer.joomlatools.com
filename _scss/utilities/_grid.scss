@@ -1,4 +1,8 @@
 @include breakpoint($delta) {
+  .features {
+    @include clearfix;
+  }
+
   .features__feature {
     @include gallery(6 of 12);
   }
