@@ -40,7 +40,7 @@
     {% for hash in info.definition.options %}
     {% unless ignored contains hash[0] %}
     <dt>{{ hash[1] | option_to_html }}</dt>
-    <dd>{{ hash[1].description | escape }}{% if hash[1].default != nil %}<br />Default: <code>{{ hash[1].default | escape }}</code>{% endif %}</dd>
+    <dd>{{ hash[1].description | escape }}{% if hash[1].default != false and hash[1].default != nil %}<br />Default: <code>{{ hash[1].default | escape }}</code>{% endif %}</dd>
     {% endunless %}
     {% endfor %}
     {% endif %}
