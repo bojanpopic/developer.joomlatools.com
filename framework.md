@@ -11,7 +11,7 @@ Our goal is to make it easier for developers to create more powerful custom exte
 
 ## Features
 
-<div class="container">
+<div class="container features">
     {% for feature in site.data.features.items %}
     <div class="features__feature">
         <h3>{{ feature.title }}</h3>
