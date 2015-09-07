@@ -63,6 +63,14 @@ pages:
           - title: Installation
           - title: Usage
           - title: Commands
+            level3:
+              - title: Cache
+              - title: Database
+              - title: Extension
+              - title: Finder
+              - title: Plugin
+              - title: Site
+              - title: Vhost
           - title: Plugins
           - title: FAQ
       - title: Vagrant
