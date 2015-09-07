@@ -1,0 +1,55 @@
+{% assign ignored = "no-interaction,ansi,help,no-ansi,quiet,verbose,version" | split:"," %}
+
+* Table of Content
+{:toc}
+
+{% for namespace in site.data.joomla-console.namespaces %}
+
+{% if namespace.id == include.namespace %}
+
+{% for command in namespace.commands %}
+
+## {{ command }}
+
+{% for info in site.data.joomla-console.commands %}
+
+{% if info.name == command %}
+{{ info.description }}
+
+> Syntax: `{{ info.usage }}`
+
+{{ info.help | process_help }}
+
+### Arguments
+{: .no_toc}
+
+<dl>
+    {% if info.definition.arguments.size > 0 %}
+    {% for hash in info.definition.arguments %}
+    <dt>{{ hash[0] }}</dt>
+    <dd>{{ hash[1].description | escape }}</dd>
+    {% endfor %}
+    {% endif %}
+</dl>
+
+### Options
+
+<dl>
+    {% if info.definition.options.size > ignored.size %}
+    {% for hash in info.definition.options %}
+    {% unless ignored contains hash[0] %}
+    <dt>{{ hash[1] | option_to_html }}</dt>
+    <dd>{{ hash[1].description | escape }}{% if hash[1].default != nil %}<br />Default: <code>{{ hash[1].default | escape }}</code>{% endif %}</dd>
+    {% endunless %}
+    {% endfor %}
+    {% endif %}
+</dl>
+
+{% break %}
+{% endif %}
+
+{% endfor %}
+
+{% endfor %}
+{% endif %}
+{% endfor %}
