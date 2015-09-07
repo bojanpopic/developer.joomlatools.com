@@ -108,7 +108,8 @@ Extension\Symlink::registerSymlinker(function($source, $destination, $project, $
   }
 
   mkdir($destination.'/new/path', 0755, true);
-	
+  symlink($source, $destination.'/new/path/symlink');
+  
   return true;
 });
 {% endhighlight %}
