@@ -3,6 +3,10 @@ module.exports = function(grunt) {
     // load time-grunt and all grunt plugins found in the package.json
     require('jit-grunt')(grunt);
 
+    // Customise the browser used by BrowserSync, example: `grunt --canary`
+    var browser = 'default';
+    if(grunt.option('canary')) {browser = 'Google Chrome Canary'; };
+
     // grunt config
     grunt.initConfig({
 
@@ -78,6 +82,7 @@ module.exports = function(grunt) {
                     notify: false,
                     watchTask: true,
                     injectChanges: false,
+                    browser: browser,
                     server: {
                         baseDir: '_site'
                     }

@@ -1,10 +1,27 @@
 ---
 layout: default
-title: Getting started
+title: Getting Started
 ---
 
 * Table of Content
 {:toc}
+
+## Installation
+
+1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
+1. Run the following commands in a directory of your choice to download and start the Vagrant box:
+
+    `vagrant init joomlatools/box`<br />
+    `vagrant up`
+
+1. Add the following line into your ***hosts file*** (`/etc/hosts` on Linux and Mac OS X, for other operating systems see [here][1]):
+
+    `33.33.33.58 joomla.box webgrind.joomla.box phpmyadmin.joomla.box`
+
+1. The dashboard is now available at [joomla.box](http://joomla.box)
+
+There will be two new directories created called `www` and `Projects`. These directories act as shared directories between your host computer and the box.
 
 ## Creating new Joomla sites
 
@@ -56,3 +73,5 @@ For more information on the symlinker, refer to the [Joomla Console docs](../con
 The `joomla` command is the most important piece in our Vagrant box. It's the workhorse for everything related to Joomla on the box. This [Joomla Console](../console.html) package can do a whole lot more except installing sites. You can also automatically [install your custom extensions](../console/2-usage.html#install-joomla-extensions) and even create your own [plugins](../console/3-plugins.html).
 
 To find out more about its options and usage, you can get an overview by running the `joomla list` command, or head over to the [documentation pages](../console/2-usage.html) for a full explanation.
+
+   [1]: http://en.wikipedia.org/wiki/Hosts_(file)#Location_in_the_file_system
