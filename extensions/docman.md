@@ -7,6 +7,6 @@ title: DOCman
 
 * [Bootstrap](/extensions/docman/bootstrap.html)
 * [Custom Icons](/extensions/docman/custom-icons.html)
-* [Custom Parameters](/extensions/docman/custom-parameters.html)
+* [Custom Fields](/extensions/docman/custom-fields.html)
 * [Icon Sizes](/extensions/docman/icon-sizes.html)
 * [Plugins](/extensions/docman/plugins.html)
