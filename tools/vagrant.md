@@ -45,4 +45,4 @@ To help you manage the development server via your browser, we've included these
 * [PhpMyAdmin](http://www.phpmyadmin.net/)
 * [Mailcatcher](http://mailcatcher.me/)
 
-To get started, head over to the [installation page](vagrant/1-installation.html).
+To get started, head over to the [installation page](vagrant/getting-started.html#installation).
